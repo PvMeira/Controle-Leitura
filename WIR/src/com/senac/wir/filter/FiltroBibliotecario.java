@@ -1,4 +1,4 @@
-package com.senac.wir.filtros;
+package com.senac.wir.filter;
 
 import java.io.IOException;
 
@@ -13,12 +13,11 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.senac.wir.entidades.Login;
+import com.senac.wir.domain.Login;
 
-@WebFilter(filterName = "FiltroADM", urlPatterns = {
-		"/paginas/emprestimo.xhtml, /paginas/pessoa.xhtml, /paginas/funcionario.xhtml,/paginas/livro.xhtml,"
-				+ "/paginas/loginCadastro.xhtml" })
-public class FiltroADM implements Filter {
+@WebFilter(filterName = "FiltroBibliotecario",  urlPatterns = {
+		"/paginas/livro.xhtml, paginas/emprestimo.xhtml" })
+public class FiltroBibliotecario implements Filter {
 
 	@Inject
 	private Login session;
@@ -35,10 +34,9 @@ public class FiltroADM implements Filter {
 
 		if (session == null) {
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/paginas/principal.xhtml");
-		} else if (session.getLogado()) {
-			if (session.getAdmin() == true) {
-				chain.doFilter(request, response);
-			}
+		} else if (session.getEmprestimo() == false && session.getLivro() == true && session.getPessoa() == false
+				&& session.getAdmin() == false) {
+			chain.doFilter(request, response);
 		}
 	}
 

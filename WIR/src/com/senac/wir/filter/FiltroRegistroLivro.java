@@ -1,4 +1,4 @@
-package com.senac.wir.filtros;
+package com.senac.wir.filter;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.senac.wir.entidades.Login;
+import com.senac.wir.domain.Login;
 
 @WebFilter(filterName = "FiltroRegistroLivro", urlPatterns = {
 		"/paginas/livro.xhtml" })

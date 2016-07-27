@@ -8,8 +8,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import com.senac.wir.entidades.Login;
-import com.senac.wir.servicos.LoginServico;
+import com.senac.wir.domain.Login;
+import com.senac.wir.service.LoginServico;
 
 @ManagedBean(eager = true)
 @SessionScoped

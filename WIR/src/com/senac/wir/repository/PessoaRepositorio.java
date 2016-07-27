@@ -1,11 +1,11 @@
-package com.senac.wir.repositorios;
+package com.senac.wir.repository;
 
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import com.senac.wir.entidades.Pessoa;
+import com.senac.wir.domain.Pessoa;
 
 @SuppressWarnings("all")
 public class PessoaRepositorio {

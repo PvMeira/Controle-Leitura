@@ -1,4 +1,4 @@
-package com.senac.wir.validadores;
+package com.senac.wir.validators;
 
 
 import javax.faces.component.UIComponent;

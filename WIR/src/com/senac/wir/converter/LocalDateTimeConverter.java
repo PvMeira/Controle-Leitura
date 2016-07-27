@@ -1,4 +1,4 @@
-package com.senac.wir.conversores;
+package com.senac.wir.converter;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

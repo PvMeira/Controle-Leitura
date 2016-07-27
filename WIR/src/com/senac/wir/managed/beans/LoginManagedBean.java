@@ -6,8 +6,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import com.senac.wir.entidades.Login;
-import com.senac.wir.servicos.LoginServico;
+import com.senac.wir.domain.Login;
+import com.senac.wir.service.LoginServico;
 import com.senac.wir.util.Mensageiro;
 
 @ManagedBean

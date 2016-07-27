@@ -1,4 +1,4 @@
-package com.senac.wir.fabricas;
+package com.senac.wir.factory;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;

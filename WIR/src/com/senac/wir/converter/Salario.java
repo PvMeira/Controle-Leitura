@@ -1,4 +1,4 @@
-package com.senac.wir.conversores;
+package com.senac.wir.converter;
 
 import java.text.NumberFormat;
 

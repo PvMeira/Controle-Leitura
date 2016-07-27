@@ -1,4 +1,4 @@
-package com.senac.wir.entidades;
+package com.senac.wir.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

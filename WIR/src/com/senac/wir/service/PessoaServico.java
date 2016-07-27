@@ -1,12 +1,12 @@
-package com.senac.wir.servicos;
+package com.senac.wir.service;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import com.senac.wir.entidades.Pessoa;
-import com.senac.wir.repositorios.PessoaRepositorio;
-import com.senac.wir.transacao.Transacional;
+import com.senac.wir.domain.Pessoa;
+import com.senac.wir.repository.PessoaRepositorio;
+import com.senac.wir.transactional.Transacional;
 
 public class PessoaServico {
 

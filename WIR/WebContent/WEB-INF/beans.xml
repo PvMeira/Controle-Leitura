@@ -4,7 +4,7 @@
 	bean-discovery-mode="all">
 	
 	<interceptors>
-		<class>com.senac.wir.transacao.TransacionalInterceptor</class>
+		<class>com.senac.wir.transactional.TransacionalInterceptor</class>
 	</interceptors>
 	
 </beans>

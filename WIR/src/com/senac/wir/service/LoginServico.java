@@ -1,12 +1,12 @@
-package com.senac.wir.servicos;
+package com.senac.wir.service;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import com.senac.wir.entidades.Login;
-import com.senac.wir.repositorios.LoginRepositorio;
-import com.senac.wir.transacao.Transacional;
+import com.senac.wir.domain.Login;
+import com.senac.wir.repository.LoginRepositorio;
+import com.senac.wir.transactional.Transacional;
 
 public class LoginServico {
 	@Inject

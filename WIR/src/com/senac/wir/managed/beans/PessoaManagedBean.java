@@ -6,8 +6,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import com.senac.wir.entidades.Pessoa;
-import com.senac.wir.servicos.PessoaServico;
+import com.senac.wir.domain.Pessoa;
+import com.senac.wir.service.PessoaServico;
 import com.senac.wir.util.Mensageiro;
 
 @ManagedBean
