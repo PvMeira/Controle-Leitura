@@ -8,9 +8,9 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 
-import com.senac.wir.util.Mensageiro;
+import com.senac.wir.util.MessengerSystem;
 
-@Interceptor @Transacional
+@Interceptor @Transactional
 public class TransacionalInterceptor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -19,12 +19,12 @@ public class TransacionalInterceptor implements Serializable {
 
 	@AroundInvoke
 	public Object intercept(InvocationContext context){
-		Object resultado = null;
+		Object result = null;
 
 		try {
 			entityManager.getTransaction().begin();
 
-			resultado = context.proceed();
+			result = context.proceed();
 
 			entityManager.getTransaction().commit();
 
@@ -32,12 +32,12 @@ public class TransacionalInterceptor implements Serializable {
 
 			entityManager.getTransaction().rollback();
 
-			Mensageiro.nootificaErro("Erro - ",
-					"Detalhes do erro: " + e.getClass().getName() + " - " + e.getMessage());
+			MessengerSystem.notifyError("Error - ",
+					"Details of the Error: " + e.getClass().getName() + " - " + e.getMessage());
 
 			e.printStackTrace();
 		}
 
-		return resultado;
+		return result;
 	}
 }

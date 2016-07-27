@@ -1,52 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-  <display-name>WIR</display-name>
-  <welcome-file-list>
-    <welcome-file>paginas/principal.xhtml</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.xhtml</url-pattern>
-  </servlet-mapping>
-  <filter>
-    <filter-name>FiltroADM</filter-name>
-    <filter-class>com.senac.wir.filter.FiltroADM</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>FiltroADM</filter-name>
-    <url-pattern>/restricted/*</url-pattern>
-  </filter-mapping>
-  <filter>
-    <filter-name>FiltroRegistroLivro</filter-name>
-    <filter-class>com.senac.wir.filter.FiltroRegistroLivro</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>FiltroRegistroLivro</filter-name>
-    <url-pattern>/restricted/*</url-pattern>
-  </filter-mapping>
-  <filter>
-    <filter-name>FiltroBibliotecario</filter-name>
-    <filter-class>com.senac.wir.filter.FiltroBibliotecario</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>FiltroBibliotecario</filter-name>
-    <url-pattern>/restricted/*</url-pattern>
-  </filter-mapping>
-  <filter>
-    <filter-name>FiltroRegistroPessoa</filter-name>
-    <filter-class>com.senac.wir.filter.FiltroRegistroPessoa</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>FiltroRegistroPessoa</filter-name>
-    <url-pattern>/restricted/*</url-pattern>
-  </filter-mapping>
-  <context-param>
-    <param-name>primefaces.FONT_AWESOME</param-name>
-    <param-value>true</param-value>
-  </context-param>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>WIR</display-name>
+	<welcome-file-list>
+		<welcome-file>paginas/principal.xhtml</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+
+	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
+	</context-param>
 </web-app>
