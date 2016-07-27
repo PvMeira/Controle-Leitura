@@ -22,36 +22,23 @@
 			position="north" resizable="true" size="130" minSize="130"
 			maxSize="130">
 			<h:form>
-			
+
 				<p:menubar>
-					<p:menuitem value="Principal" url="/paginas/principal.xhtml"
-						icon="fa fa-fw fa-home"
-						rendered="#{!sessaoManagedBean.login.logado}" />
+					<p:menuitem value="Principal" url="/pages/main.xhtml"
+						icon="fa fa-fw fa-home" />
 
 					<p:submenu label="Cadastros" icon="fa fa-fw fa-edit">
 						<p:menuitem value="Pessoas" icon="fa fa-fw fa-users"
-							url="/paginas/pessoa.xhtml" />
-						<p:separator />
-						<p:menuitem value="Logins" icon="fa fa-fw fa-key"
-							url="/paginas/loginCadastro.xhtml"
-							rendered="#{sessaoManagedBean.login.admin}" />
+							url="/pages/person.xhtml" />
 					</p:submenu>
-
-					<f:facet name="options">
-						
-						<p:commandButton value="Sign-out"
-							action="#{sessaoManagedBean.sair()}"
-							icon="fa fa-fw fa-sign-out"
-							rendered="#{sessaoManagedBean.login.logado}" />
-					</f:facet>
 				</p:menubar>
 			</h:form>
 
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center" style="border: 0px solid white;">
-			<div id="conteudoCentro" style="height: 100%">
-				<ui:insert name="conteudo" />
+			<div id="centerContent" style="height: 100%">
+				<ui:insert name="content" />
 			</div>
 		</p:layoutUnit>
 
