@@ -8,16 +8,10 @@
 
 <ui:composition template="/WEB-INF/model/default.xhtml">
 	<ui:define name="content">
-
 		<p:layout>
-			<p:layoutUnit position="north" style="text-align: center;">
-				<p:outputLabel style="font-size: 20px;"
-					value="Manutenção de Cadastros" />
-			</p:layoutUnit>
-
 			<p:layoutUnit position="center">
 
-				<h:form id="pessoaForm">
+				<h:form id="personForm">
 					<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
 
 					<p:panelGrid columns="3">
@@ -31,7 +25,7 @@
 						<p:outputLabel for="cpf" value="CPF:" />
 
 						<p:inputMask id="cpf" requiredMessage="Campo obrigatório"
-							value="#{personManagedBean.pessoa.cpf}">
+							value="#{personManagedBean.pessoa.cpf}" placeholder="CPF">
 
 						</p:inputMask>
 
@@ -55,16 +49,19 @@
 					</p:panelGrid>
 
 					<p:commandButton value="Salvar" process="@form"
-						update="@form tabelaDePessoas"
+						update="@form personTable"
 						action="#{personManagedBean.save()}" icon="fa fa-fw fa-save" />
 					<p:commandButton value="Limpar" process="@this" update="@form"
 						action="#{personManagedBean.clean()}" icon="fa fa-fw fa-eraser" />
 				</h:form>
 
-				<p:dataTable id="tabelaDePessoas" var="pessoa"
+				<p:dataTable id="personTable" var="pessoa"
 					value="#{personManagedBean.listOfRegisterPersons}"
 					emptyMessage="Não existe cadastro de pessoas no banco"
-					style="padding-top:20px;">
+					style="padding-top:20px;" paginator="true" rows="5">
+					<f:facet name="header">
+            Cadastro : Pessoas
+        			</f:facet>
 					<p:column headerText="E-mail" style="text-align: center">
 						<h:outputText value="#{pessoa.mail}" />
 					</p:column>
@@ -80,10 +77,10 @@
 
 					<p:column headerText="Ações" style="text-align: center">
 						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Cadastro"
-							update="pessoaForm"
+							update="personForm"
 							action="#{personManagedBean.setPessoa(pessoa)}" />
 						<p:commandButton icon="fa fa-fw fa-trash" title="Deletar Cadastro"
-							update="tabelaDePessoas pessoaForm"
+							update="personTable personForm"
 							action="#{personManagedBean.delete(pessoa)}">
 							<p:confirm header="Confirmação"
 								message="Deseja deletar o Cadastro?" icon="ui-icon-alert" />
