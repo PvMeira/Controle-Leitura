@@ -5,7 +5,7 @@
 	version="3.1">
 	<display-name>WIR</display-name>
 	<welcome-file-list>
-		<welcome-file>paginas/principal.xhtml</welcome-file>
+		<welcome-file>pages/main.xhtml</welcome-file>
 	</welcome-file-list>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
