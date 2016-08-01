@@ -24,21 +24,21 @@ public class PersonManagedBean {
 	}
 
 	public void save() {
-		service.save(getPessoa());
-		MessengerSystem.notifyInformation("ParabÃ©ns!", "Cadastro salvo com sucesso!");
+		service.save(getPerson());
+		MessengerSystem.notifyInformation("Parabéns!", "Cadastro salvo com sucesso!");
 		loadListOfPersons();
 		clean();
 	}
 
 	public void delete(Person person) {
 		service.delete(person);
-		MessengerSystem.notifyInformation("ParabÃ©ns!", "Cadastro deletado com sucesso!");
+		MessengerSystem.notifyInformation("Parabéns!", "Cadastro deletado com sucesso!");
 		loadListOfPersons();
 		clean();
 	}
 
 	public void clean() {
-		setPessoa(new Person());
+		setPerson(new Person());
 	}
 
 	private void loadListOfPersons() {
@@ -56,14 +56,14 @@ public class PersonManagedBean {
 		this.listOfRegisterPersons = listOfRegisterPersons;
 	}
 
-	public Person getPessoa() {
+	public Person getPerson() {
 		if (person == null) {
 			clean();
 		}
 		return person;
 	}
 
-	public void setPessoa(Person person) {
+	public void setPerson(Person person) {
 		this.person = person;
 	}
 

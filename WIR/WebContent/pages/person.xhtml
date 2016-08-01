@@ -15,25 +15,25 @@
 				<h:panelGrid columns="3" cellpadding="5">
 
 					<h:outputLabel value="Nome: " for="name" styleClass="outputlabel" />
-					<b:inputText value="#{personManagedBean.pessoa.name}" id="name"
+					<b:inputText value="#{personManagedBean.person.name}" id="name"
 						required="true" requiredMessage="Campo Obrigatório"
 						placeholder="Nome" />
 					<p:message for="name" />
 
 					<h:outputLabel value="E-Mail: " for="mail" styleClass="outputlabel" />
-					<b:inputText value="#{personManagedBean.pessoa.mail}" id="mail"
+					<b:inputText value="#{personManagedBean.person.mail}" id="mail"
 						required="true" requiredMessage="Campo Obrigatório"
 						placeholder="E-Mail" />
 					<p:message for="mail" />
 
 					<h:outputLabel value="CPF: " for="cpf" styleClass="outputlabel" />
-					<b:inputText value="#{personManagedBean.pessoa.cpf}" id="cpf"
+					<b:inputText value="#{personManagedBean.person.cpf}" id="cpf"
 						required="true" requiredMessage="Campo Obrigatório"
 						placeholder="CPF" />
 					<p:message for="cpf" />
 
 					<h:outputLabel value="Fone:" for="phone" styleClass="outputlabel" />
-					<b:inputText value="#{personManagedBean.pessoa.phone}" id="phone"
+					<b:inputText value="#{personManagedBean.person.phone}" id="phone"
 						required="true" requiredMessage="Campo Obrigatório"
 						placeholder="Telefone" />
 					<p:message for="phone" />
@@ -41,7 +41,7 @@
 				</h:panelGrid>
 				<h:panelGrid columns="3" cellpadding="5">
 					<b:commandButton value="Salvar" look="primary" iconAwesome="save"
-						action="#{personManagedBean.save()}" update="@form" />
+						action="#{personManagedBean.save()}" update="@form viewForm" />
 					<b:column span="1" />
 					<b:commandButton value="Limpar" look="primary" process="@this"
 						iconAwesome="eraser" action="#{personManagedBean.clean()}"
@@ -50,32 +50,33 @@
 			</h:form>
 		</b:panel>
 		<b:panel title="Cadastro de Pessoa" collapsible="false">
-			<h:form>
-				<b:dataTable id="personTable" var="pessoa"
+			<h:form id="viewForm">
+				<b:dataTable id="personTable" var="person"
 					value="#{personManagedBean.listOfRegisterPersons}"
-					emptyMessage="Não existe cadastros" paginator="true" rows="5">
-					<b:column headerText="Nome" style="text-align:center;">
-						<h:outputText value="#{pessoa.name}" />
-
+					emptyMessage="Não existe cadastros" paginator="true" rows="5" select="true">
+					
+					<b:column id="viewNAME" headerText="Nome" style="text-align:center;">
+						<h:outputText value="#{person.name}" title="Name"/>
 					</b:column>
-					<b:column style="text-align: center">
-						<h:outputText value="#{pessoa.mail}" />
+					
+					<b:column id="viewMAIL" style="text-align: center">
+						<h:outputText value="#{person.mail}" />
 					</b:column>
-					<b:column style="text-align: center">
-						<h:outputText value="#{pessoa.cpf}" />
+					
+					<b:column id="viewCPF" style="text-align: center" >
+						<h:outputText value="#{person.cpf}" />
 					</b:column>
-					<b:column style="text-align: center">
-						<h:outputText value="#{pessoa.phone}" />
+					
+					<b:column id="viewPHONE" style="text-align: center">
+						<h:outputText value="#{person.phone}" />
 					</b:column>
+					
 					<b:column style="text-align: center">
 						<p:panelGrid columns="2">
-							<b:commandButton iconAwesome="edit" title="Editar Cadastro"
-								update="personForm"
-								action="#{personManagedBean.setPessoa(pessoa)}" />
-								
+							<b:commandButton iconAwesome="edit" title="Editar Cadastro"							
+								action="#{personManagedBean.setPerson(person)}" />						
 							<b:commandButton title="Deletar Cadastro" iconAwesome="trash"
-								update="personTable personForm"
-								action="#{personManagedBean.delete(pessoa)}" />
+								action="#{personManagedBean.delete(person)}" />
 						</p:panelGrid>
 					</b:column>
 
