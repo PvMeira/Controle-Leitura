@@ -10,28 +10,32 @@
 <ui:composition template="/WEB-INF/model/default.xhtml">
 	<ui:define name="center">
 		<b:panel title="Cadastro de Pessoa" collapsible="false">
-			<h:form id="PersonForm">
+			<h:form id="personForm">
 				<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
 				<h:panelGrid columns="3" cellpadding="5">
 
 					<h:outputLabel value="Nome: " for="name" styleClass="outputlabel" />
-					<b:inputText value="#{personManagedBean.pessoa.name}" id="name" required="true"
-						requiredMessage="Campo Obrigatório" placeholder="Nome" />
+					<b:inputText value="#{personManagedBean.pessoa.name}" id="name"
+						required="true" requiredMessage="Campo Obrigatório"
+						placeholder="Nome" />
 					<p:message for="name" />
 
 					<h:outputLabel value="E-Mail: " for="mail" styleClass="outputlabel" />
-					<b:inputText value="#{personManagedBean.pessoa.mail}" id="mail" required="true"
-						requiredMessage="Campo Obrigatório" placeholder="E-Mail" />
+					<b:inputText value="#{personManagedBean.pessoa.mail}" id="mail"
+						required="true" requiredMessage="Campo Obrigatório"
+						placeholder="E-Mail" />
 					<p:message for="mail" />
 
 					<h:outputLabel value="CPF: " for="cpf" styleClass="outputlabel" />
-					<b:inputText value="#{personManagedBean.pessoa.cpf}" id="cpf" required="true"
-						requiredMessage="Campo Obrigatório" placeholder="CPF" />
+					<b:inputText value="#{personManagedBean.pessoa.cpf}" id="cpf"
+						required="true" requiredMessage="Campo Obrigatório"
+						placeholder="CPF" />
 					<p:message for="cpf" />
 
 					<h:outputLabel value="Fone:" for="phone" styleClass="outputlabel" />
-					<b:inputText value="#{personManagedBean.pessoa.phone}" id="phone" required="true"
-						requiredMessage="Campo Obrigatório" placeholder="Telefone" />
+					<b:inputText value="#{personManagedBean.pessoa.phone}" id="phone"
+						required="true" requiredMessage="Campo Obrigatório"
+						placeholder="Telefone" />
 					<p:message for="phone" />
 
 				</h:panelGrid>
@@ -43,6 +47,39 @@
 						iconAwesome="eraser" action="#{personManagedBean.clean()}"
 						update="@form" />
 				</h:panelGrid>
+			</h:form>
+		</b:panel>
+		<b:panel title="Cadastro de Pessoa" collapsible="false">
+			<h:form>
+				<b:dataTable id="personTable" var="pessoa"
+					value="#{personManagedBean.listOfRegisterPersons}"
+					emptyMessage="Não existe cadastros" paginator="true" rows="5">
+					<b:column headerText="Nome" style="text-align:center;">
+						<h:outputText value="#{pessoa.name}" />
+
+					</b:column>
+					<b:column style="text-align: center">
+						<h:outputText value="#{pessoa.mail}" />
+					</b:column>
+					<b:column style="text-align: center">
+						<h:outputText value="#{pessoa.cpf}" />
+					</b:column>
+					<b:column style="text-align: center">
+						<h:outputText value="#{pessoa.phone}" />
+					</b:column>
+					<b:column style="text-align: center">
+						<p:panelGrid columns="2">
+							<b:commandButton iconAwesome="edit" title="Editar Cadastro"
+								update="personForm"
+								action="#{personManagedBean.setPessoa(pessoa)}" />
+								
+							<b:commandButton title="Deletar Cadastro" iconAwesome="trash"
+								update="personTable personForm"
+								action="#{personManagedBean.delete(pessoa)}" />
+						</p:panelGrid>
+					</b:column>
+
+				</b:dataTable>
 			</h:form>
 		</b:panel>
 	</ui:define>
