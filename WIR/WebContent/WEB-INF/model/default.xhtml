@@ -4,44 +4,34 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
 
 
 
 <h:head>
-	<title>Aplicação</title>
-</h:head>
-
-<h:body>
-<!-- 	<h:outputStylesheet library="styles" name="primefacesOverride.css" /> -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>WIR</title>
+	<h:outputStylesheet library="styles" name="primefacesOverride.css" />
 	<h:outputStylesheet library="styles" name="wir-style.css" />
+</h:head>
+<b:navBar brand="Brand" brandHref="#">
+	<b:navbarLinks>
+		<b:dropMenu value="Cadastro" iconAwesome="group">
+			<b:navLink value="Pessoa" href="person.xhtml" icon-awesome="male"></b:navLink>
+			<b:navLink value="Livro" href="#" icon-awesome="book"></b:navLink>
+		</b:dropMenu>
+		<b:dropMenu value="Nova Leitura" icon-awesome="book">
+			<b:navLink value="Cadastrar nova Leitura" href="#"></b:navLink>
+		</b:dropMenu>
 
-	<p:layout>
-		<p:layoutUnit position="north" size="100" resizable="true">
-			<h:outputText value="North unit content." />
-		</p:layoutUnit>
+	</b:navbarLinks>
+</b:navBar>
+<h:body>
+	<b:container>
+		<ui:insert name="center">
 
-		<p:layoutUnit position="west" size="203" header="___"
-			resizable="true" collapsible="true">
-			<h:form>
-				<p:menu toggleable="true" styleClass="menuItem" resizable="true">
-					<p:submenu label="Cadastros">
-						<p:menuitem value="Pessoa" icon="fa fa-user-plus"
-							url="person.xhtml" />
-						<p:menuitem value="Livro" icon="ui-icon-arrowrefresh-1-w" />
-					</p:submenu>
-				</p:menu>
-			</h:form>
-		</p:layoutUnit>
-
-
-
-		<p:layoutUnit position="center" style="border: 0px solid white;">
-			<div id="centerContent" style="height: 100%">
-				<ui:insert name="content" />
-			</div>
-		</p:layoutUnit>
-
-	</p:layout>
+		</ui:insert>
+	</b:container>
 </h:body>
 </html>

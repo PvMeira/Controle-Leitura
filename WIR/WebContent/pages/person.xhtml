@@ -4,101 +4,47 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
 
 <ui:composition template="/WEB-INF/model/default.xhtml">
-	<ui:define name="content">
-		<p:layout>
-			<p:layoutUnit position="center">
+	<ui:define name="center">
+		<b:panel title="Cadastro de Pessoa" collapsible="false">
+			<h:form id="PersonForm">
+				<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
+				<h:panelGrid columns="3" cellpadding="5">
 
-				<h:form id="personForm">
-					<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
+					<h:outputLabel value="Nome: " for="name" styleClass="outputlabel" />
+					<b:inputText value="#{personManagedBean.pessoa.name}" id="name" required="true"
+						requiredMessage="Campo Obrigatório" placeholder="Nome" />
+					<p:message for="name" />
 
-					<p:panelGrid columns="3">
+					<h:outputLabel value="E-Mail: " for="mail" styleClass="outputlabel" />
+					<b:inputText value="#{personManagedBean.pessoa.mail}" id="mail" required="true"
+						requiredMessage="Campo Obrigatório" placeholder="E-Mail" />
+					<p:message for="mail" />
 
-						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" requiredMessage="Campo obrigatório"
-							placeholder="nome" required="true"
-							value="#{personManagedBean.pessoa.name}" />
-						<p:message for="nome" />
+					<h:outputLabel value="CPF: " for="cpf" styleClass="outputlabel" />
+					<b:inputText value="#{personManagedBean.pessoa.cpf}" id="cpf" required="true"
+						requiredMessage="Campo Obrigatório" placeholder="CPF" />
+					<p:message for="cpf" />
 
-						<p:outputLabel for="cpf" value="CPF:" />
+					<h:outputLabel value="Fone:" for="phone" styleClass="outputlabel" />
+					<b:inputText value="#{personManagedBean.pessoa.phone}" id="phone" required="true"
+						requiredMessage="Campo Obrigatório" placeholder="Telefone" />
+					<p:message for="phone" />
 
-						<p:inputMask id="cpf" requiredMessage="Campo obrigatório"
-							value="#{personManagedBean.pessoa.cpf}" placeholder="CPF">
-
-						</p:inputMask>
-
-						<p:message for="cpf" />
-
-						<p:outputLabel for="telefone" value="Telefone:" />
-						<p:inputMask maxlength="16" id="telefone"
-							requiredMessage="Campo obrigatório" mask="99-9999-9999"
-							placeholder="telefone " required="true"
-							value="#{personManagedBean.pessoa.phone}" />
-						<p:message for="telefone" />
-
-						<p:outputLabel for="email" value="E-mail" />
-						<p:inputMask maxlength="20" id="email"
-							requiredMessage="Campo obrigatório" required="true"
-							placeholder="email" value="#{personManagedBean.pessoa.mail}" />
-						<p:message for="email" />
-
-
-
-					</p:panelGrid>
-
-					<p:commandButton value="Salvar" process="@form"
-						update="@form personTable"
-						action="#{personManagedBean.save()}" icon="fa fa-fw fa-save" />
-					<p:commandButton value="Limpar" process="@this" update="@form"
-						action="#{personManagedBean.clean()}" icon="fa fa-fw fa-eraser" />
-				</h:form>
-
-				<p:dataTable id="personTable" var="pessoa"
-					value="#{personManagedBean.listOfRegisterPersons}"
-					emptyMessage="Não existe cadastro de pessoas no banco"
-					style="padding-top:20px;" paginator="true" rows="5">
-					<f:facet name="header">
-            Cadastro : Pessoas
-        			</f:facet>
-					<p:column headerText="E-mail" style="text-align: center">
-						<h:outputText value="#{pessoa.mail}" />
-					</p:column>
-					<p:column headerText="Nome" style="text-align: center">
-						<h:outputText value="#{pessoa.name}" />
-					</p:column>
-					<p:column headerText="CPF" style="text-align: center">
-						<h:outputText value="#{pessoa.cpf}" />
-					</p:column>
-					<p:column headerText="Telefone" style="text-align: center">
-						<h:outputText value="#{pessoa.phone}" />
-					</p:column>
-
-					<p:column headerText="Ações" style="text-align: center">
-						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Cadastro"
-							update="personForm"
-							action="#{personManagedBean.setPessoa(pessoa)}" />
-						<p:commandButton icon="fa fa-fw fa-trash" title="Deletar Cadastro"
-							update="personTable personForm"
-							action="#{personManagedBean.delete(pessoa)}">
-							<p:confirm header="Confirmação"
-								message="Deseja deletar o Cadastro?" icon="ui-icon-alert" />
-						</p:commandButton>
-
-						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-							<p:commandButton value="Sim" type="button"
-								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-							<p:commandButton value="Não" type="button"
-								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-						</p:confirmDialog>
-					</p:column>
-				</p:dataTable>
-
-			</p:layoutUnit>
-
-		</p:layout>
-
+				</h:panelGrid>
+				<h:panelGrid columns="3" cellpadding="5">
+					<b:commandButton value="Salvar" look="primary" iconAwesome="save"
+						action="#{personManagedBean.save()}" update="@form" />
+					<b:column span="1" />
+					<b:commandButton value="Limpar" look="primary" process="@this"
+						iconAwesome="eraser" action="#{personManagedBean.clean()}"
+						update="@form" />
+				</h:panelGrid>
+			</h:form>
+		</b:panel>
 	</ui:define>
 </ui:composition>
 

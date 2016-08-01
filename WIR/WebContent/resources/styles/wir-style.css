@@ -4,4 +4,18 @@
 	width: 180px;
 	margin: 1px 0;
 }
+.panelTOP .ui-widget-content{
+	border: 0px solid #000000;
+    background: #60866c;	
+}
+.outputlabel{
+padding-bottom: 10px;	
+}
+
+.ui-message-info, .ui-message-error, .ui-message-warn, .ui-message-fatal {
+   border: 1px solid;
+   margin: 0 5px;
+   padding-bottom:10px;
+   padding-top:10px;
+}
 
