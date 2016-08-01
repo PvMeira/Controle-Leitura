@@ -48,37 +48,39 @@
 						update="@form" />
 				</h:panelGrid>
 			</h:form>
+
 		</b:panel>
-		<b:panel title="Cadastro de Pessoa" collapsible="false">
+		<b:panel title="Registro:Pessoas" collapsible="false">
 			<h:form id="viewForm">
 				<b:dataTable id="personTable" var="person"
 					value="#{personManagedBean.listOfRegisterPersons}"
-					emptyMessage="Não existe cadastros" paginator="true" rows="5" select="true">
-					
-					<b:column id="viewNAME" headerText="Nome" style="text-align:center;">
-						<h:outputText value="#{person.name}" title="Name"/>
-					</b:column>
-					
-					<b:column id="viewMAIL" style="text-align: center">
+					emptyMessage="Não existe cadastros" paginator="true" rows="5"
+					select="true">
+
+					<h:column id="viewNAME" headerText="Nome"
+						style="text-align:center;">
+						<h:outputText value="#{person.name}" title="Name" />
+					</h:column>
+
+					<h:column id="viewMAIL" style="text-align: center">
 						<h:outputText value="#{person.mail}" />
-					</b:column>
-					
-					<b:column id="viewCPF" style="text-align: center" >
+					</h:column>
+
+					<h:column id="viewCPF" style="text-align: center">
 						<h:outputText value="#{person.cpf}" />
-					</b:column>
-					
-					<b:column id="viewPHONE" style="text-align: center">
+					</h:column>
+
+					<h:column id="viewPHONE" style="text-align: center">
 						<h:outputText value="#{person.phone}" />
-					</b:column>
-					
-					<b:column style="text-align: center">
-						<p:panelGrid columns="2">
-							<b:commandButton iconAwesome="edit" title="Editar Cadastro"							
-								action="#{personManagedBean.setPerson(person)}" />						
-							<b:commandButton title="Deletar Cadastro" iconAwesome="trash"
-								action="#{personManagedBean.delete(person)}" />
-						</p:panelGrid>
-					</b:column>
+					</h:column>
+
+					<h:column style="text-align: center">
+						<b:commandButton iconAwesome="edit" title="Editar Cadastro"
+							actionListener="#{personManagedBean.setPerson(person)}"
+							update="personForm" />
+						<b:commandButton title="Deletar Cadastro" iconAwesome="trash"
+							action="#{personManagedBean.delete(person)}" />
+					</h:column>
 
 				</b:dataTable>
 			</h:form>
