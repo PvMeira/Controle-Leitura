@@ -1,4 +1,4 @@
-package com.senac.wir.validators;
+package com.senac.cl.validadores;
 
 
 import javax.faces.component.UIComponent;
@@ -8,10 +8,10 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-import com.senac.wir.util.MessengerSystem;;
+import com.senac.cl.utilitarios.SistemaDeMensagens;;
 
 @FacesValidator(value = "cpfValidator")
-public class CpfValidator implements Validator {
+public class ValidadorParaCpf implements Validator {
 
     private Integer firstDigit, secondDigit;
 
@@ -24,7 +24,7 @@ public class CpfValidator implements Validator {
             }
             if (isAPatternCpf(cpf) || !validateCpf(cpf)) {
                 ((UIInput) component).setValid(false);
-                MessengerSystem.notifyError("CPF invalido","numero ou caracteres invalidos");
+                SistemaDeMensagens.notificaERRO("CPF invalido","numero ou caracteres invalidos");
             }
         }
     }

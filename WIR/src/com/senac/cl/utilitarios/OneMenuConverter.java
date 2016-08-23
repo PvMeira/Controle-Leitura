@@ -1,4 +1,4 @@
-package com.senac.wir.util;
+package com.senac.cl.utilitarios;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@FacesConverter("oneMenu")
+@FacesConverter("ConversorOneMenu")
 public class OneMenuConverter implements Converter {
 
 	private static final String KEY = OneMenuConverter.class.getCanonicalName();

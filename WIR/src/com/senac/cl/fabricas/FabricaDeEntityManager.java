@@ -1,4 +1,4 @@
-package com.senac.wir.factory;
+package com.senac.cl.fabricas;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
@@ -8,15 +8,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 @ApplicationScoped
-public class EntityManagerFactory {
+public class FabricaDeEntityManager {
 
-	private static javax.persistence.EntityManagerFactory factory = Persistence
+	private static javax.persistence.EntityManagerFactory fabrica = Persistence
 			.createEntityManagerFactory("WhatIamReadingUnit");
 
 	@Produces
 	@RequestScoped
 	public EntityManager createEntityManager() {
-		return factory.createEntityManager();
+		return fabrica.createEntityManager();
 	}
 
 	public void closeEntityManager(@Disposes EntityManager manager) {

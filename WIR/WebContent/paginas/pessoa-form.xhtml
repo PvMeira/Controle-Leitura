@@ -7,85 +7,65 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:b="http://bootsfaces.net/ui">
 
-<ui:composition template="/WEB-INF/model/default.xhtml">
+<ui:composition template="/WEB-INF/modelo/padrao.xhtml">
 	<ui:define name="center">
 		<b:panel title="Cadastro de Pessoa" collapsible="false">
-			<h:form id="personForm">
+			<h:form id="pessoaForm">
 				<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
 				<h:panelGrid columns="3" cellpadding="5">
-
-					<h:outputLabel value="Nome: " for="name" styleClass="outputlabel" />
-					<b:inputText value="#{personManagedBean.person.name}" id="name"
-						required="true" requiredMessage="Campo Obrigatório"
-						placeholder="Nome" />
-					<p:message for="name" />
-
+					<h:outputLabel value="Nome: " for="nome" styleClass="outputlabel" />
+					<b:inputText value="#{pessoaMB.pessoa.nome}" id="nome"
+						required="true" requiredMessage="Campo Obrigatório" placeholder="nome" />
+					<p:message for="nome" />
 					<h:outputLabel value="E-Mail: " for="mail" styleClass="outputlabel" />
-					<b:inputText value="#{personManagedBean.person.mail}" id="mail"
-						required="true" requiredMessage="Campo Obrigatório"
-						placeholder="E-Mail" />
+					<b:inputText value="#{pessoaMB.pessoa.mail}" id="mail"
+						required="true" requiredMessage="Campo Obrigatório" placeholder="E-Mail" />
 					<p:message for="mail" />
-
 					<h:outputLabel value="CPF: " for="cpf" styleClass="outputlabel" />
-					<b:inputText value="#{personManagedBean.person.cpf}" id="cpf"
+					<b:inputText value="#{pessoaMB.pessoa.cpf}" id="cpf"
 						required="true" requiredMessage="Campo Obrigatório"
 						placeholder="CPF" />
 					<p:message for="cpf" />
-
-					<h:outputLabel value="Fone:" for="phone" styleClass="outputlabel" />
-					<b:inputText value="#{personManagedBean.person.phone}" id="phone"
-						required="true" requiredMessage="Campo Obrigatório"
-						placeholder="Telefone" />
-					<p:message for="phone" />
-
+					<h:outputLabel value="Fone:" for="fone" styleClass="outputlabel" />
+					<b:inputText value="#{pessoaMB.pessoa.telefone}" id="fone"
+						required="true" requiredMessage="Campo Obrigatório" placeholder="Telefone" />
+					<p:message for="fone" />
 				</h:panelGrid>
 				<h:panelGrid columns="3" cellpadding="5">
 					<b:commandButton value="Salvar" look="primary" iconAwesome="save"
-						action="#{personManagedBean.save()}" update="@form viewForm" />
+						action="#{pessoaMB.salvar()}" update="@form viewForm" />
 					<b:column span="1" />
 					<b:commandButton value="Limpar" look="primary" process="@this"
-						iconAwesome="eraser" action="#{personManagedBean.clean()}"
-						update="@form" />
+						iconAwesome="eraser" action="#{pessoaMB.limpar()}" update="@form" />
 				</h:panelGrid>
 			</h:form>
-
 		</b:panel>
 		<b:panel title="Registro:Pessoas" collapsible="false">
 			<h:form id="viewForm">
-				<b:dataTable id="personTable" var="person"
-					value="#{personManagedBean.listOfRegisterPersons}"
+				<b:dataTable id="personTable" var="pessoa"
+					value="#{pessoaMB.listaDePessoasRegistradas}"
 					emptyMessage="Não existe cadastros" paginator="true" rows="5"
 					select="true">
-
-					<h:column id="viewNAME" headerText="Nome"
-						style="text-align:center;">
-						<h:outputText value="#{person.name}" title="Name" />
+					<h:column id="viewNome" headerText="Nome" style="text-align:center;">
+						<h:outputText value="#{pessoa.nome}"  />
 					</h:column>
-
 					<h:column id="viewMAIL" style="text-align: center">
-						<h:outputText value="#{person.mail}" />
+						<h:outputText value="#{pessoa.mail}" />
 					</h:column>
-
 					<h:column id="viewCPF" style="text-align: center">
-						<h:outputText value="#{person.cpf}" />
+						<h:outputText value="#{pessoa.cpf}" />
 					</h:column>
-
-					<h:column id="viewPHONE" style="text-align: center">
-						<h:outputText value="#{person.phone}" />
+					<h:column id="viewFONE" style="text-align: center">
+						<h:outputText value="#{pessoa.telefone}" />
 					</h:column>
-
 					<h:column style="text-align: center">
 						<b:commandButton iconAwesome="edit" title="Editar Cadastro"
-							actionListener="#{personManagedBean.setPerson(person)}"
-							update="personForm" />
-						<b:commandButton title="Deletar Cadastro" iconAwesome="trash"
-							action="#{personManagedBean.delete(person)}" />
+							actionListener="#{pessoaMB.setPessoa(pessoa)}" update="pessoaForm" />
+						<b:commandButton title="Deletar Cadastro" iconAwesome="trash" action="#{pessoaMB.deletar(pessoa)}" />
 					</h:column>
-
 				</b:dataTable>
 			</h:form>
 		</b:panel>
 	</ui:define>
 </ui:composition>
-
 </html>

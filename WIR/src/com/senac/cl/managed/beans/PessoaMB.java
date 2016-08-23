@@ -1,4 +1,4 @@
-package com.senac.wir.managed.beans;
+package com.senac.cl.managed.beans;
 
 import java.util.List;
 
@@ -6,65 +6,65 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import com.senac.wir.domain.Person;
-import com.senac.wir.service.PersonService;
-import com.senac.wir.util.MessengerSystem;
+import com.senac.cl.modelos.Pessoa;
+import com.senac.cl.service.PessoaService;
+import com.senac.cl.utilitarios.SistemaDeMensagens;
 
 @ManagedBean
 @ViewScoped
-public class PersonManagedBean {
+public class PessoaMB {
 
-	private Person person;
-	private List<Person> listOfRegisterPersons;
+	private Pessoa pessoa;
+	private List<Pessoa> listaDePessoasRegistradas;
 
 	@Inject
-	private PersonService service;
+	private PessoaService servico;
 
-	public PersonManagedBean() {
+	public PessoaMB() {
 	}
 
-	public void save() {
-		service.save(getPerson());
-		MessengerSystem.notifyInformation("Parabéns!", "Cadastro salvo com sucesso!");
-		loadListOfPersons();
-		clean();
+	public void salvar() {
+		servico.salvar(getPessoa());
+		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro salvo com sucesso!");
+		carregarListaDePessoas();
+		limpar();
 	}
 
-	public void delete(Person person) {
-		service.delete(person);
-		MessengerSystem.notifyInformation("Parabéns!", "Cadastro deletado com sucesso!");
-		loadListOfPersons();
-		clean();
+	public void deletar(Pessoa pessoa) {
+		servico.deletar(pessoa);
+		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro deletado com sucesso!");
+		carregarListaDePessoas();
+		limpar();
 	}
 
-	public void clean() {
-		setPerson(new Person());
+	public void limpar() {
+		setPessoa(new Pessoa());
 	}
 
-	private void loadListOfPersons() {
-		setListOfRegisterPersons(service.loadPersonsFromDataBase());
+	private void carregarListaDePessoas() {
+		setListaDePessoasRegistradas(servico.carregarPessoasDoBancoDeDados());
 	}
 
-	public List<Person> getListOfRegisterPersons() {
-		if (listOfRegisterPersons == null) {
-			loadListOfPersons();
+	public List<Pessoa> getListaDePessoasRegistradas() {
+		if (listaDePessoasRegistradas == null) {
+			carregarListaDePessoas();
 		}
-		return listOfRegisterPersons;
+		return listaDePessoasRegistradas;
 	}
 
-	public void setListOfRegisterPersons(List<Person> listOfRegisterPersons) {
-		this.listOfRegisterPersons = listOfRegisterPersons;
+	public void setListaDePessoasRegistradas(List<Pessoa> listaDePessoasRegistradas) {
+		this.listaDePessoasRegistradas = listaDePessoasRegistradas;
 	}
 
-	public Person getPerson() {
-		if (person == null) {
-			clean();
+	public Pessoa getPessoa() {
+		if (pessoa == null) {
+			limpar();
 		}
-		return person;
+		return pessoa;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 }

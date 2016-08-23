@@ -1,43 +1,48 @@
-package com.senac.wir.domain;
+package com.senac.cl.modelos;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class Person {
+public class Pessoa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	@Column(nullable = false)
-	private String name;
-	@Column(nullable = false)
+	private Long id;
+	@Column(nullable = false, name = "nome_pessoa")
+	@NotNull
+	private String nome;
+	@Column(nullable = false, name = "cpf_pessoa")
+	@NotNull
 	private String cpf;
-	@Column(nullable = false)
-	private String phone;
-	@Column(nullable = false)
+	@Column(nullable = false, name = "telefone_pessoa")
+	@NotNull
+	private String telefone;
+	@Column(nullable = false, name = "mail_pessoa")
+	@NotNull
 	private String mail;
 
-	public Person() {
+	public Pessoa() {
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getCpf() {
@@ -48,12 +53,12 @@ public class Person {
 		this.cpf = cpf;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public String getMail() {
@@ -71,8 +76,8 @@ public class Person {
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((mail == null) ? 0 : mail.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
 	}
 
@@ -84,7 +89,7 @@ public class Person {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Person other = (Person) obj;
+		Pessoa other = (Pessoa) obj;
 		if (cpf == null) {
 			if (other.cpf != null)
 				return false;
@@ -100,17 +105,23 @@ public class Person {
 				return false;
 		} else if (!mail.equals(other.mail))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!nome.equals(other.nome))
 			return false;
-		if (phone == null) {
-			if (other.phone != null)
+		if (telefone == null) {
+			if (other.telefone != null)
 				return false;
-		} else if (!phone.equals(other.phone))
+		} else if (!telefone.equals(other.telefone))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Pessoa [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", telefone=" + telefone + ", mail=" + mail
+				+ "]";
 	}
 
 }

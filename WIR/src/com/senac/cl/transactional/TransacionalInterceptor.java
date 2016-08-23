@@ -1,4 +1,4 @@
-package com.senac.wir.transactional;
+package com.senac.cl.transactional;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 
-import com.senac.wir.util.MessengerSystem;
+import com.senac.cl.utilitarios.SistemaDeMensagens;
 
 @Interceptor @Transactional
 public class TransacionalInterceptor implements Serializable {
@@ -32,7 +32,7 @@ public class TransacionalInterceptor implements Serializable {
 
 			entityManager.getTransaction().rollback();
 
-			MessengerSystem.notifyError("Error - ",
+			SistemaDeMensagens.notificaERRO("Error - ",
 					"Details of the Error: " + e.getClass().getName() + " - " + e.getMessage());
 
 			e.printStackTrace();

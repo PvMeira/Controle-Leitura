@@ -1,4 +1,4 @@
-package com.senac.wir.transactional;
+package com.senac.cl.transactional;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

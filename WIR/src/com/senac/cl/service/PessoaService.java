@@ -1,35 +1,35 @@
-package com.senac.wir.service;
+package com.senac.cl.service;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import com.senac.wir.domain.Person;
-import com.senac.wir.repository.PersonRepository;
-import com.senac.wir.transactional.Transactional;
+import com.senac.cl.modelos.Pessoa;
+import com.senac.cl.repository.PessoaRepository;
+import com.senac.cl.transactional.Transactional;
 
-public class PersonService {
+public class PessoaService {
 
 	@Inject
-	private PersonRepository repository;
+	private PessoaRepository repositorio;
 
 	@Transactional
-	public void save(Person person) {
-		if (person.getId() == null) {
-			repository.insert(person);
+	public void salvar(Pessoa pessoa) {
+		if (pessoa.getId() == null) {
+			repositorio.inserir(pessoa);
 		} else {
-			repository.update(person);
+			repositorio.atualizar(pessoa);
 		}
 	}
 
 	@Transactional
-	public List<Person> loadPersonsFromDataBase() {
-		return repository.allPerson();
+	public List<Pessoa> carregarPessoasDoBancoDeDados() {
+		return repositorio.todasAsPessoas();
 	}
 
 	@Transactional
-	public void delete(Person person) {
-		repository.remove(person);
+	public void deletar(Pessoa pessoa) {
+		repositorio.remover(pessoa);
 		;
 	}
 
