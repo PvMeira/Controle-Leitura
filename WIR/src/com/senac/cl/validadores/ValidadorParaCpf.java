@@ -9,12 +9,18 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 import com.senac.cl.utilitarios.SistemaDeMensagens;;
-
+/**
+ * 
+ * @author Pedro
+ * @since 27/08/2016
+ */
 @FacesValidator(value = "cpfValidator")
 public class ValidadorParaCpf implements Validator {
 
     private Integer firstDigit, secondDigit;
-
+/**
+ * Validao o numero de caracteres do CPF < ou > 11
+ */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         if (value != null) {
@@ -28,18 +34,31 @@ public class ValidadorParaCpf implements Validator {
             }
         }
     }
-
+/**
+ * Verifica se Tem a patern de CPF
+ * @param cpf
+ * @return
+ */
     private static boolean isAPatternCpf(String cpf) {
         return cpf.matches("\\b(\\d)\\1+\\b");
     }
-
+/**
+ * Calculo para a validação do CPF
+ * @param cpf
+ * @return
+ */
     private boolean validateCpf(String cpf) {
         firstDigit = calculateCheckerOfDigit(10, cpf.substring(0, 9));
         secondDigit = calculateCheckerOfDigit(11, cpf.substring(0, 9).concat(firstDigit.toString()));
 
         return (firstDigit.toString().concat(secondDigit.toString())).equals(cpf.substring(9, 11));
     }
-
+/**
+ * checa o calculo do digito
+ * @param multiplicador
+ * @param cpf
+ * @return
+ */
     private static Integer calculateCheckerOfDigit(int multiplicador, String cpf) {
         Integer digit;
         int soma = 0;

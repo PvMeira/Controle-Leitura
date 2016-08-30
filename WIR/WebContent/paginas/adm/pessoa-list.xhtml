@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/modelo/padrao.xhtml">
+	
+<ui:define name="center">	
+
+
+	
+			<h:form id="viewForm">
+				<p:dataTable id="personTable" var="pessoa" 
+					value="#{pessoaMB.listaDePessoasRegistradas}"
+					emptyMessage="Não existe cadastros" paginator="true" rows="5"
+					draggableColumns="true" paginatorAlwaysVisible="false" >
+					
+					<p:column id="viewNome" headerText="Nome" style="text-align:center;" >
+						<h:outputText value="#{pessoa.nome}"  />
+					</p:column>
+					<p:column id="viewMAIL" style="text-align: center" headerText="email">
+						<h:outputText value="#{pessoa.mail}" />
+					</p:column>
+					<p:column id="viewCPF" style="text-align: center" headerText="Cpf">
+						<h:outputText value="#{pessoa.cpf}" />
+					</p:column>
+					<p:column id="viewFONE" style="text-align: center" headerText="Telefone">
+						<h:outputText value="#{pessoa.telefone}" />
+					</p:column>
+					
+					<p:column id="viewSenha" style="text-align: center" headerText="Senha">
+						<h:outputText value="#{pessoa.password}" />
+					</p:column>
+					<p:column id="viewLogin" style="text-align: center" headerText="Login" >
+						
+						<p:outputLabel value="#{pessoa.username}"/>
+					</p:column>
+					<p:column style="text-align: center" id="columnAcao" headerText="Ação">
+						<p:commandButton action="#{pessoaMB.setPessoa(pessoa)}" ajax="false" value="Editar"/>
+						<p:commandButton value="Deletar" action="#{pessoaMB.deletar(pessoa)}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		
+		
+</ui:define>
+</ui:composition>

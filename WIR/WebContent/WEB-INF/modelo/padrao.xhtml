@@ -11,19 +11,50 @@
 	<title>Controle de Leitura</title>
 	<h:outputStylesheet library="styles" name="primefacesOverride.css" />
 	<h:outputStylesheet library="styles" name="wir-style.css" />
-</h:head>
-<b:navBar brand="Controle de Leitura" brandHref="#">
-	<b:navbarLinks>
-		<b:dropMenu value="Cadastro" iconAwesome="group">
-			<b:navLink value="Pessoa" href="paginas/pessoa-form.xhtml" icon-awesome="male"></b:navLink>
-			<b:navLink value="Livro" href="#" icon-awesome="book"></b:navLink>
-		</b:dropMenu>
-		<b:dropMenu value="Nova Leitura" icon-awesome="book">
-			<b:navLink value="Cadastrar nova Leitura" href="#"></b:navLink>
-		</b:dropMenu>
+	<style>
 
-	</b:navbarLinks>
-</b:navBar>
+.body {
+background-color: black;
+}
+
+</style>
+</h:head>
+
+<h:form>
+ <p:menubar >
+        <p:submenu label="Cadastro" icon="fa fa-fw fa-file-o" >
+            <p:submenu label="Novo" icon="fa fa-fw fa-plus">
+                <p:menuitem value="Livro" url="#" icon="fa fa-fw fa-book"/>
+                <p:menuitem value="Anotação" url="#" icon="fa fa-fw fa-paper-plane-o"/>
+            </p:submenu>
+        </p:submenu>
+        <p:submenu label="Nova Leitura" icon="fa fa-fw fa-bookmark-o" >
+            <p:menuitem value="Meus Livros" url="#" icon="ui-icon-arrowreturnthick-1-w" />
+            <p:menuitem value="Públicos" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+        </p:submenu>
+ 
+        <p:submenu label="Admim" icon="ui-icon-gear" >
+            <p:submenu label="Configurações" icon="fa fa-fw fa-wrench">
+                		<p:menuitem value="Login" url="#" icon="fa fa-fw fa-user"/>
+                		<p:menuitem value="Livros - Publicos " url="#" icon="fa fa-fw fa-align-justify"/>
+                		<p:menuitem value="Leituras - geral " url="#" icon="fa fa-fw fa-bookmark"/>
+                	</p:submenu>
+                <p:menuitem value="Cadastros de Livros"  icon="fa fa-fw fa-table" />
+                <p:menuitem value="Relatorios"  icon="fa fa-fw fa-file-excel-o" />
+            </p:submenu>
+        <f:facet name="options">
+            <p:commandButton  value="Logout" 
+            icon="fa fa-fw fa-power-off" 
+            action="#{sessionMB.sair()}"/>
+        </f:facet>
+        
+    </p:menubar>
+    </h:form>
+ <br />
+ <br />
+ <br />
+ <br />
+  
 <h:body>
 	<b:container>
 		<ui:insert name="center">

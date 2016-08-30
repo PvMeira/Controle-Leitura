@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Login</title>
+	<h:outputStylesheet library="styles" name="primefacesOverride.css" />
+	<h:outputStylesheet library="styles" name="wir-style.css" />
+</h:head>
+<h:form>
+		<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
+			<h:form id="frm" >
+
+				<h:panelGrid columns="3" rowClasses="3" >
+					<p:outputLabel value="login" for="login"/>
+					<p:inputText size="30" id="login"
+						required="true" 
+						requiredMessage="Campo Obrigatório"
+						value="#{sessionMB.usernameLogin}" />
+					<p:message for="login" />
+
+					<p:outputLabel value="Senha" for="senha"/>
+					<p:password size="30" required="true"  id="senha"
+						requiredMessage="Campo Obrigatório"
+						value="#{sessionMB.passwordLogin}" />
+					<p:message for="senha" />
+
+					<h:panelGroup />
+
+					<p:commandButton value="Login" action="#{sessionMB.entrar()}" icon="fa fa-fw fa-sign-in"/>
+					</h:panelGrid>
+			</h:form>
+			
+</h:form>	
+</html>

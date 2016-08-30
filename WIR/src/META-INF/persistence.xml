@@ -10,6 +10,7 @@
 		<jta-data-source>java:/jdbc/WhatImReadingDS</jta-data-source>
 
 		<class>com.senac.cl.modelos.Pessoa</class>
+		<class>com.senac.cl.modelos.PessoaHistorico</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

@@ -9,7 +9,19 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+/**
+ * 
+ * @author Pedro
+ * @since 27/08/2016
+ */
 
+/**
+ * Conversor do elemento Onemenu<PrimeFaces> para retorna o objeto da 2 e 3 camada para a 1 
+ * sem qualquer erro ou perda de dados
+ * 
+ *Em alguns casos ao selecionar um elemento no oneMenu, na hora de salvar esse elemento se perde
+ *e causo erro 
+ */
 @FacesConverter("ConversorOneMenu")
 public class OneMenuConverter implements Converter {
 

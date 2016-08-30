@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/WEB-INF/modelo/padrao.xhtml">
+
+<ui:define name="center">
+	
+	<b:panel title="Cadastro de Pessoa" collapsible="false" >
+		<h:form id="pessoaForm">
+		
+			<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
+				<p:panelGrid columns="3" cellpadding="5">
+				
+					<p:outputLabel value="Nome: " for="nome" styleClass="outputlabel" id="outLabelNome"/>
+					<p:inputText value="#{pessoaMB.pessoa.nome}" id="nome"
+						required="true" requiredMessage="Campo Obrigatório" placeholder="nome"/>
+					<p:message for="nome" />
+					
+					<p:outputLabel value="Login" for="login" styleClass="outputlabel" id="outlabelLogin"/>
+					<p:inputText value="#{pessoaMB.pessoa.username}" id="login"
+						required="true" requiredMessage="Campo Obrigatório" placeholder="login" />
+					<p:message for="login" />
+					
+					<p:outputLabel value="Senha:" for="senha" styleClass="outputlabel" id="outLabelLogin"/>
+					<p:password value="#{pessoaMB.pessoa.password}" id="senha"
+						required="true" requiredMessage="Campo Obrigatório"
+						placeholder="Senha"/>
+					<p:message for="senha" />
+					
+					<p:outputLabel value="E-Mail: " for="mail" styleClass="outputlabel" id="outLabelMail"/>
+					<p:inputText value="#{pessoaMB.pessoa.mail}" id="mail"
+						required="true" requiredMessage="Campo Obrigatório" placeholder="E-Mail" />
+					<p:message for="mail" />
+					
+					<p:outputLabel value="CPF: " for="cpf" styleClass="outputlabel" id="outLabelCpf"/>
+					<p:inputText value="#{pessoaMB.pessoa.cpf}" id="cpf"
+						required="true" requiredMessage="Campo Obrigatório"
+						placeholder="CPF" />
+					<p:message for="cpf" />
+					
+					<p:outputLabel value="Fone:" for="fone" styleClass="outputlabel" id="outLabelFone"/>
+					<p:inputText value="#{pessoaMB.pessoa.telefone}" id="fone"
+						required="true" requiredMessage="Campo Obrigatório" placeholder="Telefone" />
+					<p:message for="fone" />
+					
+				</p:panelGrid>
+				<p:panelGrid columns="3" cellpadding="5">
+				
+					<p:commandButton value="Salvar"  
+					iconAwesome="save"
+					id="savePessoaButton"
+					action="#{pessoaMB.salvar()}" 
+					update="@form" />
+					
+					<b:column span="1" />
+					
+					<p:commandButton value="Limpar" 
+					process="@this"
+					id="cleanPessoaButton"
+					iconAwesome="eraser" 
+					action="#{pessoaMB.limpar()}" 
+					update="@form" 
+					ajax="false"/>
+				</p:panelGrid>
+			
+			</h:form>
+		</b:panel>
+	
+</ui:define>
+</ui:composition>
