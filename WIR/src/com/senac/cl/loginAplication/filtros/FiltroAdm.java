@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.senac.cl.modelos.Pessoa;
 
-@WebFilter(filterName = "FiltroADM",value ="/adm" )
+@WebFilter(filterName = "FiltroADM",value ="/adm/*" )
 public class FiltroAdm implements Filter {
 
 	@Inject

@@ -35,9 +35,17 @@
 		<filter-name>FiltroADM</filter-name>
 		<filter-class>com.senac.cl.loginAplication.filtros.FiltroAdm</filter-class>
 	</filter>
+	<filter-mapping>
+		<filter-name>FiltroADM</filter-name>
+		<url-pattern>/adm/*</url-pattern>
+	</filter-mapping>
 	<filter>
 		<display-name>FiltroNormal</display-name>
 		<filter-name>FiltroNormal</filter-name>
 		<filter-class>com.senac.cl.loginAplication.filtros.FiltroNormal</filter-class>
 	</filter>
+	<filter-mapping>
+		<filter-name>FiltroNormal</filter-name>
+		<url-pattern>/normal/*</url-pattern>
+	</filter-mapping>
 </web-app>
