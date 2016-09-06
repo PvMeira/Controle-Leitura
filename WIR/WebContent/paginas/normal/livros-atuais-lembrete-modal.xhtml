@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui" 
+		xmlns:b="http://bootsfaces.net/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<p:dialog id="idModalLembrete" 
+		widgetVar="modalLembrete" 
+		modal="true" 
+		appendTo="@(body)" 
+		closable="true"
+		draggable="false"
+		header="Anotações"
+		width="700px"
+		resizable="false">
+			<h:form id="formModalLembrete" prependId="false">
+				<p:panelGrid columns="2">
+					<p:commandButton ajax="false" 	
+						icon="fa fa-fw fa-check"  
+						value="Salvar" 
+						process="@this"
+						oncomplete="modalLembrete.hide()"/>
+					
+					<p:commandButton ajax="false"
+						icon="fa fa-fw fa-ban"
+						value="Fechar" 
+						oncomplete="modalLembrete.hide()"/>
+				</p:panelGrid>
+				
+					<p:separator style="width:500px"/>
+					
+				<p:panelGrid columns="1">
+					<p:inputTextarea id="inputTextAnotação" 
+						rows="5" 
+						cols="30" 
+						style=" width:600px; height:90px;"
+						counter="display1" 
+						maxlength="100" 
+						counterTemplate="{0} characters remaining." 
+						autoResize="false" />
+					<p:outputLabel/>
+    				<h:outputText id="display1" />
+				</p:panelGrid>	
+			</h:form>
+		</p:dialog>
+</html>

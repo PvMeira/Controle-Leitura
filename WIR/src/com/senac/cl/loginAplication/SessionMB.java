@@ -3,19 +3,20 @@ package com.senac.cl.loginAplication;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import com.senac.cl.modelos.Pessoa;
 import com.senac.cl.repository.PessoaRepository;
 import com.senac.cl.utilitarios.SistemaDeMensagens;
+
 /**
  * 
  * @author Pedro
  *
  */
-@ViewScoped
+@ApplicationScoped
 @ManagedBean(eager = true)
 public class SessionMB implements Serializable {
 
@@ -24,7 +25,7 @@ public class SessionMB implements Serializable {
 	private String usernameLogin;
 
 	private String passwordLogin;
-	
+
 	@Inject
 	private Pessoa pessoaED;
 
@@ -39,10 +40,10 @@ public class SessionMB implements Serializable {
 				this.pessoaED = pessoa;
 				pessoaED.setLogado(true);
 				if (pessoaED.isAdm() == true) {
-					
+
 					return "adm/pessoa-form.xhtml?faces-redirect=true";
 				} else if (pessoaED.isNormal() == true) {
-					return "normal/Teste.xhtml?faces-redirect=true";
+					return "normal/livro-list.xhtml?faces-redirect=true";
 				}
 			}
 		}
@@ -57,7 +58,8 @@ public class SessionMB implements Serializable {
 		SessionUtil.getSession().invalidate();
 		return "Login.xhtml?faces-redirect=true";
 	}
-	public void limpaCampos(){
+
+	public void limpaCampos() {
 		this.passwordLogin = null;
 		this.usernameLogin = null;
 	}

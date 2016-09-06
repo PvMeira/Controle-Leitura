@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.senac.cl.modelos.Pessoa;
 
-@WebFilter(filterName = "FiltroNormal",value="/normal/*")
+@WebFilter(filterName = "FiltroNormal",value="/paginas/normal/*")
 public class FiltroNormal implements Filter {
 
 	@Inject

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/modelo/padrao.xhtml">
+
+	<ui:define name="center">
+		<b:panel title="Meus Livros " collapsible="false">
+			<h:form prependId="false" id="meusLisvrosForm">
+				<p:dataTable id="listaDelivrosAtuais" 
+					var="livros" 
+					value=""
+					emptyMessage="Não existe cadastros" 
+					paginator="true" rows="5"
+					draggableColumns="true" 
+					paginatorAlwaysVisible="false" >
+					
+					<p:column headerText="Titulo">
+				
+				
+					</p:column>
+					
+					<p:column headerText="Data de Inicio">
+					
+					
+					</p:column>
+					
+					<p:column headerText="Pagina Atual">
+					
+					</p:column>
+					
+					<p:column headerText="Anotações">
+					<p:commandButton id="buttonAcaoLmebrete" 
+					icon="fa fa-fw fa-note" 
+					oncomplete="PF('modalLembrete').show();"/>
+					
+					</p:column>
+					<p:column headerText="Parar Leitura" style="text-align:center">
+					<p:commandButton id="buttonAcaoPararLer" 
+					icon="fa fa-fw fa-stop"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</b:panel>
+			<!-- Modal para visualizar anotação -->
+		<ui:include src="/paginas/normal/livros-atuais-lembrete-modal.xhtml"/> 
+	</ui:define>
+</ui:composition>
