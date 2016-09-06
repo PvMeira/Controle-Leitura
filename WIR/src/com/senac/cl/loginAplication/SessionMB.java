@@ -78,4 +78,12 @@ public class SessionMB implements Serializable {
 		this.passwordLogin = passwordLogin;
 	}
 
+	public Pessoa getPessoaED() {
+		return pessoaED;
+	}
+
+	public void setPessoaED(Pessoa pessoaED) {
+		this.pessoaED = pessoaED;
+	}
+
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui" 
+		xmlns:b="http://bootsfaces.net/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<p:dialog id="modalNovaLeituraLista" 
+		widgetVar="novaLeituraLista" 
+		modal="true" 
+		appendTo="@(body)" 
+		closable="true"
+		draggable="false"
+		header="Nova Leitura"
+		width="600px"
+		resizable="false">
+			<h:form id="formModalNovaLeitura" prependId="false">
+				<p:panelGrid columns="2">
+					<p:commandButton ajax="false" 	
+						icon="fa fa-fw fa-check"  
+						value="Salvar" 
+						process="@this"
+						oncomplete="novaLeituraLista.hide()"/>
+					
+					<p:commandButton ajax="false"
+						icon="fa fa-fw fa-ban"
+						value="Fechar" 
+						oncomplete="novaLeituraLista.hide()"/>
+				</p:panelGrid>
+				
+					<p:separator style="width:500px"/>
+					
+				<p:panelGrid columns="2">
+					<p:outputLabel id="labelModalCampo" for="autoCompleteModal" value="Nome do Livro"/>
+						<p:autoComplete id="autoCompleteModal" appendTo="@(body)">
+						</p:autoComplete>
+				</p:panelGrid>	
+			</h:form>
+		</p:dialog>
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/WEB-INF/modelo/padrao.xhtml">
+
+	<ui:define name="center">
+		<b:panel title="Cadastro de um Livro" collapsible="false">
+			<h:form id="idFormCadastroLivro" prependId="false">
+				<p:growl id="idGrowlCadastroLivro" showDetail="true" sticky="false"
+					life="4000" />
+				<p:panelGrid columns="3">
+
+					<p:outputLabel id="labelTituloLivro" 
+						for="inputTextTitulo" 
+						styleClass="outputlabel" 
+						value="Título :" />
+					<p:inputText id="inputTextTitulo" 
+						value="" 
+						rendered="true" 
+						requiredMessage="Campo Obrigatório" 
+						placeholder="Título"/>
+					<p:message for="inputTextTitulo" />
+					
+					
+					<p:outputLabel id="labelAutorLivro" 
+						for="inputTextAutor" 
+						styleClass="outputlabel" 
+						value="Autor :" />
+					<p:inputText id="inputTextAutor" 
+						value="" 
+						rendered="true" 
+						requiredMessage="Campo Obrigatório" 
+						placeholder="Autor"/>
+					<p:message for="inputTextAutor" />
+					
+										
+					<p:outputLabel id="labelAutorPaginas" 
+						for="inputIntPaginas" 
+						styleClass="outputlabel" 
+						value="Paginas :" />
+					<p:inputText id="inputIntPaginas" 
+						value="" 
+						rendered="true" 
+						requiredMessage="Campo Obrigatório" 
+						placeholder="Numero de paginas"/>
+					<p:message for="inputIntPaginas" />
+					
+					<p:outputLabel id="labelResumo" 
+						for="inputTextResumo" 
+						styleClass="outputlabel" 
+						value="Resumo :" />
+					<p:inputTextarea id="inputTextResumo" 
+						value="" 
+						rows="5" 
+						cols="30" 
+						style=" width:600px; height:90px;"
+						counter="display" 
+						maxlength="100" 
+						counterTemplate="{0} characters remaining." 
+						autoResize="false" />
+					<p:outputLabel/>
+    				<br/><h:outputText id="display" />
+				</p:panelGrid>
+				
+				<p:panelGrid columns="1">
+    				<p:fileUpload 
+    					value="" 
+    					mode="simple" 
+    					label="Escolha o PDF" 
+    					skinSimple="true"/>
+    			</p:panelGrid>
+    			
+				<p:panelGrid columns="2">
+					<p:commandButton
+					ajax="false" 	
+					icon="fa fa-fw fa-check"  
+					value="Salvar" />
+					
+					<p:commandButton 	
+					ajax="false"
+					icon="fa fa-fw fa-eraser"
+					value="Limpar" />
+				</p:panelGrid>
+			</h:form>
+		</b:panel>
+	</ui:define>
+</ui:composition>

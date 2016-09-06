@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/modelo/padrao.xhtml">
+	
+<ui:define name="center">	
+<b:panel title="Meus Livros " collapsible="false" >
+		<h:form prependId="false" id="formListaLivrosUsuario">
+		<p:commandButton id="buttonNovaLeitura" 
+					oncomplete="PF('novaLeituraLista').show();"
+					icon="fa fa-fw fa-plus"  
+					value="Nova Leitura"/>
+			<br/>
+			<br/>
+			<p:dataTable id="listaLivrosUsuario"
+					var="livro" 
+					value=""
+					emptyMessage="Não existe cadastros" 
+					paginator="true" rows="5"
+					draggableColumns="true" 
+					paginatorAlwaysVisible="false" >
+					
+				<p:column headerText="Titulo">
+					<h:outputText/>
+				</p:column>
+				
+				<p:column headerText="Autor">
+					<h:outputText/>
+				</p:column>
+				
+				<p:column headerText="Paginas">
+					<h:outputText/>
+				</p:column>
+				
+				<p:column headerText="Status">
+					<h:outputText/>
+				</p:column>
+				
+				<p:column headerText="Pontuação">
+					<h:outputText/>
+				</p:column>
+				
+				<p:column headerText="Ação">
+					<p:commandButton value="Ler" icon="fa fa-fw fa-book"/>
+					<p:commandButton value="Remover" icon="fa fa-fw fa-trash"/>
+				</p:column>				
+			</p:dataTable>
+		</h:form>
+		</b:panel>
+		
+		<!-- Modal para realizar nova Leitura -->
+		<ui:include src="/paginas/normal/livro-modal-novaLeitura.xhtml"/>
+		
+</ui:define>
+</ui:composition>
