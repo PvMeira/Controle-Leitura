@@ -1,5 +1,6 @@
 package com.senac.cl.repository;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,6 +26,8 @@ public class PessoaRepository {
  */
 	public void inserir(Pessoa pessoa) {
 		pessoa.setNormal(true);
+		pessoa.setDataUltimoLogin(Calendar.getInstance());
+		pessoa.setDataUltimoLogin(Calendar.getInstance());
 		entityManager.persist(pessoa);
 	}
 /**

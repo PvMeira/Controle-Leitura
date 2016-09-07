@@ -26,7 +26,7 @@ public class PessoaService {
  */
 	@Transactional
 	public void salvar(Pessoa pessoa) {
-		if (pessoa.getId() == null) {
+		if (pessoa.getIdPessoa() == null) {
 			repositorio.inserir(pessoa);
 			service.atualizarHistorico(pessoa,tipoAcao.INCLUIR);
 		} else {

@@ -1,10 +1,18 @@
 package com.senac.cl.modelos;
 
+import java.util.Calendar;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -13,44 +21,81 @@ import javax.validation.constraints.NotNull;
  * @since 27/08/2016
  */
 @Entity
+@Table(name = "pessoa")
+@SequenceGenerator(name = "pessoa_id_pessoa_seq", sequenceName = "pessoa_id_pessoa_seq", allocationSize = 1)
 public class Pessoa {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@Column(nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_id_pessoa_seq")
+	@Column(name = "id_pessoa")
+	private Long idPessoa;
+
+	@OneToMany(mappedBy = "dono", cascade = CascadeType.ALL)
+	private List<Livro> livros;
+
+	@Column(name = "nome")
 	@NotNull
 	private String nome;
-	@Column(nullable = false)
+
+	@Column(name = "cpf")
 	@NotNull
 	private String cpf;
-	@Column(nullable = false)
+
+	@Column(name = "telefone")
 	@NotNull
 	private String telefone;
-	@Column(nullable = false)
+
+	@Column(name = "mail")
 	@NotNull
 	private String mail;
-	@Column(nullable = false)
+
+	@Column(name = "login")
 	@NotNull
 	private String username;
-	@Column(nullable = false)
+
+	@Column(name = "senha")
 	@NotNull
 	private String password;
 
-	@Column
+	@Column(name = "adm_user")
 	private boolean adm;
-	@Column
+
+	@Column(name = "normal_user")
 	private boolean normal;
-	@Column
+
+	@Column(name = "logado_user")
 	private boolean logado = false;
 
-	public Pessoa() {
-	}
+	@Column(name = "data_ultimo_login")
+	private Calendar dataUltimoLogin;
 
-	public Pessoa(Long id, String nome, String cpf, String telefone, String mail, String username, String password,
-																		boolean adm, boolean normal, boolean logado) {
+	@Transient
+	private Calendar dataLoginAtual;
+	
+	/**
+	 * 
+	 */
+	public Pessoa() {
 		
-		this.id = id;
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @param nome
+	 * @param cpf
+	 * @param telefone
+	 * @param mail
+	 * @param username
+	 * @param password
+	 * @param adm
+	 * @param normal
+	 * @param logado
+	 * @param dataUltimoLogin
+	 */
+	public Pessoa(Long id, String nome, String cpf, String telefone, String mail, String username, String password,
+			boolean adm, boolean normal, boolean logado, Calendar dataUltimoLogin) {
+		this.idPessoa = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
@@ -60,96 +105,231 @@ public class Pessoa {
 		this.adm = adm;
 		this.normal = normal;
 		this.logado = logado;
+		this.dataUltimoLogin = dataUltimoLogin;
 	}
 
-	public Long getId() {
-		return id;
+	/**
+	 * 
+	 * @return
+	 */
+	public Long getIdPessoa() {
+		return idPessoa;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	/**
+	 * 
+	 * @param idPessoa
+	 */
+	public void setIdPessoa(Long idPessoa) {
+		this.idPessoa = idPessoa;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Livro> getLivros() {
+		return livros;
+	}
+
+	/**
+	 * 
+	 * @param livros
+	 */
+	public void setLivros(List<Livro> livros) {
+		this.livros = livros;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * 
+	 * @param nome
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getCpf() {
 		return cpf;
 	}
 
+	/**
+	 * 
+	 * @param cpf
+	 */
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getTelefone() {
 		return telefone;
 	}
 
+	/**
+	 * 
+	 * @param telefone
+	 */
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getMail() {
 		return mail;
 	}
 
+	/**
+	 * 
+	 * @param mail
+	 */
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getUsername() {
 		return username;
 	}
 
+	/**
+	 * 
+	 * @param username
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * 
+	 * @param password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isAdm() {
 		return adm;
 	}
 
+	/**
+	 * 
+	 * @param adm
+	 */
 	public void setAdm(boolean adm) {
 		this.adm = adm;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isNormal() {
 		return normal;
 	}
 
+	/**
+	 * 
+	 * @param normal
+	 */
 	public void setNormal(boolean normal) {
 		this.normal = normal;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isLogado() {
 		return logado;
 	}
 
+	/**
+	 * 
+	 * @param logado
+	 */
 	public void setLogado(boolean logado) {
 		this.logado = logado;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Calendar getDataUltimoLogin() {
+		return dataUltimoLogin;
+	}
+
+	/**
+	 * 
+	 * @param dataUltimoLogin
+	 */
+	public void setDataUltimoLogin(Calendar dataUltimoLogin) {
+		this.dataUltimoLogin = dataUltimoLogin;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Calendar getDataLoginAtual() {
+		return dataLoginAtual;
+	}
+
+	/**
+	 * 
+	 * @param dataLoginAtual
+	 */
+	public void setDataLoginAtual(Calendar dataLoginAtual) {
+		this.dataLoginAtual = dataLoginAtual;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (adm ? 1231 : 1237);
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((dataLoginAtual == null) ? 0 : dataLoginAtual.hashCode());
+		result = prime * result + ((dataUltimoLogin == null) ? 0 : dataUltimoLogin.hashCode());
+		result = prime * result + ((idPessoa == null) ? 0 : idPessoa.hashCode());
+		result = prime * result + ((livros == null) ? 0 : livros.hashCode());
+		result = prime * result + (logado ? 1231 : 1237);
 		result = prime * result + ((mail == null) ? 0 : mail.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + (normal ? 1231 : 1237);
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -158,54 +338,95 @@ public class Pessoa {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Pessoa other = (Pessoa) obj;
-		if (adm != other.adm)
+		if (adm != other.adm) {
 			return false;
+		}
 		if (cpf == null) {
-			if (other.cpf != null)
+			if (other.cpf != null) {
 				return false;
-		} else if (!cpf.equals(other.cpf))
+			}
+		} else if (!cpf.equals(other.cpf)) {
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		}
+		if (dataLoginAtual == null) {
+			if (other.dataLoginAtual != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!dataLoginAtual.equals(other.dataLoginAtual)) {
 			return false;
-		if (logado != other.logado)
+		}
+		if (dataUltimoLogin == null) {
+			if (other.dataUltimoLogin != null) {
+				return false;
+			}
+		} else if (!dataUltimoLogin.equals(other.dataUltimoLogin)) {
 			return false;
+		}
+		if (idPessoa == null) {
+			if (other.idPessoa != null) {
+				return false;
+			}
+		} else if (!idPessoa.equals(other.idPessoa)) {
+			return false;
+		}
+		if (livros == null) {
+			if (other.livros != null) {
+				return false;
+			}
+		} else if (!livros.equals(other.livros)) {
+			return false;
+		}
+		if (logado != other.logado) {
+			return false;
+		}
 		if (mail == null) {
-			if (other.mail != null)
+			if (other.mail != null) {
 				return false;
-		} else if (!mail.equals(other.mail))
+			}
+		} else if (!mail.equals(other.mail)) {
 			return false;
+		}
 		if (nome == null) {
-			if (other.nome != null)
+			if (other.nome != null) {
 				return false;
-		} else if (!nome.equals(other.nome))
+			}
+		} else if (!nome.equals(other.nome)) {
 			return false;
-		if (normal != other.normal)
+		}
+		if (normal != other.normal) {
 			return false;
+		}
 		if (password == null) {
-			if (other.password != null)
+			if (other.password != null) {
 				return false;
-		} else if (!password.equals(other.password))
+			}
+		} else if (!password.equals(other.password)) {
 			return false;
+		}
 		if (telefone == null) {
-			if (other.telefone != null)
+			if (other.telefone != null) {
 				return false;
-		} else if (!telefone.equals(other.telefone))
+			}
+		} else if (!telefone.equals(other.telefone)) {
 			return false;
+		}
 		if (username == null) {
-			if (other.username != null)
+			if (other.username != null) {
 				return false;
-		} else if (!username.equals(other.username))
+			}
+		} else if (!username.equals(other.username)) {
 			return false;
+		}
 		return true;
 	}
 

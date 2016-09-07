@@ -27,7 +27,7 @@
             <p:menuitem value="Públicos" url="#" icon="ui-icon-arrowreturnthick-1-e" />
         </p:submenu>
  
-        <p:submenu label="Admim" icon="ui-icon-gear" rendered="#{!sessionMB.pessoaED.adm}">
+        <p:submenu label="Admim" icon="ui-icon-gear" >
             <p:submenu label="Configurações" icon="fa fa-fw fa-wrench">
                 		<p:menuitem value="Login" url="#" icon="fa fa-fw fa-user"/>
                 		<p:menuitem value="Livros - Publicos " url="#" icon="fa fa-fw fa-align-justify"/>
@@ -39,7 +39,7 @@
         <f:facet name="options">
             <p:commandButton  value="Logout" 
             icon="fa fa-fw fa-power-off" 
-            action="#{sessionMB.sair()}"/>
+           />
         </f:facet>
         
     </p:menubar>

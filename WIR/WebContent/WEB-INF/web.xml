@@ -24,14 +24,16 @@
     <param-name>primefaces.THEME</param-name>
     <param-value>bootstrap</param-value>
   </context-param>
-  <filter>
+<!--   <filter>
     <display-name>FiltroADM</display-name>
     <filter-name>FiltroADM</filter-name>
     <filter-class>com.senac.cl.loginAplication.filtros.FiltroAdm</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>FiltroADM</filter-name>
-    <url-pattern>/paginas/adm/*</url-pattern>
+    <url-pattern>/paginas/*</url-pattern>
+    <url-pattern>/WEB-INF/*</url-pattern>
+    <url-pattern>/resources/*</url-pattern>
   </filter-mapping>
   <filter>
     <display-name>FiltroNormal</display-name>
@@ -40,6 +42,8 @@
   </filter>
   <filter-mapping>
     <filter-name>FiltroNormal</filter-name>
+    <url-pattern>/WEB-INF/*</url-pattern>
+    <url-pattern>/resources/*</url-pattern>
     <url-pattern>/paginas/normal/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping> -->
 </web-app>

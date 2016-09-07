@@ -31,6 +31,7 @@ public class PessoaMB {
 	 * Salva um novo usuario
 	 * 
 	 */
+	
 	public void salvar() {
 		servico.salvar(getPessoa());
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro salvo com sucesso!");

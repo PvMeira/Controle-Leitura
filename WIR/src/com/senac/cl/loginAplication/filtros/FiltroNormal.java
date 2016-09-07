@@ -14,8 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.senac.cl.modelos.Pessoa;
-
-@WebFilter(filterName = "FiltroNormal",value="/paginas/normal/*")
+/**
+ * 
+ * @author Pedro
+ * @since 07/09/2016
+ */
 public class FiltroNormal implements Filter {
 
 	@Inject

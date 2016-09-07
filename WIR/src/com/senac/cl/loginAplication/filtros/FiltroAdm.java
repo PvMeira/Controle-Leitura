@@ -9,13 +9,16 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.senac.cl.modelos.Pessoa;
 
-@WebFilter(filterName = "FiltroADM",value ="/paginas/adm/*" )
+/**
+ * 
+ * @author Pedro
+ * @since 07/09/2016
+ */
 public class FiltroAdm implements Filter {
 
 	@Inject
@@ -31,13 +34,15 @@ public class FiltroAdm implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 
-		if (pessoaLogada == null) {
-			resp.sendRedirect(req.getServletContext().getContextPath() + "/Login.xhtml");
-		} else if (pessoaLogada.isLogado()) {
-			if (pessoaLogada.isAdm() == true) {
-				chain.doFilter(request, response);
+		if (pessoaLogada.getIdPessoa() == null) {
+			resp.sendRedirect(req.getContextPath() + "/paginas/Login.xhtml");
+		}else{
+			if (pessoaLogada.isLogado()) {
+				if (pessoaLogada.isAdm() == true) {
+					chain.doFilter(request, response);
+				}
 			}
-		}
+		}	
 	}
 
 	@Override

@@ -51,7 +51,6 @@
 				<p:panelGrid columns="3" cellpadding="5">
 				
 					<p:commandButton value="Salvar"  
-					iconAwesome="save"
 					id="savePessoaButton"
 					action="#{pessoaMB.salvar()}" 
 					update="@form" />
@@ -61,7 +60,6 @@
 					<p:commandButton value="Limpar" 
 					process="@this"
 					id="cleanPessoaButton"
-					iconAwesome="eraser" 
 					action="#{pessoaMB.limpar()}" 
 					update="@form" 
 					ajax="false"/>

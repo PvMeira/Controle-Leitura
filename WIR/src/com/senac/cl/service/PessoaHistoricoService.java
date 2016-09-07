@@ -1,7 +1,6 @@
 package com.senac.cl.service;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.util.Calendar;
 
 import javax.inject.Inject;
 
@@ -19,16 +18,21 @@ public class PessoaHistoricoService {
 
 	@Inject
 	private PessoaHistoricoRepository repository;
-
-	public void atualizarHistorico(Pessoa pessoa,tipoAcao tipo) {
+	/**
+	 * Atualiza o historico setando os paramentos de acao e data
+	 * @param pessoa
+	 * @param tipo
+	 */
+	public void atualizarHistorico(Pessoa pessoa, tipoAcao tipo) {
 		PessoaHistorico ph = new PessoaHistorico();
-			ph.setPessoa(pessoa);
-			ph.setTipo(tipo.getSigla());
-			ph.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
-			
+		//pessoa que realizou a ação
+		ph.setPessoa(pessoa);
+		//sigla da ação executada 
+		ph.setTipoAcao(tipo.getSigla());
+		//data da ação executada 
+		ph.setDataAcao(Calendar.getInstance());
+		
 		repository.AtualizarHistorico(ph);
 	}
-	
-	
-	
+
 }
