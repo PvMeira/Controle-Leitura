@@ -19,12 +19,18 @@
 					oncomplete="PF('novaLeituraLista').show();"
 					icon="fa fa-fw fa-plus"  
 					value="Nova Leitura"/>
+		<p:splitButton value="Alterações em Lote ">
+		<p:menuitem value = "Deletar" icon="fa fa-fw fa-trash"/>
+		<p:menuitem value = "Baixar" icon="fa fa-fw fa-arrow-down"/>
+		</p:splitButton>			
 			<br/>
 			<br/>
 			<p:dataTable id="listaLivrosUsuario"
 					var="livro" 
 					value="#{livroMB.listaLivrosPessoaLogada()}"
 					emptyMessage="Não existe cadastros" 
+					selectionMode="multiple"
+					selection="#{livroMB.livrosSelecionados}"
 					paginator="true" rows="5"
 					draggableColumns="true" 
 					paginatorAlwaysVisible="false" >

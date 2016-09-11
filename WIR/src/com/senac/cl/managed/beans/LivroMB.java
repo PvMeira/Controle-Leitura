@@ -2,7 +2,6 @@ package com.senac.cl.managed.beans;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -12,7 +11,6 @@ import javax.inject.Inject;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-import org.primefaces.model.UploadedFile;
 
 import com.senac.cl.modelos.Livro;
 import com.senac.cl.service.LivroService;
@@ -32,12 +30,19 @@ public class LivroMB {
 	
 	private List<Livro> livrosPessoaLogada;
 	
+	private List<Livro> livrosSelecionados;
+	
 	
 	@Inject
 	private LivroService livroService;
 	
 	private final static String LIDO ="Livro já Lido";
 	private final static String NAO_LIDO ="Livro não Lido";
+	
+	
+
+	public LivroMB() {
+	}
 
 	/**
 	 * Salva o livro
@@ -46,13 +51,6 @@ public class LivroMB {
 		livroService.salvar(this.getLivro());
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro salvo com sucesso!");
 		limpar();
-	}
-	
-
-	/**
-	 * 
-	 */
-	public LivroMB() {
 	}
 
 	/**
@@ -72,6 +70,8 @@ public class LivroMB {
 	 * @param event
 	 */
 	public void carregarArquivo(FileUploadEvent event)  {
+		//Converte o arquivo do evento em um array de bytes
+		//para ser armazenado no banco
 		byte[] conteudo = event.getFile().getContents();
 		this.livro.setArquivo(conteudo);
 	}
@@ -83,9 +83,12 @@ public class LivroMB {
 	 * @throws IOException
 	 */
 	public StreamedContent  FileDownloadView(Livro livro) throws IOException {   
+		//Converte os bytes do livro para um arquivo
 		ByteArrayInputStream bis = new ByteArrayInputStream(livro.getArquivo());
 		StreamedContent file;
+		//disponibiliza o formato e o tipo de arquivo para o download 
         file = new DefaultStreamedContent(bis, "application/pdf", livro.getTitulo()+".pdf");
+        //retorna o arquivo
         return file;
     }
 	
@@ -187,5 +190,20 @@ public class LivroMB {
 	public void setLivroService(LivroService livroService) {
 		this.livroService = livroService;
 	}
+
+	/**
+	 * @return the livrosSelecionados
+	 */
+	public List<Livro> getLivrosSelecionados() {
+		return livrosSelecionados;
+	}
+
+	/**
+	 * @param livrosSelecionados the livrosSelecionados to set
+	 */
+	public void setLivrosSelecionados(List<Livro> livrosSelecionados) {
+		this.livrosSelecionados = livrosSelecionados;
+	}
+	
 
 }

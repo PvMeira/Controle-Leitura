@@ -6,7 +6,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.senac.cl.modelos.Livro;
-
+@SuppressWarnings(value ="all")
 public class LivroRepository {
 
 	@Inject
@@ -31,13 +31,15 @@ public class LivroRepository {
 	public List<Livro> todosOsRegistros() {
 		return entityManager.createQuery("select l from " + Livro.class.getSimpleName() + " l").getResultList();
 	}
+
 	/**
 	 * Retorna Lista com todos os livros registrados do usuario logado
+	 * 
 	 * @param id
 	 * @return
 	 */
-	public List<Livro> todosOsRegistrosDoUsuario(Long id){
-		String sql ="SELECT * FROM livro WHERE id_pessoa = "+id+";";
+	public List<Livro> todosOsRegistrosDoUsuario(Long id) {
+		String sql = "SELECT * FROM livro WHERE id_pessoa = " + id + ";";
 		return entityManager.createNativeQuery(sql, Livro.class).getResultList();
 	}
 
