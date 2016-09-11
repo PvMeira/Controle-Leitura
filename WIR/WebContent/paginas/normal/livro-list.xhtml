@@ -6,10 +6,15 @@
 	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/WEB-INF/modelo/padrao.xhtml">
+
 	
 <ui:define name="center">	
 <b:panel title="Meus Livros " collapsible="false" >
 		<h:form prependId="false" id="formListaLivrosUsuario">
+		<p:commandButton id="buttonNovoLivro" 
+					action="livro-form.xhtml?faces-redirect=true"
+					icon="fa fa-fw fa-book"  
+					value="Novo"/>
 		<p:commandButton id="buttonNovaLeitura" 
 					oncomplete="PF('novaLeituraLista').show();"
 					icon="fa fa-fw fa-plus"  
@@ -18,44 +23,77 @@
 			<br/>
 			<p:dataTable id="listaLivrosUsuario"
 					var="livro" 
-					value=""
+					value="#{livroMB.listaLivrosPessoaLogada()}"
 					emptyMessage="Não existe cadastros" 
 					paginator="true" rows="5"
 					draggableColumns="true" 
 					paginatorAlwaysVisible="false" >
 					
 				<p:column headerText="Titulo">
-					<h:outputText/>
+					<h:outputText value="#{livro.titulo}"/>
 				</p:column>
 				
 				<p:column headerText="Autor">
-					<h:outputText/>
+					<h:outputText value="#{livro.autor}"/>
 				</p:column>
 				
 				<p:column headerText="Paginas">
-					<h:outputText/>
+					<h:outputText value="#{livro.paginas}"/>
 				</p:column>
 				
 				<p:column headerText="Status">
-					<h:outputText/>
+					<h:outputText value="#{livroMB.VerificaStatusLivro(livro)}"/>
 				</p:column>
 				
 				<p:column headerText="Pontuação">
-					<h:outputText/>
+					<h:outputText />
 				</p:column>
 				
 				<p:column headerText="Ação">
-					<p:commandButton value="Ler" icon="fa fa-fw fa-book"/>
-					<p:commandButton value="Remover" icon="fa fa-fw fa-trash"/>
+				<!-- Botao para modal Resumo -->
+				<p:commandLink 
+				id="comandLinkModalResumo"
+				title="Visualizar ou Alterar Resumo"
+				action="#{livroMB.populaObservacaoParaModal(livro)}"
+				oncomplete="PF('modalResumo').show();">
+				<p:graphicImage value="/resources/imagens/nota.png" 
+					height="30px" width="30px"/>
+				</p:commandLink>
+				<!-- Botao para downlaod do pdf -->
+				<p:commandLink
+				id="comandLinkDownlod"
+				ajax="false"
+				title="Baixar livro">
+				   <p:fileDownload value="#{livroMB.FileDownloadView(livro)}" />
+				<p:graphicImage value="/resources/imagens/download.png"
+				height="30px" width="30px"/>
+				</p:commandLink>
 				</p:column>				
 			</p:dataTable>
+			<p:remoteCommand name="updateTabelaLivro" update="listaLivrosUsuario"/>
 		</h:form>
 		</b:panel>
 		
 		<!-- Modal para realizar nova Leitura -->
 		<ui:include src="/paginas/normal/livro-modal-novaLeitura.xhtml"/>
-		
+		<!-- Modal Resumo -->
+		<ui:include src="/paginas/normal/livro-modal-resumo.xhtml" />
+
 	
+		<p:confirmDialog id="idModalConfirmDialog"
+		widgetVar="modalconfirmaExluir"
+		appendTo="@(body)"
+		width="600px"
+		height="40px"
+		global="true"
+		closable="true"
+		header="Deseja deletar deletar esse livro?"
+		message="Clique em Sim para deletar esse livro dos seus livros, ou cancelar para sair"
+		closeOnEscape="false">
+		<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="  float: right;"/>
 		
-</ui:define>
+		</p:confirmDialog>
+		
+		</ui:define>
 </ui:composition>

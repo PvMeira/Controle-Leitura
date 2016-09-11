@@ -6,7 +6,9 @@ import java.util.List;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import com.senac.cl.modelos.Pessoa;
 import com.senac.cl.repository.PessoaRepository;
@@ -26,12 +28,15 @@ public class SessionMB implements Serializable {
 	private String usernameLogin;
 
 	private String passwordLogin;
+	
+	private Pessoa pessoaLogado;
 
 	@Inject
 	private Pessoa pessoaED;
 
 	@Inject
 	PessoaRepository pessoaRP;
+	
 
 	/**
 	 * Meotodo que realiza a entrada na aplicação e faz o redirect conforme a permisao
@@ -43,13 +48,19 @@ public class SessionMB implements Serializable {
 
 		for (Pessoa pessoa : listaDePessoas) {
 			if (pessoa.getUsername().equals(this.usernameLogin) && pessoa.getPassword().equals(this.passwordLogin)) {
-				this.pessoaED = pessoa;
+				this.setPessoaED(pessoa);
+				HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 				this.pessoaED.setDataLoginAtual(Calendar.getInstance());
 				this.pessoaED.setLogado(true);
 				if (pessoaED.isAdm() == true) {
-
+					
+					ses.setAttribute("userADM", pessoa);
+					ses.setAttribute("user", pessoa);
 					return "adm/pessoa-form.xhtml?faces-redirect=true";
 				} else if (pessoaED.isNormal() == true) {
+					
+					ses.setAttribute("userNORMAL", pessoa);
+					ses.setAttribute("user", pessoa);
 					return "normal/livro-list.xhtml?faces-redirect=true";
 				}
 			}
@@ -75,6 +86,9 @@ public class SessionMB implements Serializable {
 	 */
 	public void executaUpdateLogout(){
 		Pessoa p =new Pessoa();
+		HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		ses.removeAttribute("userADM");
+		ses.removeAttribute("userNORMAL");
 		p = this.pessoaED;
 		p.setLogado(false);
 		p.setDataUltimoLogin(this.pessoaED.getDataLoginAtual());
@@ -134,5 +148,18 @@ public class SessionMB implements Serializable {
 	public void setPessoaED(Pessoa pessoaED) {
 		this.pessoaED = pessoaED;
 	}
+	/**
+	 * @return the pessoaLogado
+	 */
+	public Pessoa getPessoaLogado() {
+		return pessoaLogado;
+	}
+	/**
+	 * @param pessoaLogado the pessoaLogado to set
+	 */
+	public void setPessoaLogado(Pessoa pessoaLogado) {
+		this.pessoaLogado = pessoaLogado;
+	}
+	
 
 }

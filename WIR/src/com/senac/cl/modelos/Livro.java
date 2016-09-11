@@ -1,5 +1,6 @@
 package com.senac.cl.modelos;
 
+import java.sql.Blob;
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -62,6 +63,9 @@ public class Livro {
 	
 	@Column(name = "data_upload")
 	private Calendar dataUpload;
+	
+	@Column(name = "arquivo_livro")
+	private byte[] arquivo;
 	
 	
 	
@@ -175,6 +179,22 @@ public class Livro {
 
 	public void setDataUpload(Calendar dataUpload) {
 		this.dataUpload = dataUpload;
+	}
+	
+
+
+	/**
+	 * @return the arquivo
+	 */
+	public byte[] getArquivo() {
+		return arquivo;
+	}
+
+	/**
+	 * @param arquivo the arquivo to set
+	 */
+	public void setArquivo(byte[] arquivo) {
+		this.arquivo = arquivo;
 	}
 
 	@Override

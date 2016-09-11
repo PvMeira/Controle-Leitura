@@ -94,11 +94,5 @@ public class PessoaMB {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-//	public void consultarLogin(String user,String pass){
-//		Pessoa pessoa1 =servico.consultarLogin(user,pass );
-//		System.out.printf("Funcionou"+pessoa1.getUsername()
-//										,pessoa1.getPassword());
-//		
-//	}
 
 }

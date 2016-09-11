@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui" 
+		xmlns:b="http://bootsfaces.net/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<p:dialog id="idModalResumo" 
+		widgetVar="modalResumo" 
+		modal="true" 
+		appendTo="@(body)" 
+		closable="true"
+		draggable="false"
+		header="Resumo"
+		width="600px"
+		resizable="false">
+			<h:form id="formModalResumo" prependId="false">
+			<h:panelGrid columns="2">
+			<p:commandButton 
+				ajax="false"
+				icon="fa fa-fw fa-check"  
+				value="salvar" 
+				process="@this"
+				action="#{livroMB.atualizaResumoLivro()}"
+				oncomplete="modalResumo.hide(); updateTabelaLivro();"/>
+			<p:commandButton 
+				ajax="false"
+				icon="fa fa-fw fa-ban"
+				value="Fechar" 
+				oncomplete="modalResumo.hide()"/>
+			</h:panelGrid>	
+			
+				<p:panelGrid columns="1">
+				<p:inputTextarea id="inputTextResumo" 
+						value="#{livroMB.livro.observacao}"	
+						rows="5" 
+						cols="30" 
+						style=" width:500px; height:90px;"
+						counter="displayResumo" 
+						maxlength="100" 
+						counterTemplate="{0} characters remaining." 
+						autoResize="false" />
+					<p:outputLabel/>
+    				<br/><h:outputText id="displayResumo" />
+				</p:panelGrid>	
+			</h:form>
+		</p:dialog>
+</html>
