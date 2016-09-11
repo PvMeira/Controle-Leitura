@@ -11,6 +11,21 @@
 <ui:define name="center">	
 <b:panel title="Meus Livros " collapsible="false" >
 		<h:form prependId="false" id="formListaLivrosUsuario">
+		<p:panelGrid columns="3" >
+			<p:splitButton 
+				value="Operações em Lote " 
+				style="text-align: center">
+				<p:menuitem 
+					style="text-align: center"
+					value="Deletar" 
+					oncomplete="updateTabelaLivro()"
+					action="#{livroMB.deletarEmLote()}"
+					icon="fa fa-fw fa-trash"/>
+				<p:menuitem 
+					style="text-align: center"
+					value="Baixar" 
+					icon="fa fa-fw fa-arrow-down"/>
+			</p:splitButton>	
 		<p:commandButton id="buttonNovoLivro" 
 					action="livro-form.xhtml?faces-redirect=true"
 					icon="fa fa-fw fa-book"  
@@ -19,51 +34,57 @@
 					oncomplete="PF('novaLeituraLista').show();"
 					icon="fa fa-fw fa-plus"  
 					value="Nova Leitura"/>
-		<p:splitButton value="Alterações em Lote ">
-		<p:menuitem value = "Deletar" icon="fa fa-fw fa-trash"/>
-		<p:menuitem value = "Baixar" icon="fa fa-fw fa-arrow-down"/>
-		</p:splitButton>			
+		</p:panelGrid>		
 			<br/>
 			<br/>
 			<p:dataTable id="listaLivrosUsuario"
 					var="livro" 
+					disabledSelection="false"
 					value="#{livroMB.listaLivrosPessoaLogada()}"
 					emptyMessage="Não existe cadastros" 
-					selectionMode="multiple"
+					rowKey="#{livro.idLivro}"
 					selection="#{livroMB.livrosSelecionados}"
 					paginator="true" rows="5"
 					draggableColumns="true" 
-					paginatorAlwaysVisible="false" >
+					paginatorAlwaysVisible="true" >
 					
-				<p:column headerText="Titulo">
+				<p:column selectionMode="multiple" style="width:60px;text-align:center"/>	
+				<p:column headerText="Titulo" style="text-align:center">
 					<h:outputText value="#{livro.titulo}"/>
 				</p:column>
 				
-				<p:column headerText="Autor">
+				<p:column headerText="Autor" style="text-align:center">
 					<h:outputText value="#{livro.autor}"/>
 				</p:column>
 				
-				<p:column headerText="Paginas">
+				<p:column headerText="Paginas" style="text-align:center">
 					<h:outputText value="#{livro.paginas}"/>
 				</p:column>
 				
-				<p:column headerText="Status">
+				<p:column headerText="Status" style="text-align:center">
 					<h:outputText value="#{livroMB.VerificaStatusLivro(livro)}"/>
 				</p:column>
 				
-				<p:column headerText="Pontuação">
-					<h:outputText />
+				<p:column headerText="Pontuação" style="text-align:center">
+					<p:rating value="#{livro.pontuacao}" 
+							  cancel="false"
+							  id="idPontuacao">
+						  <p:ajax event="rate" listener="#{livroMB.updatePontuacaoLivro}" onstart="#{livroMB.populaObservacaoParaModal(livro)}"/>
+					</p:rating>
 				</p:column>
 				
-				<p:column headerText="Ação">
+				<p:column headerText="Ação" style="text-align:center">	
+				
 				<!-- Botao para modal Resumo -->
 				<p:commandLink 
 				id="comandLinkModalResumo"
 				title="Visualizar ou Alterar Resumo"
 				action="#{livroMB.populaObservacaoParaModal(livro)}"
 				oncomplete="PF('modalResumo').show();">
+				
 				<p:graphicImage value="/resources/imagens/nota.png" 
-					height="30px" width="30px"/>
+					height="20px" width="20px"/>
+					
 				</p:commandLink>
 				<!-- Botao para downlaod do pdf -->
 				<p:commandLink
@@ -72,7 +93,7 @@
 				title="Baixar livro">
 				   <p:fileDownload value="#{livroMB.FileDownloadView(livro)}" />
 				<p:graphicImage value="/resources/imagens/download.png"
-				height="30px" width="30px"/>
+				height="15px" width="15px"/>
 				</p:commandLink>
 				</p:column>				
 			</p:dataTable>

@@ -1,49 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-  <display-name>ControleDeLeitura</display-name>
-  <welcome-file-list>
-    <welcome-file>/paginas/Login.xhtml</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.xhtml</url-pattern>
-  </servlet-mapping>
-  <session-config>
-    <session-timeout>30</session-timeout>
-  </session-config>
-  <context-param>
-    <param-name>primefaces.FONT_AWESOME</param-name>
-    <param-value>true</param-value>
-  </context-param>
-  <context-param>
-    <param-name>primefaces.THEME</param-name>
-    <param-value>bootstrap</param-value>
-  </context-param>
-<!--   <filter>
-    <display-name>FiltroADM</display-name>
-    <filter-name>FiltroADM</filter-name>
-    <filter-class>com.senac.cl.loginAplication.filtros.FiltroAdm</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>FiltroADM</filter-name>
-    <url-pattern>/paginas/*</url-pattern>
-    <url-pattern>/WEB-INF/*</url-pattern>
-    <url-pattern>/resources/*</url-pattern>
-  </filter-mapping>
-  <filter>
-    <display-name>FiltroNormal</display-name>
-    <filter-name>FiltroNormal</filter-name>
-    <filter-class>com.senac.cl.loginAplication.filtros.FiltroNormal</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>FiltroNormal</filter-name>
-    <url-pattern>/WEB-INF/*</url-pattern>
-    <url-pattern>/resources/*</url-pattern>
-    <url-pattern>/paginas/normal/*</url-pattern>
-  </filter-mapping> -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>ControleDeLeitura</display-name>
+	<welcome-file-list>
+		<welcome-file>/paginas/Login.xhtml</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>/faces/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
+	
+		<servlet-mapping>
+			<servlet-name>Faces Servlet</servlet-name>
+			<url-pattern>*.xhtml</url-pattern>
+		</servlet-mapping>
+		<session-config>
+			<session-timeout>30</session-timeout>
+		</session-config>
+		<context-param>
+			<param-name>primefaces.FONT_AWESOME</param-name>
+			<param-value>true</param-value>
+		</context-param>
+		<context-param>
+			<param-name>primefaces.THEME</param-name>
+			<param-value>bootstrap</param-value>
+		</context-param>
+		<!-- <filter> <display-name>FiltroADM</display-name> <filter-name>FiltroADM</filter-name> 
+			<filter-class>com.senac.cl.loginAplication.filtros.FiltroAdm</filter-class> 
+			</filter> <filter-mapping> <filter-name>FiltroADM</filter-name> <url-pattern>/paginas/*</url-pattern> 
+			<url-pattern>/WEB-INF/*</url-pattern> <url-pattern>/resources/*</url-pattern> 
+			</filter-mapping> <filter> <display-name>FiltroNormal</display-name> <filter-name>FiltroNormal</filter-name> 
+			<filter-class>com.senac.cl.loginAplication.filtros.FiltroNormal</filter-class> 
+			</filter> <filter-mapping> <filter-name>FiltroNormal</filter-name> <url-pattern>/WEB-INF/*</url-pattern> 
+			<url-pattern>/resources/*</url-pattern> <url-pattern>/paginas/normal/*</url-pattern> 
+			</filter-mapping> -->
 </web-app>

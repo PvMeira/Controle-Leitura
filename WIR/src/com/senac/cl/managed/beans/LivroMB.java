@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.RateEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -26,10 +27,7 @@ import com.senac.cl.utilitarios.SistemaDeMensagens;
 public class LivroMB {
 
 	private Livro livro;
-	
-	
 	private List<Livro> livrosPessoaLogada;
-	
 	private List<Livro> livrosSelecionados;
 	
 	
@@ -64,6 +62,10 @@ public class LivroMB {
 		limpar();
 	}
 	
+	
+	public void deletarSeminformação(Livro livro) {
+		livroService.deletar(livro);
+	}
 	
 	/**
 	 * Carrega o arquivo upado para a entidade
@@ -112,7 +114,34 @@ public class LivroMB {
 	public void populaObservacaoParaModal(Livro livro){
 		this.livro = livro;
 	}
+	/**
+	 * metodo para atualizar o resumo que foi alterado
+	 */
 	public void atualizaResumoLivro(){
+		livroService.atualizar(this.livro);
+	}
+	/**
+	 * metodo para fazer o delete em lote atraves do selection do dataTable
+	 */
+	public void deletarEmLote(){
+		int contador = 0;
+		List<Livro> lista = this.livrosSelecionados;
+		for (Livro livro : lista) {
+			deletarSeminformação(livro);
+			contador ++;
+		}
+		SistemaDeMensagens.notificaINFORMACAO("Livros deletados ", "Com sucesso, numero de livros :"+contador);
+	}
+	/**
+	 * Metodo para atualizar a pontuação do livro apartir o evento 
+	 * ajax na 1 camada
+	 * @param rateEvent
+	 */
+	public void updatePontuacaoLivro(RateEvent rateEvent){
+		Integer pontuacao =0;
+		//Pega o evento do componente do prime e passa para um int 
+		pontuacao = ((Integer) rateEvent.getRating()).intValue();
+		this.livro.setPontuacao(pontuacao);
 		livroService.atualizar(this.livro);
 	}
 
