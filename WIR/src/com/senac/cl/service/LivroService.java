@@ -27,13 +27,14 @@ public class LivroService {
 	 * @param entidade
 	 */
 	@Transactional
-	public void salvar(Livro entidade) {
+	public void salvar(Livro entidade, boolean var) {
 		Pessoa pessoaDaSecao = (Pessoa)this.ses.getAttribute("user");
 		
 		entidade.setDono(pessoaDaSecao);
 		entidade.setDataUltimaLeitura(Calendar.getInstance());
 		entidade.setDataUpload(Calendar.getInstance());
 		entidade.setLivroAtivo(true);
+		entidade.setPublico(var);
 		
 		// Verifica se alguma campo não foi preenchido
 		this.verificaCampos(entidade);
@@ -95,6 +96,15 @@ public class LivroService {
 		Long idParaPesquisa = pessoaDaSecao.getIdPessoa();
 		List<Livro> lista = this.livroRepository.todosOsRegistrosDoUsuario(idParaPesquisa);
 		return lista;
+	}
+	/**
+	 * Retorna o auto complete 
+	 * @param s
+	 * @return
+	 */
+	public List<Livro>listarLivrosAutoComplete(String s){
+	List<Livro> lista = this.livroRepository.listarLivrosAutoComplete(s);
+	return lista;
 	}
 
 	/**

@@ -30,6 +30,8 @@ public class SessionMB implements Serializable {
 	private String passwordLogin;
 	
 	private Pessoa pessoaLogado;
+	
+	private static final String SEM_USUARIO = "Sem Usuario";
 
 	@Inject
 	private Pessoa pessoaED;
@@ -71,6 +73,22 @@ public class SessionMB implements Serializable {
 		return "";
 
 	}
+	
+	/**
+	 * Retorna o username da pessoa logada na seção
+	 * @return
+	 */
+	public String getNomeUsuarioLogado(){
+		HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Pessoa pesLogada= (Pessoa) ses.getAttribute("user");
+		if(pesLogada != null){
+		return pesLogada.getUsername();
+		}else{
+			return SEM_USUARIO ;
+		}
+		
+	}
+	
 	/**
 	 * meotodo que faz o logout da aplicação
 	 * @return

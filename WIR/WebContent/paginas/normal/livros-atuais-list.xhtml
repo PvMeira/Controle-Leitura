@@ -5,47 +5,103 @@
 	xmlns:p="http://primefaces.org/ui" 
 	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/WEB-INF/modelo/padrao.xhtml">
+	template="/WEB-INF/modelo/padrao.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions" >
 
 	<ui:define name="center">
 		<b:panel title="Meus Livros " collapsible="false">
 			<h:form prependId="false" id="meusLisvrosForm">
-				<p:dataTable id="listaDelivrosAtuais" 
+				<p:dataTable 
+					id="listaDelivrosAtuais" 
 					var="livros" 
-					value=""
+					value="#{leituraMB.listaTodasLeiturasPessoaLogada()}"
+					rowKey="#{livros.idLeitura}"
 					emptyMessage="Não existe cadastros" 
-					paginator="true" rows="5"
+					paginator="true" 
+					rows="5"
+					sortMode="multiple"
 					draggableColumns="true" 
-					paginatorAlwaysVisible="false" >
+					paginatorAlwaysVisible="true" >
 					
-					<p:column headerText="Titulo">
+					<p:column headerText="Titulo" style="text-align:center" sortBy="#{livros.livro.titulo}">
+						<h:outputText value="#{livros.livro.titulo}"/>
+					</p:column>
+					
+					<p:column headerText="Data de Inicio" style="text-align:center" sortBy="#{livros.dataInicio.time}">
+						<h:outputText value="#{livros.dataInicio.time}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Pagina Atual" style="text-align:center" sortBy="#{livros.paginaAtual}">
+						 <p:inplace id="ajaxEdit" editor="true">
+           				 	<p:inputText value="#{livros.paginaAtual}" required="true" label="text"/>
+        				</p:inplace>
+					
+						<h:outputText />
+					</p:column>
+					
+					<p:column headerText="Ações" style="text-align:center">
+					<p:commandLink id="modalObservacao"
+								   title="Abrir observação"
+								   action="#{leituraMB.leitura.setObservacao(livros.observacao)}"
+								   oncomplete="PF('modalLembrete').show();">
+							<p:ajax event="click" listener="#{leituraMB.populaLeituraParaObservacao(livros)}"/>		   
+						<p:graphicImage 
+						value="/resources/imagens/nota.png" 
+						height="20px" 
+						width="20px"/>
+					</p:commandLink>
 				
-				
-					</p:column>
-					
-					<p:column headerText="Data de Inicio">
-					
-					
-					</p:column>
-					
-					<p:column headerText="Pagina Atual">
-					
-					</p:column>
-					
-					<p:column headerText="Anotações">
-					<p:commandButton id="buttonAcaoLmebrete" 
-					icon="fa fa-fw fa-note" 
-					oncomplete="PF('modalLembrete').show();"/>
-					
-					</p:column>
-					<p:column headerText="Parar Leitura" style="text-align:center">
-					<p:commandButton id="buttonAcaoPararLer" 
-					icon="fa fa-fw fa-stop"/>
+					<p:commandLink id="abrirPDF"
+								   title="Ir para a leitura atual"
+								   onclick="#{leituraMB.init(livros)}" >
+					<p:graphicImage 
+						value="/resources/imagens/book.jpg" 
+						height="20px" 
+						width="20px"/>			   
+					<p:media
+						 value="#{leituraMB.streamedContent}" 
+						 width="700px"
+						 height="700px" 
+						 player="pdf" />   
+					</p:commandLink>
+					<p:commandLink id="paraLeitura"
+								   title="Para a leitura atual"
+								   action="#{leituraMB.pararLeitura(livros)}"
+								   update="listaDelivrosAtuais">
+						<p:confirm />		   
+						<p:graphicImage 
+						value="/resources/imagens/parar_leitura.png" 
+						height="20px" 
+						width="20px"/>
+					</p:commandLink>
 					</p:column>
 				</p:dataTable>
+			<p:remoteCommand name="atualizarlistaLeitura" update="listaDelivrosAtuais"/>	
 			</h:form>
 		</b:panel>
-			<!-- Modal para visualizar anotação -->
+		
+		
+		
+		
+		<!-- Modal para visualizar anotação -->
 		<ui:include src="/paginas/normal/livros-atuais-lembrete-modal.xhtml"/> 
+		<!-- Modal de confirmação para botao Para a leitura -->
+		<p:confirmDialog 
+			id="idModalConfirmDialogLeitura"
+			widgetVar="modalconfirmaExluir"
+			appendTo="@(body)"
+			width="600px"
+			height="40px"
+			global="true"
+			closable="true"
+			header="Deseja Parar a Leitura?"
+			message="Para para a leitura desse livro clique em Sim ou em Cancelar para fechar esta janela"
+			closeOnEscape="false">
+				<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+       			<p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="  float: right;"/>
+		
+		</p:confirmDialog>
 	</ui:define>
 </ui:composition>

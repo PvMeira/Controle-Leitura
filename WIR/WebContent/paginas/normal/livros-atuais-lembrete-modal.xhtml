@@ -15,15 +15,21 @@
 		header="Anotações"
 		width="700px"
 		resizable="false">
+		
 			<h:form id="formModalLembrete" prependId="false">
 				<p:panelGrid columns="2">
-					<p:commandButton ajax="false" 	
+					<p:commandButton 
+						id="idButtonModalLembreteSave"
+						ajax="false" 	
 						icon="fa fa-fw fa-check"  
 						value="Salvar" 
+						action="#{leituraMB.atualizarObservacao()}"
 						process="@this"
-						oncomplete="modalLembrete.hide()"/>
+						oncomplete="modalLembrete.hide(); atualizarlistaLeitura();"/>
 					
-					<p:commandButton ajax="false"
+					<p:commandButton 
+						id="idButtonModalLembrete"
+						ajax="false"
 						icon="fa fa-fw fa-ban"
 						value="Fechar" 
 						oncomplete="modalLembrete.hide()"/>
@@ -32,7 +38,9 @@
 					<p:separator style="width:500px"/>
 					
 				<p:panelGrid columns="1">
-					<p:inputTextarea id="inputTextAnotação" 
+					<p:inputTextarea 
+						id="inputTextAnotação"
+						value="#{leituraMB.leitura.observacao}" 
 						rows="5" 
 						cols="30" 
 						style=" width:600px; height:90px;"

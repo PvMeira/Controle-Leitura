@@ -20,8 +20,9 @@
 					<p:commandButton ajax="false" 	
 						icon="fa fa-fw fa-check"  
 						value="Salvar" 
+						action="#{leituraMB.salvar()}"
 						process="@this"
-						oncomplete="novaLeituraLista.hide()"/>
+						oncomplete="novaLeituraLista.hide(); updateTabelaLivro();"/>
 					
 					<p:commandButton ajax="false"
 						icon="fa fa-fw fa-ban"
@@ -32,8 +33,19 @@
 					<p:separator style="width:500px"/>
 					
 				<p:panelGrid columns="2">
-					<p:outputLabel id="labelModalCampo" for="autoCompleteModal" value="Nome do Livro"/>
-						<p:autoComplete id="autoCompleteModal" appendTo="@(body)">
+					<p:outputLabel id="labelModalCampo" 
+								   for="autoCompleteModal" 
+								   value="Nome do Livro"/>
+						<p:autoComplete 
+						id="autoCompleteModal" 
+						value="#{leituraMB.livroSelecionado}"
+						placeholder="Digite o nome do livro"
+						completeMethod="#{leituraMB.listarLivrosAutoComplete}"
+						queryDelay="1000"
+						converter="livroConverter"
+						var="livroSelecionado"
+						itemLabel="#{livroSelecionado.titulo}"
+						itemValue="#{livroSelecionado}">
 						</p:autoComplete>
 				</p:panelGrid>	
 			</h:form>

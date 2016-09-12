@@ -23,52 +23,55 @@ import javax.validation.constraints.NotNull;
 @SequenceGenerator(name = "livro_id_livro_seq", sequenceName = "livro_id_livro_seq", allocationSize = 1, initialValue = 1)
 public class Livro {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "livro_id_livro_seq")
 	@Column(name = "id_livro")
 	private Long idLivro;
-	
+
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name="id_pessoa", referencedColumnName="id_pessoa")
+	@JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
 	private Pessoa dono;
-	
+
 	@Column(name = "titulo")
 	@NotNull
 	private String titulo;
-	
+
 	@Column(name = "autor")
 	@NotNull
 	private String autor;
-	
+
 	@Column(name = "paginas")
 	@NotNull
 	private int paginas;
-	
+
 	@Column(name = "observacao")
 	@NotNull
 	private String observacao;
-	
+
 	@Column(name = "pontuacao")
 	@NotNull
 	private int pontuacao;
-	
+
 	@Column(name = "livro_ativo")
 	private boolean livroAtivo;
+
+	@Column(name = "livro_ja_foi_lido")
+	private boolean jaFoiLido;
 	
+	@Column(name = "publico")
+	private boolean publico;
+
 	@Column(name = "data_ultima_leitura")
 	private Calendar dataUltimaLeitura;
-	
+
 	@Column(name = "data_upload")
 	private Calendar dataUpload;
-	
+
 	@Column(name = "arquivo_livro")
 	@NotNull
 	private byte[] arquivo;
-	
-	
-	
+
 	/**
 	 * 
 	 */
@@ -88,7 +91,7 @@ public class Livro {
 	 * @param dataUpload
 	 */
 	public Livro(Long idLivro, Pessoa dono, String titulo, String autor, int paginas, String observacao, int pontuacao,
-			boolean livroAtivo, Calendar dataUltimaLeitura, Calendar dataUpload) {
+			boolean livroAtivo, Calendar dataUltimaLeitura, Calendar dataUpload, boolean jaFoiLido,boolean publico) {
 		this.idLivro = idLivro;
 		this.dono = dono;
 		this.titulo = titulo;
@@ -99,8 +102,10 @@ public class Livro {
 		this.livroAtivo = livroAtivo;
 		this.dataUltimaLeitura = dataUltimaLeitura;
 		this.dataUpload = dataUpload;
+		this.jaFoiLido = jaFoiLido;
+		this.publico = publico;
 	}
-	
+
 	public Long getIdLivro() {
 		return idLivro;
 	}
@@ -111,6 +116,14 @@ public class Livro {
 
 	public Pessoa getDono() {
 		return dono;
+	}
+	
+	public boolean isPublico() {
+		return publico;
+	}
+
+	public void setPublico(boolean publico) {
+		this.publico = publico;
 	}
 
 	public void setDono(Pessoa dono) {
@@ -180,8 +193,6 @@ public class Livro {
 	public void setDataUpload(Calendar dataUpload) {
 		this.dataUpload = dataUpload;
 	}
-	
-
 
 	/**
 	 * @return the arquivo
@@ -191,10 +202,26 @@ public class Livro {
 	}
 
 	/**
-	 * @param arquivo the arquivo to set
+	 * @param arquivo
+	 *            the arquivo to set
 	 */
 	public void setArquivo(byte[] arquivo) {
 		this.arquivo = arquivo;
+	}
+
+	/**
+	 * @return the jaFoiLido
+	 */
+	public boolean isJaFoiLido() {
+		return jaFoiLido;
+	}
+
+	/**
+	 * @param jaFoiLido
+	 *            the jaFoiLido to set
+	 */
+	public void setJaFoiLido(boolean jaFoiLido) {
+		this.jaFoiLido = jaFoiLido;
 	}
 
 	@Override
@@ -285,7 +312,5 @@ public class Livro {
 		}
 		return true;
 	}
-	
-	
-	
+
 }

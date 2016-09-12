@@ -4,6 +4,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Root;
 
 import com.senac.cl.modelos.Livro;
 @SuppressWarnings(value ="all")
@@ -42,5 +49,14 @@ public class LivroRepository {
 		String sql = "SELECT * FROM livro WHERE id_pessoa = " + id + ";";
 		return entityManager.createNativeQuery(sql, Livro.class).getResultList();
 	}
-
+	
+	/**
+	 * Query para o auto Complete 
+	 * @param s
+	 * @return
+	 */
+	public List<Livro> listarLivrosAutoComplete(String s){
+		String sql = "SELECT * FROM livro where titulo LIKE "+"'"+"%"+s+"%"+"'"+";";
+		return  entityManager.createNativeQuery(sql,Livro.class).getResultList();
+	}
 }

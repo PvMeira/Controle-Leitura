@@ -13,37 +13,75 @@
 	<h:outputStylesheet library="styles" name="wir-style.css" />
 
 </h:head>
+<style>
 
-<h:form>
+
+/* Classe para Label do Login */
+.fontLogin{
+font-weight: bold;
+font-size: 16px;
+}
+/* Classe para input do Login */
+.fontLoginUserName{
+font-weight: bold;
+font-size: 13px;
+}
+
+</style>
+<h:form id="idFormMenu" prependId="false">
+
  <p:menubar >
         <p:submenu label="Cadastro" icon="fa fa-fw fa-file-o" >
             <p:submenu label="Novo" icon="fa fa-fw fa-plus">
-                <p:menuitem value="Livro" url="#" icon="fa fa-fw fa-book"/>
+                <p:menuitem value="Livro" 
+               				 url="../../paginas/normal/livro-form.xhtml" 
+               				 icon="fa fa-fw fa-book"/>
                 <p:menuitem value="Anotação" url="#" icon="fa fa-fw fa-paper-plane-o"/>
             </p:submenu>
         </p:submenu>
         <p:submenu label="Nova Leitura" icon="fa fa-fw fa-bookmark-o" >
-            <p:menuitem value="Meus Livros" url="#" icon="ui-icon-arrowreturnthick-1-w" />
-            <p:menuitem value="Públicos" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+            <p:menuitem value="Meus Livros" 
+            			url="../../paginas/normal/livro-list.xhtml" 
+            			icon="ui-icon-arrowreturnthick-1-w" />
+            <p:menuitem value="Públicos" 
+            			url="../../paginas/normal/livros-atuais.xhtml" 
+            			icon="ui-icon-arrowreturnthick-1-e" />
         </p:submenu>
- 
+        
+        <p:submenu label="Minhas Leituras" icon="fa fa-fw fa-bookmark" >
+            <p:menuitem value="Leituras Atuais" 
+            			url="../../paginas/normal/livros-atuais-list.xhtml" 
+            			icon="fa fa-fw fa-list" />
+        </p:submenu>
+         
         <p:submenu label="Admim" icon="ui-icon-gear" >
             <p:submenu label="Configurações" icon="fa fa-fw fa-wrench">
-                		<p:menuitem value="Login" url="#" icon="fa fa-fw fa-user"/>
-                		<p:menuitem value="Livros - Publicos " url="#" icon="fa fa-fw fa-align-justify"/>
+                		<p:menuitem value="Login" 
+                					url="../../paginas/adm/pessoa-list.xhtml" 
+                					icon="fa fa-fw fa-user"/>
+                		<p:menuitem value="Livros - Publicos " 
+                					url="../../paginas/normal/livros-atuais.xhtml" 
+                					icon="fa fa-fw fa-align-justify"/>
                 		<p:menuitem value="Leituras - geral " url="#" icon="fa fa-fw fa-bookmark"/>
                 	</p:submenu>
                 <p:menuitem value="Cadastros de Livros"  icon="fa fa-fw fa-table" />
                 <p:menuitem value="Relatorios"  icon="fa fa-fw fa-file-excel-o" />
             </p:submenu>
+          
         <f:facet name="options">
-            <p:commandButton  value="Logout" 
-            icon="fa fa-fw fa-power-off" action="#{sessionMB.sair()}"
-           />
+        <h:outputText value="User : " styleClass="fontLogin"/>
+        <h:outputText id="labelLoginName" 
+        			  value="#{sessionMB.getNomeUsuarioLogado()}"
+        			  styleClass="fontLoginUserName" />
+         <h:outputText value="   |"/>
+        <p:commandButton  
+        value="Logout" 
+        icon="fa fa-fw fa-power-off" 
+        action="#{sessionMB.sair()}"/>
         </f:facet>
         
     </p:menubar>
-    </h:form>
+    </h:form> 
  <br />
  <br />
  <br />

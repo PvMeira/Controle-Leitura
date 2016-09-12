@@ -6,13 +6,5 @@
 
 
 
-	<application>
-		<locale-config>
-			<default-locale>pt_BR</default-locale>
-		</locale-config>
-		<message-bundle>
-            com.msg.messages.properties
-          <var>msg</var>  
-        </message-bundle>
-	</application>
+	
 </faces-config>

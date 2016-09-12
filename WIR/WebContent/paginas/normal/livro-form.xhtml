@@ -66,11 +66,26 @@
     				<br/><h:outputText id="display" />
 				</p:panelGrid>
 				
-				<p:panelGrid columns="1">
-    				<p:fileUpload fileUploadListener="#{livroMB.carregarArquivo}" mode="advanced"
-                     auto="true" sizeLimit="100000"  />
- 
-    			</p:panelGrid>
+				<p:panelGrid columns="2">
+    				<p:fileUpload 
+    				 id="idUpload"
+    				 label="Escolher o .PDF"
+    				 fileUploadListener="#{livroMB.carregarArquivo}" 
+    				 mode="advanced"
+                     auto="true" 
+                     required="true"
+                     requiredMessage="Obrigatorio"
+                     sizeLimit="10485760"  />
+                  <p:message for="idUpload" />
+                  </p:panelGrid>
+                  <p:selectBooleanCheckbox 
+                      value="#{livroMB.tornarpublico}"/>	   
+                 <p:commandLink 
+                	  id="InfoModal" 
+                	  value=" ? "
+                	  style="font-weight: bold;"
+ 					  oncomplete="PF('modalInfo').show();">
+                  </p:commandLink> 
     			
 				<p:panelGrid columns="2">
 					<p:commandButton
@@ -88,5 +103,20 @@
 				</p:panelGrid>
 			</h:form>
 		</b:panel>
+		<!-- Modal que mostra as informações sobre tornar publico o livro -->
+		<p:dialog
+		id="idModalInfo"
+		widgetVar="modalInfo"
+		closable="true"
+		appendTo="@(body)"
+		header="Informações"
+		modal="false"
+		resizable="true"
+		width="507px;"
+		height="92px;">
+		Ao selecionar essa checkbox, voce concorda em publicar este livro na comunidade, dando acesso á ele <br/>
+			ser acessado por qualquer um que entre na aba  :Nova Leitura > Públicos.	
+		</p:dialog>
+		
 	</ui:define>
 </ui:composition>

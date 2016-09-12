@@ -13,6 +13,8 @@ import org.primefaces.event.RateEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+import com.senac.cl.modelos.Leitura;
+import com.senac.cl.modelos.LeituraService;
 import com.senac.cl.modelos.Livro;
 import com.senac.cl.service.LivroService;
 import com.senac.cl.utilitarios.SistemaDeMensagens;
@@ -29,15 +31,18 @@ public class LivroMB {
 	private Livro livro;
 	private List<Livro> livrosPessoaLogada;
 	private List<Livro> livrosSelecionados;
-	
-	
+
 	@Inject
 	private LivroService livroService;
-	
-	private final static String LIDO ="Livro já Lido";
-	private final static String NAO_LIDO ="Livro não Lido";
-	
-	
+
+	@Inject
+	private LeituraService leituraService;
+
+	private final static String LIDO = "Livro já Lido";
+	private final static String LENDO = "Lendo";
+	private final static String JA_FOI_LIDO = "Já Foi Lido";
+	private final static String NAO_LIDO = "Livro não Lido";
+	private boolean tornarpublico;
 
 	public LivroMB() {
 	}
@@ -46,7 +51,7 @@ public class LivroMB {
 	 * Salva o livro
 	 */
 	public void salvar() {
-		livroService.salvar(this.getLivro());
+		livroService.salvar(this.getLivro(),tornarpublico);
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro salvo com sucesso!");
 		limpar();
 	}
@@ -61,85 +66,115 @@ public class LivroMB {
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro deletado ");
 		limpar();
 	}
-	
-	
+
+	/**
+	 * Deletar Sem as informações de sucessso para o metodo de delete em lote
+	 * 
+	 * @param livro
+	 */
 	public void deletarSeminformação(Livro livro) {
 		livroService.deletar(livro);
 	}
-	
+
 	/**
 	 * Carrega o arquivo upado para a entidade
+	 * 
 	 * @param event
 	 */
-	public void carregarArquivo(FileUploadEvent event)  {
-		//Converte o arquivo do evento em um array de bytes
-		//para ser armazenado no banco
+	public void carregarArquivo(FileUploadEvent event) {
+		// Converte o arquivo do evento em um array de bytes
+		// para ser armazenado no banco
 		byte[] conteudo = event.getFile().getContents();
 		this.livro.setArquivo(conteudo);
 	}
-	
+
 	/**
 	 * Retorna o Arquivo para downlaod do pdf
+	 * 
 	 * @param livro
 	 * @return
 	 * @throws IOException
 	 */
-	public StreamedContent  FileDownloadView(Livro livro) throws IOException {   
-		//Converte os bytes do livro para um arquivo
+	public StreamedContent FileDownloadView(Livro livro) throws IOException {
+		// Converte os bytes do livro para um arquivo
 		ByteArrayInputStream bis = new ByteArrayInputStream(livro.getArquivo());
 		StreamedContent file;
-		//disponibiliza o formato e o tipo de arquivo para o download 
-        file = new DefaultStreamedContent(bis, "application/pdf", livro.getTitulo()+".pdf");
-        //retorna o arquivo
-        return file;
-    }
-	
+		// disponibiliza o formato e o tipo de arquivo para o download
+		file = new DefaultStreamedContent(bis, "application/pdf", livro.getTitulo() + ".pdf");
+		// retorna o arquivo
+		return file;
+	}
+
 	/**
-	 * Verifica o status do livro, caso seja true retorna não lido
-	 * se não retorna ja lido
+	 * Verifica o status do livro, caso seja true retorna não lido se não
+	 * retorna ja lido
+	 * 
 	 * @param livro
 	 * @return
 	 */
-	public String VerificaStatusLivro(Livro livro){
-		if(livro.isLivroAtivo() == false){
-			return LIDO;
+	public String VerificaStatusLivro(Livro livro) {
+		if (livro.isLivroAtivo() == false && livro.isJaFoiLido() == false) {
+			Leitura lei = this.buscaLivroLeitura(livro);
+			if (lei != null) {
+				return LENDO;
+			} else {
+				return LIDO;
+			}
 		}
-		return NAO_LIDO;
+		if (livro.isJaFoiLido() == true) {
+			return JA_FOI_LIDO;
+		} else {
+			return NAO_LIDO;
+		}
 	}
-	
+
 	/**
-	 * popula a string de observação que sera usada 
-	 * na modal de observação
+	 * busca se existe uma leitura para o livro em questao
+	 * 
+	 * @param ed
+	 * @return
 	 */
-	public void populaObservacaoParaModal(Livro livro){
+	private Leitura buscaLivroLeitura(Livro ed) {
+		return this.leituraService.buscaLeituraPeloId(ed);
+
+	}
+
+	/**
+	 * popula a string de observação que sera usada na modal de observação
+	 */
+	public void populaObservacaoParaModal(Livro livro) {
 		this.livro = livro;
 	}
+
 	/**
 	 * metodo para atualizar o resumo que foi alterado
 	 */
-	public void atualizaResumoLivro(){
+	public void atualizaResumoLivro() {
 		livroService.atualizar(this.livro);
 	}
+
 	/**
 	 * metodo para fazer o delete em lote atraves do selection do dataTable
 	 */
-	public void deletarEmLote(){
+	public void deletarEmLote() {
 		int contador = 0;
 		List<Livro> lista = this.livrosSelecionados;
 		for (Livro livro : lista) {
 			deletarSeminformação(livro);
-			contador ++;
+			contador++;
 		}
-		SistemaDeMensagens.notificaINFORMACAO("Livros deletados ", "Com sucesso, numero de livros :"+contador);
+		SistemaDeMensagens.notificaINFORMACAO("Livros deletados ", "Com sucesso, numero de livros :" + contador);
 	}
+
 	/**
-	 * Metodo para atualizar a pontuação do livro apartir o evento 
-	 * ajax na 1 camada
+	 * Metodo para atualizar a pontuação do livro apartir o evento ajax na 1
+	 * camada
+	 * 
 	 * @param rateEvent
 	 */
-	public void updatePontuacaoLivro(RateEvent rateEvent){
-		Integer pontuacao =0;
-		//Pega o evento do componente do prime e passa para um int 
+	public void updatePontuacaoLivro(RateEvent rateEvent) {
+		Integer pontuacao = 0;
+		// Pega o evento do componente do prime e passa para um int
 		pontuacao = ((Integer) rateEvent.getRating()).intValue();
 		this.livro.setPontuacao(pontuacao);
 		livroService.atualizar(this.livro);
@@ -160,16 +195,15 @@ public class LivroMB {
 	public void limpar() {
 		setLivro(new Livro());
 	}
-	
+
 	/**
 	 * Lista todos os livros do usuario logado
 	 */
-	public List<Livro> listaLivrosPessoaLogada(){
+	public List<Livro> listaLivrosPessoaLogada() {
 		return this.livroService.listarTodosLivrosDoUsuario();
 	}
-	
-	
-	//-----------get set
+
+	// -----------get set
 	/**
 	 * @return the livro
 	 */
@@ -188,7 +222,6 @@ public class LivroMB {
 		this.livro = livro;
 	}
 
-
 	/**
 	 * @return the livrosPessoaLogada
 	 */
@@ -196,14 +229,13 @@ public class LivroMB {
 		return livrosPessoaLogada;
 	}
 
-
 	/**
-	 * @param livrosPessoaLogada the livrosPessoaLogada to set
+	 * @param livrosPessoaLogada
+	 *            the livrosPessoaLogada to set
 	 */
 	public void setLivrosPessoaLogada(List<Livro> livrosPessoaLogada) {
 		this.livrosPessoaLogada = livrosPessoaLogada;
 	}
-
 
 	/**
 	 * @return the livroService
@@ -212,9 +244,9 @@ public class LivroMB {
 		return livroService;
 	}
 
-
 	/**
-	 * @param livroService the livroService to set
+	 * @param livroService
+	 *            the livroService to set
 	 */
 	public void setLivroService(LivroService livroService) {
 		this.livroService = livroService;
@@ -228,10 +260,25 @@ public class LivroMB {
 	}
 
 	/**
-	 * @param livrosSelecionados the livrosSelecionados to set
+	 * @param livrosSelecionados
+	 *            the livrosSelecionados to set
 	 */
 	public void setLivrosSelecionados(List<Livro> livrosSelecionados) {
 		this.livrosSelecionados = livrosSelecionados;
+	}
+
+	/**
+	 * @return the tornarpublico
+	 */
+	public boolean isTornarpublico() {
+		return tornarpublico;
+	}
+
+	/**
+	 * @param tornarpublico the tornarpublico to set
+	 */
+	public void setTornarpublico(boolean tornarpublico) {
+		this.tornarpublico = tornarpublico;
 	}
 	
 
