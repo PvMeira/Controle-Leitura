@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/modelo/padrao.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions" >
+
+	<ui:define name="center">
+		<b:panel title="Livros Públicos" collapsible="false">
+			<h:form prependId="false" id="livrosPublicosForm">
+				<p:panelGrid columns="3">
+					<p:splitButton value="Operações em Lote "
+						style="text-align: center">
+						<p:menuitem style="text-align: center" value="Baixar" ajax="false"
+							icon="fa fa-fw fa-arrow-down">
+							<p:fileDownload value="#{livroMB.geradorZip()}" />
+						</p:menuitem>
+						<p:menuitem style="text-align: center" 
+						id="idTransferirLivroPublicosPrivado"
+						value="Copiar para meu livros" 
+						icon="fa fa-fw fa-copy"
+						action="#{livroMB.copiarLivrosPublicosParaContaUsuarioEmLote()}">
+						
+						</p:menuitem>
+					</p:splitButton>
+				<p:outputLabel value="Adicione seu livro a essa lista !"/>
+				<p:commandButton 
+					id="idButtonTransferirPublico"
+					icon="fa fa-fw fa-plus"
+					action="#{listaMB.limpar()}"
+					oncomplete="PF('modalTransferir').show();"
+					value="Clique Aqui"/>	
+				</p:panelGrid>
+				<br/>
+				<br/>
+				<p:dataTable 
+					id="listaDelivrosPublicos" 
+					var="livros" 
+					value="#{livroMB.listaLivrosPublicos()}"
+					selection="#{livroMB.livrosSelecionados}"
+					rowKey="#{livros.idLivro}"
+					emptyMessage="Não existe cadastros" 
+					paginator="true" 
+					rows="10"
+					sortMode="multiple"
+					draggableColumns="true" 
+					paginatorAlwaysVisible="true" >
+					
+					<p:column selectionMode="multiple" style="width:60px;text-align:center"/>	
+					<p:column headerText="Titulo" style="text-align:center">
+						<h:outputText value="#{livros.titulo}"/>
+					</p:column>
+					
+					<p:column headerText="Autor" style="text-align:center">
+						<h:outputText value="#{livros.autor}"/>
+					</p:column>
+					
+					<p:column headerText="Paginas" style="text-align:center">
+						<h:outputText value="#{livros.paginas}" 
+									  title="#{livroMB.getHintColaborador(livros)}"/>
+					</p:column>
+					
+					<p:column headerText="Colaborador" style="text-align:center" >
+           			<h:outputText value="#{livros.dono.nome}"/>
+					</p:column>
+					
+					<p:column headerText="Ações" style="text-align:center">
+
+						<!-- Botao para downlaod do pdf -->
+						<p:commandLink id="comandLinkDownlodPublico" ajax="false"
+							title="Baixar livro">
+							<p:fileDownload value="#{livroMB.FileDownloadView(livros)}" />
+							<p:graphicImage value="/resources/imagens/download.png"
+								height="15px" width="15px" />
+						</p:commandLink>
+						
+						<!-- Botao Transferir livro publico -->
+						<p:commandLink 
+							id="comandLinkTransferirPublico" 
+							title="Transferir livro"
+							action="#{livroMB.copiarLivrosPublicosParaContaUsuario(livros)}">
+							<p:graphicImage value="/resources/imagens/pasta.png"
+								height="15px" width="15px" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			<p:remoteCommand name="atualizarlistaLeitura" update="listaDelivrosPublicos"/>	
+			</h:form>
+		</b:panel>
+		<!-- Modal transferir livro publico -->
+		<ui:include src="/paginas/normal/livro-publico-transferencia-modal.xhtml" />
+	
+	</ui:define>
+</ui:composition>

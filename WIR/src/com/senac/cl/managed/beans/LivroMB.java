@@ -1,8 +1,12 @@
 package com.senac.cl.managed.beans;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -17,6 +21,7 @@ import com.senac.cl.modelos.Leitura;
 import com.senac.cl.modelos.LeituraService;
 import com.senac.cl.modelos.Livro;
 import com.senac.cl.service.LivroService;
+import com.senac.cl.utilitarios.Data;
 import com.senac.cl.utilitarios.SistemaDeMensagens;
 
 /**
@@ -29,6 +34,7 @@ import com.senac.cl.utilitarios.SistemaDeMensagens;
 public class LivroMB {
 
 	private Livro livro;
+	private Livro livroParaTransferir;
 	private List<Livro> livrosPessoaLogada;
 	private List<Livro> livrosSelecionados;
 
@@ -37,6 +43,9 @@ public class LivroMB {
 
 	@Inject
 	private LeituraService leituraService;
+
+	@Inject
+	Data data;
 
 	private final static String LIDO = "Livro já Lido";
 	private final static String LENDO = "Lendo";
@@ -51,9 +60,46 @@ public class LivroMB {
 	 * Salva o livro
 	 */
 	public void salvar() {
-		livroService.salvar(this.getLivro(),tornarpublico);
+		livroService.salvar(this.getLivro(), tornarpublico);
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro salvo com sucesso!");
 		limpar();
+	}
+
+	/**
+	 * Transfere o livro que foi selecionado e e muda a booleana publica para
+	 * TRUE
+	 */
+	public void transferir() {
+		this.livroService.atualizarATransferenciaParaPublico(this.livroParaTransferir);
+	}
+	
+	/**
+	 * Copia os livros selecionados para a 
+	 * conta do usuario logado
+	 */
+	public void copiarLivrosPublicosParaContaUsuario(Livro ed){
+		this.livroService.copiaLivroPublicoParaContaUsuarioLogado(ed);
+	}
+	/**
+	 * Copia os livros selecionados para a 
+	 * conta do usuario logado em lote
+	 */
+	public void copiarLivrosPublicosParaContaUsuarioEmLote(){
+		List<Livro> lista = this.livrosSelecionados;
+		for (Livro livro : lista) {
+			this.copiarLivrosPublicosParaContaUsuario(livro);
+		}
+	}
+
+	/**
+	 * Lista livros do autocomplete que esteja com publico = false
+	 * 
+	 * @param particula
+	 * @return
+	 */
+	public List<Livro> listarLivrosAutoCompleteTransferir(String particula) {
+		List<Livro> lista = this.livroService.listarLivrosAutoCompleteTransferir(particula);
+		return lista;
 	}
 
 	/**
@@ -103,6 +149,36 @@ public class LivroMB {
 		file = new DefaultStreamedContent(bis, "application/pdf", livro.getTitulo() + ".pdf");
 		// retorna o arquivo
 		return file;
+	}
+
+	/**
+	 * Metodo para Retornar um .ZIP com todos os PDF selecionados
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
+	public DefaultStreamedContent geradorZip() throws IOException {
+		ByteArrayOutputStream arq = new ByteArrayOutputStream();
+		ZipOutputStream zip = new ZipOutputStream(arq);
+		List<Livro> listaLivrosSelecionados = this.livrosSelecionados;
+		for (Livro livro : listaLivrosSelecionados) {
+			byte[] buffer = new byte[99999];
+			// Retorna o arquivo em Stream content
+			StreamedContent file = FileDownloadView(livro);
+			ZipEntry entry = new ZipEntry(file.getName());
+			// Joga o arquivo que foi baixado no content .zip
+			zip.putNextEntry(entry);
+			int len;
+			while ((len = file.getStream().read(buffer)) > 0) {
+				zip.write(buffer, 0, len);
+			}
+			file.getStream().close();
+			zip.closeEntry();
+		}
+		zip.close();
+		String d = this.data.getDataFormatoPTbrInteira(Calendar.getInstance());
+		return new DefaultStreamedContent(new ByteArrayInputStream(arq.toByteArray()), "application/zip",
+				"LivrosSelecionados" + d + ".zip");
 	}
 
 	/**
@@ -181,6 +257,20 @@ public class LivroMB {
 	}
 
 	/**
+	 * Retorna a hint do label que contem o email e username para contato
+	 * 
+	 * @param ed
+	 * @return
+	 */
+	public String getHintColaborador(Livro ed) {
+		String username = ed.getDono().getUsername();
+		String email = ed.getDono().getMail();
+		String hint = username.concat(" | ").concat(email);
+
+		return hint;
+	}
+
+	/**
 	 * Listar todos os livros do banco
 	 * 
 	 * @return
@@ -194,6 +284,7 @@ public class LivroMB {
 	 */
 	public void limpar() {
 		setLivro(new Livro());
+		setLivroParaTransferir(null);
 	}
 
 	/**
@@ -201,6 +292,15 @@ public class LivroMB {
 	 */
 	public List<Livro> listaLivrosPessoaLogada() {
 		return this.livroService.listarTodosLivrosDoUsuario();
+	}
+
+	/**
+	 * Lista todos os livros que estão marcados como Públicos
+	 * 
+	 * @return
+	 */
+	public List<Livro> listaLivrosPublicos() {
+		return this.livroService.listaTodosLivrosPublicos();
 	}
 
 	// -----------get set
@@ -275,11 +375,26 @@ public class LivroMB {
 	}
 
 	/**
-	 * @param tornarpublico the tornarpublico to set
+	 * @param tornarpublico
+	 *            the tornarpublico to set
 	 */
 	public void setTornarpublico(boolean tornarpublico) {
 		this.tornarpublico = tornarpublico;
 	}
-	
+
+	/**
+	 * @return the livroParaTransferir
+	 */
+	public Livro getLivroParaTransferir() {
+		return livroParaTransferir;
+	}
+
+	/**
+	 * @param livroParaTransferir
+	 *            the livroParaTransferir to set
+	 */
+	public void setLivroParaTransferir(Livro livroParaTransferir) {
+		this.livroParaTransferir = livroParaTransferir;
+	}
 
 }

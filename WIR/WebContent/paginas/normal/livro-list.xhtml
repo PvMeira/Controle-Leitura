@@ -24,7 +24,10 @@
 				<p:menuitem 
 					style="text-align: center"
 					value="Baixar" 
-					icon="fa fa-fw fa-arrow-down"/>
+					ajax="false"
+					icon="fa fa-fw fa-arrow-down">
+				 <p:fileDownload value="#{livroMB.geradorZip()}" />	
+				</p:menuitem>	
 			</p:splitButton>	
 		<p:commandButton id="buttonNovoLivro" 
 					action="livro-form.xhtml?faces-redirect=true"
@@ -44,7 +47,7 @@
 					emptyMessage="Não existe cadastros" 
 					rowKey="#{livro.idLivro}"
 					selection="#{livroMB.livrosSelecionados}"
-					paginator="true" rows="5"
+					paginator="true" rows="10"
 					draggableColumns="true" 
 					paginatorAlwaysVisible="true" >
 					

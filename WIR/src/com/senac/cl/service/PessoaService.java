@@ -52,4 +52,17 @@ public class PessoaService {
 		service.atualizarHistorico(pessoa,tipoAcao.DELETAR);
 		
 	}
+	
+	/**
+	 * Metodo que retorna pessoa pelo seu ID
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Transactional
+	public Pessoa buscaPessoaPeloId(Long id) {
+
+		return repositorio.buscarPeloId(id);
+	}
+	
 }

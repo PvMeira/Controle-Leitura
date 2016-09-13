@@ -106,11 +106,12 @@ public class LeituraMB {
 	public void populaLeituraParaObservacao(Leitura ed) {
 		this.leitura = ed;
 	}
+	/**
+	 * limpa campos
+	 */
 	public void limparCampos(){
 		this.leitura = null;
 	}
-	
-
 	public List<Livro> listarLivrosAutoComplete(String particula) {
 		List<Livro> lista = this.livroService.listarLivrosAutoComplete(particula);
 		return lista;

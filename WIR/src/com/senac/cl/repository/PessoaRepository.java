@@ -64,7 +64,7 @@ public class PessoaRepository {
  * @param id
  * @return
  */
-	public Pessoa buscarPeloId(Integer id) {
+	public Pessoa buscarPeloId(Long id) {
 		return entityManager.find(Pessoa.class, id);
 	}
 	
