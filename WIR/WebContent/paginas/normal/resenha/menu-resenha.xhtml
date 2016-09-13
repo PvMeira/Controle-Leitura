@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/modelo/padrao.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<ui:define name="center">
+		<b:panel title="Minhas Resenhas" collapsible="false">
+			<h:form prependId="false" id="resenhaForm">
+				<p:panelGrid columns="2">
+
+					<h:outputText value="Contador do total de resenhas do usario" />
+					<p:commandButton 
+					style="text-align:center"
+					id="novaResenhaButton" 
+					value="Nova Resenha"
+					icon="fa fa-fw fa-plus"    />
+
+				</p:panelGrid>
+				<p:dataTable id="listaDeResenhas" var="resenha"  
+					emptyMessage="Não existe cadastros" paginator="true" rows="10"
+					sortMode="multiple" draggableColumns="true"
+					paginatorAlwaysVisible="true">
+
+					<p:column headerText="Titulo" style="text-align:center">
+
+
+					</p:column>
+
+					<p:column headerText="Livro" style="text-align:center">
+
+
+					</p:column>
+
+					<p:column headerText="Assunto" style="text-align:center">
+
+
+					</p:column>
+
+					<p:column headerText="Tipo" style="text-align:center">
+
+
+					</p:column>
+
+
+					<p:column headerText="Tipo" style="text-align:center">
+
+
+					</p:column>
+
+					<p:column headerText="Data" style="text-align:center">
+
+
+					</p:column>
+
+					<p:column headerText="Ação" style="text-align:center">
+
+
+					</p:column>
+
+
+				</p:dataTable>
+			</h:form>
+		</b:panel>
+	</ui:define>
+</ui:composition>

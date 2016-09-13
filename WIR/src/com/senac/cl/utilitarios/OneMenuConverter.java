@@ -22,7 +22,7 @@ import javax.faces.convert.FacesConverter;
  *Em alguns casos ao selecionar um elemento no oneMenu, na hora de salvar esse elemento se perde
  *e causo erro 
  */
-@FacesConverter("ConversorOneMenu")
+@FacesConverter("conversorOneMenu")
 public class OneMenuConverter implements Converter {
 
 	private static final String KEY = OneMenuConverter.class.getCanonicalName();

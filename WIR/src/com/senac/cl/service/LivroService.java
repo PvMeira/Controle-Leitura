@@ -118,6 +118,24 @@ public class LivroService {
 		livroRepository.deletar(livro);
 
 	}
+	
+	/**
+	 * Conta livros  cadastrados
+	 * @return
+	 */
+	@Transactional
+	public int contaLivrosTotais(){
+		return this.livroRepository.contaLivrosCadastrados();
+	}
+	
+	/**
+	 * Conta livros publicos cadastrados
+	 * @return
+	 */
+	@Transactional
+	public int contaLivrosPublicosTotais(){
+		return this.livroRepository.contaLivrosPublicosCadastrados();
+	}
 
 	/**
 	 * 

@@ -26,61 +26,60 @@ font-size: 16px;
 font-weight: bold;
 font-size: 13px;
 }
+.menubarAplicacao{
+size: 20px;
+padding-right: 20px;
+padding-left: 70px;
+}
+.ui-widget {
+    font-size: 1.00em;
+}
+
 
 </style>
 <h:form id="idFormMenu" prependId="false">
 
- <p:menubar >
+ <p:menubar autoDisplay="true" styleClass="menubarAplicacao">
         <p:submenu label="Cadastro" icon="fa fa-fw fa-file-o" >
             <p:submenu label="Novo" icon="fa fa-fw fa-plus">
-                <p:menuitem value="Livro" 
-               				 url="../../paginas/normal/livro-form.xhtml" 
-               				 icon="fa fa-fw fa-book"/>
-                <p:menuitem value="Anotação" url="#" icon="fa fa-fw fa-paper-plane-o"/>
+                <p:menuitem value="Livro"    url="../../paginas/normal/livro-form.xhtml"           icon="fa fa-fw fa-book"/>
+                <p:menuitem value="Resenhas" url="../../paginas/normal/resenha/menu-resenha.xhtml" icon="fa fa-fw fa-paper-plane-o"/>
             </p:submenu>
         </p:submenu>
+        <p:submenu label="Resenhas" icon="fa fa-fw fa-bookmark-o" >
+            <p:menuitem value="Minhas Resenhas" url="../../paginas/normal/resenha/resenha-list.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
+            <p:menuitem value="Nova Resenha"    url="resenha-form.xhtml" icon="ui-icon-arrowreturnthick-1-e" />
+            <p:menuitem value="Comunidade"      url="" icon="ui-icon-arrowreturnthick-1-e" />
+        </p:submenu>
         <p:submenu label="Nova Leitura" icon="fa fa-fw fa-bookmark-o" >
-            <p:menuitem value="Meus Livros" 
-            			url="../../paginas/normal/livro-list.xhtml" 
-            			icon="ui-icon-arrowreturnthick-1-w" />
-            <p:menuitem value="Públicos" 
-            			url="../../paginas/normal/livros-publicos-list.xhtml" 
-            			icon="ui-icon-arrowreturnthick-1-e" />
+            <p:menuitem value="Meus Livros" url="../../paginas/normal/livro-list.xhtml" 	        icon="ui-icon-arrowreturnthick-1-w" />
+            <p:menuitem value="Públicos"    url="../../paginas/normal/livros-publicos-list.xhtml" 	icon="ui-icon-arrowreturnthick-1-e" />
         </p:submenu>
         
         <p:submenu label="Minhas Leituras" icon="fa fa-fw fa-bookmark" >
-            <p:menuitem value="Leituras Atuais" 
-            			url="../../paginas/normal/livros-atuais-list.xhtml" 
-            			icon="fa fa-fw fa-list" />
+            <p:menuitem value="Leituras Atuais" url="../../paginas/normal/livros-atuais-list.xhtml" icon="fa fa-fw fa-list" />
         </p:submenu>
          
-        <p:submenu label="Admim" icon="ui-icon-gear" >
-            <p:submenu label="Configurações" icon="fa fa-fw fa-wrench">
-                		<p:menuitem value="Login" 
-                					url="../../paginas/adm/pessoa-list.xhtml" 
-                					icon="fa fa-fw fa-user"/>
-                		<p:menuitem value="Livros - Publicos " 
-                					url="../../paginas/normal/livros-atuais.xhtml" 
-                					icon="fa fa-fw fa-align-justify"/>
+        <p:submenu label="Admim" icon="ui-icon-gear"  rendered="#{sessionMB.pessoaLogado.isAdm()}">
+            <p:submenu label="Configurações" icon="fa fa-fw fa-wrench" >
+                		<p:menuitem value="Login" url="../../paginas/adm/pessoa-list.xhtml" icon="fa fa-fw fa-user"/>
+                		<p:menuitem value="Livros - Publicos " url="../../paginas/normal/livros-publicos-list.xhtml" icon="fa fa-fw fa-align-justify"/>
+                		<p:menuitem value="Dashbord" url="../../paginas/adm/dashboard.xhtml" icon="fa fa-fw fa-align-justify"/>			
                 		<p:menuitem value="Leituras - geral " url="#" icon="fa fa-fw fa-bookmark"/>
                 	</p:submenu>
                 <p:menuitem value="Cadastros de Livros"  icon="fa fa-fw fa-table" />
                 <p:menuitem value="Relatorios"  icon="fa fa-fw fa-file-excel-o" />
             </p:submenu>
-          
-        <f:facet name="options">
-        <h:outputText value="User : " styleClass="fontLogin"/>
-        <h:outputText id="labelLoginName" 
-        			  value="#{sessionMB.getNomeUsuarioLogado()}"
-        			  styleClass="fontLoginUserName" />
-         <h:outputText value="   |"/>
-        <p:commandButton  
-        value="Logout" 
-        icon="fa fa-fw fa-power-off" 
-        action="#{sessionMB.sair()}"/>
-        </f:facet>
-        
-    </p:menubar>
+            <p:menuitem value="?" action="sobre-sistema.xhtml?faces-redirect=true" style="padding-right: 50px;"/>
+
+			<p:submenu label="Preferencias" icon="ui-icon-gear" style="float: right;" expanded="left">
+				<p:submenu label="Login" icon="fa fa-fw fa-user">
+					<p:menuitem value="Username : #{sessionMB.getNomeUsuarioLogado()}"/>
+				</p:submenu>
+			<p:menuitem action="#{sessionMB.sair()}" icon="ui-icon-extlink" value="Fazer Logout"/>
+			</p:submenu>
+
+	</p:menubar>
     </h:form> 
  <br />
  <br />
@@ -92,5 +91,7 @@ font-size: 13px;
 		<ui:insert name="center">
 		</ui:insert>
 	</b:container>
+	
+	
 </h:body>
 </html>

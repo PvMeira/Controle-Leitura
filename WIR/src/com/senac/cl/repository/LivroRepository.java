@@ -91,6 +91,23 @@ public class LivroRepository {
 		String sql = "SELECT * FROM livro where titulo LIKE " + "'" + "%" + s + "%" + "'" + ";";
 		return entityManager.createNativeQuery(sql, Livro.class).getResultList();
 	}
+	/**
+	 * Retorna o numero de livros cadastrados 
+	 * @return
+	 */
+	public int contaLivrosCadastrados() {
+		String sql = "SELECT * FROM livro "+";";
+		return entityManager.createNativeQuery(sql, Livro.class).getResultList().size();
+	}
+	
+	/**
+	 * Retorna o numero de livros publicos cadastrados 
+	 * @return
+	 */
+	public int contaLivrosPublicosCadastrados() {
+		String sql = "SELECT * FROM livro where publico = "+Boolean.TRUE+";";
+		return entityManager.createNativeQuery(sql, Livro.class).getResultList().size();
+	}
 
 	/**
 	 * Auto complete para transferir livros para Publico

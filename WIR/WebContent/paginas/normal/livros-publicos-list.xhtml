@@ -81,6 +81,7 @@
 						<p:commandLink 
 							id="comandLinkTransferirPublico" 
 							title="Transferir livro"
+							 onstart="showStatus()" oncomplete="hideStatus()" 
 							action="#{livroMB.copiarLivrosPublicosParaContaUsuario(livros)}">
 							<p:graphicImage value="/resources/imagens/pasta.png"
 								height="15px" width="15px" />
@@ -92,6 +93,6 @@
 		</b:panel>
 		<!-- Modal transferir livro publico -->
 		<ui:include src="/paginas/normal/livro-publico-transferencia-modal.xhtml" />
-	
+		
 	</ui:define>
 </ui:composition>

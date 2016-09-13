@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/WEB-INF/modelo/padrao.xhtml">
+
+	<ui:define name="center">
+		<b:panel title="Criar uma Resenha " collapsible="false">
+			<h:form id="idFormEscreverUmaResenha" prependId="false">
+
+				<p:growl id="idscreverUmaResenha" showDetail="true" sticky="false" life="4000" />
+				
+			<p:panelGrid columns="5">
+				<p:outputLabel for="idOutTextTitulo" title="Titulo" value="Titulo  " id="idLabelTitulo" style="margin-left: 27px;"/>
+				<p:inputText id="idOutTextTitulo" value="#{resenhaMB.resenha.titulo}" />
+				
+				<!-- <p:outputLabel for="oneMenutipo" title="Tipo" value="Tipo  " id="idLabelTipo"/>
+				<p:selectOneButton id="oneMenutipo"  style="width:125px" converter="conversorOneMenu" >
+					<f:selectItems/>
+				</p:selectOneButton>-->
+				</p:panelGrid> 
+				
+				<p:panelGrid columns="2">
+				<p:outputLabel for="inputTextAssunto" title="Assunto" value="Assunto" id="idLabelInput" />
+					<p:inputTextarea 
+						value="#{resenhaMB.resenha.assunto}"
+						id="inputTextAssunto"
+						rows="5" 
+						cols="30" 
+						style="width: 360px; height: 63px;"
+						counter="display2" 
+						maxlength="200" 
+						counterTemplate="{0} characters remaining." 
+						autoResize="false" />
+					<p:outputLabel/>
+    				<h:outputText id="display2" />
+				</p:panelGrid>
+				
+				<p:panelGrid columns="2">
+					<p:outputLabel for="publicaBooleana" title="Tornar Pública ?" value="Tornar Pública ?" id="idLabelBoolean" />
+					<p:selectBooleanCheckbox  id="publicaBooleana" value="#{resenhaMB.resenha.publica}"/>
+				</p:panelGrid>
+				<b:panel  collapsible="false" style="margin-right:400px;margin-left:50px;">
+				 <p:editor id="editor" widgetVar="editorWidget" value="#{resenhaMB.resenha.conteudo}" 
+				 width="600"  required="true" requiredMessage="Obrigatorio" />
+				</b:panel>
+				<p:panelGrid columns="5">
+					<p:commandButton 
+					value="Salvar" 
+					icon="fa fa-fw fa-save" 
+					action="#{resenhaMB.salvarNovaResenha()}"
+					update="@form"/>
+					<br/>
+					<p:commandButton 
+					value="Apagar" 
+					icon="fa fa-fw fa-eraser" 
+					action="#{resenha.limpar()}"
+					update="@form">
+						<p:confirm/>
+					</p:commandButton>
+					<br/>
+					<p:commandButton value="Salvar Andamento" icon="fa fa-fw fa-shekel" />
+				</p:panelGrid>
+			</h:form>
+		</b:panel>
+		
+		<!-- Modal de Confirmação -->
+		<p:confirmDialog 
+			lobal="true" 
+			showEffect="fade" 
+			hideEffect="fade"
+			header="Deseja apagar Tudo?"
+			message="tem certeza que deseja apagar todos os campos que estão preenchidos"
+			height="70px" width="400px">
+			<p:commandButton value="Sim" type="button"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+			<p:commandButton value="Não" type="button"	styleClass="ui-confirmdialog-no" icon="ui-icon-close"	style="float:right;" />
+		</p:confirmDialog>
+			<!-- Modal de Confirmação FIM -->
+			
+	</ui:define>
+</ui:composition>
