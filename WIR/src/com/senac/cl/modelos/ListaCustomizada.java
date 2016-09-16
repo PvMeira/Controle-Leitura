@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -21,11 +22,11 @@ import javax.validation.constraints.NotNull;
  * @since 13/09/2016
  */
 @Entity
-@Table(name = "lista_cust")
-@SequenceGenerator(name = "lista_custumizada_id_lista_cust_seq", sequenceName = "lista_custumizada_id_lista_cust_seq", allocationSize = 1, initialValue = 1)
-public class ListaCustom {
+@Table(name = "lista_customizada")
+@SequenceGenerator(name = "lista_customizada_id_lista_cust_seq", sequenceName = "lista_customizada_id_lista_cust_seq", allocationSize = 1, initialValue = 1)
+public class ListaCustomizada {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lista_custumizada_id_lista_cust_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lista_customizada_id_lista_cust_seq")
 	@Column(name = "id_lista_customizada")
 	private Long idListaCustomizada;
 
@@ -36,8 +37,11 @@ public class ListaCustom {
 
 	@NotNull
 	@ManyToMany
-	@JoinColumn(name = "id_livro", referencedColumnName = "id_livro")
+	@JoinTable(name = "livro_lista_customizada", 
+		joinColumns =@JoinColumn(name="id_livro"), 
+			inverseJoinColumns=@JoinColumn(name="id_lista_customizada"))
 	private List<Livro> livro;
+	
 
 	@NotNull
 	@Column(name = "nome_lista")
@@ -181,7 +185,7 @@ public class ListaCustom {
 	/**
 	 * 
 	 */
-	public ListaCustom() {
+	public ListaCustomizada() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -195,7 +199,7 @@ public class ListaCustom {
 	 * @param dataInclusao
 	 * @param publico
 	 */
-	public ListaCustom(Long idListaCustomizada, Pessoa pessoa, List<Livro> livro, String nomeLista, String tipoLista,
+	public ListaCustomizada(Long idListaCustomizada, Pessoa pessoa, List<Livro> livro, String nomeLista, String tipoLista,
 			String descricao, Calendar dataInclusao, boolean publico) {
 		this.idListaCustomizada = idListaCustomizada;
 		this.pessoa = pessoa;

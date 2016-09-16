@@ -29,11 +29,9 @@
 			<h:panelGrid columns="2">
 				<p:commandButton value="Salvar"  ajax="false"
 					id="saveCustomListButton"
-					action="#{livroMB.criarListaCustomizada()}" 
+					action="#{listaCustomizadaMB.criarListaCustomizada()}" 
 					process="@form"
 					oncomplete="updateListaCustom();"/>
-					
-					<b:column span="1" />
 					
 					<p:commandButton value="Limpar" 
 					process="@this"
@@ -49,29 +47,29 @@
 			 
 			 	<h:panelGrid columns="3">
 					<p:outputLabel value="Nome" for="inputNameModalCustom"/>
-					<p:inputText  id="inputNameModalCustom" value="#{livroMB.listaCustom.nomeLista}" />
+					<p:inputText  id="inputNameModalCustom" value="#{listaCustomizadaMB.listaCustomizada.nomeLista}" />
 					<p:message for="inputNameModalCustom"/>
 					
 					<p:outputLabel value="Tornar Lista pública" for="value1"/>
-					<p:selectBooleanButton id="value1" value="#{livroMB.listaCustom.publico}" onLabel="Não" offLabel="Sim" 
+					<p:selectBooleanButton id="value1" value="#{listaCustomizadaMB.listaCustomizada.publico}" onLabel="Não" offLabel="Sim" 
 						style="width:60px" required="true" requiredMessage="Campo Obrigatorio"/>
 					<p:message for="value1"/>	
 					
 					
 					<p:outputLabel value="Descrição" for="deacricaoInputModalCustom"/>
-					<p:inputText id="deacricaoInputModalCustom" value="#{livroMB.listaCustom.descricao}" />
+					<p:inputText id="deacricaoInputModalCustom" value="#{listaCustomizadaMB.listaCustomizada.descricao}" />
 					<p:message for="deacricaoInputModalCustom"/>
 					
 					<p:outputLabel value="Tipo de lista " />
-					<p:selectOneMenu id="oneMenuModal" value="#{livroMB.listaCustom.tipoLista}" >
-						<f:selectItems value="#{livroMB.getTipoLista()}"
+					<p:selectOneMenu id="oneMenuModal" value="#{listaCustomizadaMB.listaCustomizada.tipoLista}" >
+						<f:selectItems value="#{listaCustomizadaMB.getTipoLista()}"
 						var="list" itemLabel="#{list.nomeSimples}" itemValue="#{list.nomeSimples}"/>
 					</p:selectOneMenu>
 					
 			</h:panelGrid>
 			<p:dataTable id="listaTemporariaLivros"
 				value="#{livroMB.listaLivrosPessoaLogada()}"
-				selection="#{livroMB.livrosSelecionados}"
+				selection="#{listaCustomizadaMB.livrosSelecionadosCustomizada}"
 				var="livro"
 				rowKey="#{livro.idLivro}" 
 				paginator="true"

@@ -7,10 +7,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import com.senac.cl.modelos.ListaCustom;
+import com.senac.cl.modelos.ListaCustomizada;
 import com.senac.cl.modelos.Livro;
 import com.senac.cl.modelos.Pessoa;
-import com.senac.cl.repository.ListaCustomRepository;
+import com.senac.cl.repository.ListaCustomizadaRepository;
 import com.senac.cl.transactional.Transactional;
 
 /**
@@ -18,10 +18,10 @@ import com.senac.cl.transactional.Transactional;
  * @author Pedro
  * @since 13/09/2016
  */
-public class ListaCustomService {
+public class ListaCustomizadaService {
 
 	@Inject
-	ListaCustomRepository listaCustomRepository;
+	ListaCustomizadaRepository listaCustomizadaRepository;
 
 	private HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
@@ -32,13 +32,13 @@ public class ListaCustomService {
 	 * @param ed
 	 */
 	@Transactional
-	public void CriarUmaNovaLista(List<Livro> lista, ListaCustom ed) {
+	public void CriarUmaNovaLista(List<Livro> lista, ListaCustomizada ed) {
 		this.validaCampos(lista, ed);
 		Pessoa user = (Pessoa) ses.getAttribute("user");
 		ed.setDataInclusao(Calendar.getInstance());
 		ed.setPessoa(user);
 		ed.setLivro(lista);
-		this.listaCustomRepository.inserir(ed);
+		this.listaCustomizadaRepository.inserir(ed);
 
 	}
 
@@ -48,7 +48,7 @@ public class ListaCustomService {
 	 * @param lista
 	 * @param ed
 	 */
-	private void validaCampos(List<Livro> lista, ListaCustom ed) {
+	private void validaCampos(List<Livro> lista, ListaCustomizada ed) {
 		if (lista.isEmpty() || lista.equals(null)) {
 			throw new RuntimeException("Livro(s) não selecionados");
 		} else {
@@ -63,9 +63,9 @@ public class ListaCustomService {
 		}
 	}
 
-	public List<ListaCustom> listarListasCustomizadas() {
+	public List<ListaCustomizada> listarListasCustomizadas() {
 		Pessoa user = (Pessoa) ses.getAttribute("user");
-
-		return this.listaCustomRepository.listaRegistrosPessoaLogada(user.getIdPessoa());
+		List<ListaCustomizada> lista = this.listaCustomizadaRepository.listaRegistrosPessoaLogada(user.getIdPessoa());
+		return lista;
 	}
 }

@@ -158,24 +158,26 @@
 							value="Nova Lista Personalizada" 
 							oncomplete="PF('novaLeituraListaModal').show();"/>
 							
-						<p:dataTable id="listaCustomList" var="livro"
-							value="#{livroMB.listasCustomizadas()}"
+						<p:dataTable id="listaCustomList" var="listaCustom"
+							value="#{listaCustomizadaMB.listarTodasListasCustomizadas()}"
 							emptyMessage="Não existe cadastros"
 							paginator="true"
-							rows="10" 
-							draggableColumns="true" 
+							rows="20" 
 							paginatorAlwaysVisible="true">
-
-							<p:column headerText="Titulo" style="text-align:center">
-							</p:column>
-
-							<p:column headerText="Autor" style="text-align:center">
-
-							</p:column>
-
-							<p:column headerText="Status" style="text-align:center">
-							</p:column>
-
+							
+								<p:column headerText="Nome Lista" style="text-align:center">
+									<h:outputText value="#{listaCustom.nomeLista}"/>	
+								</p:column>
+								
+								<p:column headerText="Tipo " style="text-align:center">
+									<h:outputText value="#{listaCustom.tipoLista}"/>	
+								</p:column>
+	
+								<p:column headerText="Titulo" style="text-align:center">
+									<h:outputText value="#{listaCustom.livro.titulo}"/>
+								</p:column>
+	
+							
 						</p:dataTable>
 						<p:remoteCommand name="updateListaCustom" update="listaCustomList"/>
 					</h:form>
