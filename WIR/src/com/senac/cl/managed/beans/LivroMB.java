@@ -3,6 +3,8 @@ package com.senac.cl.managed.beans;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -17,9 +19,12 @@ import org.primefaces.event.RateEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+import com.senac.cl.enums.tipoListaCustomizada;
 import com.senac.cl.modelos.Leitura;
 import com.senac.cl.modelos.LeituraService;
+import com.senac.cl.modelos.ListaCustom;
 import com.senac.cl.modelos.Livro;
+import com.senac.cl.service.ListaCustomService;
 import com.senac.cl.service.LivroService;
 import com.senac.cl.utilitarios.Data;
 import com.senac.cl.utilitarios.SistemaDeMensagens;
@@ -34,8 +39,10 @@ import com.senac.cl.utilitarios.SistemaDeMensagens;
 public class LivroMB {
 
 	private Livro livro;
+	private ListaCustom listaCustom;
 	private Livro livroParaTransferir;
 	private List<Livro> livrosPessoaLogada;
+	private List<Livro> livrosSelecionadosCustom;
 	private List<Livro> livrosSelecionados;
 
 	@Inject
@@ -43,6 +50,9 @@ public class LivroMB {
 
 	@Inject
 	private LeituraService leituraService;
+	
+	@Inject
+	private ListaCustomService listaCustomService;
 
 	@Inject
 	Data data;
@@ -63,6 +73,15 @@ public class LivroMB {
 		livroService.salvar(this.getLivro(), tornarpublico);
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro salvo com sucesso!");
 		limpar();
+	}
+	
+	public void criarListaCustomizada(){
+		List<Livro> lista = this.livrosSelecionados;
+		this.listaCustomService.CriarUmaNovaLista(lista,  this.listaCustom);
+	}
+	
+	public tipoListaCustomizada[] getTipoLista(){
+		return tipoListaCustomizada.values();
 	}
 
 	/**
@@ -302,6 +321,10 @@ public class LivroMB {
 	public List<Livro> listaLivrosPublicos() {
 		return this.livroService.listaTodosLivrosPublicos();
 	}
+	
+	public List<ListaCustom> listasCustomizadas(){
+		return this.listaCustomService.listarListasCustomizadas();
+	}
 
 	// -----------get set
 	/**
@@ -396,5 +419,41 @@ public class LivroMB {
 	public void setLivroParaTransferir(Livro livroParaTransferir) {
 		this.livroParaTransferir = livroParaTransferir;
 	}
+
+	/**
+	 * @return the listaCustom
+	 */
+	public ListaCustom getListaCustom() {
+		if(this.listaCustom == null){
+			this.listaCustom = new ListaCustom();
+		}
+		return listaCustom;
+	}
+
+	/**
+	 * @param listaCustom the listaCustom to set
+	 */
+	public void setListaCustom(ListaCustom listaCustom) {
+		this.listaCustom = listaCustom;
+	}
+
+	/**
+	 * @return the livrosSelecionadosCustom
+	 */
+	public List<Livro> getLivrosSelecionadosCustom() {
+		if(this.livrosSelecionadosCustom == null){
+			this.livrosSelecionadosCustom = new ArrayList<Livro>();
+		}
+		return livrosSelecionadosCustom;
+	}
+
+	/**
+	 * @param livrosSelecionadosCustom the livrosSelecionadosCustom to set
+	 */
+	public void setLivrosSelecionadosCustom(List<Livro> livrosSelecionadosCustom) {
+		this.livrosSelecionadosCustom = livrosSelecionadosCustom;
+	}
+	
+	
 
 }

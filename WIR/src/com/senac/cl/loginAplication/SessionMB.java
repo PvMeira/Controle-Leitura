@@ -63,7 +63,7 @@ public class SessionMB implements Serializable {
 					
 					ses.setAttribute("userNORMAL", pessoa);
 					ses.setAttribute("user", pessoa);
-					return "normal/livro-list.xhtml?faces-redirect=true";
+					return "normal/livro/livro-list-manager.xhtml?faces-redirect=true";
 				}
 			}
 		}

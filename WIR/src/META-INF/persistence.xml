@@ -12,6 +12,7 @@
 		<class>com.senac.cl.modelos.Pessoa</class>
 		<class>com.senac.cl.modelos.Livro</class>
 		<class>com.senac.cl.modelos.Leitura</class>
+		<class>com.senac.cl.modelos.ListaCustom</class>
 		<class>com.senac.cl.modelos.Resenha</class>
 		<class>com.senac.cl.modelos.PessoaHistorico</class>
 

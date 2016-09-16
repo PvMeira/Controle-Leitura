@@ -5,7 +5,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:b="http://bootsfaces.net/ui">
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Controle de Leitura</title>
@@ -39,32 +40,33 @@ padding-left: 70px;
 </style>
 <h:form id="idFormMenu" prependId="false">
 
+
  <p:menubar autoDisplay="true" styleClass="menubarAplicacao">
         <p:submenu label="Cadastro" icon="fa fa-fw fa-file-o" >
             <p:submenu label="Novo" icon="fa fa-fw fa-plus">
-                <p:menuitem value="Livro"    url="../../paginas/normal/livro-form.xhtml"           icon="fa fa-fw fa-book"/>
-                <p:menuitem value="Resenhas" url="../../paginas/normal/resenha/menu-resenha.xhtml" icon="fa fa-fw fa-paper-plane-o"/>
+                <p:menuitem value="Livro"    url="/paginas/normal/livro/livro-form.xhtml"           icon="fa fa-fw fa-book"/>
+                <p:menuitem value="Resenhas" url="/paginas/normal/resenha/menu-resenha.xhtml" icon="fa fa-fw fa-paper-plane-o"/>
             </p:submenu>
         </p:submenu>
         <p:submenu label="Resenhas" icon="fa fa-fw fa-bookmark-o" >
-            <p:menuitem value="Minhas Resenhas" url="../../paginas/normal/resenha/resenha-list.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
-            <p:menuitem value="Nova Resenha"    url="resenha-form.xhtml" icon="ui-icon-arrowreturnthick-1-e" />
+            <p:menuitem value="Minhas Resenhas" url="/paginas/normal/resenha/resenha-list.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
+            <p:menuitem value="Nova Resenha"    url="/paginas/normal/resenha/resenha-form.xhtml" icon="ui-icon-arrowreturnthick-1-e" />
             <p:menuitem value="Comunidade"      url="" icon="ui-icon-arrowreturnthick-1-e" />
         </p:submenu>
         <p:submenu label="Nova Leitura" icon="fa fa-fw fa-bookmark-o" >
-            <p:menuitem value="Meus Livros" url="../../paginas/normal/livro-list.xhtml" 	        icon="ui-icon-arrowreturnthick-1-w" />
-            <p:menuitem value="Públicos"    url="../../paginas/normal/livros-publicos-list.xhtml" 	icon="ui-icon-arrowreturnthick-1-e" />
+            <p:menuitem value="Meus Livros" url="/paginas/normal/livro/livro-list.xhtml" 	        icon="ui-icon-arrowreturnthick-1-w" />
+            <p:menuitem value="Públicos"    url="/paginas/normal/livro/livros-publicos-list.xhtml" 	icon="ui-icon-arrowreturnthick-1-e" />
         </p:submenu>
         
         <p:submenu label="Minhas Leituras" icon="fa fa-fw fa-bookmark" >
-            <p:menuitem value="Leituras Atuais" url="../../paginas/normal/livros-atuais-list.xhtml" icon="fa fa-fw fa-list" />
+            <p:menuitem value="Leituras Atuais" url="/paginas/normal/livro/livros-atuais-list.xhtml" icon="fa fa-fw fa-list" />
         </p:submenu>
          
         <p:submenu label="Admim" icon="ui-icon-gear"  rendered="#{sessionMB.pessoaLogado.isAdm()}">
             <p:submenu label="Configurações" icon="fa fa-fw fa-wrench" >
-                		<p:menuitem value="Login" url="../../paginas/adm/pessoa-list.xhtml" icon="fa fa-fw fa-user"/>
-                		<p:menuitem value="Livros - Publicos " url="../../paginas/normal/livros-publicos-list.xhtml" icon="fa fa-fw fa-align-justify"/>
-                		<p:menuitem value="Dashbord" url="../../paginas/adm/dashboard.xhtml" icon="fa fa-fw fa-align-justify"/>			
+                		<p:menuitem value="Login" url="/paginas/adm/pessoa-list.xhtml" icon="fa fa-fw fa-user"/>
+                		<p:menuitem value="Livros - Publicos " url="/paginas/normal/livros-publicos-list.xhtml" icon="fa fa-fw fa-align-justify"/>
+                		<p:menuitem value="Dashbord" url="/paginas/adm/dashboard.xhtml" icon="fa fa-fw fa-align-justify"/>			
                 		<p:menuitem value="Leituras - geral " url="#" icon="fa fa-fw fa-bookmark"/>
                 	</p:submenu>
                 <p:menuitem value="Cadastros de Livros"  icon="fa fa-fw fa-table" />

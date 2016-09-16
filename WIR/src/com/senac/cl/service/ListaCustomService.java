@@ -1,0 +1,71 @@
+package com.senac.cl.service;
+
+import java.util.Calendar;
+import java.util.List;
+
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
+import com.senac.cl.modelos.ListaCustom;
+import com.senac.cl.modelos.Livro;
+import com.senac.cl.modelos.Pessoa;
+import com.senac.cl.repository.ListaCustomRepository;
+import com.senac.cl.transactional.Transactional;
+
+/**
+ * 
+ * @author Pedro
+ * @since 13/09/2016
+ */
+public class ListaCustomService {
+
+	@Inject
+	ListaCustomRepository listaCustomRepository;
+
+	private HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+	/**
+	 * Método para criar uma nova Lista Customizada
+	 * 
+	 * @param lista
+	 * @param ed
+	 */
+	@Transactional
+	public void CriarUmaNovaLista(List<Livro> lista, ListaCustom ed) {
+		this.validaCampos(lista, ed);
+		Pessoa user = (Pessoa) ses.getAttribute("user");
+		ed.setDataInclusao(Calendar.getInstance());
+		ed.setPessoa(user);
+		ed.setLivro(lista);
+		this.listaCustomRepository.inserir(ed);
+
+	}
+
+	/**
+	 * Valida os campos da modal de nova Lista customizada
+	 * 
+	 * @param lista
+	 * @param ed
+	 */
+	private void validaCampos(List<Livro> lista, ListaCustom ed) {
+		if (lista.isEmpty() || lista.equals(null)) {
+			throw new RuntimeException("Livro(s) não selecionados");
+		} else {
+			if (ed.getNomeLista() == null) {
+				throw new RuntimeException("Nome da Lista  não preenchido");
+			} else {
+				if (ed.getTipoLista() == null) {
+					throw new RuntimeException("Tipo da Lista  não preenchido");
+				}
+
+			}
+		}
+	}
+
+	public List<ListaCustom> listarListasCustomizadas() {
+		Pessoa user = (Pessoa) ses.getAttribute("user");
+
+		return this.listaCustomRepository.listaRegistrosPessoaLogada(user.getIdPessoa());
+	}
+}
