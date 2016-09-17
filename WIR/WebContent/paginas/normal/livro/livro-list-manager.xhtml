@@ -9,9 +9,9 @@
 
 	<ui:define name="center">
 		<b:panel title="Meus Livros" >
-			<p:tabView dynamic="true" cache="true">
+			<p:tabView dynamic="true" cache="true" >
 				<p:tab title="Meus Livros Atuais ">
-					<h:form prependId="false" id="idAbaUmForm">
+					
 						<b:panel collapsible="false">
 							<h:form prependId="false" id="formListaLivrosUsuario">
 								<p:panelGrid columns="3">
@@ -79,17 +79,19 @@
 
 											<p:graphicImage value="/resources/imagens/nota.png" height="20px" width="20px" />
 										</p:commandLink>
+										
 										<!-- Botao para downlaod do pdf -->
-										<p:commandLink id="comandLinkDownlod" ajax="false" title="Baixar livro">
+										<p:commandLink id="comandLinkDownlod"  ajax="false"  title="Baixar livro">
 											<p:fileDownload value="#{livroMB.FileDownloadView(livro)}" />
 											<p:graphicImage value="/resources/imagens/download.png" height="15px" width="15px" />
 										</p:commandLink>
+										
 									</p:column>
 								</p:dataTable>
 								<p:remoteCommand name="updateTabelaLivro" update="listaLivrosUsuario" />
 							</h:form>
 						</b:panel>
-					</h:form>
+				
 				</p:tab>
 				<p:tab title="Minhas leituras Atuais">
 					<h:form prependId="false" id="idform02">
@@ -124,20 +126,16 @@
 							<p:column headerText="Ações" style="text-align:center">
 								<p:commandLink id="modalObservacao" title="Abrir observação"
 									action="#{leituraMB.leitura.setObservacao(livros.observacao)}"
-									oncomplete="PF('modalLembrete').show();">
+									oncomplete="PF('visualizarDocumentoDialogDownload').show();">
 									<p:ajax event="click"
 										listener="#{leituraMB.populaLeituraParaObservacao(livros)}" />
 									<p:graphicImage value="/resources/imagens/nota.png"
 										height="20px" width="20px" />
 								</p:commandLink>
-
-								<p:commandLink id="abrirPDF" title="Ir para a leitura atual"
-									onclick="#{leituraMB.init(livros)}">
-									<p:graphicImage value="/resources/imagens/book.jpg"
-										height="20px" width="20px" />
-									<p:media value="#{leituraMB.streamedContent}" width="700px"
-										height="700px" player="pdf" />
-								</p:commandLink>
+							<p:commandLink id="sfsfsfsf">
+									
+							<p:graphicImage url="/resources/imagens/icone_pdf.jpg" style="width: 15px;"/>
+						</p:commandLink>
 								<p:commandLink id="paraLeitura" title="Para a leitura atual"
 									action="#{leituraMB.pararLeitura(livros)}"
 									update="listaDelivrosAtuais">
@@ -184,9 +182,7 @@
 				</p:tab>
 			</p:tabView>
 		</b:panel>
-		
-		
-		
+	
 			<!-- Imports TAB 01 -->
 			<p:confirmDialog id="idModalConfirmDialogExcluirLivro"
 				widgetVar="modalconfirmaExluir"

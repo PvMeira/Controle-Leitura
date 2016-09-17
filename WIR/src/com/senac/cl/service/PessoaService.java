@@ -1,5 +1,6 @@
 package com.senac.cl.service;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,6 +20,7 @@ public class PessoaService {
 	private PessoaRepository repositorio;
 	@Inject
 	private PessoaHistoricoService service;
+
 	
 /**
  * Metodo de Salvar - Aplica Regras de Negocio
@@ -27,9 +29,15 @@ public class PessoaService {
 	@Transactional
 	public void salvar(Pessoa pessoa) {
 		if (pessoa.getIdPessoa() == null) {
+			pessoa.setNormal(true);
+			pessoa.setDataUltimoLogin(Calendar.getInstance());
+			pessoa.setDataUltimoLogin(Calendar.getInstance());
 			repositorio.inserir(pessoa);
 			service.atualizarHistorico(pessoa,tipoAcao.INCLUIR);
 		} else {
+			pessoa.setNormal(true);
+			pessoa.setDataUltimoLogin(Calendar.getInstance());
+			pessoa.setDataUltimoLogin(Calendar.getInstance());
 			repositorio.atualizar(pessoa);
 			service.atualizarHistorico(pessoa,tipoAcao.ALTERACAO);
 		}

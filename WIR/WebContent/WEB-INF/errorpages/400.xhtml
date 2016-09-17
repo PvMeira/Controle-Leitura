@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/modelo/padrao.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<ui:define name="Contentn Title"></ui:define>
+	<ui:define name="center">
+
+
+		<p>
+			This was a bad request.
+			The server couldn't understand it.
+			Please verify if the request parameters are in the right format.
+			Alternatively, start at the left menu to find all available resources.
+		</p>
+		<ui:fragment rendered="#{not empty requestScope['javax.servlet.error.message']}">
+			<p>
+				The specific error message is: <code><h:outputText value="#{requestScope['javax.servlet.error.message']}" escape="false" /></code>
+			</p>
+		</ui:fragment>
+
+
+	</ui:define>
+</ui:composition>

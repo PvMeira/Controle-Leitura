@@ -47,6 +47,15 @@
 						required="true" requiredMessage="Campo Obrigatório" placeholder="Telefone" />
 					<p:message for="fone" />
 					
+					<p:fileUpload 
+    				 id="idUpload"
+    				 label="Escolher Foto para Perfil"
+    				 fileUploadListener="#{pessoaMB.carregarArquivo}" 
+    				 mode="advanced"
+                     auto="true" 
+                     sizeLimit="10485760"  />
+                  <p:message for="idUpload" />
+					
 				</p:panelGrid>
 				<p:panelGrid columns="3" cellpadding="5">
 				

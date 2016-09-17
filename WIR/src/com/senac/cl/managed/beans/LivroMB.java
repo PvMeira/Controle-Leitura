@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.primefaces.event.FileUploadEvent;
@@ -57,6 +59,8 @@ public class LivroMB {
 	public LivroMB() {
 	}
 
+	
+	
 	/**
 	 * Salva o livro
 	 */
@@ -163,10 +167,8 @@ public class LivroMB {
 		List<Livro> listaLivrosSelecionados = this.livrosSelecionados;
 		for (Livro livro : listaLivrosSelecionados) {
 			byte[] buffer = new byte[99999];
-			// Retorna o arquivo em Stream content
 			StreamedContent file = FileDownloadView(livro);
 			ZipEntry entry = new ZipEntry(file.getName());
-			// Joga o arquivo que foi baixado no content .zip
 			zip.putNextEntry(entry);
 			int len;
 			while ((len = file.getStream().read(buffer)) > 0) {

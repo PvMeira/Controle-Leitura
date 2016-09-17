@@ -46,22 +46,7 @@ public class LeituraMB {
 
 	private StreamedContent streamedContent;
 
-	public void init(Leitura ed) {
-		try {
-
-			InputStream in = new ByteArrayInputStream(ed.getLivro().getArquivo());
-
-			streamedContent = new DefaultStreamedContent(in, "application/pdf");
-
-			Map<String, Object> session = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-			byte[] b = (byte[]) session.get("reportBytes");
-			if (b != null) {
-				streamedContent = new DefaultStreamedContent(new ByteArrayInputStream(b),"application/pdf", "pdf");
-			}
-		} catch (Exception e) {
-		}
-
-	}
+	
 
 	public StreamedContent getStreamedContent() {
 		if (FacesContext.getCurrentInstance().getRenderResponse()) {

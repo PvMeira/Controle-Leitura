@@ -25,9 +25,6 @@ public class PessoaRepository {
  * @param pessoa
  */
 	public void inserir(Pessoa pessoa) {
-		pessoa.setNormal(true);
-		pessoa.setDataUltimoLogin(Calendar.getInstance());
-		pessoa.setDataUltimoLogin(Calendar.getInstance());
 		entityManager.persist(pessoa);
 	}
 /**

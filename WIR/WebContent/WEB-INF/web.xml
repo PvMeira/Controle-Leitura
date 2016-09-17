@@ -7,6 +7,30 @@
 	<welcome-file-list>
 		<welcome-file>/paginas/Login.xhtml</welcome-file>
 	</welcome-file-list>
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/WEB-INF/errorpages/expired.xhtml</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.sql.SQLException</exception-type>
+		<location>/WEB-INF/errorpages/database.xhtml</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.RuntimeException</exception-type>
+		<location>/WEB-INF/errorpages/bug.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/errorpages/500.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/errorpages/404.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>400</error-code>
+		<location>/WEB-INF/errorpages/400.xhtml</location>
+	</error-page>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -24,29 +48,41 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.faces</url-pattern>
 	</servlet-mapping>
-	
-		<servlet-mapping>
-			<servlet-name>Faces Servlet</servlet-name>
-			<url-pattern>*.xhtml</url-pattern>
-		</servlet-mapping>
-		<session-config>
-			<session-timeout>30</session-timeout>
-		</session-config>
-		<context-param>
-			<param-name>primefaces.FONT_AWESOME</param-name>
-			<param-value>true</param-value>
-		</context-param>
-		<context-param>
-			<param-name>primefaces.THEME</param-name>
-			<param-value>bootstrap</param-value>
-		</context-param>
-		<!-- <filter> <display-name>FiltroADM</display-name> <filter-name>FiltroADM</filter-name> 
-			<filter-class>com.senac.cl.loginAplication.filtros.FiltroAdm</filter-class> 
-			</filter> <filter-mapping> <filter-name>FiltroADM</filter-name> <url-pattern>/paginas/*</url-pattern> 
-			<url-pattern>/WEB-INF/*</url-pattern> <url-pattern>/resources/*</url-pattern> 
-			</filter-mapping> <filter> <display-name>FiltroNormal</display-name> <filter-name>FiltroNormal</filter-name> 
-			<filter-class>com.senac.cl.loginAplication.filtros.FiltroNormal</filter-class> 
-			</filter> <filter-mapping> <filter-name>FiltroNormal</filter-name> <url-pattern>/WEB-INF/*</url-pattern> 
-			<url-pattern>/resources/*</url-pattern> <url-pattern>/paginas/normal/*</url-pattern> 
-			</filter-mapping> -->
+	<filter>
+		<filter-name>facesExceptionFilter</filter-name>
+		<filter-class>org.omnifaces.filter.FacesExceptionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>facesExceptionFilter</filter-name>
+		<servlet-name>facesServlet</servlet-name>
+	</filter-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.omnifaces.FACES_VIEWS_SCAN_PATHS</param-name>
+		<param-value>/*.xhtml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>bootstrap</param-value>
+	</context-param>
+	<!-- <filter> <display-name>FiltroADM</display-name> <filter-name>FiltroADM</filter-name> 
+		<filter-class>com.senac.cl.loginAplication.filtros.FiltroAdm</filter-class> 
+		</filter> <filter-mapping> <filter-name>FiltroADM</filter-name> <url-pattern>/paginas/*</url-pattern> 
+		<url-pattern>/WEB-INF/*</url-pattern> <url-pattern>/resources/*</url-pattern> 
+		</filter-mapping> <filter> <display-name>FiltroNormal</display-name> <filter-name>FiltroNormal</filter-name> 
+		<filter-class>com.senac.cl.loginAplication.filtros.FiltroNormal</filter-class> 
+		</filter> <filter-mapping> <filter-name>FiltroNormal</filter-name> <url-pattern>/WEB-INF/*</url-pattern> 
+		<url-pattern>/resources/*</url-pattern> <url-pattern>/paginas/normal/*</url-pattern> 
+		</filter-mapping> -->
 </web-app>
