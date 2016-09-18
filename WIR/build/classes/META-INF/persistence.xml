@@ -11,8 +11,12 @@
 
 		<class>com.senac.wir.entidades.Pessoa</class>
 		<class>com.senac.wir.entidades.Login</class>
-
+		
+		
+		 
+		 
 		<properties>
+			
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />

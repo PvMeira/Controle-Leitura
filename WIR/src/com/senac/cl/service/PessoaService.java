@@ -60,6 +60,14 @@ public class PessoaService {
 		service.atualizarHistorico(pessoa,tipoAcao.DELETAR);
 		
 	}
+	/**
+	 * Conta o numeor de pessoas cadastradas no momento na aplicação
+	 * @return
+	 */
+	public int buscaNumeroDeusuarioCadastradosAplicacao(){
+		int numero =repositorio.contaTodasAsPessoasAplicacao();
+		return numero;
+	}
 	
 	/**
 	 * Metodo que retorna pessoa pelo seu ID

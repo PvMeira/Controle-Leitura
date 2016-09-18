@@ -34,6 +34,16 @@ public class PessoaRepository {
 	public List<Pessoa> todasAsPessoas() {
 		return entityManager.createQuery("select l from " + Pessoa.class.getSimpleName() + " l").getResultList();
 	}
+	
+	
+	/**
+	 * Retorna o numero de usuaarios que aplicação possui
+	 * @return
+	 */
+	public int contaTodasAsPessoasAplicacao() {
+		return entityManager.createQuery("select l from " + Pessoa.class.getSimpleName() + " l").getResultList().size();
+	}
+	
 /**
  * Remove a entidade do banco
  * @param pessoa

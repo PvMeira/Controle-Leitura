@@ -57,6 +57,15 @@ public class LeituraRepository {
 	public List<Leitura> todosOsRegistros() {
 		return entityManager.createQuery("select l from " + Leitura.class.getSimpleName() + " l").getResultList();
 	}
+	
+	/**
+	 * Conta todas as leituras que estãos endo feitas na aplicação
+	 * @return
+	 */
+	public int contaTodaAsLeiturasAplicacao() {
+		return entityManager.createQuery("select l from " + Leitura.class.getSimpleName() + " l").getResultList().size();
+	}
+
 
 	/**
 	 * Busca a a leitura pelo id do livro

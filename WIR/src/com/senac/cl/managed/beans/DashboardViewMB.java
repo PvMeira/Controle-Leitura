@@ -12,7 +12,9 @@ import org.primefaces.model.DashboardModel;
 import org.primefaces.model.DefaultDashboardColumn;
 import org.primefaces.model.DefaultDashboardModel;
 
+import com.senac.cl.modelos.LeituraService;
 import com.senac.cl.service.LivroService;
+import com.senac.cl.service.PessoaService;
 
 /**
  * 
@@ -29,12 +31,20 @@ public class DashboardViewMB implements Serializable {
 	
 	@Inject
 	private LivroService livroService;
+	
+	@Inject
+	private PessoaService pessoaService;
+	
+	@Inject
+	private LeituraService leituraService;
 
 	@PostConstruct
 	public void init() {
 		model = new DefaultDashboardModel();
 		DashboardColumn column1 = new DefaultDashboardColumn();
 		DashboardColumn column2 = new DefaultDashboardColumn();
+		DashboardColumn column3 = new DefaultDashboardColumn();
+
 
 		column1.addWidget("livros");
 		column1.addWidget("usuarios");
@@ -44,6 +54,7 @@ public class DashboardViewMB implements Serializable {
 
 		model.addColumn(column1);
 		model.addColumn(column2);
+		model.addColumn(column3);
 
 	}
 	
@@ -63,7 +74,20 @@ public class DashboardViewMB implements Serializable {
 	public int contaLivrosPublicosTotais(){
 		return this.livroService.contaLivrosPublicosTotais();
 	}
-	
+	/**
+	 * Retorna o numero de usuario cadastrados na aplicação
+	 * @return
+	 */
+	public int contaPessoasCadastradasAplicacao(){
+		return this.pessoaService.buscaNumeroDeusuarioCadastradosAplicacao();
+	}
+	/**
+	 * Retorna o numero de leituras neste momento na aplicação
+	 * @return
+	 */
+	public int contaLeiturasAplicacao(){
+		return this.leituraService.contaLeiturasAplicacao();
+	}
 	
 
 	/**

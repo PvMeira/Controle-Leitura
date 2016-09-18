@@ -14,7 +14,7 @@
 
 	<ui:define name="center">
 		<h:form prependId="false" id="dashBoardForm">
-			<p:panel id="basic" header="Administração DashBaord"  style="margin-bottom:20px">
+			<p:panel id="basic" header="Administração-DashBaord"  style="margin-bottom:20px">
 				<p:dashboard id="board" model="#{dashboardViewMB.model}">
 					<p:panel id="livros" header="Livros">
 						<h:outputText value="Totais de Livros cadastrados :" />
@@ -27,11 +27,15 @@
 							styleClass="inputNumber" />
 					</p:panel>
 					<p:panel id="usuarios" header="Usuarios">
-						<h:outputText value="Dados relacionados aos usuario" />
+						<h:outputText value="Totais de Usuáarios cadastrados :" />
+						<h:outputText value="#{dashboardViewMB.contaPessoasCadastradasAplicacao()}"
+							styleClass="inputNumber" />
 					</p:panel>
 
 					<p:panel id="dados" header="Dados">
-						<h:outputText value="Dados e estatisticas serão mostradas aqui" />
+						<h:outputText value="Totais de leituras na aplicação neste momento :" />
+						<h:outputText value="#{dashboardViewMB.contaLeiturasAplicacao()}"
+							styleClass="inputNumber" />
 					</p:panel>
 
 					<p:panel id="extras" header="Extras">

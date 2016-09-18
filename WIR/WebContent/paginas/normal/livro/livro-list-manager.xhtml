@@ -137,7 +137,7 @@
 							<p:column headerText="Ações" style="text-align:center">
 								<p:commandLink id="modalObservacao" title="Abrir observação"
 									action="#{leituraMB.leitura.setObservacao(livros.observacao)}"
-									oncomplete="PF('visualizarDocumentoDialogDownload').show();">
+									oncomplete="PF('modalLembrete').show();">
 									<p:ajax event="click"
 										listener="#{leituraMB.populaLeituraParaObservacao(livros)}" />
 									<p:graphicImage value="/resources/imagens/nota.png"
