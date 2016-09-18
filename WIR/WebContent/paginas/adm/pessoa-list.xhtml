@@ -7,9 +7,7 @@
 	template="/WEB-INF/modelo/padrao.xhtml">
 	
 <ui:define name="center">	
-
-
-	
+	<p:panel id="basic" header="Administração-Todos os usuários do Sistema"  style="margin-bottom:20px">
 			<h:form id="viewForm">
 				<p:dataTable id="personTable" var="pessoa" 
 					value="#{pessoaMB.listaDePessoasRegistradas}"
@@ -42,7 +40,7 @@
 					</p:column>
 				</p:dataTable>
 			</h:form>
-		
+	</p:panel>	
 		
 </ui:define>
 </ui:composition>

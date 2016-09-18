@@ -8,10 +8,8 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.primefaces.event.FileUploadEvent;
@@ -19,7 +17,6 @@ import org.primefaces.event.RateEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-import com.senac.cl.enums.tipoListaCustomizada;
 import com.senac.cl.modelos.Leitura;
 import com.senac.cl.modelos.LeituraService;
 import com.senac.cl.modelos.Livro;
@@ -59,8 +56,6 @@ public class LivroMB {
 	public LivroMB() {
 	}
 
-	
-	
 	/**
 	 * Salva o livro
 	 */
@@ -68,6 +63,13 @@ public class LivroMB {
 		livroService.salvar(this.getLivro(), tornarpublico);
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro salvo com sucesso!");
 		limpar();
+	}
+
+	/**
+	 * Salva uma nova leitura apartir do livro seleciona inline
+	 */
+	public void iniciarLeituraLivroInline(Livro ed) {
+		this.leituraService.salvar(ed);
 	}
 
 	/**

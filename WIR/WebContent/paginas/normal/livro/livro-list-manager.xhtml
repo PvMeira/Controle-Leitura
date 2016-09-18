@@ -8,11 +8,11 @@
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
 	<ui:define name="center">
-		<b:panel title="Meus Livros" >
+			<p:panel id="basicManagerLivros" header="Meus Livros"  style="margin-bottom:20px">
 			<p:tabView dynamic="true" cache="true" >
 				<p:tab title="Meus Livros Atuais ">
 					
-						<b:panel collapsible="false">
+					<p:panel id="livrosUsuariosAtuais"  >
 							<h:form prependId="false" id="formListaLivrosUsuario">
 								<p:panelGrid columns="3">
 									<p:splitButton value="Operações em Lote "
@@ -28,10 +28,10 @@
 									</p:splitButton>
 									<p:commandButton id="buttonNovoLivro"
 										action="livro-form.xhtml?faces-redirect=true"
-										icon="fa fa-fw fa-book" value="Novo" />
+										icon="fa fa-fw fa-book" value="Novo Livro" />
 									<p:commandButton id="buttonNovaLeitura"
 										oncomplete="PF('novaLeituraLista').show();"
-										icon="fa fa-fw fa-plus" value="Nova Leitura" />
+										icon="fa fa-fw fa-leanpub" value="Nova Leitura" />
 								</p:panelGrid>
 								<br />
 								<br />
@@ -86,11 +86,19 @@
 											<p:graphicImage value="/resources/imagens/download.png" height="15px" width="15px" />
 										</p:commandLink>
 										
+												<!-- Botao para ler este livro em especifico -->
+										<p:commandLink id="comandLinkLerLivro"
+											title="Começar a ler este livro"
+											action="#{livroMB.iniciarLeituraLivroInline(livro)}"
+											oncomplete="updateTabelaLivro();">
+											<p:graphicImage value="/resources/imagens/logo.png" height="20px" width="20px" />
+										</p:commandLink>
+										
 									</p:column>
 								</p:dataTable>
 								<p:remoteCommand name="updateTabelaLivro" update="listaLivrosUsuario" />
 							</h:form>
-						</b:panel>
+						</p:panel>
 				
 				</p:tab>
 				<p:tab title="Minhas leituras Atuais">
@@ -116,8 +124,10 @@
 							<p:column headerText="Pagina Atual" style="text-align:center"
 								sortBy="#{livros.paginaAtual}">
 								<p:inplace id="ajaxEdit" editor="true">
-									<p:inputText value="#{livros.paginaAtual}" required="true"
-										label="text" />
+									<p:inputText value="#{livros.paginaAtual}" 
+										required="true"
+										label="text" 
+										onchange="atualizarlistaLeitura();" />
 								</p:inplace>
 
 								<h:outputText />
@@ -138,7 +148,8 @@
 						</p:commandLink>
 								<p:commandLink id="paraLeitura" title="Para a leitura atual"
 									action="#{leituraMB.pararLeitura(livros)}"
-									update="listaDelivrosAtuais">
+									update="listaDelivrosAtuais"
+									oncomplete="updateTabelaLivro();">
 									<p:confirm />
 									<p:graphicImage value="/resources/imagens/parar_leitura.png"
 										height="20px" width="20px" />
@@ -181,7 +192,7 @@
 					</h:form>
 				</p:tab>
 			</p:tabView>
-		</b:panel>
+		</p:panel>
 	
 			<!-- Imports TAB 01 -->
 			<p:confirmDialog id="idModalConfirmDialogExcluirLivro"

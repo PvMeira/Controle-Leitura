@@ -105,7 +105,7 @@ public class SessionMB implements Serializable {
 		HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		Pessoa pesLogada= (Pessoa) ses.getAttribute("user");
 		if(pesLogada != null){
-		return pesLogada.getUsername();
+			return pesLogada.getUsername();
 		}else{
 			return SEM_USUARIO ;
 		}

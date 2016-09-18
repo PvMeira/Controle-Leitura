@@ -9,7 +9,7 @@
 	xmlns:pe="http://primefaces.org/ui/extensions" >
 
 	<ui:define name="center">
-		<b:panel title="Administração - Todos os Livros Aplicação" collapsible="false">
+	<p:panel id="basic" header="Administração-Todos os Livros do Sistema"  style="margin-bottom:20px">
 			<h:form prependId="false" id="admFormLivros">
 				<p:dataTable 
 					id="listaDelivrosAsm" 
@@ -71,6 +71,6 @@
 					<p:dataExporter type="xml" target="listaDelivrosAsm" fileName="livros-dados" />
 				</p:commandLink>
 			</h:form>
-		</b:panel>
+		</p:panel>
 	</ui:define>
 </ui:composition>

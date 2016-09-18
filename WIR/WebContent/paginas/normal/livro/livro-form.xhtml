@@ -8,7 +8,7 @@
 	template="/WEB-INF/modelo/padrao.xhtml">
 
 	<ui:define name="center">
-		<b:panel title="Cadastro de um Livro" collapsible="false">
+		<p:panel id="basic" header="Cadastro de Livro"  style="margin-bottom:20px">
 			<h:form id="idFormCadastroLivro" prependId="false">
 				<p:growl id="idGrowlCadastroLivro" showDetail="true" sticky="false"
 					life="4000" />
@@ -104,7 +104,7 @@
 					value="Limpar" />
 				</p:panelGrid>
 			</h:form>
-		</b:panel>
+		</p:panel>
 		<!-- Modal que mostra as informações sobre tornar publico o livro -->
 		<p:dialog
 				id="idModalInfo"

@@ -9,7 +9,7 @@
 	xmlns:pe="http://primefaces.org/ui/extensions" >
 
 	<ui:define name="center">
-		<b:panel title="Livros Públicos" collapsible="false">
+	<p:panel id="basicManagerLivrosPublicos" header="Livros Públicos"  style="margin-bottom:20px">
 			<h:form prependId="false" id="livrosPublicosForm">
 				<p:panelGrid columns="3">
 					<p:splitButton value="Operações em Lote "
@@ -90,7 +90,7 @@
 				</p:dataTable>
 			<p:remoteCommand name="atualizarlistaLeitura" update="listaDelivrosPublicos"/>	
 			</h:form>
-		</b:panel>
+		</p:panel>
 		<!-- Modal transferir livro publico -->
 		<ui:include src="/paginas/normal/livro/livro-publico-transferencia-modal.xhtml" />
 		

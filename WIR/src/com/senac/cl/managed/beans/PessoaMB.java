@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import org.primefaces.event.CaptureEvent;
 import org.primefaces.event.FileUploadEvent;
 
 import com.senac.cl.modelos.Pessoa;
@@ -72,6 +73,15 @@ public class PessoaMB {
 		fs.close();
 		return byt;
 	}
+	
+	/**
+	 * Método para captura
+	 * @param captureEvent
+	 */
+	 public void oncapture(CaptureEvent captureEvent) {
+	        byte[] data = captureEvent.getData();
+	        this.pessoa.setFotoUser(data);
+	    }
 
 	/**
 	 * Deleta Um usuario do sistema

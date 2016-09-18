@@ -8,7 +8,7 @@
 	template="/WEB-INF/modelo/padrao.xhtml">
 
 	<ui:define name="center">
-		<b:panel title="Criar uma Resenha " collapsible="false">
+	<p:panel id="basicCriarRenhas" header="Escrever Uma nova Resenha"  style="margin-bottom:20px">
 			<h:form id="idFormEscreverUmaResenha" prependId="false">
 
 				<p:growl id="idscreverUmaResenha" showDetail="true" sticky="false" life="4000" />
@@ -43,10 +43,10 @@
 					<p:outputLabel for="publicaBooleana" title="Tornar Pública ?" value="Tornar Pública ?" id="idLabelBoolean" />
 					<p:selectBooleanCheckbox  id="publicaBooleana" value="#{resenhaMB.resenha.publica}"/>
 				</p:panelGrid>
-				<b:panel  collapsible="false" style="margin-right:400px;margin-left:50px;">
+				<p:panel   style="margin-right:400px;margin-left:50px;">
 				 <p:editor id="editor" widgetVar="editorWidget" value="#{resenhaMB.resenha.conteudo}" 
 				 width="600"  required="true" requiredMessage="Obrigatorio" />
-				</b:panel>
+				</p:panel>
 				<p:panelGrid columns="5">
 					<p:commandButton 
 					value="Salvar" 
@@ -65,7 +65,7 @@
 					<p:commandButton value="Salvar Andamento" icon="fa fa-fw fa-shekel" />
 				</p:panelGrid>
 			</h:form>
-		</b:panel>
+		</p:panel>
 		
 		<!-- Modal de Confirmação -->
 		<p:confirmDialog 

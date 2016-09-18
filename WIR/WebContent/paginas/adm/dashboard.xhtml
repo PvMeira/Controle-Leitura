@@ -5,19 +5,17 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/WEB-INF/modelo/padrao.xhtml">
-
-	<ui:define name="center">
-		<h:form prependId="false" id="dashBoardForm">
-			<style>
+	<style>
 .inputNumber {
 	font-weight: bold;
 	font-size: 15px;
 }
 </style>
-			<div style="height: 500px;" align="left">
 
+	<ui:define name="center">
+		<h:form prependId="false" id="dashBoardForm">
+			<p:panel id="basic" header="Administração DashBaord"  style="margin-bottom:20px">
 				<p:dashboard id="board" model="#{dashboardViewMB.model}">
-
 					<p:panel id="livros" header="Livros">
 						<h:outputText value="Totais de Livros cadastrados :" />
 						<h:outputText value="#{dashboardViewMB.contaLivrosTotais()}"
@@ -28,7 +26,6 @@
 							value="#{dashboardViewMB.contaLivrosPublicosTotais()}"
 							styleClass="inputNumber" />
 					</p:panel>
-
 					<p:panel id="usuarios" header="Usuarios">
 						<h:outputText value="Dados relacionados aos usuario" />
 					</p:panel>
@@ -40,10 +37,8 @@
 					<p:panel id="extras" header="Extras">
 						<h:outputText value="Conteudo extra do sistema será mostrado aqui" />
 					</p:panel>
-
 				</p:dashboard>
-				<div style="clear: both" />
-			</div>
+			</p:panel>
 		</h:form>
 	</ui:define>
 </ui:composition>
