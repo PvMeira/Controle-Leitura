@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import org.apache.taglibs.standard.lang.jstl.BooleanLiteral;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RateEvent;
 import org.primefaces.model.DefaultStreamedContent;
@@ -69,7 +70,24 @@ public class LivroMB {
 	 * Salva uma nova leitura apartir do livro seleciona inline
 	 */
 	public void iniciarLeituraLivroInline(Livro ed) {
-		this.leituraService.salvar(ed);
+		if (this.verificaSeExisteLeitura(ed) == Boolean.TRUE) {
+			this.leituraService.salvar(ed);
+		} else {
+			SistemaDeMensagens.notificaAVISO("Opa", "Parece que voce ja tem uam leitura em andamento com esse livro");
+		}
+	}
+
+	/**
+	 * Verifica se existe uma Leitura com o livro selecionado
+	 * 
+	 * @param livroED
+	 */
+	public boolean verificaSeExisteLeitura(Livro livroED) {
+		Leitura leitura = leituraService.buscaLeituraPeloId(livroED);
+		if (leitura != null) {
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
 	}
 
 	/**

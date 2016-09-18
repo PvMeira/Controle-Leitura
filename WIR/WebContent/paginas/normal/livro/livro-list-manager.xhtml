@@ -88,10 +88,11 @@
 										
 												<!-- Botao para ler este livro em especifico -->
 										<p:commandLink id="comandLinkLerLivro"
+											rendered="#{livroMB.VerificaStatusLivro(livro) eq 'Livro não Lido' or 'Livro já Lido'}"
 											title="Começar a ler este livro"
 											action="#{livroMB.iniciarLeituraLivroInline(livro)}"
 											oncomplete="updateTabelaLivro();">
-											<p:graphicImage value="/resources/imagens/logo.png" height="20px" width="20px" />
+											<p:graphicImage value="/resources/imagens/livro_lendo.png" height="20px" width="20px" />
 										</p:commandLink>
 										
 									</p:column>

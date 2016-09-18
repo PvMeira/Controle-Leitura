@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.management.RuntimeMBeanException;
 import javax.servlet.http.HttpSession;
 
 import com.senac.cl.repository.LeituraRepository;
 import com.senac.cl.repository.LivroRepository;
 import com.senac.cl.transactional.Transactional;
+import com.senac.cl.utilitarios.SistemaDeMensagens;
 
 /**
  * 
