@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/modelo/padrao.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions" >
+
+	<ui:define name="center">
+		<b:panel title="Administração - Todos os Livros Aplicação" collapsible="false">
+			<h:form prependId="false" id="admFormLivros">
+				<p:dataTable 
+					id="listaDelivrosAsm" 
+					var="livros" 
+					value="#{livroMB.listarTodosLivros()}"
+					emptyMessage="Não existe cadastros" 
+					paginator="true" 
+					rows="25"
+					paginatorAlwaysVisible="true" >
+					
+					<p:column headerText="# ID" style="text-align:center">
+						<h:outputText value="#{livros.idLivro}"/>
+					</p:column>
+					
+					<p:column headerText="Titulo" style="text-align:center">
+						<h:outputText value="#{livros.titulo}"/>
+					</p:column>
+					
+					<p:column headerText="Autor" style="text-align:center">
+						<h:outputText value="#{livros.autor}"/>
+					</p:column>
+					
+					<p:column headerText="Titulo" style="text-align:center">
+						<h:outputText value="#{livros.titulo}"/>
+					</p:column>
+					
+					<p:column headerText="Paginas" style="text-align:center">
+						<h:outputText value="#{livros.paginas}" 
+									  title="#{livroMB.getHintColaborador(livros)}"/>
+					</p:column>
+					
+					<p:column headerText="Colaborador" style="text-align:center" >
+           			<h:outputText value="#{livros.dono.nome}"/>
+					</p:column>
+					
+					<p:column headerText="Data upload Livro" style="text-align:center">
+						<h:outputText value="#{livros.dataUpload.time}" id="uploadTime">
+							<f:convertDateTime for="uploadTime" pattern="EEE, M/d/yy hh:mm"/>
+						</h:outputText>
+					</p:column>
+				</p:dataTable>
+				<p:commandLink id="excel" ajax="false">
+					<p:graphicImage value="/resources/imagens/excel.png" height="30px" width="30px" />
+					<p:dataExporter type="xls" target="listaDelivrosAsm" fileName="livros-dados" />
+				</p:commandLink>
+
+				<p:commandLink id="pdf" ajax="false">
+					<p:graphicImage value="/resources/imagens/pdf.png" height="30px" width="30px" />
+					<p:dataExporter type="pdf" target="listaDelivrosAsm" fileName="livros-dados" />
+				</p:commandLink>
+
+				<p:commandLink id="csv" ajax="false">
+					<p:graphicImage value="/resources/imagens/csv.png" height="30px" width="30px" />
+					<p:dataExporter type="csv" target="listaDelivrosAsm" fileName="livros-dados" />
+				</p:commandLink>
+
+				<p:commandLink id="xml" ajax="false">
+					<p:graphicImage value="/resources/imagens/xml.jpg" height="30px" width="30px" />
+					<p:dataExporter type="xml" target="listaDelivrosAsm" fileName="livros-dados" />
+				</p:commandLink>
+			</h:form>
+		</b:panel>
+	</ui:define>
+</ui:composition>

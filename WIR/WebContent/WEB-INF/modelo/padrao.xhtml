@@ -42,41 +42,35 @@ height: 50px;
 </style>
 <h:form id="idFormMenu" prependId="false">
  <p:menubar autoDisplay="true" styleClass="menubarAplicacao" id="menuBarAplicatio">
-        <p:submenu label="Cadastro" icon="fa fa-fw fa-file-o" >
-            <p:submenu label="Novo" icon="fa fa-fw fa-plus">
-                <p:menuitem value="Livro"    url="/paginas/normal/livro/livro-form.xhtml"           icon="fa fa-fw fa-book"/>
-                <p:menuitem value="Resenhas" url="/paginas/normal/resenha/menu-resenha.xhtml" icon="fa fa-fw fa-paper-plane-o"/>
-            </p:submenu>
+        <p:submenu label="Resenhas" icon="fa fa-fw fa-pencil-square-o" >
+            <p:menuitem value="Minhas Resenhas" url="/paginas/normal/resenha/resenha-list.xhtml" icon="fa fa-fw fa-text-width" />
+            <p:menuitem value="Nova Resenha"    url="/paginas/normal/resenha/resenha-form.xhtml" icon="fa fa-fw fa-pencil" />
+            <p:menuitem value="Comunidade"      url="" icon="fa fa-fw fa-group" />
         </p:submenu>
-        <p:submenu label="Resenhas" icon="fa fa-fw fa-bookmark-o" >
-            <p:menuitem value="Minhas Resenhas" url="/paginas/normal/resenha/resenha-list.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
-            <p:menuitem value="Nova Resenha"    url="/paginas/normal/resenha/resenha-form.xhtml" icon="ui-icon-arrowreturnthick-1-e" />
-            <p:menuitem value="Comunidade"      url="" icon="ui-icon-arrowreturnthick-1-e" />
-        </p:submenu>
-        <p:submenu label="Nova Leitura" icon="fa fa-fw fa-bookmark-o" >
-            <p:menuitem value="Meus Livros" url="/paginas/normal/livro/livro-list.xhtml" 	        icon="ui-icon-arrowreturnthick-1-w" />
-            <p:menuitem value="Públicos"    url="/paginas/normal/livro/livros-publicos-list.xhtml" 	icon="ui-icon-arrowreturnthick-1-e" />
+        <p:submenu label="Nova Leitura" icon="fa fa-fw fa-plus-square" >
+            <p:menuitem value="Meus Livros" url="/paginas/normal/livro/livro-list-manager.xhtml"    icon="fa fa-fw fa-tasks" />
+            <p:menuitem value="Públicos"    url="/paginas/normal/livro/livros-publicos-list.xhtml" 	icon="fa fa-fw fa-folder-open-o" />
         </p:submenu>
         
-        <p:submenu label="Minhas Leituras" icon="fa fa-fw fa-bookmark" >
-            <p:menuitem value="Leituras Atuais" url="/paginas/normal/livro/livros-atuais-list.xhtml" icon="fa fa-fw fa-list" />
+        <p:submenu label="Minhas Leituras" icon="fa fa-fw fa-folder-open-o" >
+            <p:menuitem value="Leituras Atuais" url="/paginas/normal/livro/livro-list-manager.xhtml" icon="fa fa-fw fa-list" />
         </p:submenu>
          
-        <p:submenu label="Admim" icon="ui-icon-gear"  rendered="#{sessionMB.pessoaLogado.isAdm()}">
-            <p:submenu label="Configurações" icon="fa fa-fw fa-wrench" >
+        <p:submenu label="Admim" icon="fa fa-fw fa-cog"  rendered="#{sessionMB.ADM}">
+            <p:submenu label="Configurações" icon="fa fa-fw fa-wrench" rendered="#{sessionMB.ADM}">
                 		<p:menuitem value="Login" url="/paginas/adm/pessoa-list.xhtml" icon="fa fa-fw fa-user"/>
                 		<p:menuitem value="Livros - Publicos " url="/paginas/normal/livros-publicos-list.xhtml" icon="fa fa-fw fa-align-justify"/>
-                		<p:menuitem value="Dashbord" url="/paginas/adm/dashboard.xhtml" icon="fa fa-fw fa-align-justify"/>			
+                		<p:menuitem value="Dashbord" url="/paginas/adm/dashboard.xhtml" icon="fa fa-fw fa-dashboard"/>			
                 		<p:menuitem value="Leituras - geral " url="#" icon="fa fa-fw fa-bookmark"/>
                 	</p:submenu>
                 <p:menuitem value="Cadastros de Livros"  icon="fa fa-fw fa-table" />
-                <p:menuitem value="Relatorios"  icon="fa fa-fw fa-file-excel-o" />
+                <p:menuitem value="Relatorios" url="/paginas/adm/livro-todos-adm.xhtml"	icon="fa fa-fw fa-file-excel-o" />
             </p:submenu>
             <p:menuitem value="?" action="sobre-sistema.xhtml?faces-redirect=true" style="padding-right: 50px;"/>
          <f:facet name="options">
          		<o:graphicImage value="#{sessionMB.imagemUsuarioSecao}" height="50px" width="50px"/> 
          		
-            <p:commandButton type="button" value="Logout" icon="fa fa-fw fa-log-out" />
+            <p:commandButton  value="Logout" action="#{sessionMB.sair()}" icon="fa fa-fw fa-sign-out" />
         </f:facet>  
 	</p:menubar>
     </h:form> 

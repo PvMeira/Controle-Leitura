@@ -52,10 +52,6 @@
 		<filter-name>facesExceptionFilter</filter-name>
 		<filter-class>org.omnifaces.filter.FacesExceptionFilter</filter-class>
 	</filter>
-	<filter-mapping>
-		<filter-name>facesExceptionFilter</filter-name>
-		<servlet-name>facesServlet</servlet-name>
-	</filter-mapping>
 
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>

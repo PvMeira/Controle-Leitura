@@ -59,7 +59,7 @@
 						cols="30" 
 						style=" width:600px; height:90px;"
 						counter="display" 
-						maxlength="100" 
+						maxlength="300" 
 						counterTemplate="{0} characters remaining." 
 						autoResize="false" />
 					<p:outputLabel/>
@@ -78,8 +78,10 @@
                      sizeLimit="10485760"  />
                   <p:message for="idUpload" />
                   </p:panelGrid>
-                  <p:selectBooleanCheckbox 
-                      value="#{livroMB.tornarpublico}"/>	   
+                <p:outputLabel value="Tornar livro público" for="value1"/>
+				<p:selectBooleanButton id="value1"  value="#{livroMB.tornarpublico}" onLabel="Não" offLabel="Sim" 
+				style="width:60px"/>
+				      
                  <p:commandLink 
                 	  id="InfoModal" 
                 	  value=" ? "
@@ -92,7 +94,7 @@
 					onstart="#{livroMB.carregarArquivo()}"
 					action="#{livroMB.salvar()}"
 					ajax="false"
-					icon="fa fa-fw fa-check"  
+					icon="fa fa-fw fa-floppy-o"  
 					value="Salvar" />
 					
 					<p:commandButton 
@@ -105,15 +107,15 @@
 		</b:panel>
 		<!-- Modal que mostra as informações sobre tornar publico o livro -->
 		<p:dialog
-		id="idModalInfo"
-		widgetVar="modalInfo"
-		closable="true"
-		appendTo="@(body)"
-		header="Informações"
-		modal="false"
-		resizable="true"
-		width="507px;"
-		height="92px;">
+				id="idModalInfo"
+				widgetVar="modalInfo"
+				closable="true"
+				appendTo="@(body)"
+				header="Informações"
+				modal="false"
+				resizable="true"
+				width="507px;"
+				height="92px;">
 		Ao selecionar essa checkbox, voce concorda em publicar este livro na comunidade, dando acesso á ele <br/>
 			ser acessado por qualquer um que entre na aba  :Nova Leitura > Públicos.	
 		</p:dialog>

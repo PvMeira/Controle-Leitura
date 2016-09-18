@@ -46,6 +46,8 @@ public class SessionMB implements Serializable {
 	private Pessoa usuarioSecao;
 	private byte[] imagemUsuarioSecao;
 	
+	private boolean ADM;
+	
 	private static final String SEM_USUARIO = "Sem Usuario";
 
 	@Inject
@@ -67,11 +69,13 @@ public class SessionMB implements Serializable {
 				if (pessoaED.isAdm() == true) {
 					ses.setAttribute("userADM", pessoa);
 					ses.setAttribute("user", pessoa);
+					this.isAdm();
 					this.getImagemUser();
 					return "adm/pessoa-form.xhtml?faces-redirect=true";
 				} else if (pessoaED.isNormal() == true) {
 					ses.setAttribute("userNORMAL", pessoa);
 					ses.setAttribute("user", pessoa);
+					this.isAdm();
 					this.getImagemUser();
 					return "normal/livro/livro-list-manager.xhtml?faces-redirect=true";
 				}
@@ -88,37 +92,10 @@ public class SessionMB implements Serializable {
 			Pessoa pesLogada= (Pessoa) ses.getAttribute("user");
 			if(pesLogada.getFotoUser() != null){
 	         this.imagemUsuarioSecao = pesLogada.getFotoUser();
-			}else{
-				this.imagemUsuarioSecao = this.converteFileToByteArray();
 			}
 	    }
 	  
-	  	private  byte[] converteFileToByteArray() {
-			File f = new File("C:/devHome/workspace/WIR-WEBII-Project/WIR/WebContent/resources/imagens/iconeUser.png");
-			FileInputStream fs = null;
-			try {
-				fs = new FileInputStream(f);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			byte[] byt = new byte[(int) f.length()];
-			for (int i = 0; i < f.length(); i++) {
-				try {
-					byt[i] = (byte) fs.read();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			try {
-				fs.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return byt;
-		}
+
 	
 	/**
 	 * Retorna o username da pessoa logada na seção
@@ -133,6 +110,15 @@ public class SessionMB implements Serializable {
 			return SEM_USUARIO ;
 		}
 		
+	}
+	private  void isAdm(){
+		HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Pessoa pesLogada= (Pessoa) ses.getAttribute("user");
+		if(pesLogada.isAdm() == true){
+			this.ADM = Boolean.TRUE;
+		}else{
+			this.ADM = Boolean.FALSE;
+		}
 	}
 	
 	
@@ -265,6 +251,18 @@ public class SessionMB implements Serializable {
 	 */
 	public void setImagemUsuarioSecao(byte[] imagemUsuarioSecao) {
 		this.imagemUsuarioSecao = imagemUsuarioSecao;
+	}
+	/**
+	 * @return the aDM
+	 */
+	public boolean isADM() {
+		return ADM;
+	}
+	/**
+	 * @param aDM the aDM to set
+	 */
+	public void setADM(boolean aDM) {
+		ADM = aDM;
 	}
 
 
