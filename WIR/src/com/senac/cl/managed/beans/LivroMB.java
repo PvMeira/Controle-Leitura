@@ -65,6 +65,9 @@ public class LivroMB {
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro salvo com sucesso!");
 		limpar();
 	}
+	public void editarLivro(){
+		livroService.atualizar(this.getLivro());
+	}
 
 	/**
 	 * Salva uma nova leitura apartir do livro seleciona inline

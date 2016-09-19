@@ -2,13 +2,14 @@ package com.senac.cl.modelos;
 
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -30,7 +31,7 @@ public class Livro {
 	private Long idLivro;
 
 	@NotNull
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
 	private Pessoa dono;
 

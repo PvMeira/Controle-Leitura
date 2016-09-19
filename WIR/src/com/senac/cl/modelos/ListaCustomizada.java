@@ -3,8 +3,10 @@ package com.senac.cl.modelos;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,12 +33,12 @@ public class ListaCustomizada {
 	private Long idListaCustomizada;
 
 	@NotNull
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
 	private Pessoa pessoa;
 
 	@NotNull
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_lista_customizada", 
 		joinColumns =@JoinColumn(name="id_livro"), 
 			inverseJoinColumns=@JoinColumn(name="id_lista_customizada"))

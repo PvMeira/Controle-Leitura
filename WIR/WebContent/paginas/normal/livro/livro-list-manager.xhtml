@@ -70,6 +70,9 @@
 									</p:column>
 
 									<p:column headerText="Ação" style="text-align:center">
+										<p:commandButton action="#{livroMB.populaObservacaoParaModal(livro)}" 
+										icon="fa fa-fw fa-edit" id="editButtonLivro" 
+										oncomplete="PF('editarLivro').show();"/>
 
 										<!-- Botao para modal Resumo -->
 										<p:commandLink id="comandLinkModalResumo"
@@ -237,6 +240,9 @@
 			<ui:include src="/paginas/normal/livro/livro-modal-novaLeitura.xhtml"/>
 			<!-- Modal Resumo -->
 			<ui:include src="/paginas/normal/livro/livro-modal-resumo.xhtml" />
+			
+			<!-- Modal Edit Livro -->
+			<ui:include src="/paginas/normal/livro/modal-edit-livro.xhtml" />
 		<!-- Imports TAB 02 -->
 		
 			<!-- Modal para visualizar anotação -->
@@ -258,7 +264,6 @@
 			</p:confirmDialog>
 		<!-- Imports TAB 03 -->
 		<!-- Modal Criar Lista Personalizada para livros -->
-				<ui:include src="/paginas/normal/livro/livros-personalizados-modal.xhtml" />
-				
+		<ui:include src="/paginas/normal/livro/livros-personalizados-modal.xhtml" />
 	</ui:define>
 </ui:composition>
