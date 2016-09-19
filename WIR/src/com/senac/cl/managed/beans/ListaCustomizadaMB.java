@@ -30,7 +30,9 @@ public class ListaCustomizadaMB {
 	public tipoListaCustomizada[] getTipoLista() {
 		return tipoListaCustomizada.values();
 	}
-
+	public List<ListaCustomizada>listarTodasListasCustomizadasDoSistema(){
+		return this.listaCustomizadaService.listarTodasListadasCustumizadasDoSistema();
+	}
 
 	public List<ListaCustomizada> listarTodasListasCustomizadas() {
 		return this.listaCustomizadaService.listarListasCustomizadas();

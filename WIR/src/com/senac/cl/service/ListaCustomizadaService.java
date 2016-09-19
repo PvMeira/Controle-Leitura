@@ -62,6 +62,9 @@ public class ListaCustomizadaService {
 			}
 		}
 	}
+	public List<ListaCustomizada> listarTodasListadasCustumizadasDoSistema(){
+		return this.listaCustomizadaRepository.todosOsRegistros();
+	}
 
 	public List<ListaCustomizada> listarListasCustomizadas() {
 		Pessoa user = (Pessoa) ses.getAttribute("user");
