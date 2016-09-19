@@ -174,7 +174,7 @@
 							paginator="true"
 							rows="20" 
 							paginatorAlwaysVisible="true">
-							 	   <p:column>
+							 	<p:column>
          						 	 <p:rowToggler/>
          						  </p:column>
 								<p:column headerText="Nome Lista" style="text-align:center">
@@ -194,17 +194,18 @@
 								<p:column headerText="Criador" style="text-align:center">
 									<h:outputText value="#{listaCustom.pessoa.nome}"/>
 								</p:column>
+								<p:column>
+									<p:commandButton id="buttonDeleteList"  icon="fa fa-fw fa-trash"/>
+								</p:column>
 						 <p:rowExpansion >
+						 							<!-- SUBTABELA -->
 						 	<p:subTable id="subListaCustom" value="#{listaCustom.livro}" var="subLista">
-						 	
 						 		<p:column  style="text-align:center" footerText="Nome">
 									<h:outputText value="#{subLista.titulo}"/>	
 								</p:column>
-								
 								<p:column  style="text-align:center" footerText="Autor">
 									<h:outputText value="#{subLista.autor}"/>	
 								</p:column>
-								
 								<p:column  style="text-align:center" footerText="Pontuação">
 									<p:rating value="#{subLista.pontuacao}" cancel="false" id="idPontuacao" />
 								</p:column>
