@@ -7,6 +7,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import com.senac.cl.modelos.ListaCustomizada;
 import com.senac.cl.modelos.Livro;
 import com.senac.cl.modelos.Pessoa;
 import com.senac.cl.repository.LivroRepository;
@@ -16,6 +17,9 @@ public class LivroService {
 
 	@Inject
 	LivroRepository livroRepository;
+	
+	@Inject
+	ListaCustomizadaService listaCustomizadaService;
 
 	private HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	
@@ -115,8 +119,22 @@ public class LivroService {
 	 */
 	@Transactional
 	public void deletar(Livro livro) {
+		this.verificaExisteListaCustomizada(livro);
 		livroRepository.deletar(livro);
 
+	}
+	private void verificaExisteListaCustomizada(Livro ed){
+		List<ListaCustomizada> lista = listaCustomizadaService.listarListasCustomizadas();
+		if(lista != null){
+			for (ListaCustomizada listaCustomizada : lista) {
+				List<Livro> livro = listaCustomizada.getLivro();
+				for (Livro livro2 : livro) {
+					if(livro2.equals(ed)){
+						this.listaCustomizadaService.removeListaCustomizadaPeloLivro(listaCustomizada);
+					}
+				}
+			}
+		}
 	}
 	
 	/**
