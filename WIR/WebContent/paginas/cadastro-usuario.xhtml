@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<html   xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:h="http://java.sun.com/jsf/html"
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:p="http://primefaces.org/ui" 
 		xmlns:b="http://bootsfaces.net/ui"
 		xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:o="http://omnifaces.org/ui">
+        xmlns:o="http://omnifaces.org/ui"
+        template="/WEB-INF/modelo/padrao-login.xhtml">
 <h:head>
  <title>Cadastro</title>
-<h:outputStylesheet library="styles" name="primefacesOverride.css" />
-<h:outputStylesheet library="styles" name="wir-style.css" />
 </h:head>		
  <style type="text/css">
-	 .form-signin {
+	 .form-newUser {
 	      margin: 0 auto;
 	      max-width: 830px;
 	      padding: 35px;
 	      
 	 }
 </style>
-<h:body style="padding-top: 60px;">
-     	<p:panel id="basic" header="Registro - novo usuário"  style="margin-bottom:20px" styleClass="form-signin">
+<ui:define name="centerLogin">
+     	<p:panel id="basic" header="Registro - novo usuário"  style="margin-bottom:20px" styleClass="form-newUser">
 		<h:form id="pessoaForm">
-		
 			<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
 				<p:panelGrid columns="3" cellpadding="5">
 				
@@ -69,14 +67,12 @@
 		               <p:commandButton type="button" value="Usar webcam" onclick="PF('pc').capture()" rendered="#{not empty photoCamView.filename}"/>
 				</p:panelGrid>
 				<p:panelGrid columns="3" cellpadding="5">
-					<p:commandButton value="Salvar"  
-					id="savePessoaButton" icon="fa fa-fw fa-floppy-o" action="#{pessoaMB.salvar()}" oncomplete="Login.xhtml?faces-redirect=true" update="@form" />
+					<p:commandButton value="Salvar"   id="savePessoaButton" icon="fa fa-fw fa-floppy-o" action="#{pessoaMB.salvar()}" oncomplete="Login.xhtml?faces-redirect=true" update="@form" />
 					<b:column span="1" />
-					<p:commandButton value="Limpar" 
-					process="@this" icon="fa fa-fw fa-eraser" id="cleanPessoaButton" action="#{pessoaMB.limpar()}" update="@form" ajax="false"/>
+					<p:commandButton value="Limpar" process="@this" icon="fa fa-fw fa-eraser" id="cleanPessoaButton" action="#{pessoaMB.limpar()}" update="@form" ajax="false"/>
 				</p:panelGrid>
 			
 			</h:form>
 		</p:panel> 
-</h:body>
-</html>
+</ui:define>
+</ui:composition>

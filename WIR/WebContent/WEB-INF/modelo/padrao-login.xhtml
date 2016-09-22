@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:o="http://omnifaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Controle de Leitura</title>
+	<h:outputStylesheet library="styles" name="primefacesOverride.css" />
+	<h:outputStylesheet library="styles" name="wir-style.css" />
+<style type="text/css">
+
+.ui-widget {
+    font-size: 1.00em;
+}
+
+</style>
+</h:head>
+<h:form id="idFormMenu" prependId="false">
+ <p:menubar autoDisplay="true" styleClass="menubarAplicacao" id="menuBarAplicatio">
+      
+	</p:menubar>
+    </h:form> 
+    		    
+ <br />
+ <br />
+  <p:sticky target="menuBarAplicatio" />
+<h:body>
+		<ui:insert name="centerLogin">
+		</ui:insert>
+	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+		  <h:graphicImage value="/resources/ajax/ajax-loader.gif" height="50px" width="50px"/>  
+	</p:dialog>
+</h:body>
+</html>
