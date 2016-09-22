@@ -36,6 +36,7 @@ public class LivroMB {
 
 	private Livro livro;
 	private Livro livroParaTransferir;
+	private Livro livroEdit;
 	private List<Livro> livrosPessoaLogada;
 	private List<Livro> livrosSelecionados;
 
@@ -66,7 +67,8 @@ public class LivroMB {
 		limpar();
 	}
 	public void editarLivro(){
-		livroService.atualizar(this.getLivro());
+		livroService.atualizar(this.getLivroEdit());
+		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro alterado com sucesso!");
 	}
 
 	/**
@@ -239,7 +241,9 @@ public class LivroMB {
 		return this.leituraService.buscaLeituraPeloId(ed);
 
 	}
-
+	public void populaLivroEdicao(Livro ed){
+		this.livroEdit = ed;
+	}
 	/**
 	 * popula a string de observação que sera usada na modal de observação
 	 */
@@ -420,6 +424,20 @@ public class LivroMB {
 	 */
 	public void setLivroParaTransferir(Livro livroParaTransferir) {
 		this.livroParaTransferir = livroParaTransferir;
+	}
+
+	/**
+	 * @return the livroEdit
+	 */
+	public Livro getLivroEdit() {
+		return livroEdit;
+	}
+
+	/**
+	 * @param livroEdit the livroEdit to set
+	 */
+	public void setLivroEdit(Livro livroEdit) {
+		this.livroEdit = livroEdit;
 	}
 
 }

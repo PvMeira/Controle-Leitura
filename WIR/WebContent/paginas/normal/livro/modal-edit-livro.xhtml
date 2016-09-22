@@ -17,29 +17,25 @@
 		resizable="false">
 			<h:form id="formEditarLivro" prependId="false">
 				<p:panelGrid columns="2">
-					<p:commandButton ajax="false" 	
+					<p:commandButton 	
 						icon="fa fa-fw fa-check"  
 						value="Salvar" 
 						action="#{livroMB.editarLivro()}"
 						process="@this"
 						oncomplete="editarLivro.hide(); updateTabelaLivro();"/>
 					
-					<p:commandButton ajax="false"
-						icon="fa fa-fw fa-ban"
-						value="Fechar" 
-						action="#{livroMB.limpar()}"
-						oncomplete="novaLeituraLista.hide()"/>
+					
 				</p:panelGrid>
 					<p:separator style="width:500px"/>
 				<p:panelGrid columns="2">
 				<p:outputLabel value="Titulo" for="inputTitulo"/>
-					<h:inputText value="#{livroMB.livro.titulo}" id="inputTitulo"/>
+					<h:inputText value="#{livroMB.livroEdit.titulo}" id="inputTitulo"/>
 				
 				<p:outputLabel value="Autor" for="inputAutor"/>
-					<h:inputText value="#{livroMB.livro.autor}" id="inputAutor"/>
+					<h:inputText value="#{livroMB.livroEdit.autor}" id="inputAutor"/>
 				
 				<p:outputLabel value="Páginas" for="inputPag"/>
-					<h:inputText value="#{livroMB.livro.paginas}" id="inputPag"/>
+					<h:inputText value="#{livroMB.livroEdit.paginas}" id="inputPag"/>
 				
 				</p:panelGrid>	
 			</h:form>

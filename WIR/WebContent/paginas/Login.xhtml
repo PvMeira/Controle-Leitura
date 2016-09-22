@@ -1,65 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:b="http://bootsfaces.net/ui">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui" 
+		xmlns:b="http://bootsfaces.net/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:o="http://omnifaces.org/ui">
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="styles" name="primefacesOverride.css" />
-	<h:outputStylesheet library="styles" name="wir-style.css" />
-</h:head>
-<h:body>
-<style>
-<!--
-.panel-body {
-    padding: 55px;
-}
--->
-</style>
-<h:form id="loginForm">
-  <b:container layout="fluid">
-  <br/>
-  <br/>
-  <br/>
-    <b:panel title="Tela de Login" collapsible="false" style="margin-right:100px;">
-      <b:row>
-        <b:column medium-screen="2">
-          <h:outputText value="Username:" for="username" />
-        </b:column>
-        <b:column medium-screen="4">
-          <b:inputText placeholder="Username" id="username" value="#{sessionMB.usernameLogin}"
-                       ajax="true" autocomplete="false" >
-            <f:facet name="prepend">
-              <b:icon name="user" />
-            </f:facet>
-          </b:inputText>
-        </b:column>
-      </b:row>
-      <b:row>
-        <b:column medium-screen="2">
-          <h:outputText value="Password:" />
-        </b:column>
-        <b:column medium-screen="4">
-          <b:inputSecret placeholder="Password" id="password" value="#{sessionMB.passwordLogin}"
-                         ajax="true" autocomplete="false">
-            <f:facet name="prepend">	
-              <b:iconAwesome name="key" />
-            </f:facet>
-          </b:inputSecret>
-        </b:column>
-      </b:row>
-      <b:row>
-        <b:column span="2" offset="2">
-          <b:commandButton value="login"  action="#{sessionMB.entrar()}" look="primary"
-            style="width:100%" />
-        </b:column>
+ <title>Controle de Leitura - Login</title>
+<h:outputStylesheet library="styles" name="primefacesOverride.css" />
+<h:outputStylesheet library="styles" name="wir-style.css" />
+</h:head>		
+ <style type="text/css">
+            .form-signin {
+                margin: 0 auto;
+                max-width: 330px;
+                padding: 15px;
+            }
        
-      </b:row>
-    </b:panel>
-  </b:container>
-</h:form>
+</style>
+<h:body style="padding-top: 60px;">
+        <b:container>
+            <h:form styleClass="form-signin" prependId="false">
+                <h2 class="form-signin-heading">Faça seu Login</h2>
+                <b:inputText id="email" placeholder="Email address" value="#{sessionMB.usernameLogin}">
+                    <f:facet name="prepend">
+                        <b:icon name="user" />
+                    </f:facet>
+                </b:inputText>
+                <b:inputText id="password" placeholder="Password" type="password" value="#{sessionMB.passwordLogin}">
+                    <f:facet name="prepend">
+                        <b:iconAwesome name="key" />
+                    </f:facet>
+                </b:inputText>
+                <h:panelGrid columns="1">
+                	<b:selectBooleanCheckbox value="true" caption="remember me"/>
+                		<p:commandLink id="redirectLink" value="Sem conta? Cadastre-se Agora" 
+                		action="cadastro-usuario.xhtml?faces-redirect=true"/>
+                </h:panelGrid>
+                <b:commandButton look="primary btn-block" value="Sign In" action="#{sessionMB.entrar()}" icon="log-in" size="lg"/>
+            </h:form>
+        </b:container>
 </h:body>
 </html>

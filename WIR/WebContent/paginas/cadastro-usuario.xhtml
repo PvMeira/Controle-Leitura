@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui" 
+		xmlns:b="http://bootsfaces.net/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:o="http://omnifaces.org/ui">
+<h:head>
+ <title>Cadastro</title>
+<h:outputStylesheet library="styles" name="primefacesOverride.css" />
+<h:outputStylesheet library="styles" name="wir-style.css" />
+</h:head>		
+ <style type="text/css">
+	 .form-signin {
+	      margin: 0 auto;
+	      max-width: 830px;
+	      padding: 35px;
+	      
+	 }
+</style>
+<h:body style="padding-top: 60px;">
+     	<p:panel id="basic" header="Registro - novo usuário"  style="margin-bottom:20px" styleClass="form-signin">
+		<h:form id="pessoaForm">
+		
+			<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
+				<p:panelGrid columns="3" cellpadding="5">
+				
+					<p:outputLabel value="Nome: " for="nome" styleClass="outputlabel" id="outLabelNome"/>
+					<p:inputText value="#{pessoaMB.pessoa.nome}" id="nome"
+						required="true" requiredMessage="Campo Obrigatório" placeholder="nome"/>
+					<p:message for="nome" />
+					
+					<p:outputLabel value="Login" for="login" styleClass="outputlabel" id="outlabelLogin"/>
+					<p:inputText value="#{pessoaMB.pessoa.username}" id="login"
+						required="true" requiredMessage="Campo Obrigatório" placeholder="login" />
+					<p:message for="login" />
+					
+					<p:outputLabel value="Senha:" for="senha" styleClass="outputlabel" id="outLabelLogin"/>
+					<p:password value="#{pessoaMB.pessoa.password}" id="senha"
+						required="true" requiredMessage="Campo Obrigatório"
+						placeholder="Senha"/>
+					<p:message for="senha" />
+					
+					<p:outputLabel value="E-Mail: " for="mail" styleClass="outputlabel" id="outLabelMail"/>
+					<p:inputText value="#{pessoaMB.pessoa.mail}" id="mail"
+						required="true" requiredMessage="Campo Obrigatório" placeholder="E-Mail" />
+					<p:message for="mail" />
+					
+					<p:outputLabel value="CPF: " for="cpf" styleClass="outputlabel" id="outLabelCpf"/>
+					<p:inputText value="#{pessoaMB.pessoa.cpf}" id="cpf"
+						required="true" requiredMessage="Campo Obrigatório"
+						placeholder="CPF" />
+					<p:message for="cpf" />
+					
+					<p:outputLabel value="Fone:" for="fone" styleClass="outputlabel" id="outLabelFone"/>
+					<p:inputText value="#{pessoaMB.pessoa.telefone}" id="fone"
+						required="true" requiredMessage="Campo Obrigatório" placeholder="Telefone" />
+					<p:message for="fone" />
+					<p:outputLabel value="Escolha uma Foto:" for="idUpload"/>
+						<p:fileUpload 
+	    				 id="idUpload"
+	    				 fileUploadListener="#{pessoaMB.carregarArquivo}" 
+	    				 mode="advanced"
+	                     auto="true" 
+	                     sizeLimit="10485760"  />
+	                  <p:message for="idUpload" />
+		               <p:photoCam widgetVar="pc" listener="#{pessoaMB.oncapture}" rendered="#{not empty photoCamView.filename}"/>
+		               <p:commandButton type="button" value="Usar webcam" onclick="PF('pc').capture()" rendered="#{not empty photoCamView.filename}"/>
+				</p:panelGrid>
+				<p:panelGrid columns="3" cellpadding="5">
+					<p:commandButton value="Salvar"  
+					id="savePessoaButton" icon="fa fa-fw fa-floppy-o" action="#{pessoaMB.salvar()}" oncomplete="Login.xhtml?faces-redirect=true" update="@form" />
+					<b:column span="1" />
+					<p:commandButton value="Limpar" 
+					process="@this" icon="fa fa-fw fa-eraser" id="cleanPessoaButton" action="#{pessoaMB.limpar()}" update="@form" ajax="false"/>
+				</p:panelGrid>
+			
+			</h:form>
+		</p:panel> 
+</h:body>
+</html>

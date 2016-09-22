@@ -70,10 +70,12 @@
 									</p:column>
 
 									<p:column headerText="Ação" style="text-align:center">
-										<p:commandButton action="#{livroMB.populaObservacaoParaModal(livro)}" 
-										icon="fa fa-fw fa-edit" id="editButtonLivro" 
-										oncomplete="PF('editarLivro').show();"/>
-
+									<p:commandLink id="commandLinkEdit" 
+									title="Editar livro" oncomplete="PF('editarLivro').show();"
+									action="#{livroMB.populaLivroEdicao(livro)}">
+									
+									<p:graphicImage value="/resources/imagens/edit.png" height="15px" width="15px" />
+									</p:commandLink>
 										<!-- Botao para modal Resumo -->
 										<p:commandLink id="comandLinkModalResumo"
 											title="Visualizar ou Alterar Resumo"
