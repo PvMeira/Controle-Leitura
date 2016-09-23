@@ -1,0 +1,53 @@
+.div_body_classic {
+	position: absolute;
+	margin: 0px;
+	left: 187px;
+	right: 0px;
+	top: 78px;
+	bottom: 0px;
+	/*height: 700px;*/
+	width: 89%;
+	z-index: 0;
+	display: block;
+	visibility: visible;
+	overflow: auto
+}
+
+.div_menu_classic {
+	position: absolute;
+	margin: 0px;
+	left: 0px;
+	right: auto;
+	top: 78px;
+	bottom: 0px;
+	/*height: 440px;*/
+	z-index: 10;
+	width: 174px;
+	display: block;
+	visibility: visible;
+}
+
+.div_head_classic {
+	position: absolute;
+	margin: 0px;
+	top: 0px;
+	bottom: auto;
+	left: 0px;
+	right: 0px;
+	width: auto;
+	z-index: 0;
+	height: 57px;
+	display: block;
+	visibility: visible;
+}
+
+#icons button {
+	display: none !important;
+}
+
+.ui_growl {
+	position: fixed;
+	top: 118px;
+	right: 39px;
+	width: 301px;
+}

@@ -8,59 +8,59 @@
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
 	<ui:define name="center">
-			<p:panel id="basicManagerLivros" header="Meus Livros"  style="margin-bottom:20px">
+			<p:panel id="basicManagerLivros" header="#{msg['label.nome.header.list.manager']}"  style="margin-bottom:20px">
 			<p:tabView dynamic="true" cache="true" >
-				<p:tab title="Meus Livros Atuais ">
+				<p:tab title="#{msg['label.nome.aba.header.list.manager']}">
 					
 					<p:panel id="livrosUsuariosAtuais"  >
 							<h:form prependId="false" id="formListaLivrosUsuario">
 								<p:panelGrid columns="3">
-									<p:splitButton value="Operações em Lote "
+									<p:splitButton value="#{msg['label.nome.slitButton.list.manager']}"
 										style="text-align: center">
-										<p:menuitem style="text-align: center" value="Deletar"
+										<p:menuitem style="text-align: center" value="#{msg['title.remove']}"
 											oncomplete="updateTabelaLivro()"
 											action="#{livroMB.deletarEmLote()}" 
 											icon="fa fa-fw fa-trash" />
-										<p:menuitem style="text-align: center" value="Baixar"
+										<p:menuitem style="text-align: center" value="#{msg['imprimir.zip']}"
 											ajax="false" icon="fa fa-fw fa-arrow-down">
 											<p:fileDownload value="#{livroMB.geradorZip()}" />
 										</p:menuitem>
 									</p:splitButton>
 									<p:commandButton id="buttonNovoLivro"
 										action="livro-form.xhtml?faces-redirect=true"
-										icon="fa fa-fw fa-book" value="Novo Livro" />
+										icon="fa fa-fw fa-book" value="#{msg['title.new.book']}" />
 									<p:commandButton id="buttonNovaLeitura"
 										oncomplete="PF('novaLeituraLista').show();"
-										icon="fa fa-fw fa-leanpub" value="Nova Leitura" />
+										icon="fa fa-fw fa-leanpub" value="#{msg['title.new.reading']}" />
 								</p:panelGrid>
 								<br />
 								<br />
 								<p:dataTable id="listaLivrosUsuario" var="livro"
 									disabledSelection="false"
 									value="#{livroMB.listaLivrosPessoaLogada()}"
-									emptyMessage="Não existe cadastros" rowKey="#{livro.idLivro}"
+									emptyMessage="#{msg['datatable.pageReportTemplete.empty']}" rowKey="#{livro.idLivro}"
 									selection="#{livroMB.livrosSelecionados}" paginator="true"
 									rows="10" draggableColumns="true" paginatorAlwaysVisible="true">
 
 									<p:column selectionMode="multiple"
 										style="width:60px;text-align:center" />
-									<p:column headerText="Titulo" style="text-align:center">
+									<p:column headerText="#{msg['livro.titulo']}" style="text-align:center">
 										<h:outputText value="#{livro.titulo}" />
 									</p:column>
 
-									<p:column headerText="Autor" style="text-align:center">
+									<p:column headerText="#{msg['livro.autor']}" style="text-align:center">
 										<h:outputText value="#{livro.autor}" />
 									</p:column>
 
-									<p:column headerText="Paginas" style="text-align:center">
+									<p:column headerText="#{msg['livro.paginas']}" style="text-align:center">
 										<h:outputText value="#{livro.paginas}" />
 									</p:column>
 
-									<p:column headerText="Status" style="text-align:center">
+									<p:column headerText="#{msg['livro.status']}" style="text-align:center">
 										<h:outputText value="#{livroMB.VerificaStatusLivro(livro)}" />
 									</p:column>
 
-									<p:column headerText="Pontuação" style="text-align:center">
+									<p:column headerText="#{msg['livro.pontuacao']}" style="text-align:center">
 										<p:rating value="#{livro.pontuacao}" cancel="false"
 											id="idPontuacao">
 											<p:ajax event="rate"
@@ -69,10 +69,10 @@
 										</p:rating>
 									</p:column>
 
-									<p:column headerText="Ação" style="text-align:center">
+									<p:column headerText="#{msg['livro.acao']}" style="text-align:center">
 										<!-- Botao para modal Resumo -->
 										<p:commandLink id="comandLinkModalResumo"
-											title="Visualizar ou Alterar Resumo"
+											title="#{msg['livro.resumo']}"
 											action="#{livroMB.populaObservacaoParaModal(livro)}"
 											oncomplete="PF('modalResumo').show();">
 
@@ -80,7 +80,7 @@
 										</p:commandLink>
 										
 										<!-- Botao para downlaod do pdf -->
-										<p:commandLink id="comandLinkDownlod"  ajax="false"  title="Baixar livro">
+										<p:commandLink id="comandLinkDownlod"  ajax="false"  title="#{msg['livro.download']}">
 											<p:fileDownload value="#{livroMB.FileDownloadView(livro)}" />
 											<p:graphicImage value="/resources/imagens/download.png" height="15px" width="15px" />
 										</p:commandLink>
@@ -93,9 +93,9 @@
 											oncomplete="updateTabelaLivro();">
 											<p:graphicImage value="/resources/imagens/livro_lendo.png" height="30px" width="30px" />
 										</p:commandLink>
-										<p:menuButton value="Mais">
-										<p:menuitem value="Editar" oncomplete="PF('editarLivro').show();" action="#{livroMB.populaLivroEdicao(livro)}"/>
-										<p:menuitem value="Deletar"  action="#{livroMB.deletar(livro)}"/>
+										<p:menuButton value="#{msg['title.more']}">
+										<p:menuitem value="#{msg['livro.editar']}" oncomplete="PF('editarLivro').show();" action="#{livroMB.populaLivroEdicao(livro)}"/>
+										<p:menuitem value="#{msg['livro.remover']}"  action="#{livroMB.deletar(livro)}"/>
 										</p:menuButton>
 										
 									</p:column>
@@ -105,7 +105,7 @@
 						</p:panel>
 				
 				</p:tab>
-				<p:tab title="Minhas leituras Atuais">
+				<p:tab title="#{msg['label.nome.aba.header.list.manager.leituras']}">
 					<h:form prependId="false" id="idform02">
 						<p:dataTable id="listaDelivrosAtuais" var="livros"
 							value="#{leituraMB.listaTodasLeiturasPessoaLogada()}"
@@ -164,7 +164,7 @@
 					</h:form>
 
 				</p:tab>
-				<p:tab title="Listas Personalizadas">
+				<p:tab title="#{msg['label.nome.aba.header.list.manager.lista.custom']}">
 					<h:form prependId="false" id="idAbaTresForm">
 
 						<p:commandButton id="idButtonGerarListaCustomizada"

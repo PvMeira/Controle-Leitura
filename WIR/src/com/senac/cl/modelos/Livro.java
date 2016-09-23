@@ -31,7 +31,7 @@ public class Livro {
 	private Long idLivro;
 
 	@NotNull
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
 	private Pessoa dono;
 

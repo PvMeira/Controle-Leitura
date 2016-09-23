@@ -97,6 +97,7 @@ public class LivroService {
 	/**
 	 * verifica Se todos os campo obrigatorios estão preenchidos
 	 */
+	@Transactional
 	private void verificaCampos(Livro livro) {
 		if (livro.getTitulo() == null) {
 			throw new RuntimeException("Campo Autor está nulo");
