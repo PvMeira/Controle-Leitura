@@ -88,7 +88,7 @@
 												<!-- Botao para ler este livro em especifico -->
 										<p:commandLink id="comandLinkLerLivro"
 											rendered="#{livroMB.VerificaStatusLivro(livro) eq 'Livro não Lido' or 'Livro já Lido'}"
-											title="Começar a ler este livro"
+											title="#{msg['livro.nova.leitura']}"
 											action="#{livroMB.iniciarLeituraLivroInline(livro)}"
 											oncomplete="updateTabelaLivro();">
 											<p:graphicImage value="/resources/imagens/livro_lendo.png" height="30px" width="30px" />
@@ -109,23 +109,23 @@
 					<h:form prependId="false" id="idform02">
 						<p:dataTable id="listaDelivrosAtuais" var="livros"
 							value="#{leituraMB.listaTodasLeiturasPessoaLogada()}"
-							rowKey="#{livros.idLeitura}" emptyMessage="Não existe cadastros"
+							rowKey="#{livros.idLeitura}" emptyMessage="#{msg['datatable.pageReportTemplete.empty']}"
 							paginator="true" rows="10" sortMode="multiple"
 							draggableColumns="true" paginatorAlwaysVisible="true">
 
-							<p:column headerText="Titulo" style="text-align:center"
+							<p:column headerText="#{msg['livro.titulo']}" style="text-align:center"
 								sortBy="#{livros.livro.titulo}">
 								<h:outputText value="#{livros.livro.titulo}" />
 							</p:column>
 
-							<p:column headerText="Data de Inicio" style="text-align:center"
+							<p:column headerText="#{msg['leitura.dataInicio']}" style="text-align:center"
 								sortBy="#{livros.dataInicio.time}">
 								<h:outputText value="#{livros.dataInicio.time}">
 									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</h:outputText>
 							</p:column>
 
-							<p:column headerText="Pagina Atual" style="text-align:center"
+							<p:column headerText="#{msg['leitura.paginaAtual']}" style="text-align:center"
 								sortBy="#{livros.paginaAtual}">
 								<p:inplace id="ajaxEdit" editor="true">
 									<p:inputText value="#{livros.paginaAtual}" 
@@ -137,8 +137,8 @@
 								<h:outputText />
 							</p:column>
 
-							<p:column headerText="Ações" style="text-align:center">
-								<p:commandLink id="modalObservacao" title="Abrir observação"
+							<p:column headerText="#{msg['livro.acao']}" style="text-align:center">
+								<p:commandLink id="modalObservacao" title="#{msg['leitura.observacao']}"
 									action="#{leituraMB.leitura.setObservacao(livros.observacao)}"
 									oncomplete="PF('modalLembrete').show();">
 									<p:ajax event="click"
@@ -150,7 +150,7 @@
 									
 							<p:graphicImage url="/resources/imagens/icone_pdf.jpg" style="width: 15px;"/>
 						</p:commandLink>
-								<p:commandLink id="paraLeitura" title="Para a leitura atual"
+								<p:commandLink id="paraLeitura" title="#{msg['leitura.parar']}"
 									action="#{leituraMB.pararLeitura(livros)}"
 									update="listaDelivrosAtuais"
 									oncomplete="updateTabelaLivro();">
@@ -168,33 +168,33 @@
 					<h:form prependId="false" id="idAbaTresForm">
 
 						<p:commandButton id="idButtonGerarListaCustomizada"
-							value="Nova Lista Personalizada" 
+							value="#{msg['leitura.nova']}" 
 							oncomplete="PF('novaLeituraListaModal').show();"/>
 							
 						<p:dataTable id="listaCustomList" var="listaCustom"
 							value="#{listaCustomizadaMB.listarTodasListasCustomizadas()}"
-							emptyMessage="Não existe cadastros"
+							emptyMessage="#{msg['datatable.pageReportTemplete.empty']}"
 							paginator="true"
 							rows="20" 
 							paginatorAlwaysVisible="true">
 							 	<p:column>
          						 	 <p:rowToggler/>
          						  </p:column>
-								<p:column headerText="Nome Lista" style="text-align:center">
+								<p:column headerText="#{msg['listaCustom.nome']}" style="text-align:center">
 									<h:outputText value="#{listaCustom.nomeLista}"/>	
 								</p:column>
-								<p:column headerText="Tipo " style="text-align:center">
+								<p:column headerText="#{msg['listaCustom.tipo']}" style="text-align:center">
 									<h:outputText value="#{listaCustom.tipoLista}"/>	
 								</p:column>
-								<p:column headerText="Livros na lista" style="text-align:center">
+								<p:column headerText="#{msg['listaCustom.livros.lista']}" style="text-align:center">
 									<h:outputText value="#{listaCustom.livro.size()}"/>
 								</p:column>
-								<p:column headerText="Data de Criação" style="text-align:center">
+								<p:column headerText="#{msg['listaCustom.data']}" style="text-align:center">
 									<h:outputText value="#{listaCustom.dataInclusao.time}">
 										<f:convertDateTime pattern="dd/MM/yyyy" />
 									</h:outputText>
 								</p:column>
-								<p:column headerText="Criador" style="text-align:center">
+								<p:column headerText="#{msg['listaCustom.criador']}" style="text-align:center">
 									<h:outputText value="#{listaCustom.pessoa.nome}"/>
 								</p:column>
 								<p:column>
@@ -203,13 +203,13 @@
 						 <p:rowExpansion >
 						 							<!-- SUBTABELA -->
 						 	<p:subTable id="subListaCustom" value="#{listaCustom.livro}" var="subLista">
-						 		<p:column  style="text-align:center" footerText="Nome">
+						 		<p:column  style="text-align:center">
 									<h:outputText value="#{subLista.titulo}"/>	
 								</p:column>
-								<p:column  style="text-align:center" footerText="Autor">
+								<p:column  style="text-align:center">
 									<h:outputText value="#{subLista.autor}"/>	
 								</p:column>
-								<p:column  style="text-align:center" footerText="Pontuação">
+								<p:column  style="text-align:center">
 									<p:rating value="#{subLista.pontuacao}" cancel="false" id="idPontuacao" />
 								</p:column>
 						 	</p:subTable>
@@ -229,11 +229,11 @@
 				height="40px"
 				global="true"
 				closable="true"
-				header="Deseja deletar deletar esse livro?"
-				message="Clique em Sim para deletar esse livro dos seus livros, ou cancelar para sair"
+				header="#{msg['lista.modal.excluir.header']}"
+				message="#{msg['lista.modal.excluir.message']}"
 			closeOnEscape="false">
-			<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-	        <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="  float: right;"/>
+			<p:commandButton value="#{msg['lista.modal.excluir.button.sim']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        <p:commandButton value="#{msg['lista.modal.excluir.button.cancelar']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="  float: right;"/>
 			
 			</p:confirmDialog>	
 			<!-- Modal para realizar nova Leitura -->
@@ -255,11 +255,11 @@
 				height="40px"
 				global="true"
 				closable="true"
-				header="Deseja Parar a Leitura?"
-				message="Para para a leitura desse livro clique em Sim ou em Cancelar para fechar esta janela"
+				header="#{msg['lista.modal.parar.leitura.header']}"
+				message="#{msg['lista.modal.parar.leitura.message']}"
 				closeOnEscape="false">
-					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-	       			<p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="  float: right;"/>
+					<p:commandButton value="#{msg['lista.modal.excluir.button.sim']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	       			<p:commandButton value="#{msg['lista.modal.excluir.button.cancelar']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="  float: right;"/>
 			
 			</p:confirmDialog>
 		<!-- Imports TAB 03 -->

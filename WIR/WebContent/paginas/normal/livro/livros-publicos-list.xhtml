@@ -9,24 +9,24 @@
 	xmlns:pe="http://primefaces.org/ui/extensions" >
 
 	<ui:define name="center">
-	<p:panel id="basicManagerLivrosPublicos" header="Livros Públicos"  style="margin-bottom:20px">
+	<p:panel id="basicManagerLivrosPublicos" header="#{msg['livro.list.publico']}"  style="margin-bottom:20px">
 			<h:form prependId="false" id="livrosPublicosForm">
 				<p:panelGrid columns="3">
-					<p:splitButton value="Operações em Lote "
+					<p:splitButton value="#{msg['label.nome.slitButton.list.manager']}"
 						style="text-align: center">
-						<p:menuitem style="text-align: center" value="Baixar" ajax="false"
+						<p:menuitem style="text-align: center" value="#{msg['imprimir.zip']}" ajax="false"
 							icon="fa fa-fw fa-arrow-down">
 							<p:fileDownload value="#{livroMB.geradorZip()}" />
 						</p:menuitem>
 						<p:menuitem style="text-align: center" 
 						id="idTransferirLivroPublicosPrivado"
-						value="Copiar para meu livros" 
+						value="#{msg['livro.list.publico.copiar']}" 
 						icon="fa fa-fw fa-copy"
 						action="#{livroMB.copiarLivrosPublicosParaContaUsuarioEmLote()}">
 						
 						</p:menuitem>
 					</p:splitButton>
-				<p:outputLabel value="Adicione seu livro a essa lista !"/>
+				<p:outputLabel value="#{msg['livro.list.publico.adicionar']}"/>
 				<p:commandButton 
 					id="idButtonTransferirPublico"
 					icon="fa fa-fw fa-plus"
@@ -42,7 +42,7 @@
 					value="#{livroMB.listaLivrosPublicos()}"
 					selection="#{livroMB.livrosSelecionados}"
 					rowKey="#{livros.idLivro}"
-					emptyMessage="Não existe cadastros" 
+					emptyMessage="#{msg['datatable.pageReportTemplete.empty']}" 
 					paginator="true" 
 					rows="10"
 					sortMode="multiple"
@@ -50,20 +50,20 @@
 					paginatorAlwaysVisible="true" >
 					
 					<p:column selectionMode="multiple" style="width:60px;text-align:center"/>	
-					<p:column headerText="Titulo" style="text-align:center">
+					<p:column headerText="#{msg['livro.titulo']}" style="text-align:center">
 						<h:outputText value="#{livros.titulo}"/>
 					</p:column>
 					
-					<p:column headerText="Autor" style="text-align:center">
+					<p:column headerText="#{msg['livro.autor']}" style="text-align:center">
 						<h:outputText value="#{livros.autor}"/>
 					</p:column>
 					
-					<p:column headerText="Paginas" style="text-align:center">
+					<p:column headerText="#{msg['livro.paginas']}" style="text-align:center">
 						<h:outputText value="#{livros.paginas}" 
 									  title="#{livroMB.getHintColaborador(livros)}"/>
 					</p:column>
 					
-					<p:column headerText="Colaborador" style="text-align:center" >
+					<p:column headerText="#{msg['livro.list.publico.colaborador']}" style="text-align:center" >
            			<h:outputText value="#{livros.dono.nome}"/>
 					</p:column>
 					
@@ -71,7 +71,7 @@
 
 						<!-- Botao para downlaod do pdf -->
 						<p:commandLink id="comandLinkDownlodPublico" ajax="false"
-							title="Baixar livro">
+							title="#{msg['livro.list.publico.download']}">
 							<p:fileDownload value="#{livroMB.FileDownloadView(livros)}" />
 							<p:graphicImage value="/resources/imagens/download.png"
 								height="15px" width="15px" />
@@ -80,7 +80,7 @@
 						<!-- Botao Transferir livro publico -->
 						<p:commandLink 
 							id="comandLinkTransferirPublico" 
-							title="Transferir livro"
+							title="#{msg['livro.list.publico.transferir']}"
 							onstart="showStatus()" oncomplete="hideStatus()" 
 							action="#{livroMB.copiarLivrosPublicosParaContaUsuario(livros)}">
 							<p:graphicImage value="/resources/imagens/pasta.png"

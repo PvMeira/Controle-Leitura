@@ -8,54 +8,53 @@
         xmlns:o="http://omnifaces.org/ui"
         template="/WEB-INF/modelo/padrao-login.xhtml">
 <h:head>
- <title>Cadastro</title>
+ <title>#{msg['cadastro.usuario']}</title>
 </h:head>		
  <style type="text/css">
 	 .form-newUser {
 	      margin: 0 auto;
 	      max-width: 830px;
 	      padding: 35px;
-	      
 	 }
 </style>
 <ui:define name="centerLogin">
-     	<p:panel id="basic" header="Registro - novo usuário"  style="margin-bottom:20px" styleClass="form-newUser">
+     	<p:panel id="basic" header="#{msg['cadastro.usuario.header']}"  style="margin-bottom:20px" styleClass="form-newUser">
 		<h:form id="pessoaForm">
 			<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
 				<p:panelGrid columns="3" cellpadding="5">
 				
-					<p:outputLabel value="Nome: " for="nome" styleClass="outputlabel" id="outLabelNome"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.nome']} :" for="nome" styleClass="outputlabel" id="outLabelNome"/>
 					<p:inputText value="#{pessoaMB.pessoa.nome}" id="nome"
 						required="true" requiredMessage="Campo Obrigatório" placeholder="nome"/>
 					<p:message for="nome" />
 					
-					<p:outputLabel value="Login" for="login" styleClass="outputlabel" id="outlabelLogin"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.username']} :" for="login" styleClass="outputlabel" id="outlabelLogin"/>
 					<p:inputText value="#{pessoaMB.pessoa.username}" id="login"
-						required="true" requiredMessage="Campo Obrigatório" placeholder="login" />
+						required="true" requiredMessage="Campo Obrigatório" placeholder="#{pessoaMB.pessoa.username}" />
 					<p:message for="login" />
 					
-					<p:outputLabel value="Senha:" for="senha" styleClass="outputlabel" id="outLabelLogin"/>
-					<p:password value="#{pessoaMB.pessoa.password}" id="senha"
+					<p:outputLabel value="#{msg['cadastro.usuario.password']}" for="senha" styleClass="outputlabel" id="outLabelLogin"/>
+					<p:password value="#{pessoaMB.pessoa.password} :" id="senha"
 						required="true" requiredMessage="Campo Obrigatório"
-						placeholder="Senha"/>
+						placeholder="#{pessoaMB.pessoa.password}"/>
 					<p:message for="senha" />
 					
-					<p:outputLabel value="E-Mail: " for="mail" styleClass="outputlabel" id="outLabelMail"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.mail']} :" for="mail" styleClass="outputlabel" id="outLabelMail"/>
 					<p:inputText value="#{pessoaMB.pessoa.mail}" id="mail"
-						required="true" requiredMessage="Campo Obrigatório" placeholder="E-Mail" />
+						required="true" requiredMessage="Campo Obrigatório" placeholder="#{msg['cadastro.usuario.mail']}" />
 					<p:message for="mail" />
 					
-					<p:outputLabel value="CPF: " for="cpf" styleClass="outputlabel" id="outLabelCpf"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.cpf']} :" for="cpf" styleClass="outputlabel" id="outLabelCpf"/>
 					<p:inputText value="#{pessoaMB.pessoa.cpf}" id="cpf"
 						required="true" requiredMessage="Campo Obrigatório"
-						placeholder="CPF" />
+						placeholder="#{msg['cadastro.usuario.cpf']}" />
 					<p:message for="cpf" />
 					
-					<p:outputLabel value="Fone:" for="fone" styleClass="outputlabel" id="outLabelFone"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.fone']} :" for="fone" styleClass="outputlabel" id="outLabelFone"/>
 					<p:inputText value="#{pessoaMB.pessoa.telefone}" id="fone"
-						required="true" requiredMessage="Campo Obrigatório" placeholder="Telefone" />
+						required="true" requiredMessage="Campo Obrigatório" placeholder="#{msg['cadastro.usuario.fone']}" />
 					<p:message for="fone" />
-					<p:outputLabel value="Escolha uma Foto:" for="idUpload"/>
+					<p:outputLabel value="#{msg[cadastro.usuario.escolher.foto]} :" for="idUpload"/>
 						<p:fileUpload 
 	    				 id="idUpload"
 	    				 fileUploadListener="#{pessoaMB.carregarArquivo}" 
@@ -64,12 +63,14 @@
 	                     sizeLimit="10485760"  />
 	                  <p:message for="idUpload" />
 		               <p:photoCam widgetVar="pc" listener="#{pessoaMB.oncapture}" rendered="#{not empty photoCamView.filename}"/>
-		               <p:commandButton type="button" value="Usar webcam" onclick="PF('pc').capture()" rendered="#{not empty photoCamView.filename}"/>
+		               <p:commandButton type="button" value="#{msg['cadastro.usuario.webCam']}" onclick="PF('pc').capture()" rendered="#{not empty photoCamView.filename}"/>
 				</p:panelGrid>
 				<p:panelGrid columns="3" cellpadding="5">
-					<p:commandButton value="Salvar"   id="savePessoaButton" icon="fa fa-fw fa-floppy-o" action="#{pessoaMB.salvar()}" oncomplete="Login.xhtml?faces-redirect=true" update="@form" />
+					<p:commandButton value="#{msg['title.salvar']}"   id="savePessoaButton" icon="fa fa-fw fa-floppy-o" 
+					action="#{pessoaMB.salvar()}" oncomplete="Login.xhtml?faces-redirect=true" update="@form" />
 					<b:column span="1" />
-					<p:commandButton value="Limpar" process="@this" icon="fa fa-fw fa-eraser" id="cleanPessoaButton" action="#{pessoaMB.limpar()}" update="@form" ajax="false"/>
+					<p:commandButton value="#{msg['title.limpar']}" process="@this" icon="fa fa-fw fa-eraser" id="cleanPessoaButton" 
+					action="#{pessoaMB.limpar()}" update="@form" ajax="false"/>
 				</p:panelGrid>
 			
 			</h:form>

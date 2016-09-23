@@ -12,7 +12,7 @@
 		appendTo="@(body)" 
 		closable="true"
 		draggable="false"
-		header="Anotações"
+		header="#{msg['livro.modal.anotacao']}"
 		width="700px"
 		resizable="false">
 		
@@ -22,7 +22,7 @@
 						id="idButtonModalLembreteSave"
 						ajax="false" 	
 						icon="fa fa-fw fa-check"  
-						value="Salvar" 
+						value="#{msg['title.salvar']}" 
 						action="#{leituraMB.atualizarObservacao()}"
 						process="@this"
 						oncomplete="modalLembrete.hide(); atualizarlistaLeitura();"/>
@@ -31,7 +31,7 @@
 						id="idButtonModalLembrete"
 						ajax="false"
 						icon="fa fa-fw fa-ban"
-						value="Fechar" 
+						value="#{msg['title.fechar']}" 
 						oncomplete="modalLembrete.hide()"/>
 				</p:panelGrid>
 				

@@ -16,29 +16,29 @@
 		<h:form prependId="false" id="dashBoardForm">
 			<p:panel id="basic" header="Administração-DashBaord"  style="margin-bottom:20px">
 				<p:dashboard id="board" model="#{dashboardViewMB.model}">
-					<p:panel id="livros" header="Livros">
-						<h:outputText value="Totais de Livros cadastrados :" />
+					<p:panel id="livros" header="#{msg['dashboard.livros']}">
+						<h:outputText value="#{msg['dashboard.conta.livros.cadastrados']}" />
 						<h:outputText value="#{dashboardViewMB.contaLivrosTotais()}"
 							styleClass="inputNumber" />
 						<p:separator />
-						<h:outputText value="Totais de Livros Públicos cadastrados :" />
+						<h:outputText value="#{msg['dashboard.conta.livros.publicos.cadastrados']}" />
 						<h:outputText
 							value="#{dashboardViewMB.contaLivrosPublicosTotais()}"
 							styleClass="inputNumber" />
 					</p:panel>
-					<p:panel id="usuarios" header="Usuarios">
-						<h:outputText value="Totais de Usuáarios cadastrados :" />
+					<p:panel id="usuarios" header="#{msg['dashboard.usuarios']}">
+						<h:outputText value="#{msg['dashboard.conta.usuarios.cadastrados']}" />
 						<h:outputText value="#{dashboardViewMB.contaPessoasCadastradasAplicacao()}"
 							styleClass="inputNumber" />
 					</p:panel>
 
-					<p:panel id="dados" header="Dados">
-						<h:outputText value="Totais de leituras na aplicação neste momento :" />
+					<p:panel id="dados" header="#{msg['dashboard.dados']}">
+						<h:outputText value="#{msg['dashboard.dados.conta']}" />
 						<h:outputText value="#{dashboardViewMB.contaLeiturasAplicacao()}"
 							styleClass="inputNumber" />
 					</p:panel>
 
-					<p:panel id="extras" header="Extras">
+					<p:panel id="extras" header="#{msg['dashboard.extras']}">
 						<h:outputText value="Conteudo extra do sistema será mostrado aqui" />
 					</p:panel>
 				</p:dashboard>

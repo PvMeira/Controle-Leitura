@@ -12,21 +12,21 @@
 		appendTo="@(body)" 
 		closable="true"
 		draggable="false"
-		header="Nova Leitura"
+		header="#{msg['title.new.reading']}"
 		width="600px"
 		resizable="false">
 			<h:form id="formModalNovaLeitura" prependId="false">
 				<p:panelGrid columns="2">
 					<p:commandButton ajax="false" 	
 						icon="fa fa-fw fa-check"  
-						value="Salvar" 
+						value="#{msg['title.salvar']}" 
 						action="#{leituraMB.salvar()}"
 						process="@this"
 						oncomplete="novaLeituraLista.hide(); updateTabelaLivro();"/>
 					
 					<p:commandButton ajax="false"
 						icon="fa fa-fw fa-ban"
-						value="Fechar" 
+						value="#{msg['title.fechar']}" 
 						oncomplete="novaLeituraLista.hide()"/>
 				</p:panelGrid>
 				
@@ -35,11 +35,11 @@
 				<p:panelGrid columns="2">
 					<p:outputLabel id="labelModalCampo" 
 								   for="autoCompleteModal" 
-								   value="Nome do Livro"/>
+								   value="#{msg['lista.modal.novaLeitura.field']}"/>
 						<p:autoComplete 
 						id="autoCompleteModal" 
 						value="#{leituraMB.livroSelecionado}"
-						placeholder="Digite o nome do livro"
+						placeholder="#{msg['lista.modal.novaLeitura.field']}"
 						completeMethod="#{leituraMB.listarLivrosAutoComplete}"
 						queryDelay="1000"
 						converter="livroConverter"

@@ -12,7 +12,7 @@
 		appendTo="@(body)" 
 		closable="true"
 		draggable="false"
-		header="Tornar livro particular Público"
+		header="#{msg['livro.modal.publico.transferir.header']}"
 		width="600px"
 		resizable="false">
 			<h:form id="formModalTransferencia" prependId="false">
@@ -20,7 +20,7 @@
 					<p:commandButton 
 						ajax="false" 	
 						icon="fa fa-fw fa-check"  
-						value="Transferir" 
+						value="#{msg['livro.modal.publico.transferir.button']}" 
 						action="#{livroMB.transferir()}"
 						process="@this"
 						oncomplete="modalTransferir.hide(); atualizarlistaLeitura();"/>
@@ -28,7 +28,7 @@
 					<p:commandButton 
 						ajax="false"
 						icon="fa fa-fw fa-ban"
-						value="Cancelar" 
+						value="#{msg['lista.modal.excluir.button.cancelar']}" 
 						oncomplete="modalTransferir.hide()"/>
 				</p:panelGrid>
 				
@@ -37,11 +37,11 @@
 				<p:panelGrid columns="2">
 					<p:outputLabel id="labelModalCampo" 
 								   for="autoCompleteModalTranferencia" 
-								   value="Nome do Livro :"/>
+								   value="#{msg['livro.titulo']} :"/>
 						<p:autoComplete 
 						id="autoCompleteModalTranferencia" 
 						value="#{livroMB.livroParaTransferir}"
-						placeholder="Digite o nome do livro"
+						placeholder="#{msg['livro.titulo']}"
 						completeMethod="#{livroMB.listarLivrosAutoCompleteTransferir}"
 						queryDelay="1000"
 						converter="livroConverter"

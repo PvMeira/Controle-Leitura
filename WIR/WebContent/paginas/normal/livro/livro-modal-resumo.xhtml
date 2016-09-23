@@ -12,7 +12,7 @@
 		appendTo="@(body)" 
 		closable="true"
 		draggable="false"
-		header="Resumo"
+		header="#{msg['livro.modal.resumo.header']}"
 		width="600px"
 		resizable="false">
 			<h:form id="formModalResumo" prependId="false">
@@ -20,14 +20,14 @@
 			<p:commandButton 
 				ajax="false"
 				icon="fa fa-fw fa-check"  
-				value="salvar" 
+				value="#{msg['title.salvar']}" 
 				process="@this"
 				action="#{livroMB.atualizaResumoLivro()}"
 				oncomplete="modalResumo.hide(); updateTabelaLivro();"/>
 			<p:commandButton 
 				ajax="false"
 				icon="fa fa-fw fa-ban"
-				value="Fechar" 
+				value="#{msg['title.fechar']}" 
 				oncomplete="modalResumo.hide()"/>
 			</h:panelGrid>	
 			

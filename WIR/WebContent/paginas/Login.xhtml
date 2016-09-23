@@ -7,7 +7,7 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:o="http://omnifaces.org/ui">
 <h:head>
- <title>Controle de Leitura - Login</title>
+ <title>#{msg['login.title']}</title>
 <h:outputStylesheet library="styles" name="primefacesOverride.css" />
 <h:outputStylesheet library="styles" name="wir-style.css" />
 </h:head>		
@@ -22,23 +22,23 @@
 <h:body style="padding-top: 60px;">
         <b:container>
             <h:form styleClass="form-signin" prependId="false">
-                <h2 class="form-signin-heading">Faça seu Login</h2>
-                <b:inputText id="email" placeholder="Email address" value="#{sessionMB.usernameLogin}">
+                <h2 class="form-signin-heading">#{msg['login.header']}</h2>
+                <b:inputText id="email" placeholder="#{msg['cadastro.usuario.username']}" value="#{sessionMB.usernameLogin}">
                     <f:facet name="prepend">
                         <b:icon name="user" />
                     </f:facet>
                 </b:inputText>
-                <b:inputText id="password" placeholder="Password" type="password" value="#{sessionMB.passwordLogin}">
+                <b:inputText id="password" placeholder="#{msg['cadastro.usuario.password']}" type="password" value="#{sessionMB.passwordLogin}">
                     <f:facet name="prepend">
                         <b:iconAwesome name="key" />
                     </f:facet>
                 </b:inputText>
                 <h:panelGrid columns="1">
-                	<b:selectBooleanCheckbox value="true" caption="remember me"/>
-                		<p:commandLink id="redirectLink" value="Sem conta? Cadastre-se Agora" 
+                	<b:selectBooleanCheckbox value="true" caption="#{msg['login.checkBox']}"/>
+                		<p:commandLink id="redirectLink" value="#{msg['login.command.link']}" 
                 		action="cadastro-usuario.xhtml?faces-redirect=true"/>
                 </h:panelGrid>
-                <b:commandButton look="primary btn-block" value="Sign In" action="#{sessionMB.entrar()}" icon="log-in" size="lg"/>
+                <b:commandButton look="primary btn-block" value="#{msg['login.button.logar']}" action="#{sessionMB.entrar()}" icon="log-in" size="lg"/>
             </h:form>
         </b:container>
 </h:body>

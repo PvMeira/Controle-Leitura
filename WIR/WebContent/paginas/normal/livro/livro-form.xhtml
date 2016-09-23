@@ -8,7 +8,7 @@
 	template="/WEB-INF/modelo/padrao.xhtml">
 
 	<ui:define name="center">
-		<p:panel id="basic" header="Cadastro de Livro"  style="margin-bottom:20px">
+		<p:panel id="basic" header="#{msg['livro.form.header']}"  style="margin-bottom:20px">
 			<h:form id="idFormCadastroLivro" prependId="false">
 				<p:growl id="idGrowlCadastroLivro" showDetail="true" sticky="false"
 					life="4000" />
@@ -17,42 +17,42 @@
 					<p:outputLabel id="labelTituloLivro" 
 						for="inputTextTitulo" 
 						styleClass="outputlabel" 
-						value="Título :" />
+						value="#{msg['livro.titulo']} :" />
 					<p:inputText id="inputTextTitulo" 
 						value="#{livroMB.livro.titulo}" 
 						rendered="true" 
 						requiredMessage="Campo Obrigatório" 
-						placeholder="Título"/>
+						placeholder="#{msg['livro.titulo']}"/>
 					<p:message for="inputTextTitulo" />
 					
 					
 					<p:outputLabel id="labelAutorLivro" 
 						for="inputTextAutor" 
 						styleClass="outputlabel" 
-						value="Autor :" />
+						value="#{msg['livro.autor']} :" />
 					<p:inputText id="inputTextAutor" 
 					value="#{livroMB.livro.autor}" 
 						rendered="true" 
 						requiredMessage="Campo Obrigatório" 
-						placeholder="Autor"/>
+						placeholder="#{msg['livro.autor']}"/>
 					<p:message for="inputTextAutor" />
 					
 										
 					<p:outputLabel id="labelAutorPaginas" 
 						for="inputIntPaginas" 
 						styleClass="outputlabel" 
-						value="Paginas :" />
+						value="#{msg['livro.paginas']} :" />
 					<p:inputText id="inputIntPaginas" 
 						value="#{livroMB.livro.paginas}" 
 						rendered="true" 
 						requiredMessage="Campo Obrigatório" 
-						placeholder="Numero de paginas"/>
+						placeholder="#{msg['livro.paginas']}"/>
 					<p:message for="inputIntPaginas" />
 					
 					<p:outputLabel id="labelResumo" 
 						for="inputTextResumo" 
 						styleClass="outputlabel" 
-						value="Resumo :" />
+						value="#{msg['livro.form.resumo']} :" />
 					<p:inputTextarea id="inputTextResumo" 
 						value="#{livroMB.livro.observacao}" 
 						rows="5" 
@@ -69,7 +69,7 @@
 				<p:panelGrid columns="2">
     				<p:fileUpload 
     				 id="idUpload"
-    				 label="Escolher o .PDF"
+    				 label="#{msg['livro.form.upload.pdf']}"
     				 fileUploadListener="#{livroMB.carregarArquivo}" 
     				 mode="advanced"
                      auto="true" 
@@ -78,13 +78,13 @@
                      sizeLimit="10485760"  />
                   <p:message for="idUpload" />
                   </p:panelGrid>
-                <p:outputLabel value="Tornar livro público" for="value1"/>
+                <p:outputLabel value="#{msg['livro.form.publico']}" for="value1"/>
 				<p:selectBooleanButton id="value1"  value="#{livroMB.tornarpublico}" onLabel="Não" offLabel="Sim" 
 				style="width:60px"/>
 				      
                  <p:commandLink 
                 	  id="InfoModal" 
-                	  value=" ? "
+                	  value="#{msg['livro.form.duvida.publico']}"
                 	  style="font-weight: bold;"
  					  oncomplete="PF('modalInfo').show();">
                   </p:commandLink> 
@@ -95,13 +95,13 @@
 					action="#{livroMB.salvar()}"
 					ajax="false"
 					icon="fa fa-fw fa-floppy-o"  
-					value="Salvar" />
+					value="#{msg['title.salvar']}" />
 					
 					<p:commandButton 
 					action="#{livroMB.limpar()}"	
 					ajax="false"
 					icon="fa fa-fw fa-eraser"
-					value="Limpar" />
+					value="#{msg['title.limpar']}" />
 				</p:panelGrid>
 			</h:form>
 		</p:panel>
@@ -111,13 +111,13 @@
 				widgetVar="modalInfo"
 				closable="true"
 				appendTo="@(body)"
-				header="Informações"
+				header="#{msg['livro.form.modal.info.header']}"
 				modal="false"
 				resizable="true"
 				width="507px;"
 				height="92px;">
-		Ao selecionar essa checkbox, voce concorda em publicar este livro na comunidade, dando acesso á ele <br/>
-			ser acessado por qualquer um que entre na aba  :Nova Leitura > Públicos.	
+			<p>Ao selecionar essa checkbox, voce concorda em publicar este livro na comunidade, dando acesso á ele <br/>
+			ser acessado por qualquer um que entre na aba  :Nova Leitura > Públicos.</p>	
 		</p:dialog>
 		
 	</ui:define>

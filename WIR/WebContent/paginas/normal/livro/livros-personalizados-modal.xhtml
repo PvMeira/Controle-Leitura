@@ -7,7 +7,7 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<p:dialog id="novaLeituraModId"  widgetVar="novaLeituraListaModal" modal="true" appendTo="@(body)" closable="true"	draggable="false"
-		header="Nova Lista Personalizada"
+		header="#{msg['livroCustom.list.modal.header']}"
 		width="800px"
 		height="400px"
 		resizable="false">
@@ -27,13 +27,13 @@
 		</style>
 		<h:form>
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar"  ajax="false"
+				<p:commandButton value="#{msg['title.salvar']}"  ajax="false"
 					id="saveCustomListButton"
 					action="#{listaCustomizadaMB.criarListaCustomizada()}" 
 					process="@form"
 					oncomplete="updateListaCustom();"/>
 					
-					<p:commandButton value="Limpar" 
+					<p:commandButton value="#{msg['title.limpar']}" 
 					process="@this"
 					id="cleanCustomListButton"
 					/>
@@ -46,21 +46,21 @@
 			 <p:spacer height="10px" id="spacerModalLivrospersonalizados2"/>
 			 
 			 	<h:panelGrid columns="3">
-					<p:outputLabel value="Nome" for="inputNameModalCustom"/>
+					<p:outputLabel value="#{msg['listaCustom.nome']}" for="inputNameModalCustom"/>
 					<p:inputText  id="inputNameModalCustom" value="#{listaCustomizadaMB.listaCustomizada.nomeLista}" />
 					<p:message for="inputNameModalCustom"/>
 					
-					<p:outputLabel value="Tornar Lista pública" for="value1"/>
+					<p:outputLabel value="#{msg['livroCustom.list.modal.coluna.pergunta']}" for="value1"/>
 					<p:selectBooleanButton id="value1" value="#{listaCustomizadaMB.listaCustomizada.publico}" onLabel="Não" offLabel="Sim" 
 						style="width:60px" required="true" requiredMessage="Campo Obrigatorio"/>
 					<p:message for="value1"/>	
 					
 					
-					<p:outputLabel value="Descrição" for="deacricaoInputModalCustom"/>
+					<p:outputLabel value="#{msg['livroCustom.list.modal.coluna.descricao']}" for="deacricaoInputModalCustom"/>
 					<p:inputText id="deacricaoInputModalCustom" value="#{listaCustomizadaMB.listaCustomizada.descricao}" />
 					<p:message for="deacricaoInputModalCustom"/>
 					
-					<p:outputLabel value="Tipo de lista " />
+					<p:outputLabel value="#{msg['livroCustom.list.modal.coluna.tipo']}" />
 					<p:selectOneMenu id="oneMenuModal" value="#{listaCustomizadaMB.listaCustomizada.tipoLista}" >
 						<f:selectItems value="#{listaCustomizadaMB.getTipoLista()}"
 						var="list" itemLabel="#{list.nomeSimples}" itemValue="#{list.nomeSimples}"/>
@@ -76,7 +76,7 @@
 				rows="10" draggableColumns="true" paginatorAlwaysVisible="true">
 				
 				<p:column selectionMode="multiple" style="width:60px;text-align:center" />
-				<p:column headerText="Nome Livro">
+				<p:column headerText="#{msg['livro.titulo']}">
 					<h:outputText value="#{livro.titulo}"/>
 				</p:column>
 			</p:dataTable> 

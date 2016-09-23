@@ -9,44 +9,44 @@
 
 <ui:define name="center">
 	
-	<p:panel id="basic" header="Administração Cadastro usuário"  style="margin-bottom:20px">
+	<p:panel id="basic" header="#{msg['pessoa.form.header']}"  style="margin-bottom:20px">
 		<h:form id="pessoaForm">
 		
 			<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
 				<p:panelGrid columns="3" cellpadding="5">
 				
-					<p:outputLabel value="Nome: " for="nome" styleClass="outputlabel" id="outLabelNome"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.nome']} :" for="nome" styleClass="outputlabel" id="outLabelNome"/>
 					<p:inputText value="#{pessoaMB.pessoa.nome}" id="nome"
 						required="true" requiredMessage="Campo Obrigatório" placeholder="nome"/>
 					<p:message for="nome" />
 					
-					<p:outputLabel value="Login" for="login" styleClass="outputlabel" id="outlabelLogin"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.username']} :" for="login" styleClass="outputlabel" id="outlabelLogin"/>
 					<p:inputText value="#{pessoaMB.pessoa.username}" id="login"
-						required="true" requiredMessage="Campo Obrigatório" placeholder="login" />
+						required="true" requiredMessage="Campo Obrigatório" placeholder="#{msg['cadastro.usuario.username']}" />
 					<p:message for="login" />
 					
-					<p:outputLabel value="Senha:" for="senha" styleClass="outputlabel" id="outLabelLogin"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.password']} :" for="senha" styleClass="outputlabel" id="outLabelLogin"/>
 					<p:password value="#{pessoaMB.pessoa.password}" id="senha"
 						required="true" requiredMessage="Campo Obrigatório"
-						placeholder="Senha"/>
+						placeholder="#{msg['cadastro.usuario.password']}"/>
 					<p:message for="senha" />
 					
-					<p:outputLabel value="E-Mail: " for="mail" styleClass="outputlabel" id="outLabelMail"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.mail']} :" for="mail" styleClass="outputlabel" id="outLabelMail"/>
 					<p:inputText value="#{pessoaMB.pessoa.mail}" id="mail"
-						required="true" requiredMessage="Campo Obrigatório" placeholder="E-Mail" />
+						required="true" requiredMessage="Campo Obrigatório" placeholder="#{msg['cadastro.usuario.mail']}" />
 					<p:message for="mail" />
 					
-					<p:outputLabel value="CPF: " for="cpf" styleClass="outputlabel" id="outLabelCpf"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.cpf']} :" for="cpf" styleClass="outputlabel" id="outLabelCpf"/>
 					<p:inputText value="#{pessoaMB.pessoa.cpf}" id="cpf"
 						required="true" requiredMessage="Campo Obrigatório"
-						placeholder="CPF" />
+						placeholder="#{msg['cadastro.usuario.cpf']}" />
 					<p:message for="cpf" />
 					
-					<p:outputLabel value="Fone:" for="fone" styleClass="outputlabel" id="outLabelFone"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.fone']} :" for="fone" styleClass="outputlabel" id="outLabelFone"/>
 					<p:inputText value="#{pessoaMB.pessoa.telefone}" id="fone"
-						required="true" requiredMessage="Campo Obrigatório" placeholder="Telefone" />
+						required="true" requiredMessage="Campo Obrigatório" placeholder="#{msg['cadastro.usuario.fone']}" />
 					<p:message for="fone" />
-					<p:outputLabel value="Escolha uma Foto:" for="idUpload"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.escolher.foto']} :" for="idUpload"/>
 						<p:fileUpload 
 	    				 id="idUpload"
 	    				 fileUploadListener="#{pessoaMB.carregarArquivo}" 
@@ -55,11 +55,11 @@
 	                     sizeLimit="10485760"  />
 	                  <p:message for="idUpload" />
 		               <p:photoCam widgetVar="pc" listener="#{pessoaMB.oncapture}" rendered="#{not empty photoCamView.filename}"/>
-		               <p:commandButton type="button" value="Usar webcam" onclick="PF('pc').capture()" rendered="#{not empty photoCamView.filename}"/>
+		               <p:commandButton type="button" value="#{msg['cadastro.usuario.webCam']}" onclick="PF('pc').capture()" rendered="#{not empty photoCamView.filename}"/>
 				</p:panelGrid>
 				<p:panelGrid columns="3" cellpadding="5">
 				
-					<p:commandButton value="Salvar"  
+					<p:commandButton value="#{msg['title.salvar']}"  
 					id="savePessoaButton"
 					icon="fa fa-fw fa-floppy-o" 
 					action="#{pessoaMB.salvar()}" 
@@ -67,7 +67,7 @@
 					
 					<b:column span="1" />
 					
-					<p:commandButton value="Limpar" 
+					<p:commandButton value="#{msg['title.limpar']}" 
 					process="@this"
 					icon="fa fa-fw fa-eraser"
 					id="cleanPessoaButton"
