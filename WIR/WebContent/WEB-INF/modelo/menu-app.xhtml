@@ -6,26 +6,26 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-	<p:submenu label="Resenhas" icon="fa fa-fw fa-pencil-square-o" expanded="true">
-            <p:menuitem value="Minhas Resenhas" url="/paginas/normal/resenha/resenha-list.xhtml" icon="fa fa-fw fa-text-width" />
-            <p:menuitem value="Nova Resenha"    url="/paginas/normal/resenha/resenha-form.xhtml" icon="fa fa-fw fa-pencil" />
-            <p:menuitem value="Comunidade"      url="" icon="fa fa-fw fa-group" />
+	<p:submenu label="#{msg['menu.bar.resenhas']}" icon="fa fa-fw fa-pencil-square-o" expanded="true">
+            <p:menuitem value="#{msg['menu.bar.minhas.resenhas']}" url="/paginas/normal/resenha/resenha-list.xhtml" icon="fa fa-fw fa-text-width" />
+            <p:menuitem value="#{msg['menu.bar.nova.resenha']}"    url="/paginas/normal/resenha/resenha-form.xhtml" icon="fa fa-fw fa-pencil" />
+            <p:menuitem value="#{msg['menu.bar.comunidade']}" url="" icon="fa fa-fw fa-group" />
         </p:submenu>
-        <p:submenu label="Nova Leitura" icon="fa fa-fw fa-plus-square" >
-            <p:menuitem value="Meus Livros" url="/paginas/normal/livro/livro-list-manager.xhtml"    icon="fa fa-fw fa-tasks" />
-            <p:menuitem value="Públicos"    url="/paginas/normal/livro/livros-publicos-list.xhtml" 	icon="fa fa-fw fa-folder-open-o" />
+        <p:submenu label="#{msg['menu.bar.nova.leitura']}" icon="fa fa-fw fa-plus-square" >
+            <p:menuitem value="#{msg['menu.bar.meus.livros']}" url="/paginas/normal/livro/livro-list-manager.xhtml"    icon="fa fa-fw fa-tasks" />
+            <p:menuitem value="#{msg['menu.bar.livros.publicos']}" url="/paginas/normal/livro/livros-publicos-list.xhtml" 	icon="fa fa-fw fa-folder-open-o" />
         </p:submenu>
-        <p:submenu label="Minhas Leituras" icon="fa fa-fw fa-folder-open-o" >
-            <p:menuitem value="Leituras Atuais" url="/paginas/normal/livro/livro-list-manager.xhtml" icon="fa fa-fw fa-list" />
+        <p:submenu label="#{msg['menu.bar.minhas.leituras']}" icon="fa fa-fw fa-folder-open-o" >
+            <p:menuitem value="#{msg['menu.bar.leituras.atuais']}" url="/paginas/normal/livro/livro-list-manager.xhtml" icon="fa fa-fw fa-list" />
         </p:submenu>
-        <p:submenu label="Admim" icon="fa fa-fw fa-cog"  rendered="#{sessionMB.ADM}">
-            <p:submenu label="Configurações" icon="fa fa-fw fa-wrench" rendered="#{sessionMB.ADM}">
-                		<p:menuitem value="Login" url="/paginas/adm/pessoa-list.xhtml" icon="fa fa-fw fa-user"/>
-                		<p:menuitem value="Livros - Publicos " url="/paginas/normal/livro/livros-publicos-list.xhtml" icon="fa fa-fw fa-align-justify"/>
-                		<p:menuitem value="Dashbord" url="/paginas/adm/dashboard.xhtml" icon="fa fa-fw fa-dashboard"/>			
-                		<p:menuitem value="Leituras - geral " url="/paginas/adm/livro-todos-adm.xhtml" icon="fa fa-fw fa-bookmark"/>
+        <p:submenu label="#{msg['menu.bar.adm']}" icon="fa fa-fw fa-cog"  rendered="#{sessionMB.ADM}">
+            <p:submenu label="#{msg['menu.bar.config']}" icon="fa fa-fw fa-wrench" rendered="#{sessionMB.ADM}">
+                		<p:menuitem value="#{msg['menu.bar.login']}" url="/paginas/adm/pessoa-list.xhtml" icon="fa fa-fw fa-user"/>
+                		<p:menuitem value="#{msg['menu.bar.livros.publicos']}" url="/paginas/normal/livro/livros-publicos-list.xhtml" icon="fa fa-fw fa-align-justify"/>
+                		<p:menuitem value="#{msg['menu.bar.dashboard']}" url="/paginas/adm/dashboard.xhtml" icon="fa fa-fw fa-dashboard"/>			
+                		<p:menuitem value="#{msg['menu.bar.adm.leituras.geral']}" url="/paginas/adm/livro-todos-adm.xhtml" icon="fa fa-fw fa-bookmark"/>
                 	</p:submenu>
-                <p:menuitem value="Cadastros de Livros"  icon="fa fa-fw fa-table" />
-                <p:menuitem value="Relatorios" url="/paginas/adm/livro-todos-adm.xhtml"	icon="fa fa-fw fa-file-excel-o" />
+                <p:menuitem value="#{msg['menu.bar.adm.cadastro.livro']}"  icon="fa fa-fw fa-table" />
+                <p:menuitem value="#{msg['menu.bar.adm.relatorios']}" url="/paginas/adm/livro-todos-adm.xhtml"	icon="fa fa-fw fa-file-excel-o" />
             </p:submenu>
 </ui:composition>

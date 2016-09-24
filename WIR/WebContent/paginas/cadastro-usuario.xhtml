@@ -30,13 +30,13 @@
 					
 					<p:outputLabel value="#{msg['cadastro.usuario.username']} :" for="login" styleClass="outputlabel" id="outlabelLogin"/>
 					<p:inputText value="#{pessoaMB.pessoa.username}" id="login"
-						required="true" requiredMessage="Campo Obrigatório" placeholder="#{pessoaMB.pessoa.username}" />
+						required="true" requiredMessage="Campo Obrigatório" placeholder="#{msg['cadastro.usuario.username']}" />
 					<p:message for="login" />
 					
 					<p:outputLabel value="#{msg['cadastro.usuario.password']}" for="senha" styleClass="outputlabel" id="outLabelLogin"/>
 					<p:password value="#{pessoaMB.pessoa.password} :" id="senha"
 						required="true" requiredMessage="Campo Obrigatório"
-						placeholder="#{pessoaMB.pessoa.password}"/>
+						placeholder="#{msg['cadastro.usuario.password']}"/>
 					<p:message for="senha" />
 					
 					<p:outputLabel value="#{msg['cadastro.usuario.mail']} :" for="mail" styleClass="outputlabel" id="outLabelMail"/>
@@ -54,7 +54,7 @@
 					<p:inputText value="#{pessoaMB.pessoa.telefone}" id="fone"
 						required="true" requiredMessage="Campo Obrigatório" placeholder="#{msg['cadastro.usuario.fone']}" />
 					<p:message for="fone" />
-					<p:outputLabel value="#{msg[cadastro.usuario.escolher.foto]} :" for="idUpload"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.escolher.foto']} :" for="idUpload"/>
 						<p:fileUpload 
 	    				 id="idUpload"
 	    				 fileUploadListener="#{pessoaMB.carregarArquivo}" 
