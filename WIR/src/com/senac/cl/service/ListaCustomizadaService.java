@@ -37,10 +37,22 @@ public class ListaCustomizadaService {
 		Pessoa user = (Pessoa) ses.getAttribute("user");
 		ed.setDataInclusao(Calendar.getInstance());
 		ed.setPessoa(user);
-		ed.setLivro(lista);
+//		this.populaNomeLivro(lista, ed);
 		this.listaCustomizadaRepository.inserir(ed);
 
 	}
+	
+	@Transactional
+	public void deletarListaCustomizada(ListaCustomizada ed){
+		this.listaCustomizadaRepository.deletar(ed);
+	}
+//	private void populaNomeLivro(List<Livro> lista, ListaCustomizada ed){
+//		List<String> list = null;
+//		for (Livro livro : lista) {
+//			list.add(livro.getTitulo());
+//		}
+//		ed.setLivro(list);
+//	}
 
 	/**
 	 * Valida os campos da modal de nova Lista customizada

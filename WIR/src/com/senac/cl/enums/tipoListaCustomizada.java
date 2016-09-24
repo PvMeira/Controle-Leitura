@@ -1,6 +1,5 @@
 package com.senac.cl.enums;
 
-import java.util.List;
 
 public enum tipoListaCustomizada {
 

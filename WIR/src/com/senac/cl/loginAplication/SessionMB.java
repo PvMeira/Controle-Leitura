@@ -1,27 +1,17 @@
 package com.senac.cl.loginAplication;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.imageio.stream.FileImageOutputStream;
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
-import com.senac.cl.modelos.Livro;
 import com.senac.cl.modelos.Pessoa;
 import com.senac.cl.repository.PessoaRepository;
 import com.senac.cl.utilitarios.SistemaDeMensagens;

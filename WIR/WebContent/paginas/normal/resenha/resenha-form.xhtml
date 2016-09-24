@@ -6,29 +6,48 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:b="http://bootsfaces.net/ui"
 	template="/WEB-INF/modelo/padrao.xhtml">
+<style>
+.editor{
+border: 2px  !important;
+color: #656565;
+}
 
+</style>
 	<ui:define name="center">
-	<p:panel id="basicCriarRenhas" header="Escrever Uma nova Resenha"  style="margin-bottom:20px">
+	<p:panel id="basicCriarRenhas" header="#{msg['resenha.form.header']}"  style="margin-bottom:20px">
 			<h:form id="idFormEscreverUmaResenha" prependId="false">
 
 				<p:growl id="idscreverUmaResenha" showDetail="true" sticky="false" life="4000" />
 				
-			<p:panelGrid columns="5">
-				<p:outputLabel for="idOutTextTitulo" title="Titulo" value="Titulo  " id="idLabelTitulo" style="margin-left: 27px;"/>
-				<p:inputText id="idOutTextTitulo" value="#{resenhaMB.resenha.titulo}" />
+			<p:panelGrid columns="2">
+				<p:outputLabel for="idOutTextTitulo" title="#{msg['resenha.form.titulo']}" value="#{msg['resenha.form.titulo']}  :" id="idLabelTitulo" />
+				<p:inputText id="idOutTextTitulo" value="#{resenhaMB.resenha.titulo}" placeholder="#{msg['resenha.form.titulo']}"/>
 				
-				<!-- <p:outputLabel for="oneMenutipo" title="Tipo" value="Tipo  " id="idLabelTipo"/>
-				<p:selectOneButton id="oneMenutipo"  style="width:125px" converter="conversorOneMenu" >
-					<f:selectItems/>
-				</p:selectOneButton>-->
+			    <p:outputLabel for="oneMenutipo" title="#{msg['resenha.form.tipo']}" value="#{msg['resenha.form.tipo']}  :" id="idLabelTipo"/>
+				<p:selectOneMenu id="oneMenutipo" value="#{resenhaMB.resenha.tipoResenha}" >
+						<f:selectItems value="#{resenhaMB.tipoResenha}"
+						var="list" itemLabel="#{list.nome}" itemValue="#{list.sigla}"/>
+					</p:selectOneMenu>
 				</p:panelGrid> 
-				
+				<p:outputLabel for="autoCompleteResenhaForm" id="livroResenha" value="#{msg['resenha.form.nome.livro']} :"/>
+				<p:autoComplete 
+						id="autoCompleteResenhaForm" 
+						value="#{resenhaMB.resenha.livroAlvo}"
+						placeholder="#{msg['resenha.form.nome.livro']}"
+						completeMethod="#{livroMB.listarLivrosAutoCompleteResenha}"
+						queryDelay="1000"
+						converter="livroConverter"
+						var="livroSelecionado"
+						itemLabel="#{livroSelecionado.titulo}"
+						itemValue="#{livroSelecionado}">
+				</p:autoComplete>
 				<p:panelGrid columns="2">
-				<p:outputLabel for="inputTextAssunto" title="Assunto" value="Assunto" id="idLabelInput" />
+				<p:outputLabel for="inputTextAssunto" title="#{msg['resenha.form.assunto']}" value="#{msg['resenha.form.assunto']} :" id="idLabelInput" />
 					<p:inputTextarea 
 						value="#{resenhaMB.resenha.assunto}"
 						id="inputTextAssunto"
 						rows="5" 
+						placeholder="#{msg['resenha.form.assunto']}"
 						cols="30" 
 						style="width: 360px; height: 63px;"
 						counter="display2" 
@@ -40,42 +59,45 @@
 				</p:panelGrid>
 				
 				<p:panelGrid columns="2">
-					<p:outputLabel for="publicaBooleana" title="Tornar Pública ?" value="Tornar Pública ?" id="idLabelBoolean" />
+					<p:outputLabel for="publicaBooleana" title="#{msg['resenha.form.tornarpublica']}" value="#{msg['resenha.form.tornarpublica']}" id="idLabelBoolean" />
 					<p:selectBooleanCheckbox  id="publicaBooleana" value="#{resenhaMB.resenha.publica}"/>
 				</p:panelGrid>
-				<p:panel   style="margin-right:400px;margin-left:50px;">
+				<p:panel   style="margin-right:400px;margin-left:50px;" styleClass="editor">
 				 <p:editor id="editor" widgetVar="editorWidget" value="#{resenhaMB.resenha.conteudo}" 
-				 width="600"  required="true" requiredMessage="Obrigatorio" />
+				 width="600"  />
 				</p:panel>
 				<p:panelGrid columns="5">
 					<p:commandButton 
-					value="Salvar" 
+					value="#{msg['title.salvar']}" 
 					icon="fa fa-fw fa-save" 
 					action="#{resenhaMB.salvarNovaResenha()}"
 					update="@form"/>
 					<br/>
 					<p:commandButton 
-					value="Apagar" 
+					value="#{msg['title.limpar']}" 
 					icon="fa fa-fw fa-eraser" 
-					action="#{resenha.limpar()}"
+					action="#{resenhaMB.limpar()}"
 					update="@form">
 						<p:confirm/>
 					</p:commandButton>
 					<br/>
-					<p:commandButton value="Salvar Andamento" icon="fa fa-fw fa-shekel" />
+					<p:commandButton 
+					value="#{msg['resenha.form.salvarAndamento']}" 
+					icon="fa fa-fw fa-shekel"
+					action="#{resenhaMB.salvarResenhaIncompleta()}" />
 				</p:panelGrid>
 			</h:form>
 		</p:panel>
 		
 		<!-- Modal de Confirmação -->
 		<p:confirmDialog 
-			lobal="true" 
+			global="true" 
 			showEffect="fade" 
 			hideEffect="fade"
-			header="Deseja apagar Tudo?"
-			message="tem certeza que deseja apagar todos os campos que estão preenchidos"
+			header="#{msg['resenha.form.modal.header']}"
+			message="#{msg['resenha.form.modal.message']}"
 			height="70px" width="400px">
-			<p:commandButton value="Sim" type="button"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+			<p:commandButton value="Sim" type="button"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="@form"/>
 			<p:commandButton value="Não" type="button"	styleClass="ui-confirmdialog-no" icon="ui-icon-close"	style="float:right;" />
 		</p:confirmDialog>
 			<!-- Modal de Confirmação FIM -->

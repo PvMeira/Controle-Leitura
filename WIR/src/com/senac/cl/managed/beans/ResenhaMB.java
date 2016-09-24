@@ -4,8 +4,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import com.senac.cl.enums.tipoResenha;
 import com.senac.cl.modelos.Resenha;
 import com.senac.cl.service.ResenhaService;
+import com.senac.cl.utilitarios.SistemaDeMensagens;
 
 /**
  * 
@@ -25,8 +27,13 @@ public class ResenhaMB {
 	 * Salva uma nova resenha
 	 */
 	public void salvarNovaResenha() {
+		if(this.resenha.getConteudo().trim().isEmpty() == false  && this.resenha.getTitulo().trim().isEmpty() == false && this.resenha.getAssunto() .trim().isEmpty() == false){
 		this.resenhaService.salvarNovaResenha(this.resenha);
+		SistemaDeMensagens.notificaINFORMACAO("Cadastro Salvo com Sucesso", "");
 		limpar();
+		}else{
+			this.salvarResenhaIncompleta();
+		}
 	}
 
 	/**
@@ -34,7 +41,15 @@ public class ResenhaMB {
 	 * possa continuar escrevendo
 	 */
 	public void salvarResenhaIncompleta() {
-		this.resenhaService.salvarNovaResenha(this.resenha);
+		this.resenhaService.salvarResenhaIncompleta(this.resenha);
+		SistemaDeMensagens.notificaINFORMACAO("Cadastro incompleto Salvo com Sucesso", "");
+	}
+	/**
+	 * retorna os tipos de resenhas da Enum
+	 * @return
+	 */
+	public tipoResenha[] getTipoResenha() {
+		return tipoResenha.values();
 	}
 
 	/**

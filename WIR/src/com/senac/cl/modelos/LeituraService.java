@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.management.RuntimeMBeanException;
 import javax.servlet.http.HttpSession;
 
 import com.senac.cl.enums.tipoLeituraHistorico;
@@ -13,7 +12,6 @@ import com.senac.cl.repository.LeituraRepository;
 import com.senac.cl.repository.LivroRepository;
 import com.senac.cl.service.LeituraHistoricoService;
 import com.senac.cl.transactional.Transactional;
-import com.senac.cl.utilitarios.SistemaDeMensagens;
 
 /**
  * 
@@ -27,7 +25,7 @@ public class LeituraService {
 
 	@Inject
 	LivroRepository livroRepository;
-	
+
 	@Inject
 	LeituraHistoricoService leituraHistoricoService;
 
@@ -87,7 +85,8 @@ public class LeituraService {
 	@Transactional
 	public void pararLeitura(Leitura ed) {
 		this.atualizarStatusLivro(ed.getLivro(), true, true);
-		this.leituraHistoricoService.inserirLinhaHistorico(ed, tipoLeituraHistorico.CANCELAMENTO, Calendar.getInstance());
+		this.leituraHistoricoService.inserirLinhaHistorico(ed, tipoLeituraHistorico.CANCELAMENTO,
+				Calendar.getInstance());
 		this.leituraRepository.deletar(ed);
 	}
 
@@ -100,14 +99,16 @@ public class LeituraService {
 		this.leituraRepository.atualizar(ed);
 		this.leituraHistoricoService.inserirLinhaHistorico(ed, tipoLeituraHistorico.ALTERACAO, null);
 	}
+
 	/**
 	 * Conta todas as leituras da aplicação
+	 * 
 	 * @return
 	 */
 	@Transactional
-	public int contaLeiturasAplicacao(){
+	public int contaLeiturasAplicacao() {
 		int conta = this.leituraRepository.contaTodaAsLeiturasAplicacao();
-		return conta; 
+		return conta;
 	}
 
 	/**

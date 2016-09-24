@@ -12,7 +12,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import org.apache.taglibs.standard.lang.jstl.BooleanLiteral;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RateEvent;
 import org.primefaces.model.DefaultStreamedContent;
@@ -66,7 +65,8 @@ public class LivroMB {
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro salvo com sucesso!");
 		limpar();
 	}
-	public void editarLivro(){
+
+	public void editarLivro() {
 		livroService.atualizar(this.getLivroEdit());
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro alterado com sucesso!");
 	}
@@ -75,7 +75,7 @@ public class LivroMB {
 	 * Salva uma nova leitura apartir do livro seleciona inline
 	 */
 	public void iniciarLeituraLivroInline(Livro ed) {
-		if (this.verificaSeExisteLeitura(ed) == Boolean.TRUE) {
+		if (ed.isLivroAtivo()) {
 			this.leituraService.salvar(ed);
 		} else {
 			SistemaDeMensagens.notificaAVISO("Opa", "Parece que voce ja tem uam leitura em andamento com esse livro");
@@ -130,6 +130,11 @@ public class LivroMB {
 		List<Livro> lista = this.livroService.listarLivrosAutoCompleteTransferir(particula);
 		return lista;
 	}
+	
+	public List<Livro> listarLivrosAutoCompleteResenha(String particula) {
+		List<Livro> lista = this.livroService.listarLivrosAutoCompleteResenha(particula);
+		return lista;
+	}
 
 	/**
 	 * Deleta o livro selecionado
@@ -137,9 +142,17 @@ public class LivroMB {
 	 * @param livro
 	 */
 	public void deletar(Livro livro) {
-		livroService.deletar(livro);
-		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro deletado ");
-		limpar();
+		boolean existe = this.verificaSeExisteLeitura(livro);
+		if (existe == true) {
+			livroService.deletar(livro);
+			limpar();
+		} else {
+			Leitura leitura = leituraService.buscaLeituraPeloId(livro);
+			this.leituraService.pararLeitura(leitura);
+			livroService.deletar(livro);
+			SistemaDeMensagens.notificaINFORMACAO("Leitura excluida", "Leitura relacionada ao livro excluida");
+			limpar();
+		}
 	}
 
 	/**
@@ -241,9 +254,11 @@ public class LivroMB {
 		return this.leituraService.buscaLeituraPeloId(ed);
 
 	}
-	public void populaLivroEdicao(Livro ed){
+
+	public void populaLivroEdicao(Livro ed) {
 		this.livroEdit = ed;
 	}
+
 	/**
 	 * popula a string de observação que sera usada na modal de observação
 	 */
@@ -434,7 +449,8 @@ public class LivroMB {
 	}
 
 	/**
-	 * @param livroEdit the livroEdit to set
+	 * @param livroEdit
+	 *            the livroEdit to set
 	 */
 	public void setLivroEdit(Livro livroEdit) {
 		this.livroEdit = livroEdit;

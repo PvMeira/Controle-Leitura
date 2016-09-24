@@ -1,9 +1,6 @@
 package com.senac.cl.managed.beans;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -46,8 +43,6 @@ public class LeituraMB {
 
 	private StreamedContent streamedContent;
 
-	
-
 	public StreamedContent getStreamedContent() {
 		if (FacesContext.getCurrentInstance().getRenderResponse()) {
 			return new DefaultStreamedContent();
@@ -75,28 +70,31 @@ public class LeituraMB {
 	public void pararLeitura(Leitura ed) {
 		this.leituraService.pararLeitura(ed);
 	}
+
 	/**
-	 * Atualiza a observação
-	 * da leitura atual
+	 * Atualiza a observação da leitura atual
 	 */
 	public void atualizarObservacao() {
 		this.leituraService.atualizar(this.leitura);
 		this.limparCampos();
 	}
+
 	/**
-	 * Popula a entidade para a atualização
-	 * da observação
+	 * Popula a entidade para a atualização da observação
+	 * 
 	 * @param ed
 	 */
 	public void populaLeituraParaObservacao(Leitura ed) {
 		this.leitura = ed;
 	}
+
 	/**
 	 * limpa campos
 	 */
-	public void limparCampos(){
+	public void limparCampos() {
 		this.leitura = null;
 	}
+
 	public List<Livro> listarLivrosAutoComplete(String particula) {
 		List<Livro> lista = this.livroService.listarLivrosAutoComplete(particula);
 		return lista;

@@ -2,10 +2,8 @@ package com.senac.cl.modelos;
 
 import java.util.Calendar;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -60,7 +58,7 @@ public class Livro {
 
 	@Column(name = "livro_ja_foi_lido")
 	private boolean jaFoiLido;
-	
+
 	@Column(name = "publico")
 	private boolean publico;
 
@@ -93,7 +91,7 @@ public class Livro {
 	 * @param dataUpload
 	 */
 	public Livro(Long idLivro, Pessoa dono, String titulo, String autor, int paginas, String observacao, int pontuacao,
-			boolean livroAtivo, Calendar dataUltimaLeitura, Calendar dataUpload, boolean jaFoiLido,boolean publico) {
+			boolean livroAtivo, Calendar dataUltimaLeitura, Calendar dataUpload, boolean jaFoiLido, boolean publico) {
 		this.idLivro = idLivro;
 		this.dono = dono;
 		this.titulo = titulo;
@@ -119,7 +117,7 @@ public class Livro {
 	public Pessoa getDono() {
 		return dono;
 	}
-	
+
 	public boolean isPublico() {
 		return publico;
 	}

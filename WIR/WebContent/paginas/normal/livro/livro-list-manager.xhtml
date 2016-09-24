@@ -95,7 +95,7 @@
 										</p:commandLink>
 										<p:menuButton value="#{msg['title.more']}">
 										<p:menuitem value="#{msg['livro.editar']}" oncomplete="PF('editarLivro').show();" action="#{livroMB.populaLivroEdicao(livro)}"/>
-										<p:menuitem value="#{msg['livro.remover']}"  action="#{livroMB.deletar(livro)}"/>
+										<p:menuitem value="#{msg['livro.remover']}"  action="#{livroMB.deletar(livro)}" oncomplete="updateTabelaLivro();"/>
 										</p:menuButton>
 										
 									</p:column>
@@ -164,7 +164,7 @@
 					</h:form>
 
 				</p:tab>
-				<p:tab title="#{msg['label.nome.aba.header.list.manager.lista.custom']}">
+				<!-- <p:tab title="#{msg['label.nome.aba.header.list.manager.lista.custom']}">
 					<h:form prependId="false" id="idAbaTresForm">
 
 						<p:commandButton id="idButtonGerarListaCustomizada"
@@ -186,9 +186,6 @@
 								<p:column headerText="#{msg['listaCustom.tipo']}" style="text-align:center">
 									<h:outputText value="#{listaCustom.tipoLista}"/>	
 								</p:column>
-								<p:column headerText="#{msg['listaCustom.livros.lista']}" style="text-align:center">
-									<h:outputText value="#{listaCustom.livro.size()}"/>
-								</p:column>
 								<p:column headerText="#{msg['listaCustom.data']}" style="text-align:center">
 									<h:outputText value="#{listaCustom.dataInclusao.time}">
 										<f:convertDateTime pattern="dd/MM/yyyy" />
@@ -198,26 +195,14 @@
 									<h:outputText value="#{listaCustom.pessoa.nome}"/>
 								</p:column>
 								<p:column>
-									<p:commandButton id="buttonDeleteList"  icon="fa fa-fw fa-trash"/>
+									<p:commandButton id="buttonDeleteList"  icon="fa fa-fw fa-trash" 
+									action="#{listaCustomizadaMB.deletarUmaListaCustomizada(listaCustom)}" oncomplete="updateListaCustom();"/>
 								</p:column>
-						 <p:rowExpansion >
-						 							<!-- SUBTABELA -->
-						 	<p:subTable id="subListaCustom" value="#{listaCustom.livro}" var="subLista">
-						 		<p:column  style="text-align:center">
-									<h:outputText value="#{subLista.titulo}"/>	
-								</p:column>
-								<p:column  style="text-align:center">
-									<h:outputText value="#{subLista.autor}"/>	
-								</p:column>
-								<p:column  style="text-align:center">
-									<p:rating value="#{subLista.pontuacao}" cancel="false" id="idPontuacao" />
-								</p:column>
-						 	</p:subTable>
-						 </p:rowExpansion>		
+						 
 						</p:dataTable>
 						<p:remoteCommand name="updateListaCustom" update="listaCustomList"/>
 					</h:form>
-				</p:tab>
+				</p:tab> -->
 			</p:tabView>
 		</p:panel>
 	

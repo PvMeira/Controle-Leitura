@@ -1,18 +1,13 @@
 package com.senac.cl.modelos;
 
 import java.util.Calendar;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,17 +28,15 @@ public class ListaCustomizada {
 	private Long idListaCustomizada;
 
 	@NotNull
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
 	private Pessoa pessoa;
 
-	@NotNull
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "livro_lista_customizada", 
-		joinColumns =@JoinColumn(name="id_livro"), 
-			inverseJoinColumns=@JoinColumn(name="id_lista_customizada"))
-	private List<Livro> livro;
-	
+	// @NotNull
+	// @JoinTable(name = "livroNome_lista_customizada", joinColumns =
+	// @JoinColumn(name = "id_livroNome"), inverseJoinColumns = @JoinColumn(name
+	// = "id_lista_customizada"))
+	// private List<String> livro;
 
 	@NotNull
 	@Column(name = "nome_lista")
@@ -94,20 +87,20 @@ public class ListaCustomizada {
 		this.pessoa = pessoa;
 	}
 
-	/**
-	 * @return the livro
-	 */
-	public List<Livro> getLivro() {
-		return livro;
-	}
-
-	/**
-	 * @param livro
-	 *            the livro to set
-	 */
-	public void setLivro(List<Livro> livro) {
-		this.livro = livro;
-	}
+	// /**
+	// * @return the livro
+	// */
+	// public List<String> getLivro() {
+	// return livro;
+	// }
+	//
+	// /**
+	// * @param livro
+	// * the livro to set
+	// */
+	// public void setLivro(List<String> livro) {
+	// this.livro = livro;
+	// }
 
 	/**
 	 * @return the nomeLista
@@ -201,11 +194,11 @@ public class ListaCustomizada {
 	 * @param dataInclusao
 	 * @param publico
 	 */
-	public ListaCustomizada(Long idListaCustomizada, Pessoa pessoa, List<Livro> livro, String nomeLista, String tipoLista,
+	public ListaCustomizada(Long idListaCustomizada, Pessoa pessoa, String nomeLista, String tipoLista,
 			String descricao, Calendar dataInclusao, boolean publico) {
 		this.idListaCustomizada = idListaCustomizada;
 		this.pessoa = pessoa;
-		this.livro = livro;
+		// this.livro = livro;
 		this.nomeLista = nomeLista;
 		this.tipoLista = tipoLista;
 		this.descricao = descricao;

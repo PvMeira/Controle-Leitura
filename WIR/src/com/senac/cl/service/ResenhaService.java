@@ -33,7 +33,20 @@ public class ResenhaService {
 	public void salvarNovaResenha(Resenha ed) {
 		Pessoa pes =(Pessoa)ses.getAttribute("user"); 
 		ed.setDataInicio(Calendar.getInstance());
+		ed.setDataFim(Calendar.getInstance());
 		ed.setInacabada(false);
+		ed.setAutor(pes);
+		this.resenhaRepository.inserir(ed);
+	}
+	/**
+	 * Salvar uma resenha incompleta
+	 * @param ed
+	 */
+	@Transactional
+	public void salvarResenhaIncompleta(Resenha ed){
+		Pessoa pes =(Pessoa)ses.getAttribute("user"); 
+		ed.setDataInicio(Calendar.getInstance());
+		ed.setInacabada(true);
 		ed.setAutor(pes);
 		this.resenhaRepository.inserir(ed);
 	}

@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -69,20 +68,20 @@ public class Pessoa {
 
 	@Column(name = "data_ultimo_login")
 	private Calendar dataUltimoLogin;
-	
+
 	@Column(name = "foto_user")
 	private byte[] fotoUser;
 
 	@Transient
 	private Calendar dataLoginAtual;
-	
+
 	/**
 	 * 
 	 */
 	public Pessoa() {
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @param id
@@ -135,7 +134,6 @@ public class Pessoa {
 	public List<Livro> getLivros() {
 		return livros;
 	}
-	
 
 	/**
 	 * @return the fotoUser
@@ -145,7 +143,8 @@ public class Pessoa {
 	}
 
 	/**
-	 * @param fotoUser the fotoUser to set
+	 * @param fotoUser
+	 *            the fotoUser to set
 	 */
 	public void setFotoUser(byte[] fotoUser) {
 		this.fotoUser = fotoUser;

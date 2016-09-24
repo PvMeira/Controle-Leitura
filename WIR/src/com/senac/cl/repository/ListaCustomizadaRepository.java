@@ -22,7 +22,7 @@ public class ListaCustomizadaRepository {
 	}
 
 	public void deletar(ListaCustomizada ed) {
-		entityManager.remove(entityManager.merge(ed));
+		entityManager.remove(ed);
 
 	}
 

@@ -7,23 +7,23 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import com.senac.cl.modelos.ListaCustomizada;
 import com.senac.cl.modelos.Livro;
 import com.senac.cl.modelos.Pessoa;
 import com.senac.cl.repository.LivroRepository;
 import com.senac.cl.transactional.Transactional;
+import com.senac.cl.utilitarios.SistemaDeMensagens;
 
 public class LivroService {
 
 	@Inject
 	LivroRepository livroRepository;
-	
+
 	@Inject
 	ListaCustomizadaService listaCustomizadaService;
 
 	private HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-	
-	private static final String OBS ="Livro Publico, nome do dono :";
+
+	private static final String OBS = "Livro Publico, nome do dono :";
 
 	/**
 	 * Salva um livro
@@ -66,18 +66,18 @@ public class LivroService {
 		entidade.setPublico(Boolean.TRUE);
 		livroRepository.atualizar(entidade);
 	}
-	
+
 	/**
-	 * Criar um novo livro que é uma copia 
-	 * do livro publico
+	 * Criar um novo livro que é uma copia do livro publico
+	 * 
 	 * @param entidade
 	 */
 	@Transactional
-	public void copiaLivroPublicoParaContaUsuarioLogado(Livro entidade){
+	public void copiaLivroPublicoParaContaUsuarioLogado(Livro entidade) {
 		Pessoa pessoaDaSecao = (Pessoa) this.ses.getAttribute("user");
-		
+
 		Livro novo = new Livro();
-		
+
 		novo.setArquivo(entidade.getArquivo());
 		novo.setAutor(entidade.getAutor());
 		novo.setDataUltimaLeitura(Calendar.getInstance());
@@ -90,7 +90,7 @@ public class LivroService {
 		novo.setPontuacao(entidade.getPontuacao());
 		novo.setTitulo(entidade.getTitulo());
 		novo.setPublico(Boolean.FALSE);
-		
+
 		livroRepository.inserir(novo);
 	}
 
@@ -120,39 +120,45 @@ public class LivroService {
 	 */
 	@Transactional
 	public void deletar(Livro livro) {
-		this.verificaExisteListaCustomizada(livro);
 		livroRepository.deletar(livro);
+		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro deletado ");
+	}
+	// private String verificaExisteListaCustomizada(Livro ed){
+	// List<ListaCustomizada> lista =
+	// listaCustomizadaService.listarListasCustomizadas();
+	// String nomeListasCustom = null;
+	// if(lista != null){
+	// for (ListaCustomizada listaCustomizada : lista) {
+	// List<String> nomeLivro = listaCustomizada.getLivro();
+	// for (String livro2 : nomeLivro) {
+	// if(livro2.equals(ed.getTitulo())){
+	// nomeListasCustom = " :";
+	// return nomeListasCustom.concat(listaCustomizada.getNomeLista());
+	// }
+	// }
+	// }
+	// }
+	// return nomeListasCustom;
+	// }
+	//
 
-	}
-	private void verificaExisteListaCustomizada(Livro ed){
-		List<ListaCustomizada> lista = listaCustomizadaService.listarListasCustomizadas();
-		if(lista != null){
-			for (ListaCustomizada listaCustomizada : lista) {
-				List<Livro> livro = listaCustomizada.getLivro();
-				for (Livro livro2 : livro) {
-					if(livro2.equals(ed)){
-						this.listaCustomizadaService.removeListaCustomizadaPeloLivro(listaCustomizada);
-					}
-				}
-			}
-		}
-	}
-	
 	/**
-	 * Conta livros  cadastrados
+	 * Conta livros cadastrados
+	 * 
 	 * @return
 	 */
 	@Transactional
-	public int contaLivrosTotais(){
+	public int contaLivrosTotais() {
 		return this.livroRepository.contaLivrosCadastrados();
 	}
-	
+
 	/**
 	 * Conta livros publicos cadastrados
+	 * 
 	 * @return
 	 */
 	@Transactional
-	public int contaLivrosPublicosTotais(){
+	public int contaLivrosPublicosTotais() {
 		return this.livroRepository.contaLivrosPublicosCadastrados();
 	}
 
@@ -207,6 +213,12 @@ public class LivroService {
 	 */
 	public List<Livro> listarLivrosAutoCompleteTransferir(String s) {
 		List<Livro> lista = this.livroRepository.listarLivrosAutoCompleteTransferir(s);
+		return lista;
+	}
+	
+	
+	public List<Livro> listarLivrosAutoCompleteResenha(String s) {
+		List<Livro> lista = this.livroRepository.listarLivrosAutoCompleteResenha(s);
 		return lista;
 	}
 

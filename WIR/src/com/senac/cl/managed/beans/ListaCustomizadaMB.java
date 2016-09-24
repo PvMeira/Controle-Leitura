@@ -27,6 +27,10 @@ public class ListaCustomizadaMB {
 		this.listaCustomizadaService.CriarUmaNovaLista(lista, this.listaCustomizada);
 	}
 	
+	public void deletarUmaListaCustomizada(ListaCustomizada ed){
+		this.listaCustomizadaService.deletarListaCustomizada(ed);
+	}
+	
 	public tipoListaCustomizada[] getTipoLista() {
 		return tipoListaCustomizada.values();
 	}

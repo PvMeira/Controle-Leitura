@@ -12,6 +12,7 @@ import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
+import com.senac.cl.modelos.ListaCustomizada;
 import com.senac.cl.modelos.Livro;
 
 @SuppressWarnings(value = "all")
@@ -39,6 +40,8 @@ public class LivroRepository {
 		entityManager.remove(entityManager.merge(livro));
 
 	}
+	
+
 
 	/**
 	 * atualizar
@@ -118,6 +121,13 @@ public class LivroRepository {
 	public List<Livro> listarLivrosAutoCompleteTransferir(String s) {
 		String sql = "SELECT * FROM livro where titulo LIKE " + "'" + "%" + s + "%" + "'" + "  and publico = "
 				+ Boolean.FALSE + ";";
+		return entityManager.createNativeQuery(sql, Livro.class).getResultList();
+	}
+	
+	
+	
+	public List<Livro> listarLivrosAutoCompleteResenha(String s) {
+		String sql = "SELECT * FROM livro where titulo LIKE " + "'" + "%" + s + "%" + "'" + ";";
 		return entityManager.createNativeQuery(sql, Livro.class).getResultList();
 	}
 }
