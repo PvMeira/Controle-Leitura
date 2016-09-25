@@ -11,7 +11,7 @@
 </f:metadata>
 <ui:define name="center">
 	
-	<p:panel id="basic" header="#{msg['pessoa.form.header']}"  style="margin-bottom:20px">
+	<p:panel id="basic" header="#{msg['pessoa.form.header']}"  style="margin-bottom:20px" rendered="#{sessionMB.ADM}">
 		<h:form id="pessoaForm">
 		
 			<p:growl id="growl" showDetail="true" sticky="false" life="4000" />

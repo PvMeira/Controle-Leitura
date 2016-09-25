@@ -14,7 +14,7 @@
 
 	<ui:define name="center">
 		<h:form prependId="false" id="dashBoardForm">
-			<p:panel id="basic" header="Administração-DashBaord"  style="margin-bottom:20px">
+			<p:panel id="basic" header="Administração-DashBaord"  style="margin-bottom:20px" rendered="#{sessionMB.ADM}">
 				<p:dashboard id="board" model="#{dashboardViewMB.model}">
 					<p:panel id="livros" header="#{msg['dashboard.livros']}">
 						<h:outputText value="#{msg['dashboard.conta.livros.cadastrados']}" />

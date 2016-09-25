@@ -7,7 +7,7 @@
 	template="/WEB-INF/modelo/padrao.xhtml">
 	
 <ui:define name="center">	
-	<p:panel id="basic" header="#{msg['pessoa.list.header']}"  style="margin-bottom:20px">
+	<p:panel id="basic" header="#{msg['pessoa.list.header']}"  style="margin-bottom:20px" rendered="#{sessionMB.ADM}">
 			<h:form id="viewForm">
 				<p:dataTable id="personTable" var="pessoa" 
 					value="#{pessoaMB.listaDePessoasRegistradas}"

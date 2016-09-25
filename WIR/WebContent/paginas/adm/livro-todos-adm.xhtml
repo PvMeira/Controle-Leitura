@@ -9,7 +9,7 @@
 	xmlns:pe="http://primefaces.org/ui/extensions" >
 
 	<ui:define name="center">
-	<p:panel id="basic" header="#{msg['livro.adm.list']}"  style="margin-bottom:20px">
+	<p:panel id="basic" header="#{msg['livro.adm.list']}"  style="margin-bottom:20px" rendered="#{sessionMB.ADM}">
 			<h:form prependId="false" id="admFormLivros">
 				<p:dataTable 
 					id="listaDelivrosAsm" 
