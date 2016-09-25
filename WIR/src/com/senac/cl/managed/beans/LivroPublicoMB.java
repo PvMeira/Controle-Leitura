@@ -38,7 +38,6 @@ public class LivroPublicoMB {
 
 	@Inject
 	LivroPublicoService livroPublicoService;
-	
 
 	@Inject
 	Data data;
@@ -54,18 +53,28 @@ public class LivroPublicoMB {
 		this.limpar();
 	}
 
-	
+	/**
+	 * Salvar um novo livro publico método para admim apenas
+	 */
 	public void salvarLivroPublicoForm() {
 		this.livroPublicoService.salvarLivroPublico(this.livroPublico);
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Livro publico adicionada");
 		this.limpar();
 	}
-	
+
+	/**
+	 * copia o livro selecioando para a conta do usuário Logado
+	 * 
+	 * @param ed
+	 */
 	public void copiarLivrosPublicosParaContaUsuario(LivroPublico ed) {
 		this.livroPublicoService.transferirLivroPublicoParaUsuario(ed);
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Livro transferido para sua conta");
 	}
-	
+
+	/**
+	 * Copiar os livros selecionados na lista em lote
+	 */
 	public void copiarLivrosPublicosParaContaUsuarioEmLote() {
 		List<LivroPublico> lista = this.livrosPublicosSelecionados;
 		for (LivroPublico livro : lista) {
@@ -73,12 +82,14 @@ public class LivroPublicoMB {
 		}
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Livro(s) transferido(s) para sua conta");
 	}
+
+	/**
+	 * Transferir o livro que foi selecionado na modal
+	 */
 	public void transferirLivro() {
 		this.livroPublicoService.salvarPublico(this.getLivro());
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Seu Livro foi adicionado a lista Publica");
 	}
-
-	
 
 	/**
 	 * Listar todos os livros publicos
@@ -100,6 +111,22 @@ public class LivroPublicoMB {
 		SistemaDeMensagens.notificaINFORMACAO("Livro deletado ", "");
 	}
 
+	/**
+	 * Deleta os livros que foram selecionados na lista
+	 */
+	public void deletarLivrosPublicosLote() {
+		List<LivroPublico> lista = this.livrosPublicosSelecionados;
+		for (LivroPublico livroPublico : lista) {
+			this.livroPublicoService.deletar(livroPublico);
+		}
+	}
+
+	/**
+	 * Monta o nome do colaborador + o email
+	 * 
+	 * @param ed
+	 * @return
+	 */
 	public String getHintColaborador(LivroPublico ed) {
 		String username = ed.getDonoPublico().getUsername();
 		String email = ed.getDonoPublico().getMail();
@@ -107,8 +134,11 @@ public class LivroPublicoMB {
 
 		return hint;
 	}
-	
-	public void limpar(){
+
+	/**
+	 * Limpa os campos da aplicação e seta um novo Livro Publico
+	 */
+	public void limpar() {
 		this.livroPublico = new LivroPublico();
 	}
 
@@ -168,7 +198,7 @@ public class LivroPublicoMB {
 	 * @return the livroPublico
 	 */
 	public LivroPublico getLivroPublico() {
-		if(this.livroPublico == null){
+		if (this.livroPublico == null) {
 			this.limpar();
 		}
 		return livroPublico;
@@ -212,7 +242,6 @@ public class LivroPublicoMB {
 		this.livrosPublicosSelecionados = livrosPublicosSelecionados;
 	}
 
-
 	/**
 	 * @return the livro
 	 */
@@ -220,9 +249,9 @@ public class LivroPublicoMB {
 		return livro;
 	}
 
-
 	/**
-	 * @param livro the livro to set
+	 * @param livro
+	 *            the livro to set
 	 */
 	public void setLivro(Livro livro) {
 		this.livro = livro;

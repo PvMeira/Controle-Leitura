@@ -8,7 +8,7 @@
 	template="/WEB-INF/modelo/padrao.xhtml">
 	
 	<ui:define name="center">
-	
+<p:messages id="messagesAdmForm" showDetail="true" autoUpdate="true" closable="true" />
 		<p:panel id="basic" header="#{msg['livro.form.header']}"  style="margin-bottom:20px">
 			<h:form id="idFormCadastroLivroAdm" prependId="false">
 				<p:growl id="idGrowlCadastroLivroAdm" showDetail="true" sticky="false"

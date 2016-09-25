@@ -23,15 +23,21 @@
 						value="#{msg['livro.list.publico.copiar']}" 
 						icon="fa fa-fw fa-copy"
 						action="#{livroPublicoMB.copiarLivrosPublicosParaContaUsuarioEmLote()}">
-						
 						</p:menuitem>
+						<p:menuitem rendered="#{sessionMB.ADM}"
+								style="text-align: center"
+								id="splitButtonDelete" 
+								action="#{livroPublicoMB.deletarLivrosPublicosLote()}"
+								oncomplete="atualizarlistaLeitura();"
+								icon="fa fa-fw fa-trash" 
+								value="#{msg['livros.publicos.list.sliptButton.layout']}"/>
 					</p:splitButton>
 				<p:outputLabel value="#{msg['livro.list.publico.adicionar']}"/>
 				<p:commandButton 
 					id="idButtonTransferirPublico"
 					icon="fa fa-fw fa-plus"
 					oncomplete="PF('modalTransferir').show();"
-					value="Clique Aqui"/>	
+					value="#{msg['livros.publicos.list.title.button.modal']}"/>	
 				</p:panelGrid>
 				<br/>
 				<br/>
@@ -58,15 +64,20 @@
 					</p:column>
 					
 					<p:column headerText="#{msg['livro.paginas']}" style="text-align:center">
-						<h:outputText value="#{livros.paginasPublico}" 
-									  title="#{livroPublicoMB.getHintColaborador(livros)}"/>
+						<h:outputText value="#{livros.paginasPublico}"/>
 					</p:column>
 					
 					<p:column headerText="#{msg['livro.list.publico.colaborador']}" style="text-align:center" >
-           			<h:outputText value="#{livros.donoPublico.nome}"/>
+           			<h:outputText value="#{livros.donoPublico.nome}" title="#{livroPublicoMB.getHintColaborador(livros)}"/>
 					</p:column>
 					
-					<p:column headerText="Ações" style="text-align:center">
+					<p:column headerText="#{msg['livros.publicos.list.coluna.header.adm']}" style="text-align:center" rendered="#{sessionMB.ADM}">
+           				<h:outputText value="#{livros.dataUploadPublico.time}" id="uploadTime">
+							<f:convertDateTime for="uploadTime" pattern="EEE, M/d/yy hh:mm"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="#{msg['livros.publicos.list.acao']}" style="text-align:center">
 
 						<!-- Botao para downlaod do pdf -->
 						<p:commandLink id="comandLinkDownlodPublico" ajax="false"
@@ -85,8 +96,16 @@
 								height="15px" width="15px" />
 						</p:commandLink>
 					</p:column>
+					<p:column headerText="#{msg['livros.publicos.list.acaoAdm']}" style="text-align:center" rendered="#{sessionMB.ADM}">
+					<p:commandButton id="buttonDeleteAdm" 
+						icon="fa fa-fw fa-trash" 
+						value="#{msg['livros.publicos.list.button.layout']}"
+						action="#{livroPublicoMB.deletarLivroPublico(livros)}"
+						oncomplete="atualizarlistaLeitura();">
+					</p:commandButton>
+					</p:column>
 				</p:dataTable>
-			<p:remoteCommand name="atualizarlistaLeitura" update="listaDelivrosPublicos"/>	
+			<p:remoteCommand name="atualizarlistaLeitura" update="listaDelivrosPublicos"/>
 			</h:form>
 		</p:panel>
 		<!-- Modal transferir livro publico -->

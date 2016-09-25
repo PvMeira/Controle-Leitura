@@ -9,11 +9,13 @@ import javax.servlet.http.HttpSession;
 
 import com.senac.cl.enums.tipoAcao;
 import com.senac.cl.modelos.Livro;
-import com.senac.cl.modelos.LivroPublico;
 import com.senac.cl.modelos.Pessoa;
 import com.senac.cl.repository.LivroRepository;
 import com.senac.cl.transactional.Transactional;
-
+/**
+ * @author Pedro
+ * @since 25/09/2016
+ */
 public class LivroService {
 
 	@Inject
@@ -33,7 +35,6 @@ public class LivroService {
 
 	/**
 	 * Salva um livro
-	 * 
 	 * @param entidade
 	 */
 	@Transactional
@@ -59,7 +60,6 @@ public class LivroService {
 
 	/**
 	 * Atualiza a entidade livro recebida
-	 * 
 	 * @param entidade
 	 */
 	public void atualizar(Livro entidade) {
@@ -70,7 +70,6 @@ public class LivroService {
 
 	/**
 	 * Atualiza a boolean que torna o livro público
-	 * 
 	 * @param entidade
 	 */
 	@Transactional
@@ -184,7 +183,11 @@ public class LivroService {
 		List<Livro> lista = this.livroRepository.listarLivrosAutoCompleteTransferir(s);
 		return lista;
 	}
-
+	/**
+	 * Auto complete para resenha
+	 * @param s
+	 * @return
+	 */
 	public List<Livro> listarLivrosAutoCompleteResenha(String s) {
 		List<Livro> lista = this.livroRepository.listarLivrosAutoCompleteResenha(s);
 		return lista;

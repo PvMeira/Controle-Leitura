@@ -91,7 +91,9 @@ public class LivroMB {
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro salvo com sucesso!");
 		limpar();
 	}
-
+	/**
+	 * Editar livro selecionado
+	 */
 	public void editarLivro() {
 		livroService.atualizar(this.getLivroEdit());
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro alterado com sucesso!");
@@ -132,7 +134,6 @@ public class LivroMB {
 
 	/**
 	 * Lista livros do autocomplete que esteja com publico = false
-	 * 
 	 * @param particula
 	 * @return
 	 */
@@ -148,7 +149,6 @@ public class LivroMB {
 
 	/**
 	 * Deleta o livro selecionado
-	 * 
 	 * @param livro
 	 */
 	public void deletar(Livro livro) {
@@ -167,7 +167,6 @@ public class LivroMB {
 
 	/**
 	 * Deletar Sem as informações de sucessso para o metodo de delete em lote
-	 * 
 	 * @param livro
 	 */
 	public void deletarSeminformação(Livro livro) {
@@ -176,7 +175,6 @@ public class LivroMB {
 
 	/**
 	 * Carrega o arquivo upado para a entidade
-	 * 
 	 * @param event
 	 */
 	public void carregarArquivo(FileUploadEvent event) {
@@ -188,7 +186,6 @@ public class LivroMB {
 
 	/**
 	 * Retorna o Arquivo para downlaod do pdf
-	 * 
 	 * @param livro
 	 * @return
 	 * @throws IOException
@@ -205,7 +202,6 @@ public class LivroMB {
 
 	/**
 	 * Metodo para Retornar um .ZIP com todos os PDF selecionados
-	 * 
 	 * @return
 	 * @throws IOException
 	 */
@@ -234,7 +230,6 @@ public class LivroMB {
 	/**
 	 * Verifica o status do livro, caso seja true retorna não lido se não
 	 * retorna ja lido
-	 * 
 	 * @param livro
 	 * @return
 	 */
@@ -256,7 +251,6 @@ public class LivroMB {
 
 	/**
 	 * busca se existe uma leitura para o livro em questao
-	 * 
 	 * @param ed
 	 * @return
 	 */
@@ -264,7 +258,10 @@ public class LivroMB {
 		return this.leituraService.buscaLeituraPeloId(ed);
 
 	}
-
+	/**
+	 * popula livro para edição
+	 * @param ed
+	 */
 	public void populaLivroEdicao(Livro ed) {
 		this.livroEdit = ed;
 	}

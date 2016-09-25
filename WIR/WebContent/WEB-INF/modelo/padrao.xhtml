@@ -47,7 +47,7 @@
 		<h:outputScript name="app.js" library="js" />
 		<h:outputScript name="jquery.ticker.js" library="js" />
 		<h:outputStylesheet name="padrao.css" library="css" />
-		<h:outputStylesheet name="ticker-style.css" library="primefaces-ControleLeitura" />
+		<h:outputStylesheet name="ticker-style.css" library="css" />
 		<h:outputStylesheet library="styles" name="primefacesOverride.css" />
 		
 	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
@@ -70,7 +70,8 @@
 				</p:layoutUnit>
 				
 				<p:layoutUnit id="center" position="center" resizable="false" collapsible="false">
-					<ui:insert name="center" />
+					<ui:insert name="center">
+					</ui:insert>
 				</p:layoutUnit>
 
 				<!-- usuario Logado -->			
