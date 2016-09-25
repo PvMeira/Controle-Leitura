@@ -17,7 +17,7 @@
 		<class>com.senac.cl.modelos.PessoaHistorico</class>
 		<class>com.senac.cl.modelos.LeituraHistorico</class>
 		<class>com.senac.cl.modelos.LivroHistorico</class>
-		
+		<class>com.senac.cl.modelos.LivroPublico</class>
 		
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<validation-mode>CALLBACK</validation-mode>

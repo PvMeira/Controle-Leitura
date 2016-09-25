@@ -90,7 +90,7 @@
 											rendered="#{livroMB.VerificaStatusLivro(livro) eq 'Livro não Lido' or 'Livro já Lido'}"
 											title="#{msg['livro.nova.leitura']}"
 											action="#{livroMB.iniciarLeituraLivroInline(livro)}"
-											oncomplete="updateTabelaLivro();">
+											oncomplete="updateTabelaLivro(); atualizarlistaLeitura();">
 											<p:graphicImage value="/resources/imagens/livro_lendo.png" height="20px" width="20px" />
 										</p:commandLink>
 										<p:menuButton value="#{msg['title.more']}">

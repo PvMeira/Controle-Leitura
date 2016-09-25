@@ -27,11 +27,11 @@
 						required="true" requiredMessage="Campo Obrigatório" placeholder="#{msg['cadastro.usuario.username']}" />
 					<p:message for="login" />
 					
-					<p:outputLabel value="#{msg['cadastro.usuario.password']} :" for="senha" styleClass="outputlabel" id="outLabelLogin"/>
-					<p:password value="#{pessoaMB.pessoa.password}" id="senha"
+					<p:outputLabel value="#{msg['cadastro.usuario.password']} :" for="senha1" styleClass="outputlabel" id="outLabelLogin"/>
+					<p:password value="#{pessoaMB.pessoa.password}" id="senha1"
 						required="true" requiredMessage="Campo Obrigatório"
 						placeholder="#{msg['cadastro.usuario.password']}"/>
-					<p:message for="senha" />
+					<p:message for="senha1" />
 					
 					<p:outputLabel value="#{msg['cadastro.usuario.mail']} :" for="mail" styleClass="outputlabel" id="outLabelMail"/>
 					<p:inputText value="#{pessoaMB.pessoa.mail}" id="mail"
@@ -44,7 +44,7 @@
 						placeholder="#{msg['cadastro.usuario.cpf']}" />
 					<p:message for="cpf" />
 					
-					<p:outputLabel value="#{msg['cadastro.usuario.fone']} :" for="fone" styleClass="outputlabel" id="outLabelFone"/>
+					<p:outputLabel value="#{msg['cadastro.usuario.fone']}  :" for="fone" styleClass="outputlabel" id="outLabelFone"/>
 					<p:inputText value="#{pessoaMB.pessoa.telefone}" id="fone"
 						required="true" requiredMessage="Campo Obrigatório" placeholder="#{msg['cadastro.usuario.fone']}" />
 					<p:message for="fone" />

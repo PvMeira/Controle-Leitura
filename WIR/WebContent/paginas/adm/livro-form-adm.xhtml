@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/WEB-INF/modelo/padrao.xhtml">
+	
+	<ui:define name="center">
+	
+		<p:panel id="basic" header="#{msg['livro.form.header']}"  style="margin-bottom:20px">
+			<h:form id="idFormCadastroLivroAdm" prependId="false">
+				<p:growl id="idGrowlCadastroLivroAdm" showDetail="true" sticky="false"
+					life="4000" />
+				<p:panelGrid columns="3">
+
+					<p:outputLabel id="labelTituloLivroAdm" 
+						for="inputTextTituloAdm" 
+						styleClass="outputlabel" 
+						value="#{msg['livro.titulo']} :" />
+					<p:inputText id="inputTextTituloAdm" 
+						value="#{livroPublicoMB.livroPublico.tituloPublico}" 
+						rendered="true" 
+						requiredMessage="Campo Obrigatório" 
+						placeholder="#{msg['livro.titulo']}"/>
+					<p:message for="inputTextTituloAdm" />
+					
+					
+					<p:outputLabel id="labelAutorLivroAdm" 
+						for="inputTextAutorAdm" 
+						styleClass="outputlabel" 
+						value="#{msg['livro.autor']} :" />
+					<p:inputText id="inputTextAutorAdm" 
+					value="#{livroPublicoMB.livroPublico.autorPublico}" 
+						rendered="true" 
+						requiredMessage="Campo Obrigatório" 
+						placeholder="#{msg['livro.autor']}"/>
+					<p:message for="inputTextAutorAdm" />
+					
+										
+					<p:outputLabel id="labelAutorPaginasAdm" 
+						for="inputIntPaginasAdm" 
+						styleClass="outputlabel" 
+						value="#{msg['livro.paginas']} :" />
+					<p:inputText id="inputIntPaginasAdm" 
+						value="#{livroPublicoMB.livroPublico.paginasPublico}" 
+						rendered="true" 
+						requiredMessage="Campo Obrigatório" 
+						placeholder="#{msg['livro.paginas']}"/>
+					<p:message for="inputIntPaginasAdm" />
+					
+					<p:outputLabel id="labelResumoAdm" 
+						for="inputTextResumoAdm" 
+						styleClass="outputlabel" 
+						value="#{msg['livro.form.resumo']} :" />
+					<p:inputTextarea id="inputTextResumoAdm" 
+						value="#{livroPublicoMB.livroPublico.observacaoPublico}" 
+						rows="5" 
+						cols="30" 
+						style=" width:600px; height:90px;"
+						counter="displayAdm" 
+						maxlength="300" 
+						counterTemplate="{0} characters remaining." 
+						autoResize="false" />
+					<p:outputLabel/>
+    				<br/><h:outputText id="displayAdm" />
+				</p:panelGrid>
+				
+				<p:panelGrid columns="2">
+    				<p:fileUpload 
+    				 id="idUploadAdm"
+    				 label="#{msg['livro.form.upload.pdf']}"
+    				 fileUploadListener="#{livroPublicoMB.carregarArquivo}" 
+    				 mode="advanced"
+                     auto="true" 
+                     required="true"
+                     requiredMessage="Obrigatorio"
+                     sizeLimit="10485760"  />
+                  <p:message for="idUploadAdm" />
+                  </p:panelGrid>
+				        			
+				<p:panelGrid columns="2">
+					<p:commandButton
+						action="#{livroPublicoMB.salvarLivroPublicoForm()}"
+						ajax="false"
+						icon="fa fa-fw fa-floppy-o"  
+						value="#{msg['title.salvar']}" />
+					
+					<p:commandButton 
+						action="#{livroPublicoMB.limpar()}"	
+						ajax="false"
+						icon="fa fa-fw fa-eraser"
+						value="#{msg['title.limpar']}" />
+				</p:panelGrid>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>

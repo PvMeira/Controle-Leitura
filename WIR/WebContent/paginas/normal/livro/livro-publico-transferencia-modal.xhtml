@@ -21,7 +21,7 @@
 						ajax="false" 	
 						icon="fa fa-fw fa-check"  
 						value="#{msg['livro.modal.publico.transferir.button']}" 
-						action="#{livroMB.transferir()}"
+						action="#{livroPublicoMB.transferirLivro()}"
 						process="@this"
 						oncomplete="modalTransferir.hide(); atualizarlistaLeitura();"/>
 					
@@ -39,15 +39,15 @@
 								   for="autoCompleteModalTranferencia" 
 								   value="#{msg['livro.titulo']} :"/>
 						<p:autoComplete 
-						id="autoCompleteModalTranferencia" 
-						value="#{livroMB.livroParaTransferir}"
-						placeholder="#{msg['livro.titulo']}"
-						completeMethod="#{livroMB.listarLivrosAutoCompleteTransferir}"
-						queryDelay="1000"
-						converter="livroConverter"
-						var="livroSelecionado"
-						itemLabel="#{livroSelecionado.titulo}"
-						itemValue="#{livroSelecionado}">
+							id="autoCompleteModalTranferencia" 
+							value="#{livroPublicoMB.livro}"
+							placeholder="#{msg['livro.titulo']}"
+							completeMethod="#{livroMB.listarLivrosAutoCompleteTransferir}"
+							queryDelay="1000"
+							converter="livroConverter"
+							var="livroSelecionado"
+							itemLabel="#{livroSelecionado.titulo}"
+							itemValue="#{livroSelecionado}">
 						</p:autoComplete>
 				</p:panelGrid>	
 			</h:form>

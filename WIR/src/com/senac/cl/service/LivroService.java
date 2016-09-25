@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.senac.cl.enums.tipoAcao;
 import com.senac.cl.modelos.Livro;
+import com.senac.cl.modelos.LivroPublico;
 import com.senac.cl.modelos.Pessoa;
 import com.senac.cl.repository.LivroRepository;
 import com.senac.cl.transactional.Transactional;
@@ -23,10 +24,12 @@ public class LivroService {
 
 	@Inject
 	LivroHistoricoService livroHistoricoService;
+	
+	@Inject
+	LivroPublicoService livroPublicoService;
 
 	private HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
-	private static final String OBS = "Livro Publico, nome do dono :";
 
 	/**
 	 * Salva um livro
@@ -38,18 +41,19 @@ public class LivroService {
 		if (entidade.getIdLivro() != null) {
 			this.atualizar(entidade);
 		} else {
-			Pessoa pessoaDaSecao = (Pessoa) this.ses.getAttribute("user");
-
-			entidade.setDono(pessoaDaSecao);
-			entidade.setDataUltimaLeitura(Calendar.getInstance());
-			entidade.setDataUpload(Calendar.getInstance());
-			entidade.setLivroAtivo(true);
-			entidade.setPublico(var);
-
-			// Verifica se alguma campo não foi preenchido
-			this.verificaCampos(entidade);
-			livroHistoricoService.inserirLinhaHistorico(entidade, tipoAcao.INCLUIR, null);
-			livroRepository.inserir(entidade);
+		
+				Pessoa pessoaDaSecao = (Pessoa) this.ses.getAttribute("user");
+				entidade.setDono(pessoaDaSecao);
+				entidade.setDataUltimaLeitura(Calendar.getInstance());
+				entidade.setDataUpload(Calendar.getInstance());
+				entidade.setLivroAtivo(true);
+				entidade.setPublico(var);
+	
+				// Verifica se alguma campo não foi preenchido
+				this.verificaCampos(entidade);
+				livroHistoricoService.inserirLinhaHistorico(entidade, tipoAcao.INCLUIR, null);
+				livroRepository.inserir(entidade);
+			
 		}
 	}
 
@@ -58,7 +62,6 @@ public class LivroService {
 	 * 
 	 * @param entidade
 	 */
-	@Transactional
 	public void atualizar(Livro entidade) {
 		entidade.setDataUpload(Calendar.getInstance());
 		livroHistoricoService.inserirLinhaHistorico(entidade, tipoAcao.ALTERACAO, entidade.getDataUpload());
@@ -77,32 +80,6 @@ public class LivroService {
 		livroRepository.atualizar(entidade);
 	}
 
-	/**
-	 * Criar um novo livro que é uma copia do livro publico
-	 * 
-	 * @param entidade
-	 */
-	@Transactional
-	public void copiaLivroPublicoParaContaUsuarioLogado(Livro entidade) {
-		Pessoa pessoaDaSecao = (Pessoa) this.ses.getAttribute("user");
-
-		Livro novo = new Livro();
-
-		novo.setArquivo(entidade.getArquivo());
-		novo.setAutor(entidade.getAutor());
-		novo.setDataUltimaLeitura(Calendar.getInstance());
-		novo.setDataUpload(Calendar.getInstance());
-		novo.setDono(pessoaDaSecao);
-		novo.setJaFoiLido(Boolean.FALSE);
-		novo.setLivroAtivo(Boolean.TRUE);
-		novo.setObservacao(OBS.concat(entidade.getDono().getNome()));
-		novo.setPaginas(entidade.getPaginas());
-		novo.setPontuacao(entidade.getPontuacao());
-		novo.setTitulo(entidade.getTitulo());
-		novo.setPublico(Boolean.FALSE);
-		livroHistoricoService.inserirLinhaHistorico(entidade, tipoAcao.INCLUIR, null);
-		livroRepository.inserir(novo);
-	}
 
 	/**
 	 * verifica Se todos os campo obrigatorios estão preenchidos

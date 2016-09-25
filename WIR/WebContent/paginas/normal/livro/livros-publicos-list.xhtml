@@ -16,13 +16,13 @@
 						style="text-align: center">
 						<p:menuitem style="text-align: center" value="#{msg['imprimir.zip']}" ajax="false"
 							icon="fa fa-fw fa-arrow-down">
-							<p:fileDownload value="#{livroMB.geradorZip()}" />
+							<p:fileDownload value="#{livroPublicoMB.geradorZip()}" />
 						</p:menuitem>
 						<p:menuitem style="text-align: center" 
 						id="idTransferirLivroPublicosPrivado"
 						value="#{msg['livro.list.publico.copiar']}" 
 						icon="fa fa-fw fa-copy"
-						action="#{livroMB.copiarLivrosPublicosParaContaUsuarioEmLote()}">
+						action="#{livroPublicoMB.copiarLivrosPublicosParaContaUsuarioEmLote()}">
 						
 						</p:menuitem>
 					</p:splitButton>
@@ -30,7 +30,6 @@
 				<p:commandButton 
 					id="idButtonTransferirPublico"
 					icon="fa fa-fw fa-plus"
-					action="#{listaMB.limpar()}"
 					oncomplete="PF('modalTransferir').show();"
 					value="Clique Aqui"/>	
 				</p:panelGrid>
@@ -39,32 +38,32 @@
 				<p:dataTable 
 					id="listaDelivrosPublicos" 
 					var="livros" 
-					value="#{livroMB.listaLivrosPublicos()}"
-					selection="#{livroMB.livrosSelecionados}"
-					rowKey="#{livros.idLivro}"
+					value="#{livroPublicoMB.listarLivrosPublicos()}"
+					selection="#{livroPublicoMB.livrosPublicosSelecionados}"
+					rowKey="#{livros.idLivroPublico}"
 					emptyMessage="#{msg['datatable.pageReportTemplete.empty']}" 
 					paginator="true" 
-					rows="10"
+					rows="25"
 					sortMode="multiple"
 					draggableColumns="true" 
 					paginatorAlwaysVisible="true" >
 					
 					<p:column selectionMode="multiple" style="width:60px;text-align:center"/>	
 					<p:column headerText="#{msg['livro.titulo']}" style="text-align:center">
-						<h:outputText value="#{livros.titulo}"/>
+						<h:outputText value="#{livros.tituloPublico}"/>
 					</p:column>
 					
 					<p:column headerText="#{msg['livro.autor']}" style="text-align:center">
-						<h:outputText value="#{livros.autor}"/>
+						<h:outputText value="#{livros.autorPublico}"/>
 					</p:column>
 					
 					<p:column headerText="#{msg['livro.paginas']}" style="text-align:center">
-						<h:outputText value="#{livros.paginas}" 
-									  title="#{livroMB.getHintColaborador(livros)}"/>
+						<h:outputText value="#{livros.paginasPublico}" 
+									  title="#{livroPublicoMB.getHintColaborador(livros)}"/>
 					</p:column>
 					
 					<p:column headerText="#{msg['livro.list.publico.colaborador']}" style="text-align:center" >
-           			<h:outputText value="#{livros.dono.nome}"/>
+           			<h:outputText value="#{livros.donoPublico.nome}"/>
 					</p:column>
 					
 					<p:column headerText="Ações" style="text-align:center">
@@ -72,7 +71,7 @@
 						<!-- Botao para downlaod do pdf -->
 						<p:commandLink id="comandLinkDownlodPublico" ajax="false"
 							title="#{msg['livro.list.publico.download']}">
-							<p:fileDownload value="#{livroMB.FileDownloadView(livros)}" />
+							<p:fileDownload value="#{livroPublicoMB.FileDownloadView(livros)}" />
 							<p:graphicImage value="/resources/imagens/download.png"
 								height="15px" width="15px" />
 						</p:commandLink>
@@ -81,8 +80,7 @@
 						<p:commandLink 
 							id="comandLinkTransferirPublico" 
 							title="#{msg['livro.list.publico.transferir']}"
-							onstart="showStatus()" oncomplete="hideStatus()" 
-							action="#{livroMB.copiarLivrosPublicosParaContaUsuario(livros)}">
+							action="#{livroPublicoMB.copiarLivrosPublicosParaContaUsuario(livros)}">
 							<p:graphicImage value="/resources/imagens/pasta.png"
 								height="15px" width="15px" />
 						</p:commandLink>

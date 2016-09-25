@@ -21,6 +21,8 @@ import org.primefaces.model.StreamedContent;
 import com.senac.cl.modelos.Leitura;
 import com.senac.cl.modelos.LeituraService;
 import com.senac.cl.modelos.Livro;
+import com.senac.cl.modelos.LivroPublico;
+import com.senac.cl.service.LivroPublicoService;
 import com.senac.cl.service.LivroService;
 import com.senac.cl.utilitarios.Data;
 import com.senac.cl.utilitarios.SistemaDeMensagens;
@@ -39,12 +41,16 @@ public class LivroMB {
 	private Livro livroEdit;
 	private List<Livro> livrosPessoaLogada;
 	private List<Livro> livrosSelecionados;
+	private List<LivroPublico> livrosPublicosSelecionados;
 
 	@Inject
 	private LivroService livroService;
 
 	@Inject
 	private LeituraService leituraService;
+	
+	@Inject 
+	LivroPublicoService livroPublicoService;
 
 	@Inject
 	Data data;
@@ -69,13 +75,18 @@ public class LivroMB {
 		livro = new Livro();
 	}
 	
-	
-	
-	
 	/**
 	 * Salva o livro
 	 */
 	public void salvar() {
+		if(tornarpublico == true){
+			this.livroPublicoService.salvarPublico(this.getLivro());
+			if(this.livro.getIdLivro() != null){
+				this.livro.setPublico(true);
+				this.livroService.atualizar(this.livro);
+			}
+		}
+		
 		livroService.salvar(this.getLivro(), tornarpublico);
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro salvo com sucesso!");
 		limpar();
@@ -85,6 +96,7 @@ public class LivroMB {
 		livroService.atualizar(this.getLivroEdit());
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro alterado com sucesso!");
 	}
+	
 
 	/**
 	 * Salva uma nova leitura apartir do livro seleciona inline
@@ -116,23 +128,6 @@ public class LivroMB {
 	 */
 	public void transferir() {
 		this.livroService.atualizarATransferenciaParaPublico(this.livroParaTransferir);
-	}
-
-	/**
-	 * Copia os livros selecionados para a conta do usuario logado
-	 */
-	public void copiarLivrosPublicosParaContaUsuario(Livro ed) {
-		this.livroService.copiaLivroPublicoParaContaUsuarioLogado(ed);
-	}
-
-	/**
-	 * Copia os livros selecionados para a conta do usuario logado em lote
-	 */
-	public void copiarLivrosPublicosParaContaUsuarioEmLote() {
-		List<Livro> lista = this.livrosSelecionados;
-		for (Livro livro : lista) {
-			this.copiarLivrosPublicosParaContaUsuario(livro);
-		}
 	}
 
 	/**
@@ -469,6 +464,22 @@ public class LivroMB {
 	 */
 	public void setLivroEdit(Livro livroEdit) {
 		this.livroEdit = livroEdit;
+	}
+
+
+	/**
+	 * @return the livrosPublicosSelecionados
+	 */
+	public List<LivroPublico> getLivrosPublicosSelecionados() {
+		return livrosPublicosSelecionados;
+	}
+
+
+	/**
+	 * @param livrosPublicosSelecionados the livrosPublicosSelecionados to set
+	 */
+	public void setLivrosPublicosSelecionados(List<LivroPublico> livrosPublicosSelecionados) {
+		this.livrosPublicosSelecionados = livrosPublicosSelecionados;
 	}
 
 }
