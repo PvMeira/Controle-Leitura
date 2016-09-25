@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -57,6 +58,20 @@ public class LivroMB {
 	public LivroMB() {
 	}
 
+	
+	@PostConstruct
+	public void init(){
+		atribuirEstadoInicial();
+	}
+	
+	private void atribuirEstadoInicial()
+	{
+		livro = new Livro();
+	}
+	
+	
+	
+	
 	/**
 	 * Salva o livro
 	 */

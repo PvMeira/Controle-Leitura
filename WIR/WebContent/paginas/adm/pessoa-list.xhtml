@@ -13,34 +13,36 @@
 					value="#{pessoaMB.listaDePessoasRegistradas}"
 					emptyMessage="#{msg['datatable.pageReportTemplete.empty']}" paginator="true" rows="5"
 					draggableColumns="true" paginatorAlwaysVisible="false" >
-					
 					<p:column id="viewNome" headerText="#{msg['cadastro.usuario.nome']}" style="text-align:center;" >
 						<h:outputText value="#{pessoa.nome}"  />
 					</p:column>
-					<p:column id="viewMAIL" style="text-align: center" headerText="#{msg['cadastro.usuario.mail']}" style="text-align:center;">
+					<p:column id="viewMAIL" style="text-align: center" headerText="#{msg['cadastro.usuario.mail']}" >
 						<h:outputText value="#{pessoa.mail}" />
 					</p:column>
-					<p:column id="viewCPF" style="text-align: center" headerText="#{msg['cadastro.usuario.cpf']}" style="text-align:center;">
+					<p:column id="viewCPF" style="text-align: center" headerText="#{msg['cadastro.usuario.cpf']}" >
 						<h:outputText value="#{pessoa.cpf}" />
 					</p:column>
-					<p:column id="viewFONE" style="text-align: center" headerText="#{msg['cadastro.usuario.fone']}" style="text-align:center;">
+					<p:column id="viewFONE" style="text-align: center" headerText="#{msg['cadastro.usuario.fone']}" >
 						<h:outputText value="#{pessoa.telefone}" />
 					</p:column>
 					
-					<p:column id="viewSenha" style="text-align: center" headerText="#{msg['cadastro.usuario.password']}" style="text-align:center;" rendered="#{sessionMB.ADM}">
+					<p:column id="viewSenha" style="text-align: center" headerText="#{msg['cadastro.usuario.password']}"  rendered="#{sessionMB.ADM}">
 						<h:outputText value="#{pessoa.password}" />
 					</p:column>
-					<p:column id="viewLogin" style="text-align: center" headerText="#{msg['cadastro.usuario.username']}" style="text-align:center;" rendered="#{sessionMB.ADM}">
+					<p:column id="viewLogin" style="text-align: center" headerText="#{msg['cadastro.usuario.username']}"  rendered="#{sessionMB.ADM}">
 						
 						<p:outputLabel value="#{pessoa.username}"/>
 					</p:column>
 					<p:column style="text-align: center" id="columnAcao" headerText="#{msg['livro.acao']}">
-						<p:commandButton action="#{pessoaMB.setPessoa(pessoa)}" ajax="false" value="#{msg['title.edit']}"/>
-						<p:commandButton value="#{msg['title.remove']}" action="#{pessoaMB.deletar(pessoa)}" />
+						<p:commandButton icon="fa fa-fw fa-pencil" value="Editar" action="pessoa-form?faces-redirect=true&amp;includeViewParams=true">
+							<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaMB.pessoa}"/>
+						</p:commandButton>
+						<p:commandButton value="#{msg['title.remove']}" icon="fa fa-fw fa-trash"
+						action="#{pessoaMB.deletar(pessoa)}" oncomplete="atualizarlistaPessoa();"/>
 					</p:column>
 				</p:dataTable>
+				<p:remoteCommand name="atualizarlistaPessoa" update="personTable" />
 			</h:form>
 	</p:panel>	
-		
 </ui:define>
 </ui:composition>

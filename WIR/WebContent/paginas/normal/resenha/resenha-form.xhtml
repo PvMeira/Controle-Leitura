@@ -59,8 +59,8 @@ color: #656565;
 				</p:panelGrid>
 				
 				<p:panelGrid columns="2">
-					<p:outputLabel for="publicaBooleana" title="#{msg['resenha.form.tornarpublica']}" value="#{msg['resenha.form.tornarpublica']}" id="idLabelBoolean" />
-					<p:selectBooleanCheckbox  id="publicaBooleana" value="#{resenhaMB.resenha.publica}"/>
+			    <p:outputLabel value="#{msg['livro.form.publico']}" for="value1"/>
+				<p:selectBooleanButton id="value1"  value="#{resenhaMB.resenha.publica}" onLabel="Não" offLabel="Sim" style="width:60px"/>
 				</p:panelGrid>
 				<p:panel   style="margin-right:400px;margin-left:50px;" styleClass="editor">
 				 <p:editor id="editor" widgetVar="editorWidget" value="#{resenhaMB.resenha.conteudo}" 

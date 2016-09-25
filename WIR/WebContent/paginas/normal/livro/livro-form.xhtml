@@ -6,7 +6,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:b="http://bootsfaces.net/ui"
 	template="/WEB-INF/modelo/padrao.xhtml">
-
+<f:metadata>
+	<f:viewParam name="id" value="#{livroMB.livro}" />
+</f:metadata>
 	<ui:define name="center">
 		<p:panel id="basic" header="#{msg['livro.form.header']}"  style="margin-bottom:20px">
 			<h:form id="idFormCadastroLivro" prependId="false">

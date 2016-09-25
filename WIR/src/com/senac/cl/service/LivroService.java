@@ -7,11 +7,11 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import com.senac.cl.enums.tipoAcao;
 import com.senac.cl.modelos.Livro;
 import com.senac.cl.modelos.Pessoa;
 import com.senac.cl.repository.LivroRepository;
 import com.senac.cl.transactional.Transactional;
-import com.senac.cl.utilitarios.SistemaDeMensagens;
 
 public class LivroService {
 
@@ -20,6 +20,9 @@ public class LivroService {
 
 	@Inject
 	ListaCustomizadaService listaCustomizadaService;
+
+	@Inject
+	LivroHistoricoService livroHistoricoService;
 
 	private HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
@@ -32,17 +35,22 @@ public class LivroService {
 	 */
 	@Transactional
 	public void salvar(Livro entidade, boolean var) {
-		Pessoa pessoaDaSecao = (Pessoa) this.ses.getAttribute("user");
+		if (entidade.getIdLivro() != null) {
+			this.atualizar(entidade);
+		} else {
+			Pessoa pessoaDaSecao = (Pessoa) this.ses.getAttribute("user");
 
-		entidade.setDono(pessoaDaSecao);
-		entidade.setDataUltimaLeitura(Calendar.getInstance());
-		entidade.setDataUpload(Calendar.getInstance());
-		entidade.setLivroAtivo(true);
-		entidade.setPublico(var);
+			entidade.setDono(pessoaDaSecao);
+			entidade.setDataUltimaLeitura(Calendar.getInstance());
+			entidade.setDataUpload(Calendar.getInstance());
+			entidade.setLivroAtivo(true);
+			entidade.setPublico(var);
 
-		// Verifica se alguma campo não foi preenchido
-		this.verificaCampos(entidade);
-		livroRepository.inserir(entidade);
+			// Verifica se alguma campo não foi preenchido
+			this.verificaCampos(entidade);
+			livroHistoricoService.inserirLinhaHistorico(entidade, tipoAcao.INCLUIR, null);
+			livroRepository.inserir(entidade);
+		}
 	}
 
 	/**
@@ -53,6 +61,7 @@ public class LivroService {
 	@Transactional
 	public void atualizar(Livro entidade) {
 		entidade.setDataUpload(Calendar.getInstance());
+		livroHistoricoService.inserirLinhaHistorico(entidade, tipoAcao.ALTERACAO, entidade.getDataUpload());
 		livroRepository.atualizar(entidade);
 	}
 
@@ -64,6 +73,7 @@ public class LivroService {
 	@Transactional
 	public void atualizarATransferenciaParaPublico(Livro entidade) {
 		entidade.setPublico(Boolean.TRUE);
+		livroHistoricoService.inserirLinhaHistorico(entidade, tipoAcao.ALTERACAO, entidade.getDataUpload());
 		livroRepository.atualizar(entidade);
 	}
 
@@ -90,7 +100,7 @@ public class LivroService {
 		novo.setPontuacao(entidade.getPontuacao());
 		novo.setTitulo(entidade.getTitulo());
 		novo.setPublico(Boolean.FALSE);
-
+		livroHistoricoService.inserirLinhaHistorico(entidade, tipoAcao.INCLUIR, null);
 		livroRepository.inserir(novo);
 	}
 
@@ -120,27 +130,9 @@ public class LivroService {
 	 */
 	@Transactional
 	public void deletar(Livro livro) {
+		livroHistoricoService.inserirLinhaHistorico(livro, tipoAcao.DELETAR, livro.getDataUpload());
 		livroRepository.deletar(livro);
-		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro deletado ");
 	}
-	// private String verificaExisteListaCustomizada(Livro ed){
-	// List<ListaCustomizada> lista =
-	// listaCustomizadaService.listarListasCustomizadas();
-	// String nomeListasCustom = null;
-	// if(lista != null){
-	// for (ListaCustomizada listaCustomizada : lista) {
-	// List<String> nomeLivro = listaCustomizada.getLivro();
-	// for (String livro2 : nomeLivro) {
-	// if(livro2.equals(ed.getTitulo())){
-	// nomeListasCustom = " :";
-	// return nomeListasCustom.concat(listaCustomizada.getNomeLista());
-	// }
-	// }
-	// }
-	// }
-	// return nomeListasCustom;
-	// }
-	//
 
 	/**
 	 * Conta livros cadastrados
@@ -215,8 +207,7 @@ public class LivroService {
 		List<Livro> lista = this.livroRepository.listarLivrosAutoCompleteTransferir(s);
 		return lista;
 	}
-	
-	
+
 	public List<Livro> listarLivrosAutoCompleteResenha(String s) {
 		List<Livro> lista = this.livroRepository.listarLivrosAutoCompleteResenha(s);
 		return lista;

@@ -6,7 +6,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:b="http://bootsfaces.net/ui"
 	template="/WEB-INF/modelo/padrao.xhtml">
-
+<f:metadata>
+	<f:viewParam name="id" value="#{pessoaMB.pessoa}" />
+</f:metadata>
 <ui:define name="center">
 	
 	<p:panel id="basic" header="#{msg['pessoa.form.header']}"  style="margin-bottom:20px">

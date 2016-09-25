@@ -2,7 +2,9 @@ package com.senac.cl.service;
 
 import java.util.Calendar;
 
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import com.senac.cl.enums.tipoAcao;
 import com.senac.cl.modelos.Pessoa;
@@ -18,18 +20,19 @@ public class PessoaHistoricoService {
 
 	@Inject
 	private PessoaHistoricoRepository repository;
+	
+	private HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	/**
 	 * Atualiza o historico setando os paramentos de acao e data
 	 * @param pessoa
 	 * @param tipo
 	 */
 	public void atualizarHistorico(Pessoa pessoa, tipoAcao tipo) {
+		Pessoa pessoaLogada = (Pessoa) ses.getAttribute("user");
 		PessoaHistorico ph = new PessoaHistorico();
-		//pessoa que realizou a ação
-		ph.setPessoa(pessoa);
-		//sigla da ação executada 
+		ph.setNomeUsuario(pessoaLogada.getNome());
+		ph.setNomelogin(pessoa.getNome());
 		ph.setTipoAcao(tipo.getSigla());
-		//data da ação executada 
 		ph.setDataAcao(Calendar.getInstance());
 		
 		repository.AtualizarHistorico(ph);

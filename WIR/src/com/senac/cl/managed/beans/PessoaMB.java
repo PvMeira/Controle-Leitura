@@ -90,8 +90,6 @@ public class PessoaMB {
 	 */
 	public void deletar(Pessoa pessoa) {
 		servico.deletar(pessoa);
-		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro deletado com sucesso!");
-		carregarListaDePessoas();
 		limpar();
 	}
 

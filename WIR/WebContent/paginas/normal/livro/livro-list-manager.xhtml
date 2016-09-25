@@ -94,7 +94,9 @@
 											<p:graphicImage value="/resources/imagens/livro_lendo.png" height="20px" width="20px" />
 										</p:commandLink>
 										<p:menuButton value="#{msg['title.more']}">
-										<p:menuitem value="#{msg['livro.editar']}" oncomplete="PF('editarLivro').show();" action="#{livroMB.populaLivroEdicao(livro)}"/>
+										<p:menuitem value="#{msg['livro.editar']}" 	outcome="livro-form">
+										 	<f:param name="id" value="#{livro.idLivro}"/>
+										 </p:menuitem>
 										<p:menuitem value="#{msg['livro.remover']}"  action="#{livroMB.deletar(livro)}" oncomplete="updateTabelaLivro();"/>
 										</p:menuButton>
 										
@@ -226,8 +228,6 @@
 			<!-- Modal Resumo -->
 			<ui:include src="/paginas/normal/livro/livro-modal-resumo.xhtml" />
 			
-			<!-- Modal Edit Livro -->
-			<ui:include src="/paginas/normal/livro/modal-edit-livro.xhtml" />
 		<!-- Imports TAB 02 -->
 		
 			<!-- Modal para visualizar anotação -->

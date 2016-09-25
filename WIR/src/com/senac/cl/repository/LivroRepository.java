@@ -73,6 +73,10 @@ public class LivroRepository {
 		String sql = "SELECT * FROM livro WHERE id_pessoa = " + id + ";";
 		return entityManager.createNativeQuery(sql, Livro.class).getResultList();
 	}
+	
+	public Livro search(Long id){
+		return entityManager.find(Livro.class, id);
+	}
 
 	/**
 	 * Retorna Lista com todo os registros marcados como públicos
