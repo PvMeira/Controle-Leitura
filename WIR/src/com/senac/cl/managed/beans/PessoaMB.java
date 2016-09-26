@@ -92,6 +92,17 @@ public class PessoaMB {
 		servico.deletar(pessoa);
 		limpar();
 	}
+	/**
+	 * Retorna o nome da aba com contador
+	 * @return
+	 */
+	public String nomeAbaUserAdm(){
+		int num = this.getListaDePessoasRegistradas().size();
+		
+		String retorno = "Usuários Cadastrados".concat("("+num).concat(")");
+		
+		return retorno;
+	}
 
 	/**
 	 * Carrega foto

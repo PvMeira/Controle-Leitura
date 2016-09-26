@@ -54,4 +54,12 @@ public class LivroPublicoRepository {
 	public List<LivroPublico> todosOsRegistros() {
 		return entityManager.createQuery("select l from " + LivroPublico.class.getSimpleName() + " l").getResultList();
 	}
+	/**
+	 * Conta todos os livros publicos da aplicação
+	 * @return
+	 */
+	public int contarTodosOsLivrosPublicosAplicacao(){
+		int valor = entityManager.createQuery("select l from " + LivroPublico.class.getSimpleName() + " l").getResultList().size();
+		return valor;
+	}
 }

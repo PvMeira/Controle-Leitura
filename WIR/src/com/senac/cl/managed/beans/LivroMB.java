@@ -146,6 +146,17 @@ public class LivroMB {
 		List<Livro> lista = this.livroService.listarLivrosAutoCompleteResenha(particula);
 		return lista;
 	}
+	/**
+	 * Retorna o nome da aba com contador
+	 * @return
+	 */
+	public String nomeAbaLivrosAdm(){
+		int num = listarTodosLivros().size();
+		
+		String retorno = "Todos os Livros Cadastrados".concat("("+num).concat(")");
+		
+		return retorno;
+	}
 
 	/**
 	 * Deleta o livro selecionado

@@ -100,6 +100,27 @@ public class LivroPublicoMB {
 		List<LivroPublico> lista = this.livroPublicoService.listarLivrosPublicos();
 		return lista;
 	}
+	
+	/**
+	 * Retorna o nome da aba com contador
+	 * @return
+	 */
+	public String nomeAbaLivrosPublicosAdm(){
+		int num = listarLivrosPublicos().size();
+		
+		String retorno = "Livros Públicos Cadastrados".concat("("+num).concat(")");
+		
+		return retorno;
+	}
+	
+	/**
+	 * Conta todos os livros publicos da aplicação
+	 * @return
+	 */
+	public int contarTodosLivrosPublicosAplicacao(){
+			int valor = this.livroPublicoService.contarLivrosPublicosAplicacao();
+		return valor;
+	}
 
 	/**
 	 * Deletar Livro publico caso seja ADM

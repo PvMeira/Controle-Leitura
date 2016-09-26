@@ -159,4 +159,13 @@ public class LivroPublicoService {
 	public List<LivroPublico> listarLivrosPublicos(){
 		return this.livroRepository.todosOsRegistros();
 	}
+	/**
+	 * Conta todos os livros publicos da aplicação
+	 * @return
+	 */
+	@Transactional
+	public int contarLivrosPublicosAplicacao(){
+		int valor = this.livroRepository.contarTodosOsLivrosPublicosAplicacao(); 
+		return valor;
+	}
 }
