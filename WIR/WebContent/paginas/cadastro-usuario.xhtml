@@ -41,13 +41,17 @@
 					
 					<p:outputLabel value="#{msg['cadastro.usuario.mail']} :" for="mail" styleClass="outputlabel" id="outLabelMail"/>
 					<p:inputText value="#{pessoaMB.pessoa.mail}" id="mail"
-						required="true" requiredMessage="Campo Obrigatório" placeholder="#{msg['cadastro.usuario.mail']}" />
+						required="true" requiredMessage="Campo Obrigatório" placeholder="#{msg['cadastro.usuario.mail']}" >
+							<f:validator validatorId="emailValidator" />
+						</p:inputText>
 					<p:message for="mail" />
 					
 					<p:outputLabel value="#{msg['cadastro.usuario.cpf']} :" for="cpf" styleClass="outputlabel" id="outLabelCpf"/>
 					<p:inputText value="#{pessoaMB.pessoa.cpf}" id="cpf"
 						required="true" requiredMessage="Campo Obrigatório"
-						placeholder="#{msg['cadastro.usuario.cpf']}" />
+						placeholder="#{msg['cadastro.usuario.cpf']}" >
+							<f:validator validatorId="cpfValidator" />
+						</p:inputText>
 					<p:message for="cpf" />
 					
 					<p:outputLabel value="#{msg['cadastro.usuario.fone']} :" for="fone" styleClass="outputlabel" id="outLabelFone"/>
