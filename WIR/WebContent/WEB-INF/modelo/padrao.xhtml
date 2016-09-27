@@ -71,10 +71,10 @@
 				
 				<p:panel id="panelConfig" style="position:absolute; right:0; top:15px; font-weight: bold; z-index: 25; padding-right: 40px; width: 35px; background:transparent;" >
 					<h:form prependId="false" id="formPrefs">
-						<p:graphicImage id="prefs" value="/resources/imagens/config.png" title="Configuração" width="40px" height="40px"/>
+						<p:graphicImage id="prefs" value="/resources/imagens/config.png" title="#{msg['label.pagina-config']}" width="40px" height="40px"/>
 		          		<p:contextMenu for="prefs" event="click" style="background:white; position: absolute; z-index:30000; width: 180px" >
 		          			<f:attribute name="onclick" value="javascript:this.style.zindex = 20000"/>
-		          			<p:menuitem value="Fazer logOff" ajax="false" action="#{sessionMB.sair()}" icon="ui-icon-power" /> 
+		          			<p:menuitem value="#{msg['menu.aplication.label.logOff']}" ajax="false" action="#{sessionMB.sair()}" icon="ui-icon-power" /> 
 		          		</p:contextMenu>
 					</h:form>
 	     		</p:panel>

@@ -3,9 +3,13 @@ package com.senac.cl.service;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+
+import org.exolab.castor.xml.ValidationException;
 
 import com.senac.cl.enums.tipoAcao;
 import com.senac.cl.modelos.Livro;
@@ -121,16 +125,19 @@ public class LivroPublicoService {
 	@Transactional
 	private void verificaCampos(LivroPublico livro) {
 		if (livro.getTituloPublico() == null) {
-			throw new RuntimeException("Campo Autor está nulo");
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Campo Titulo não foi preenchido", "").toString());
 		}
 		if (livro.getDonoPublico() == null) {
-			throw new RuntimeException("Problema Com o login, contado suporte");
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de sistema usuário logado não foi identificado", "").toString());
 		}
 		if (livro.getPaginasPublico() == 0) {
-			throw new RuntimeException("Campo paginas está nulo");
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Campo Páginas não foi preenchido", "").toString());
 		}
 		if (livro.getAutorPublico() == null) {
-			throw new RuntimeException("Campo autor está nulo");
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Campo Autor não foi preenchido", "").toString());
+		}
+		if (livro.getArquivoPublico() == null) {
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Arquivo não foi selecionado", "").toString());
 		}
 	}
 

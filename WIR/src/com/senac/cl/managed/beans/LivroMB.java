@@ -88,7 +88,6 @@ public class LivroMB {
 		}
 		
 		livroService.salvar(this.getLivro(), tornarpublico);
-		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro salvo com sucesso!");
 		limpar();
 	}
 	/**

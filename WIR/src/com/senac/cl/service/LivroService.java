@@ -3,6 +3,7 @@ package com.senac.cl.service;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -86,16 +87,19 @@ public class LivroService {
 	@Transactional
 	private void verificaCampos(Livro livro) {
 		if (livro.getTitulo() == null) {
-			throw new RuntimeException("Campo Autor está nulo");
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Campo Titulo não foi preenchido", "").toString());
 		}
 		if (livro.getDono() == null) {
-			throw new RuntimeException("Problema Com o login, contado suporte");
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de sistema usuário logado não foi identificado", "").toString());
 		}
 		if (livro.getPaginas() == 0) {
-			throw new RuntimeException("Campo paginas está nulo");
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Campo Páginas não foi preenchido", "").toString());
 		}
 		if (livro.getAutor() == null) {
-			throw new RuntimeException("Campo autor está nulo");
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Campo Autor não foi preenchido", "").toString());
+		}
+		if (livro.getArquivo() == null) {
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Arquivo não foi selecionado", "").toString());
 		}
 	}
 
