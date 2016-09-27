@@ -58,8 +58,8 @@
 		<p:layout  id="test" fullPage="true">
 			<p:layoutUnit id="top" position="north" resizable="false" collapsible="false"  >
 				<h:form id="formHead" >
-					<div style="display: table-cell; margin-left: -10px; margin-top: -11px; text-align: center;" title="Clique aqui">
-					<a><p:graphicImage id="logo" value="/resources/imagens/logo.png" style="position:absolute; top:2px; left:2px;z-index: 1000;" width="50px" height="50px"/></a>
+					<div style="display: table-cell; margin-left: -10px; margin-top: -11px; text-align: center;" title="Controle De Leitura">
+					<a><p:graphicImage id="logo" value="/resources/imagens/logo.png" style="position:absolute; top:2px; left:2px;z-index: 1000;" width="60px" height="60px"/></a>
 					</div>
 					<p:menubar id="menu" autoDisplay="false"  
 					style="display: table-cell; border:0; padding-left: 100px; padding-top: 8px; padding-bottom: 0; background:transparent; margin:0; padding-right: 25px;" 
@@ -68,6 +68,16 @@
 					</p:menubar>
 				</h:form>
 				</p:layoutUnit>
+				
+				<p:panel id="panelConfig" style="position:absolute; right:0; top:15px; font-weight: bold; z-index: 25; padding-right: 40px; width: 35px; background:transparent;" >
+					<h:form prependId="false" id="formPrefs">
+						<p:graphicImage id="prefs" value="/resources/imagens/config.png" title="Configuração" width="40px" height="40px"/>
+		          		<p:contextMenu for="prefs" event="click" style="background:white; position: absolute; z-index:30000; width: 180px" >
+		          			<f:attribute name="onclick" value="javascript:this.style.zindex = 20000"/>
+		          			<p:menuitem value="Fazer logOff" ajax="false" action="#{sessionMB.sair()}" icon="ui-icon-power" /> 
+		          		</p:contextMenu>
+					</h:form>
+	     		</p:panel>
 				
 				<p:layoutUnit id="center" position="center" resizable="false" collapsible="false">
 					<ui:insert name="center">
