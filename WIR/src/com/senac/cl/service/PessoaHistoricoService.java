@@ -1,6 +1,7 @@
 package com.senac.cl.service;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -36,6 +37,10 @@ public class PessoaHistoricoService {
 		ph.setDataAcao(Calendar.getInstance());
 		
 		repository.AtualizarHistorico(ph);
+	}
+	
+	public List<PessoaHistorico> listaHistoricoPessoa(){
+		return this.repository.todosOsRegistros();
 	}
 
 }

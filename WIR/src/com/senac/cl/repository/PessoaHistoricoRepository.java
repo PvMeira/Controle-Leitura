@@ -1,8 +1,11 @@
 package com.senac.cl.repository;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import com.senac.cl.modelos.LeituraHistorico;
 import com.senac.cl.modelos.PessoaHistorico;
 
 public class PessoaHistoricoRepository {
@@ -19,6 +22,10 @@ public class PessoaHistoricoRepository {
 	public void AtualizarHistorico(PessoaHistorico ph) {
 		entityManager.persist(ph);
 
+	}
+	@SuppressWarnings("unchecked")
+	public List<PessoaHistorico> todosOsRegistros() {
+		return entityManager.createQuery("select l from " + PessoaHistorico.class.getSimpleName() + " l").getResultList();
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.senac.cl.service;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -11,6 +12,7 @@ import com.senac.cl.modelos.Livro;
 import com.senac.cl.modelos.LivroHistorico;
 import com.senac.cl.modelos.Pessoa;
 import com.senac.cl.repository.LivroHistoricoRepository;
+
 /**
  * 
  * @author Pedro
@@ -21,8 +23,12 @@ public class LivroHistoricoService {
 	LivroHistoricoRepository repository;
 
 	private HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-	
-	
+	/**
+	 * Cria uma linha na tabela de historico
+	 * @param ed
+	 * @param en
+	 * @param c
+	 */
 	public void inserirLinhaHistorico(Livro ed, tipoAcao en, Calendar c) {
 		Pessoa pessoaLogada = (Pessoa) ses.getAttribute("user");
 
@@ -37,4 +43,12 @@ public class LivroHistoricoService {
 
 		this.repository.inserir(historico);
 	}
+	/**
+	 * Lista todos os registros da aplicação
+	 * @return
+	 */
+	public List<LivroHistorico> listarHistoricoLivro() {
+		return repository.todosOsRegistros();
+	}
+	
 }

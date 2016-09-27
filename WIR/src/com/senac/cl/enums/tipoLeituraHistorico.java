@@ -47,5 +47,16 @@ public enum tipoLeituraHistorico {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public static tipoLeituraHistorico getTipoLeituraHistoricoEnumPorSigla(String sigla){
+		switch (sigla) {
+			case "I":return tipoLeituraHistorico.INICIO;
+			case "F":return tipoLeituraHistorico.FIM;
+			case "A":return tipoLeituraHistorico.ALTERACAO;
+			case "C":return tipoLeituraHistorico.CANCELAMENTO;
+		}
+		return null;
+	}
+
 
 }

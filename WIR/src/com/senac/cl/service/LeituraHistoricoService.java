@@ -1,6 +1,7 @@
 package com.senac.cl.service;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -32,6 +33,10 @@ public class LeituraHistoricoService {
 		historico.setTipoAcao(en.getSigla());
 
 		this.repository.inserir(historico);
+	}
+
+	public List<LeituraHistorico> listaHistoricoLeitura() {
+		return this.repository.todosOsRegistros();
 	}
 
 }

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/modelo/padrao.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions" >
+
+	<ui:define name="center">
+	<p:panel id="basic" header="Histórico de Movimento de aplicações"  style="margin-bottom:20px" rendered="#{sessionMB.ADM}">
+	<p:accordionPanel multiple="true">
+        <p:tab title="#{historicoMB.abaHisLivro()}">
+			<h:form prependId="false" id="admFormLivros">
+				<p:dataTable 
+					id="listaHistoricoLivro" 
+					var="livro" 
+					value="#{historicoMB.listarhistoricoLivro()}"
+					emptyMessage="#{msg['datatable.pageReportTemplete.empty']}" 
+					paginator="true" 
+					rows="25"
+					paginatorAlwaysVisible="true" >
+					
+					<p:column headerText="#{msg['livro.adm.list.coluna.id']}" style="text-align:center">
+						<h:outputText value="#{livro.idLivroHistorico}"/>
+					</p:column>
+					
+					<p:column headerText="#{msg['livro.titulo']}" style="text-align:center">
+						<h:outputText value="#{livro.nomeLivro}"/>
+					</p:column>
+					
+					<p:column headerText="Funcionário/Ação" style="text-align:center">
+						<h:outputText value="#{historicoMB.buscaPessoaRealizouAcao(livro.pessoaRealizouAcaoLogin)}"/>
+					</p:column>
+					
+					
+					<p:column headerText="Data Inicio" style="text-align:center">
+						<h:outputText value="#{livro.dataInicio.time}" id="dataFimHis">
+							<f:convertDateTime for="dataFimHis" pattern="EEE, M/d/yy hh:mm"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Data Fim" style="text-align:center" >
+           			<h:outputText value="#{livro.datafim.time}" id="dataIniciohis">
+           				<f:convertDateTime for="dataIniciohis" pattern="EEE, M/d/yy hh:mm"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Ação Realizada" style="text-align:center">
+						<h:outputText value="#{historicoMB.conversorAcaoEnumLivro(livro)}" />
+
+					</p:column>
+				</p:dataTable>
+				<p:commandLink id="excel" ajax="false" title="#{msg['livro.adm.list.export.exel']}">
+					<p:graphicImage value="/resources/imagens/excel.png" height="30px" width="30px" />
+					<p:dataExporter type="xls" target="listaHistoricoLivro" fileName="livros-Historico-dados" />
+				</p:commandLink>
+
+				<p:commandLink id="pdf" ajax="false" title="#{msg['livro.adm.list.export.pdf']}">
+					<p:graphicImage value="/resources/imagens/pdf.png" height="30px" width="30px" />
+					<p:dataExporter type="pdf" target="listaHistoricoLivro" fileName="livros-Historico-dados" />
+				</p:commandLink>
+
+				<p:commandLink id="csv" ajax="false" title="#{msg['livro.adm.list.export.csv']}">
+					<p:graphicImage value="/resources/imagens/csv.png" height="30px" width="30px" />
+					<p:dataExporter type="csv" target="listaHistoricoLivro" fileName="livros-Historico-dados" />
+				</p:commandLink>
+
+				<p:commandLink id="xml" ajax="false" title="#{msg['livro.adm.list.export.xml']}">
+					<p:graphicImage value="/resources/imagens/xml.jpg" height="30px" width="30px" />
+					<p:dataExporter type="xml" target="listaHistoricoLivro" fileName="livros-Historico-dados" />
+				</p:commandLink>
+			</h:form>
+        </p:tab>
+        
+        <p:tab title="#{historicoMB.abaHisPessoa()}">
+			<h:form prependId="false" id="admFormUser">
+				<p:dataTable 
+					id="listaHistoricoPessoa" 
+					var="pes" 
+					value="#{historicoMB.listarhistoricoPessoa()}"
+					emptyMessage="#{msg['datatable.pageReportTemplete.empty']}" 
+					paginator="true" 
+					rows="25"
+					paginatorAlwaysVisible="true" >
+					
+					<p:column headerText="ID" style="text-align:center">
+						<h:outputText value="#{pes.idHistorico}"/>
+					</p:column>
+					
+					<p:column headerText="Login" style="text-align:center">
+						<h:outputText value="#{pes.nomelogin}"/>
+					</p:column>
+					
+
+					<p:column headerText="Nome Usuário" style="text-align:center">
+						<h:outputText value="#{pes.nomeUsuario}" />
+						
+					</p:column>
+					
+					<p:column headerText="Data Fim" style="text-align:center" >
+           			<h:outputText value="#{pes.dataAcao.time}" id="dataHistPessoa">
+           				<f:convertDateTime for="dataHistPessoa" pattern="EEE, M/d/yy hh:mm"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Ação Realizada" style="text-align:center">
+						<h:outputText value="#{historicoMB.conversorAcaoEnumPessoa(pes)}" />
+
+					</p:column>
+				</p:dataTable>
+				<p:commandLink id="excel1" ajax="false" title="#{msg['livro.adm.list.export.exel']}">
+					<p:graphicImage value="/resources/imagens/excel.png" height="30px" width="30px" />
+					<p:dataExporter type="xls" target="listaHistoricoPessoa" fileName="Pessoa-Historico-dados" />
+				</p:commandLink>
+
+				<p:commandLink id="pdf1" ajax="false" title="#{msg['livro.adm.list.export.pdf']}">
+					<p:graphicImage value="/resources/imagens/pdf.png" height="30px" width="30px" />
+					<p:dataExporter type="pdf" target="listaHistoricoPessoa" fileName="Pessoa-Historico-dados" />
+				</p:commandLink>
+
+				<p:commandLink id="csv1" ajax="false" title="#{msg['livro.adm.list.export.csv']}">
+					<p:graphicImage value="/resources/imagens/csv.png" height="30px" width="30px" />
+					<p:dataExporter type="csv" target="listaHistoricoPessoa" fileName="Pessoa-Historico-dados" />
+				</p:commandLink>
+
+				<p:commandLink id="xml1" ajax="false" title="#{msg['livro.adm.list.export.xml']}">
+					<p:graphicImage value="/resources/imagens/xml.jpg" height="30px" width="30px" />
+					<p:dataExporter type="xml" target="listaHistoricoPessoa" fileName="Pessoa-Historico-dados" />
+				</p:commandLink>
+			</h:form>
+        </p:tab>
+        
+         <p:tab title="#{historicoMB.abaHisLeitura()}">
+			<h:form prependId="false" id="admFormLeitura">
+				<p:dataTable 
+					id="listaHistoricoLeitura" 
+					var="leitura" 
+					value="#{historicoMB.listarhistoricoLeitura()}"
+					emptyMessage="#{msg['datatable.pageReportTemplete.empty']}" 
+					paginator="true" 
+					rows="25"
+					paginatorAlwaysVisible="true" >
+					
+					<p:column headerText="ID" style="text-align:center">
+						<h:outputText value="#{leitura.idLeituraHistorico}"/>
+					</p:column>
+					
+					<p:column headerText="#{msg['livro.titulo']}" style="text-align:center">
+						<h:outputText value="#{leitura.nomeLivro}"/>
+					</p:column>
+					
+
+					<p:column headerText="Nome Usuário" style="text-align:center">
+						<h:outputText value="#{leitura.nomePessoa}" />
+					</p:column>
+					
+					<p:column headerText="Data Inicio" style="text-align:center" >
+           			<h:outputText value="#{leitura.dataInicio.time}" id="dataHistLei1">
+           				<f:convertDateTime for="dataHistLei1" pattern="EEE, M/d/yy hh:mm"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Data Fim" style="text-align:center" >
+           			<h:outputText value="#{leitura.datafim.time}" id="dataHistLei">
+           				<f:convertDateTime for="dataHistLei" pattern="EEE, M/d/yy hh:mm"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Funcionário/Ação" style="text-align:center">
+						<h:outputText value="#{historicoMB.buscaPessoaRealizouAcao(leitura.pessoaRealizouAcaoLogin)}"/>
+					</p:column>
+					
+					<p:column headerText="Ação Realizada" style="text-align:center">
+						<h:outputText value="#{historicoMB.conversorAcaoEnumleitura(leitura)}" />
+					</p:column>
+				</p:dataTable>
+				<p:commandLink id="excel2" ajax="false" title="#{msg['livro.adm.list.export.exel']}">
+					<p:graphicImage value="/resources/imagens/excel.png" height="30px" width="30px" />
+					<p:dataExporter type="xls" target="listaHistoricoLeitura" fileName="Leitura-Historico-dados" />
+				</p:commandLink>
+
+				<p:commandLink id="pdf2" ajax="false" title="#{msg['livro.adm.list.export.pdf']}">
+					<p:graphicImage value="/resources/imagens/pdf.png" height="30px" width="30px" />
+					<p:dataExporter type="pdf" target="listaHistoricoLeitura" fileName="Leitura-Historico-dados" />
+				</p:commandLink>
+
+				<p:commandLink id="csv2" ajax="false" title="#{msg['livro.adm.list.export.csv']}">
+					<p:graphicImage value="/resources/imagens/csv.png" height="30px" width="30px" />
+					<p:dataExporter type="csv" target="listaHistoricoLeitura" fileName="Leitura-Historico-dados" />
+				</p:commandLink>
+
+				<p:commandLink id="xml2" ajax="false" title="#{msg['livro.adm.list.export.xml']}">
+					<p:graphicImage value="/resources/imagens/xml.jpg" height="30px" width="30px" />
+					<p:dataExporter type="xml" target="listaHistoricoLeitura" fileName="Leitura-Historico-dados" />
+				</p:commandLink>
+			</h:form>
+        </p:tab>
+    </p:accordionPanel>
+		</p:panel>
+	</ui:define>
+</ui:composition>
