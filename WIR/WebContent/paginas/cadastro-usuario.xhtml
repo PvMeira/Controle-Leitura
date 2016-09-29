@@ -55,7 +55,7 @@
 					<p:message for="cpf" />
 					
 					<p:outputLabel value="#{msg['cadastro.usuario.fone']} :" for="fone" styleClass="outputlabel" id="outLabelFone"/>
-					<p:inputText value="#{pessoaMB.pessoa.telefone}" id="fone"
+					<p:inputMask mask="(999) 999-9999" value="#{pessoaMB.pessoa.telefone}" id="fone"
 						required="true" requiredMessage="Campo Obrigatório" placeholder="#{msg['cadastro.usuario.fone']}" />
 					<p:message for="fone" />
 					<p:outputLabel value="#{msg['cadastro.usuario.escolher.foto']} :" for="idUpload"/>
