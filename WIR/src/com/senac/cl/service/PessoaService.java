@@ -34,6 +34,7 @@ public class PessoaService {
 			pessoa.setDataUltimoLogin(Calendar.getInstance());
 			repositorio.inserir(pessoa);
 			service.atualizarHistorico(pessoa,tipoAcao.INCLUIR);
+
 		} else {
 			pessoa.setNormal(true);
 			pessoa.setDataUltimoLogin(Calendar.getInstance());

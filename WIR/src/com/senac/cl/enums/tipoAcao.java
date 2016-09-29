@@ -9,7 +9,8 @@ public enum tipoAcao {
 	
 	INCLUIR ("I","INCLUIR"),
 	DELETAR ("D","DELETAR"),
-	ALTERACAO ("A","ALTERACAO");
+	ALTERACAO ("A","ALTERACAO"),
+	NOVOCADASTRO ("N","Novo Cadastro"),;
  
 
 private String sigla;
@@ -41,6 +42,7 @@ private String nome;
 			case "A":return tipoAcao.ALTERACAO;
 			case "D":return tipoAcao.DELETAR;
 			case "I":return tipoAcao.INCLUIR;
+			case "N":return tipoAcao.NOVOCADASTRO;
 		}
 		return null;
 	}

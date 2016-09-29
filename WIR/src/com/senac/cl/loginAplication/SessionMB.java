@@ -61,13 +61,13 @@ public class SessionMB implements Serializable {
 					ses.setAttribute("user", pessoa);
 					this.isAdm();
 					this.getImagemUser();
-					return "adm/pessoa-form.xhtml?faces-redirect=true";
+					return "paginas/adm/pessoa-form.xhtml?faces-redirect=true";
 				} else if (pessoaED.isNormal() == true) {
 					ses.setAttribute("userNORMAL", pessoa);
 					ses.setAttribute("user", pessoa);
 					this.isAdm();
 					this.getImagemUser();
-					return "normal/livro/livro-list-manager.xhtml?faces-redirect=true";
+					return "paginas/normal/livro/livro-list-manager.xhtml?faces-redirect=true";
 				}
 			}
 		}
@@ -120,7 +120,7 @@ public class SessionMB implements Serializable {
 		this.executaUpdateLogout();
 		this.imagemUsuarioSecao = null;
 		SessionUtil.getSession().invalidate();
-		return "/paginas/Login.xhtml?faces-redirect=true";
+		return "/Login.xhtml?faces-redirect=true";
 	}
 	/**
 	 * Meotodo para executar o update do usuario logado

@@ -31,7 +31,12 @@ public class PessoaHistoricoService {
 	public void atualizarHistorico(Pessoa pessoa, tipoAcao tipo) {
 		Pessoa pessoaLogada = (Pessoa) ses.getAttribute("user");
 		PessoaHistorico ph = new PessoaHistorico();
-		ph.setNomeUsuario(pessoaLogada.getNome());
+		if(pessoaLogada != null){
+			ph.setNomeUsuario(pessoaLogada.getNome());	
+		}else{
+			ph.setNomeUsuario("Novo Usuário");	
+		}
+		
 		ph.setNomelogin(pessoa.getNome());
 		ph.setTipoAcao(tipo.getSigla());
 		ph.setDataAcao(Calendar.getInstance());
