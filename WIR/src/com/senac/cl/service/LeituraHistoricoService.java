@@ -27,6 +27,7 @@ public class LeituraHistoricoService {
 		historico.setDataInicio(ed.getDataInicio());
 		historico.setNomeLivro(ed.getLivro().getTitulo());
 		historico.setNomePessoa(ed.getLeitor().getNome());
+		historico.setIdDono(ed.getLeitor().getIdPessoa());
 		historico.setObservação(ed.getObservacao());
 		historico.setPessoaRealizouAcaoLogin(pessoaLogada.getIdPessoa());
 		historico.setDatafim(c);
@@ -37,6 +38,11 @@ public class LeituraHistoricoService {
 
 	public List<LeituraHistorico> listaHistoricoLeitura() {
 		return this.repository.todosOsRegistros();
+	}
+	
+	public List<LeituraHistorico> listaHistoricoLeituraUsuarioLogado() {
+		Pessoa pessoaLogada = (Pessoa) ses.getAttribute("user");
+		return this.repository.listaHistoricoLeituraUsuarioLogado(pessoaLogada.getIdPessoa());
 	}
 
 }

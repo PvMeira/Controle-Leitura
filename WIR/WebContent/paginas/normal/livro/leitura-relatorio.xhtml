@@ -1,0 +1,92 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/modelo/padrao.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<ui:define name="center">
+		<p:panel id="basic" header="Histórico de Movimento de aplicações"
+			style="margin-bottom:20px">
+			<p:accordionPanel multiple="true">
+
+
+				<p:tab title="Leituras Realizadas">
+					<h:form prependId="false" id="leituraRelatorioForm">
+						<p:dataTable id="relatorioLeituraLista" var="r"
+							value="#{leituraMB.listaHistoricoLeituraUsuarioLogado()}"
+							emptyMessage="#{msg['datatable.pageReportTemplete.empty']}"
+							paginator="true" rows="50" paginatorAlwaysVisible="true">
+
+							<p:column headerText="#{msg['livro.adm.list.coluna.id']}"
+								style="text-align:center">
+								<h:outputText value="#{r.idLeituraHistorico}" />
+							</p:column>
+
+							<p:column headerText="#{msg['livro.titulo']}"
+								style="text-align:center">
+								<h:outputText value="#{r.nomeLivro}" />
+							</p:column>
+
+							<p:column headerText="Ação"
+								style="text-align:center">
+								<h:outputText value="#{r.tipoAcao}" />
+							</p:column>
+
+							
+							<p:column
+								headerText="#{msg['livro.adm.list.coluna.data.upload']}"
+								style="text-align:center">
+								<h:outputText value="#{r.dataInicio.time}" id="uploadTime">
+									<f:convertDateTime for="uploadTime" pattern="EEE, M/d/yy hh:mm" />
+								</h:outputText>
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['livro.adm.list.coluna.data.upload']}"
+								style="text-align:center">
+								<h:outputText value="#{r.datafim.time}" id="uploadTime1">
+									<f:convertDateTime for="uploadTime1" pattern="EEE, M/d/yy hh:mm" />
+								</h:outputText>
+							</p:column>
+						</p:dataTable>
+						<p:commandLink id="excel2" ajax="false"
+							title="#{msg['livro.adm.list.export.exel']}">
+							<p:graphicImage value="/resources/imagens/excel.png"
+								height="30px" width="30px" />
+							<p:dataExporter type="xls" target="relatorioLeituraLista"
+								fileName="relatorio-leitura" />
+						</p:commandLink>
+
+						<p:commandLink id="pdf2" ajax="false"
+							title="#{msg['livro.adm.list.export.pdf']}">
+							<p:graphicImage value="/resources/imagens/pdf.png" height="30px"
+								width="30px" />
+							<p:dataExporter type="pdf" target="relatorioLeituraLista"
+								fileName="relatorio-leitura" />
+						</p:commandLink>
+
+						<p:commandLink id="csv2" ajax="false"
+							title="#{msg['livro.adm.list.export.csv']}">
+							<p:graphicImage value="/resources/imagens/csv.png" height="30px"
+								width="30px" />
+							<p:dataExporter type="csv" target="relatorioLeituraLista"
+								fileName="relatorio-leitura" />
+						</p:commandLink>
+
+						<p:commandLink id="xml2" ajax="false"
+							title="#{msg['livro.adm.list.export.xml']}">
+							<p:graphicImage value="/resources/imagens/xml.jpg" height="30px"
+								width="30px" />
+							<p:dataExporter type="xml" target="relatorioLeituraLista"
+								fileName="relatorio-leitura" />
+						</p:commandLink>
+					</h:form>
+				</p:tab>
+			</p:accordionPanel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

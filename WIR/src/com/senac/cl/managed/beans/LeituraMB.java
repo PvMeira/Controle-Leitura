@@ -12,8 +12,10 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import com.senac.cl.modelos.Leitura;
+import com.senac.cl.modelos.LeituraHistorico;
 import com.senac.cl.modelos.LeituraService;
 import com.senac.cl.modelos.Livro;
+import com.senac.cl.service.LeituraHistoricoService;
 import com.senac.cl.service.LivroService;
 
 /**
@@ -40,8 +42,20 @@ public class LeituraMB {
 
 	@Inject
 	private LivroMB livroMB;
+	@Inject
+	private LeituraHistoricoService leituraHistoricoService;
 
 	private StreamedContent streamedContent;
+	
+	public List<LeituraHistorico> listaHistoricoLeituraUsuarioLogado(){
+		
+		return this.leituraHistoricoService.listaHistoricoLeituraUsuarioLogado();
+		
+	}
+	
+//	public String getNomeAcaoHistorico (LeituraHistorico ed){
+//		
+//	}
 
 	public StreamedContent getStreamedContent() {
 		if (FacesContext.getCurrentInstance().getRenderResponse()) {
