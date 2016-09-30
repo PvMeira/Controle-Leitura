@@ -34,10 +34,10 @@
 						<p:outputLabel value="#{pessoa.username}"/>
 					</p:column>
 					<p:column style="text-align: center" id="columnAcao" headerText="#{msg['livro.acao']}">
-						<p:commandButton icon="fa fa-fw fa-pencil" value="Editar" action="pessoa-form?faces-redirect=true&amp;includeViewParams=true">
+						<p:commandButton icon="fa fa-fw fa-pencil"  action="pessoa-form?faces-redirect=true&amp;includeViewParams=true">
 							<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaMB.pessoa}"/>
 						</p:commandButton>
-						<p:commandButton value="#{msg['title.remove']}" icon="fa fa-fw fa-trash"
+						<p:commandButton icon="fa fa-fw fa-trash"
 						action="#{pessoaMB.deletar(pessoa)}" oncomplete="atualizarlistaPessoa();"/>
 					</p:column>
 				</p:dataTable>
