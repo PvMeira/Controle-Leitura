@@ -23,7 +23,7 @@ public class NormalFiltro extends HttpFilter {
     public void doFilter(HttpServletRequest request, HttpServletResponse response, HttpSession session, FilterChain chain)
         throws ServletException, IOException
     {
-        if (session != null && session.getAttribute("userADM") != null) {
+        if (session.getAttribute("userADM") != null) {
             chain.doFilter(request, response);
         }
         else {
