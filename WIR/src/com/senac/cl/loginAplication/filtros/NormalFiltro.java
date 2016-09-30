@@ -14,21 +14,20 @@ import org.omnifaces.util.Servlets;
 /**
  * 
  * @author Pedro
- * @since 29/09/2016
+ * @since 07/09/2016
  */
-
-@WebFilter("/paginas/*")
-public class LoginFiltro extends HttpFilter {
+@WebFilter("/paginas/adm/*")
+public class NormalFiltro extends HttpFilter {
 
     @Override
     public void doFilter(HttpServletRequest request, HttpServletResponse response, HttpSession session, FilterChain chain)
         throws ServletException, IOException
     {
-        if (session != null && session.getAttribute("user") != null) {
+        if (session != null && session.getAttribute("userADM") != null) {
             chain.doFilter(request, response);
         }
         else {
-            Servlets.facesRedirect(request, response, "Login.xhtml");
+            Servlets.facesRedirect(request, response, "paginas/semAutorizacao.xhtml");
         }
     }
 }
