@@ -33,5 +33,10 @@ public class LeituraHistoricoRepository {
 	public List<LeituraHistorico> todosOsRegistros() {
 		return entityManager.createQuery("select l from " + LeituraHistorico.class.getSimpleName() + " l").getResultList();
 	}
+	
+	public List<LeituraHistorico> listaHistoricoLeituraUsuarioLogado(long id){
+		String sql = "SELECT * FROM leitura_historico WHERE id_dono = "+id+";";
+		return entityManager.createNativeQuery(sql, LeituraHistorico.class).getResultList();
+	}
 
 }

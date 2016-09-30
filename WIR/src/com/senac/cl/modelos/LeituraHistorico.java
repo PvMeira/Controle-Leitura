@@ -51,7 +51,9 @@ public class LeituraHistorico {
 	@Column(name = "acao_login_pessoa")
 	private long pessoaRealizouAcaoLogin;
 
-
+	@Column(name = "id_dono")
+	@NotNull
+	private long idDono;
 	
 	
 	
@@ -74,7 +76,7 @@ public class LeituraHistorico {
 	 * @param pessoaRealizouAcaoLogin
 	 */
 	public LeituraHistorico(Long idLeituraHistorico, String nomeLivro, String observação, String nomePessoa,
-			Calendar dataInicio, Calendar datafim, long pessoaRealizouAcaoLogin,String tipo) {
+			Calendar dataInicio, Calendar datafim, long pessoaRealizouAcaoLogin,String tipo, long idDono) {
 		this.idLeituraHistorico = idLeituraHistorico;
 		this.nomeLivro = nomeLivro;
 		this.observação = observação;
@@ -83,6 +85,7 @@ public class LeituraHistorico {
 		this.datafim = datafim;
 		this.pessoaRealizouAcaoLogin = pessoaRealizouAcaoLogin;
 		this.tipoAcao = tipo;
+		this.idDono = idDono;
 	}
 
 
@@ -212,6 +215,23 @@ public class LeituraHistorico {
 	public void setPessoaRealizouAcaoLogin(long pessoaRealizouAcaoLogin) {
 		this.pessoaRealizouAcaoLogin = pessoaRealizouAcaoLogin;
 	}
+
+
+	/**
+	 * @return the idDono
+	 */
+	public long getIdDono() {
+		return idDono;
+	}
+
+
+	/**
+	 * @param idDono the idDono to set
+	 */
+	public void setIdDono(long idDono) {
+		this.idDono = idDono;
+	}
+	
 	
 
 }
