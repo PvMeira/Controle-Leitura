@@ -1,6 +1,7 @@
 package com.senac.cl.service;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -49,6 +50,27 @@ public class ResenhaService {
 		ed.setInacabada(true);
 		ed.setAutor(pes);
 		this.resenhaRepository.inserir(ed);
+	}
+	
+	/**
+	 * Lista Resenhas completadas pelo usuario da seção
+	 * @return
+	 */
+	@Transactional
+	public List<Resenha> listaResenhaUsuarioAcabadas(){
+			Pessoa pes =(Pessoa)ses.getAttribute("user"); 
+		return this.resenhaRepository.listaResenhasAcabadasUsuario(pes.getIdPessoa());
+		
+	}
+	
+	/**
+	 * Lista Resenhas inacabadas pelo usuario da seção
+	 * @return
+	 */
+	@Transactional
+	public List<Resenha> listaResenhaUsuarioInacabadas(){
+			Pessoa pes =(Pessoa)ses.getAttribute("user"); 
+		return this.resenhaRepository.listaResenhasInacabadasUsuario(pes.getIdPessoa());
 	}
 
 }

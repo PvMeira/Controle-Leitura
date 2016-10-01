@@ -9,16 +9,17 @@
 
 	<ui:define name="center">
 	
-<p:panel id="basicManagerResenhas" header="Minhas Resenhas - Finalizadas"  style="margin-bottom:20px; width:100%;" >
-	<p:carousel numVisible="1" effect="easeInStrong"  style="margin-bottom:0; width:100%;" value="#{resenhaMB.listaResenhasUsuarioAcabadas()}" var="resenha" >
+<p:panel id="basicManagerResenhasInacabadas" header="Minhas Resenhas - Inacabadas"  style="margin-bottom:20px; width:100%;" >
+	<p:carousel numVisible="1" effect="easeInStrong"  style="margin-bottom:0; width:100%;" value="#{resenhaMB.listaResenhasUsuarioInacabadas()}" var="resenha" >
         <p:tab>
-        <h:form id="formResenhaTab" prependId="false">
+        <h:form id="formResenhaInacabadaTab" prependId="false">
         	<h:panelGrid columns="2" cellpadding="10">
+        	
         	<p:outputLabel value="Título"/>
         	       <h:outputText  value="#{resenha.titulo}" escape="false" />
         	
         		<p:outputLabel value="Assunto"/>
-        	       <h:outputText id="display" value="#{resenha.assunto}" escape="false" />
+        	       <h:outputText  value="#{resenha.assunto}" escape="false" />
             
             	<p:outputLabel value="Livro"/>
           	 		<h:outputText value="#{resenha.livroAlvo.titulo}" />

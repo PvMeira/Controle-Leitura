@@ -24,6 +24,16 @@ public enum tipoResenha {
 		this.sigla = sigla;
 		this.nome = nome;
 	}
+	
+	public static tipoResenha getTipoResenhaEnumPorSigla(String sigla){
+		switch (sigla) {
+			case "C":return tipoResenha.CRITICA;
+			case "D":return tipoResenha.DESCRITIVA;
+			case "T":return tipoResenha.TEMATICA;
+			case "L":return tipoResenha.LITERARIA;
+		}
+		return null;
+	}
 
 	/**
 	 * @return the sigla
