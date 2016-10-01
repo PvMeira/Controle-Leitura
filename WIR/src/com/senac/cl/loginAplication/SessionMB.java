@@ -86,6 +86,11 @@ public class SessionMB implements Serializable {
 	         this.imagemUsuarioSecao = pesLogada.getFotoUser();
 			}
 	    }
+	  public byte[] getImagemUsuarioLogado(){
+		  	HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+			Pessoa pesLogada= (Pessoa) ses.getAttribute("user"); 
+			return pesLogada.getFotoUser();
+	  }
 	  
 
 	

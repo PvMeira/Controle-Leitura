@@ -5,7 +5,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:pe="http://primefaces.org/ui/extensions">
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:o="http://omnifaces.org/ui">
 
 <f:view contentType="text/html">
     <h:head>
@@ -85,8 +86,11 @@
 				</p:layoutUnit>
 
 				<!-- usuario Logado -->			
-          		<p:outputLabel value="Usuário : #{sessionMB.nomeUsuarioLogado}"
+          		<p:outputLabel id="nameUser" value="Usuário : #{sessionMB.nomeUsuarioLogado}"
           		styleClass="ui-widget" style="position:absolute;right:0;top:0; font-weight: bold; z-index: 20; padding-right: 40px"/>
+          		<p:tooltip id="toolTipContent" for="nameUser" position="bottom">
+        			<o:graphicImage  value="#{sessionMB.imagemUsuarioLogado}"  height="200px"/>
+   				 </p:tooltip>
 
 			
 		</p:layout>	    
