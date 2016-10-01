@@ -73,7 +73,9 @@ public class SessionMB implements Serializable {
 		}
 
 		SistemaDeMensagens.notificaERRO("Usuario ou Senha inválidos", "");
+		
 		limpaCampos();
+		
 		return "";
 
 	}

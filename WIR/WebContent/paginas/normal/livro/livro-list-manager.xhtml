@@ -126,14 +126,20 @@
 									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</h:outputText>
 							</p:column>
-
+							
+							<p:column headerText="#{msg['leitura.list.numero.total.paginas']}" style="text-align:center" sortBy="#{livros.paginaTotal}">
+								<h:outputText value="#{livros.paginaTotal}"/>
+							</p:column>
+							
 							<p:column headerText="#{msg['leitura.paginaAtual']}" style="text-align:center"
 								sortBy="#{livros.paginaAtual}">
 								<p:inplace id="ajaxEdit" editor="true">
-									<p:inputText value="#{livros.paginaAtual}" 
+								<p:inputText 
+										value="#{livros.paginaAtual}" 
 										required="true"
 										label="text" 
-										onchange="atualizarlistaLeitura();" />
+										onchange="atualizarlistaLeitura();" >
+								</p:inputText>
 								</p:inplace>
 
 								<h:outputText />
@@ -166,45 +172,6 @@
 					</h:form>
 
 				</p:tab>
-				<!-- <p:tab title="#{msg['label.nome.aba.header.list.manager.lista.custom']}">
-					<h:form prependId="false" id="idAbaTresForm">
-
-						<p:commandButton id="idButtonGerarListaCustomizada"
-							value="#{msg['leitura.nova']}" 
-							oncomplete="PF('novaLeituraListaModal').show();"/>
-							
-						<p:dataTable id="listaCustomList" var="listaCustom"
-							value="#{listaCustomizadaMB.listarTodasListasCustomizadas()}"
-							emptyMessage="#{msg['datatable.pageReportTemplete.empty']}"
-							paginator="true"
-							rows="20" 
-							paginatorAlwaysVisible="true">
-							 	<p:column>
-         						 	 <p:rowToggler/>
-         						  </p:column>
-								<p:column headerText="#{msg['listaCustom.nome']}" style="text-align:center">
-									<h:outputText value="#{listaCustom.nomeLista}"/>	
-								</p:column>
-								<p:column headerText="#{msg['listaCustom.tipo']}" style="text-align:center">
-									<h:outputText value="#{listaCustom.tipoLista}"/>	
-								</p:column>
-								<p:column headerText="#{msg['listaCustom.data']}" style="text-align:center">
-									<h:outputText value="#{listaCustom.dataInclusao.time}">
-										<f:convertDateTime pattern="dd/MM/yyyy" />
-									</h:outputText>
-								</p:column>
-								<p:column headerText="#{msg['listaCustom.criador']}" style="text-align:center">
-									<h:outputText value="#{listaCustom.pessoa.nome}"/>
-								</p:column>
-								<p:column>
-									<p:commandButton id="buttonDeleteList"  icon="fa fa-fw fa-trash" 
-									action="#{listaCustomizadaMB.deletarUmaListaCustomizada(listaCustom)}" oncomplete="updateListaCustom();"/>
-								</p:column>
-						 
-						</p:dataTable>
-						<p:remoteCommand name="updateListaCustom" update="listaCustomList"/>
-					</h:form>
-				</p:tab> -->
 			</p:tabView>
 		</p:panel>
 	
