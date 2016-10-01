@@ -5,11 +5,8 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
-
-import org.exolab.castor.xml.ValidationException;
 
 import com.senac.cl.enums.tipoAcao;
 import com.senac.cl.modelos.Livro;
@@ -25,40 +22,42 @@ import com.senac.cl.transactional.Transactional;
  * @since 25/09/2016
  */
 public class LivroPublicoService {
-	
+
 	@Inject
 	LivroPublicoRepository livroRepository;
 	@Inject
 	LivroRepository livroRepository1;
 	@Inject
 	LivroHistoricoService livroService;
-	
+
 	private HttpSession ses = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-/**
- * Método para salvar o livro publico, recebendo um livro normal	
- * @param ed
- * @param var
- */
+
+	/**
+	 * Método para salvar o livro publico, recebendo um livro normal
+	 * 
+	 * @param ed
+	 * @param var
+	 */
 	public void salvarPublico(Livro ed) {
-		
+
 		LivroPublico entidade = this.populaLivroPublico(ed);
 
-			// Verifica se alguma campo não foi preenchido
+		// Verifica se alguma campo não foi preenchido
 		this.verificaCampos(entidade);
 		livroRepository.inserir(entidade);
-		
+
 	}
-	
+
 	@Transactional
-	public void transferirLivroPublicoParaUsuario(LivroPublico ed){
+	public void transferirLivroPublicoParaUsuario(LivroPublico ed) {
 		Pessoa pessoaDaSecao = (Pessoa) this.ses.getAttribute("user");
 		Livro entidade = new Livro();
 		entidade.setDono(pessoaDaSecao);
 		entidade.setDataUltimaLeitura(Calendar.getInstance());
 		entidade.setDataUpload(Calendar.getInstance());
-		
-		//Copiando para nova entidade
-		
+
+		// Copiando para nova entidade
+
 		entidade.setArquivo(ed.getArquivoPublico());
 		entidade.setAutor(ed.getAutorPublico());
 		entidade.setObservacao(ed.getObservacaoPublico());
@@ -68,45 +67,44 @@ public class LivroPublicoService {
 		entidade.setJaFoiLido(false);
 		entidade.setPublico(true);
 		entidade.setLivroAtivo(true);
-		
+
 		this.livroService.inserirLinhaHistorico(entidade, tipoAcao.INCLUIR, null);
 		this.livroRepository1.inserir(entidade);
-		
+
 	}
-	
+
 	@Transactional
 	public void salvarLivroPublico(LivroPublico ed) {
-		
+
 		Pessoa pessoaDaSecao = (Pessoa) this.ses.getAttribute("user");
-		
-		ed.setDataUltimaLeituraPublico(Calendar.getInstance());	
+
+		ed.setDataUltimaLeituraPublico(Calendar.getInstance());
 		ed.setDataUploadPublico(Calendar.getInstance());
 		ed.setPublicoPublico(true);
 		ed.setJaFoiLidoPublico(false);
 		ed.setDonoPublico(pessoaDaSecao);
-		
+
 		this.verificaCampos(ed);
 		livroRepository.inserir(ed);
-		
+
 	}
-	
-	
-	
+
 	/**
-	 * Popula o livro publico, recebendo um livro e copiando-o
-	 *	para a entidade Livro Publico
+	 * Popula o livro publico, recebendo um livro e copiando-o para a entidade
+	 * Livro Publico
+	 * 
 	 * @param ed
 	 * @return
 	 */
-	private LivroPublico populaLivroPublico(Livro ed){
+	private LivroPublico populaLivroPublico(Livro ed) {
 		Pessoa pessoaDaSecao = (Pessoa) this.ses.getAttribute("user");
 		LivroPublico entidade = new LivroPublico();
 		entidade.setDonoPublico(pessoaDaSecao);
 		entidade.setDataUltimaLeituraPublico(Calendar.getInstance());
 		entidade.setDataUploadPublico(Calendar.getInstance());
-		
-		//Copiando para nova entidade
-		
+
+		// Copiando para nova entidade
+
 		entidade.setArquivoPublico(ed.getArquivo());
 		entidade.setAutorPublico(ed.getAutor());
 		entidade.setObservacaoPublico(ed.getObservacao());
@@ -115,64 +113,79 @@ public class LivroPublicoService {
 		entidade.setTituloPublico(ed.getTitulo());
 		entidade.setJaFoiLidoPublico(false);
 		entidade.setPublicoPublico(true);
-		
+
 		return entidade;
 	}
+
 	/**
 	 * Verifica se algum campo não foi preenchido
+	 * 
 	 * @param livro
 	 */
 	@Transactional
 	private void verificaCampos(LivroPublico livro) {
 		if (livro.getTituloPublico() == null) {
-			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Campo Titulo não foi preenchido", "").toString());
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Erro de validação Campo Titulo não foi preenchido", "").toString());
 		}
 		if (livro.getDonoPublico() == null) {
-			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de sistema usuário logado não foi identificado", "").toString());
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Erro de sistema usuário logado não foi identificado", "").toString());
 		}
 		if (livro.getPaginasPublico() == 0) {
-			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Campo Páginas não foi preenchido", "").toString());
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Erro de validação Campo Páginas não foi preenchido", "").toString());
 		}
 		if (livro.getAutorPublico() == null) {
-			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Campo Autor não foi preenchido", "").toString());
+			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Erro de validação Campo Autor não foi preenchido", "").toString());
 		}
 		if (livro.getArquivoPublico() == null) {
-			throw new RuntimeException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Arquivo não foi selecionado", "").toString());
+			throw new RuntimeException(
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação Arquivo não foi selecionado", "")
+							.toString());
 		}
 	}
 
 	/**
 	 * Atualiza a entidade livro recebida
+	 * 
 	 * @param entidade
 	 */
 	@Transactional
 	public void atualizar(Livro ed) {
-		LivroPublico entidade = this.populaLivroPublico(ed);	
+		LivroPublico entidade = this.populaLivroPublico(ed);
 		livroRepository.atualizar(entidade);
 	}
+
 	/**
-	 * Método para deletar 
+	 * Método para deletar
+	 * 
 	 * @param livro
 	 */
 	@Transactional
 	public void deletar(LivroPublico livro) {
 		livroRepository.deletar(livro);
 	}
+
 	/**
 	 * Listar todos os livros Publicos
+	 * 
 	 * @return
 	 */
 	@Transactional
-	public List<LivroPublico> listarLivrosPublicos(){
+	public List<LivroPublico> listarLivrosPublicos() {
 		return this.livroRepository.todosOsRegistros();
 	}
+
 	/**
 	 * Conta todos os livros publicos da aplicação
+	 * 
 	 * @return
 	 */
 	@Transactional
-	public int contarLivrosPublicosAplicacao(){
-		int valor = this.livroRepository.contarTodosOsLivrosPublicosAplicacao(); 
+	public int contarLivrosPublicosAplicacao() {
+		int valor = this.livroRepository.contarTodosOsLivrosPublicosAplicacao();
 		return valor;
 	}
 }

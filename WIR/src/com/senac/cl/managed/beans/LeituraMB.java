@@ -17,7 +17,6 @@ import com.senac.cl.modelos.LeituraService;
 import com.senac.cl.modelos.Livro;
 import com.senac.cl.service.LeituraHistoricoService;
 import com.senac.cl.service.LivroService;
-import com.senac.cl.utilitarios.SistemaDeMensagens;
 
 /**
  * 
