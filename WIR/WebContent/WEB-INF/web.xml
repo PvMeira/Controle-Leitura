@@ -5,7 +5,7 @@
 	version="3.1">
 	<display-name>ControleDeLeitura</display-name>
 	<welcome-file-list>
-		<welcome-file>/paginas/Login.xhtml</welcome-file>
+		<welcome-file>Login.xhtml</welcome-file>
 	</welcome-file-list>
 	<error-page>
 		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
@@ -72,13 +72,22 @@
 		<param-name>primefaces.THEME</param-name>
 		<param-value>bootstrap</param-value>
 	</context-param>
-	<!-- <filter> <display-name>FiltroADM</display-name> <filter-name>FiltroADM</filter-name> 
-		<filter-class>com.senac.cl.loginAplication.filtros.FiltroAdm</filter-class> 
-		</filter> <filter-mapping> <filter-name>FiltroADM</filter-name> <url-pattern>/paginas/*</url-pattern> 
-		<url-pattern>/WEB-INF/*</url-pattern> <url-pattern>/resources/*</url-pattern> 
-		</filter-mapping> <filter> <display-name>FiltroNormal</display-name> <filter-name>FiltroNormal</filter-name> 
-		<filter-class>com.senac.cl.loginAplication.filtros.FiltroNormal</filter-class> 
-		</filter> <filter-mapping> <filter-name>FiltroNormal</filter-name> <url-pattern>/WEB-INF/*</url-pattern> 
-		<url-pattern>/resources/*</url-pattern> <url-pattern>/paginas/normal/*</url-pattern> 
-		</filter-mapping> -->
+	<servlet>
+		<servlet-name>Controle Leitura REST SERVICE</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>com.senac.cl.rest</param-value>
+		</init-param>
+		<init-param>
+			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Controle Leitura REST SERVICE</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
 </web-app>
