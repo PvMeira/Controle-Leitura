@@ -10,7 +10,9 @@
             <p:menuitem value="#{msg['menu.bar.minhas.resenhas']}" url="/paginas/normal/resenha/resenha-list.xhtml" icon="fa fa-fw fa-text-width" />
             <p:menuitem value="Resenhas-Inacabadas" url="/paginas/normal/resenha/resenha-list-inacabadas.xhtml" icon="fa fa-fw fa-underline" />
             <p:menuitem value="#{msg['menu.bar.nova.resenha']}"    url="/paginas/normal/resenha/resenha-form.xhtml" icon="fa fa-fw fa-pencil" />
-            <p:menuitem value="#{msg['menu.bar.comunidade']}" url="" icon="fa fa-fw fa-group" />
+        </p:submenu>
+        <p:submenu label="#{msg['menu.bar.comunidade']}" icon="fa fa-fw fa-comments-o" >
+        	 <p:menuitem value="Post" url=""  icon="fa fa-fw fa-comment-o"/>
         </p:submenu>
         <p:submenu label="#{msg['menu.bar.nova.leitura']}" icon="fa fa-fw fa-plus-square" >
             <p:menuitem value="#{msg['menu.bar.meus.livros']}" url="/paginas/normal/livro/livro-list-manager.xhtml"    icon="fa fa-fw fa-tasks" />

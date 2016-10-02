@@ -33,12 +33,12 @@
 
 							<p:column headerText="Ação"
 								style="text-align:center">
-								<h:outputText value="#{r.tipoAcao}" />
+								<h:outputText value="#{leituraMB.conversorAcaoEnumleitura(r)}" />
 							</p:column>
 
 							
 							<p:column
-								headerText="#{msg['livro.adm.list.coluna.data.upload']}"
+								headerText="Inicio Leitura"
 								style="text-align:center">
 								<h:outputText value="#{r.dataInicio.time}" id="uploadTime">
 									<f:convertDateTime for="uploadTime" pattern="EEE, M/d/yy hh:mm" />
@@ -46,7 +46,7 @@
 							</p:column>
 							
 							<p:column
-								headerText="#{msg['livro.adm.list.coluna.data.upload']}"
+								headerText="Fim Leitura"
 								style="text-align:center">
 								<h:outputText value="#{r.datafim.time}" id="uploadTime1">
 									<f:convertDateTime for="uploadTime1" pattern="EEE, M/d/yy hh:mm" />

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+import com.senac.cl.enums.tipoLeituraHistorico;
 import com.senac.cl.modelos.Leitura;
 import com.senac.cl.modelos.LeituraHistorico;
 import com.senac.cl.modelos.LeituraService;
@@ -52,9 +53,15 @@ public class LeituraMB {
 		return this.leituraHistoricoService.listaHistoricoLeituraUsuarioLogado();
 		
 	}
+	/**
+	 * Conversor acao leitura
+	 * @param ed
+	 * @return
+	 */
+	public String conversorAcaoEnumleitura(LeituraHistorico ed){
+		return tipoLeituraHistorico.getTipoLeituraHistoricoEnumPorSigla(ed.getTipoAcao()).getNome();
+	}
 	
-
-
 	public StreamedContent getStreamedContent() {
 		if (FacesContext.getCurrentInstance().getRenderResponse()) {
 			return new DefaultStreamedContent();
