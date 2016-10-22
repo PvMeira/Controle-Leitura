@@ -70,7 +70,7 @@ public class LivroRepository {
 	 * @return
 	 */
 	public List<Livro> todosOsRegistrosDoUsuario(Long id) {
-		String sql = "SELECT * FROM livro WHERE id_pessoa = " + id + ";";
+		String sql = "SELECT * FROM livro WHERE id_pessoa = " + id + "and livro_ativo = "+Boolean.TRUE+";";
 		return entityManager.createNativeQuery(sql, Livro.class).getResultList();
 	}
 	

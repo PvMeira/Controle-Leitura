@@ -51,4 +51,11 @@ public class SistemaDeMensagens {
 		FacesMessage mensagem = new FacesMessage(severity,	messenge, details);
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
 	}
+	/**
+	 * mensagem padrão SEVERITY_INFO
+	 * @param details
+	 */
+	public void geraMensagemPadrão(String details){
+		 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", details));
+	}
 }

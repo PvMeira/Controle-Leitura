@@ -19,10 +19,10 @@
 							<p:fileDownload value="#{livroPublicoMB.geradorZip()}" />
 						</p:menuitem>
 						<p:menuitem style="text-align: center" 
-						id="idTransferirLivroPublicosPrivado"
-						value="#{msg['livro.list.publico.copiar']}" 
-						icon="fa fa-fw fa-copy"
-						action="#{livroPublicoMB.copiarLivrosPublicosParaContaUsuarioEmLote()}">
+								id="idTransferirLivroPublicosPrivado"
+								value="#{msg['livro.list.publico.copiar']}" 
+								icon="fa fa-fw fa-copy"
+								action="#{livroPublicoMB.copiarLivrosPublicosParaContaUsuarioEmLote()}">
 						</p:menuitem>
 						<p:menuitem rendered="#{sessionMB.ADM}"
 								style="text-align: center"

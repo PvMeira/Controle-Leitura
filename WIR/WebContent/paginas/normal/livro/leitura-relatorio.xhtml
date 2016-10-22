@@ -21,13 +21,9 @@
 							emptyMessage="#{msg['datatable.pageReportTemplete.empty']}"
 							paginator="true" rows="50" paginatorAlwaysVisible="true">
 
-							<p:column headerText="#{msg['livro.adm.list.coluna.id']}"
-								style="text-align:center">
-								<h:outputText value="#{r.idLeituraHistorico}" />
-							</p:column>
 
 							<p:column headerText="#{msg['livro.titulo']}"
-								style="text-align:center">
+								style="text-align:center" sortBy="#{r.nomeLivro}">
 								<h:outputText value="#{r.nomeLivro}" />
 							</p:column>
 
@@ -39,7 +35,7 @@
 							
 							<p:column
 								headerText="Inicio Leitura"
-								style="text-align:center">
+								style="text-align:center" sortBy="#{r.dataInicio.time}">
 								<h:outputText value="#{r.dataInicio.time}" id="uploadTime">
 									<f:convertDateTime for="uploadTime" pattern="EEE, M/d/yy hh:mm" />
 								</h:outputText>
@@ -47,7 +43,7 @@
 							
 							<p:column
 								headerText="Fim Leitura"
-								style="text-align:center">
+								style="text-align:center" sortBy="#{r.datafim.time}">
 								<h:outputText value="#{r.datafim.time}" id="uploadTime1">
 									<f:convertDateTime for="uploadTime1" pattern="EEE, M/d/yy hh:mm" />
 								</h:outputText>

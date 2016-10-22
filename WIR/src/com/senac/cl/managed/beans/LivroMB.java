@@ -42,6 +42,8 @@ public class LivroMB {
 	private List<Livro> livrosPessoaLogada;
 	private List<Livro> livrosSelecionados;
 	private List<LivroPublico> livrosPublicosSelecionados;
+	
+	private SistemaDeMensagens m;
 
 	@Inject
 	private LivroService livroService;
@@ -68,6 +70,7 @@ public class LivroMB {
 	@PostConstruct
 	public void init(){
 		atribuirEstadoInicial();
+		m = new SistemaDeMensagens();
 	}
 	
 	private void atribuirEstadoInicial()
@@ -89,6 +92,7 @@ public class LivroMB {
 		
 		livroService.salvar(this.getLivro(), tornarpublico);
 		limpar();
+		m.geraMensagemPadrão("Livro Adicionado !");
 	}
 	/**
 	 * Editar livro selecionado

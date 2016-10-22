@@ -13,8 +13,6 @@
 	
 	<p:panel id="basic" header="#{msg['pessoa.form.header']}"  style="margin-bottom:20px" rendered="#{sessionMB.ADM}">
 		<h:form id="pessoaForm">
-		
-			<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
 				<p:panelGrid columns="3" cellpadding="5">
 				
 					<p:outputLabel value="#{msg['cadastro.usuario.nome']} :" for="nome" styleClass="outputlabel" id="outLabelNome"/>
@@ -54,11 +52,11 @@
 					<p:message for="fone" />
 					<p:outputLabel value="#{msg['cadastro.usuario.escolher.foto']} :" for="idUpload"/>
 						<p:fileUpload 
-	    				 id="idUpload"
-	    				 fileUploadListener="#{pessoaMB.carregarArquivo}" 
-	    				 mode="advanced"
-	                     auto="true" 
-	                     sizeLimit="10485760"  />
+		    				 id="idUpload"
+		    				 fileUploadListener="#{pessoaMB.carregarArquivo}" 
+		    				 mode="advanced"
+		                     auto="true" 
+		                     sizeLimit="10485760"  />
 	                  <p:message for="idUpload" />
 		               <p:photoCam widgetVar="pc" listener="#{pessoaMB.oncapture}" rendered="#{not empty photoCamView.filename}"/>
 		               <p:commandButton type="button" value="#{msg['cadastro.usuario.webCam']}" onclick="PF('pc').capture()" rendered="#{not empty photoCamView.filename}"/>
@@ -66,24 +64,23 @@
 				<p:panelGrid columns="3" cellpadding="5">
 				
 					<p:commandButton value="#{msg['title.salvar']}"  
-					id="savePessoaButton"
-					icon="fa fa-fw fa-floppy-o" 
-					action="#{pessoaMB.salvar()}" 
-					update="@form" />
+						id="savePessoaButton"
+						icon="fa fa-fw fa-floppy-o" 
+						action="#{pessoaMB.salvar()}" 
+						update="@form" />
 					
-					<b:column span="1" />
 					
 					<p:commandButton value="#{msg['title.limpar']}" 
-					process="@this"
-					icon="fa fa-fw fa-eraser"
-					id="cleanPessoaButton"
-					action="#{pessoaMB.limpar()}" 
-					update="@form" 
-					ajax="false"/>
+						process="@this"
+						icon="fa fa-fw fa-eraser"
+						id="cleanPessoaButton"
+						action="#{pessoaMB.limpar()}" 
+						update="@form" 
+						ajax="false"/>
 				</p:panelGrid>
 			
 			</h:form>
-		</p:panel>
+	</p:panel>
 	
 </ui:define>
 </ui:composition>
