@@ -61,7 +61,7 @@ public class SessionMB implements Serializable {
 					ses.setAttribute("user", pessoa);
 					this.isAdm();
 					this.getImagemUser();
-					return "paginas/adm/pessoa-form.xhtml?faces-redirect=true";
+					return "paginas/adm/dashboard.xhtml?faces-redirect=true";
 				} else if (pessoaED.isNormal() == true) {
 					ses.setAttribute("userNORMAL", pessoa);
 					ses.setAttribute("user", pessoa);

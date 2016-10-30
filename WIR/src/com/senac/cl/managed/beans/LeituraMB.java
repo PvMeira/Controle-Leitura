@@ -59,7 +59,16 @@ public class LeituraMB {
 	 * @return
 	 */
 	public String conversorAcaoEnumleitura(LeituraHistorico ed){
-		return tipoLeituraHistorico.getTipoLeituraHistoricoEnumPorSigla(ed.getTipoAcao()).getNome();
+		if(tipoLeituraHistorico.getTipoLeituraHistoricoEnumPorSigla(ed.getTipoAcao()).getNome().equalsIgnoreCase("CANCELAMENTO")){
+			return "LIDO";
+		}
+		if(tipoLeituraHistorico.getTipoLeituraHistoricoEnumPorSigla(ed.getTipoAcao()).getNome().equalsIgnoreCase("ALTERACAO")){
+			return "LENDO";
+		}else{
+			return tipoLeituraHistorico.getTipoLeituraHistoricoEnumPorSigla(ed.getTipoAcao()).getNome();	
+		}
+	
+		
 	}
 	
 	public StreamedContent getStreamedContent() {
