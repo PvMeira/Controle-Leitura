@@ -39,6 +39,7 @@ public class LivroMB {
 	private Livro livro;
 	private Livro livroParaTransferir;
 	private Livro livroEdit;
+	private Livro livroVisualizacao;
 	private List<Livro> livrosPessoaLogada;
 	private List<Livro> livrosSelecionados;
 	private List<LivroPublico> livrosPublicosSelecionados;
@@ -134,6 +135,8 @@ public class LivroMB {
 	public void transferir() {
 		this.livroService.atualizarATransferenciaParaPublico(this.livroParaTransferir);
 	}
+	
+
 
 	/**
 	 * Lista livros do autocomplete que esteja com publico = false
@@ -491,6 +494,22 @@ public class LivroMB {
 	 */
 	public void setLivrosPublicosSelecionados(List<LivroPublico> livrosPublicosSelecionados) {
 		this.livrosPublicosSelecionados = livrosPublicosSelecionados;
+	}
+
+
+	/**
+	 * @return the livroVisualizacao
+	 */
+	public Livro getLivroVisualizacao() {
+		return livroVisualizacao;
+	}
+
+
+	/**
+	 * @param livroVisualizacao the livroVisualizacao to set
+	 */
+	public void setLivroVisualizacao(Livro livroVisualizacao) {
+		this.livroVisualizacao = livroVisualizacao;
 	}
 
 }

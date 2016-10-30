@@ -9,7 +9,6 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-import com.senac.cl.utilitarios.SistemaDeMensagens;;
 /**
  * @author Pedro
  * @since 25/09/2016

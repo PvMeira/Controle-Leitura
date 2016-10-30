@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import com.senac.cl.modelos.LeituraHistorico;
 import com.senac.cl.modelos.PessoaHistorico;
 
 public class PessoaHistoricoRepository {
