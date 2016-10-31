@@ -32,6 +32,8 @@ public class VisualizacaoMB implements Serializable{
 	
 	private byte[] bytesLivro;
 	
+	private String idLivro ;
+	
 	
     public void populaLivroVisualizacao(Livro l) throws IOException{
     	this.limpaDadosStream();
@@ -80,7 +82,7 @@ public class VisualizacaoMB implements Serializable{
 		this.nomeLivro = nomeLivro;
 	}
 	
-	public String getIdFile() {
+	public String generateId() {
 	    return  java.util.UUID.randomUUID().toString();
 	}
 	
@@ -123,6 +125,22 @@ public class VisualizacaoMB implements Serializable{
 	 */
 	public void setBytesLivro(byte[] bytesLivro) {
 		this.bytesLivro = bytesLivro;
+	}
+
+
+	/**
+	 * @return the idLivro
+	 */
+	public String getIdLivro() {
+		return idLivro;
+	}
+
+
+	/**
+	 * @param idLivro the idLivro to set
+	 */
+	public void setIdLivro(String idLivro) {
+		this.idLivro = idLivro;
 	}
 	
 	

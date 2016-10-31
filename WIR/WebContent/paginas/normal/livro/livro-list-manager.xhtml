@@ -156,7 +156,9 @@
 								</p:commandLink>
 						<p:commandLink id="idLivroVisualizacao"
 								  oncomplete="PF('previewPdf').show();"
+								  update=":idPreviewPdf, :idPanelPreview, :idPreviewMedia"
 								  action="#{visualizacaoMB.populaLivroVisualizacao(livros.livro)}">
+								  <f:setPropertyActionListener target="#{visualizacaoMB.idLivro}" value="#{visualizacaoMB.generateId()}" />
 							      <p:graphicImage url="/resources/imagens/icone_pdf.jpg" style="width: 15px;"/>
 						</p:commandLink>
 								<p:commandLink id="paraLeitura" title="#{msg['leitura.parar']}"
@@ -221,19 +223,20 @@
                   header="#{visualizacaoMB.nomeLivro}"
                   modal="true"
                   widgetVar="previewPdf"
-                  width="1483"
-                  height="843"
+                  width="800"
+                  height="600"
                   resizable="false" 
                   appendTo="@(body)"
                   draggable="true"
-                  dynamic="true">
+                  dynamic="true" 
+                  onHide="updateTabelaLivro();">
             <h:panelGroup id="idPanelPreview">
                 <p:media id="idPreviewMedia"
                          value="#{visualizacaoMB.viewLivro()}"
                          player="pdf"
-                         width="60%"
-                         height="80%" >
-                    <f:param name="id" value="#{visualizacaoMB.idFile}" />
+                         width="800"
+                         height="600" >
+                    <f:param name="id" value="#{visualizacaoMB.idLivro}" />
                 </p:media>
             </h:panelGroup>
         </p:dialog>
