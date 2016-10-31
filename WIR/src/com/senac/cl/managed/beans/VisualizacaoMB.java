@@ -79,6 +79,11 @@ public class VisualizacaoMB implements Serializable{
 	public void setNomeLivro(String nomeLivro) {
 		this.nomeLivro = nomeLivro;
 	}
+	
+	public String getIdFile() {
+	    return  java.util.UUID.randomUUID().toString();
+	}
+	
 	/**
 	 * @return the conteudo
 	 */
