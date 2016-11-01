@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -23,6 +24,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "pessoa")
 @SequenceGenerator(name = "pessoa_id_pessoa_seq", sequenceName = "pessoa_id_pessoa_seq", allocationSize = 1)
+@NamedQuery(name="Pessoa.findAll", query="SELECT c FROM Pessoa c") 
 public class Pessoa {
 
 	@Id
