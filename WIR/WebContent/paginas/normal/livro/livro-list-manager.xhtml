@@ -147,10 +147,9 @@
 
 							<p:column headerText="#{msg['livro.acao']}" style="text-align:center">
 								<p:commandLink id="modalObservacao" title="#{msg['leitura.observacao']}"
-									action="#{leituraMB.leitura.setObservacao(livros.observacao)}"
+									action="#{leituraMB.populaLeituraParaObservacao(livros)}"
+									update=":formModalLembrete"
 									oncomplete="PF('modalLembrete').show();">
-									<p:ajax event="click"
-										listener="#{leituraMB.populaLeituraParaObservacao(livros)}" />
 									<p:graphicImage value="/resources/imagens/nota.png"
 										height="20px" width="20px" />
 								</p:commandLink>
