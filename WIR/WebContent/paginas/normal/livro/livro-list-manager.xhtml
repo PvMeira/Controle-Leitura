@@ -73,9 +73,9 @@
 										<!-- Botao para modal Resumo -->
 										<p:commandLink id="comandLinkModalResumo"
 											title="#{msg['livro.resumo']}"
+											update=":formModalResumo"
 											action="#{livroMB.populaObservacaoParaModal(livro)}"
 											oncomplete="PF('modalResumo').show();">
-
 											<p:graphicImage value="/resources/imagens/nota.png" height="20px" width="20px" />
 										</p:commandLink>
 										
