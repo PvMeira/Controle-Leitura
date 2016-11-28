@@ -1,0 +1,43 @@
+<!doctype html>
+<html ng-app>
+	<head>
+		<title>Lista de compras com AngularJS</title>
+    <meta charset="utf-8">
+		<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/lista-compras.css">
+		<script src="lib/angular-1.0.1.js"></script>
+		<script src="app/lista-compras.js"></script>
+	</head>
+	<body>
+		<div class="container" ng-controller="ListaComprasController">
+			<div class="row">
+				<div class="page-header">
+					<h1>Lista de livros Disponiveis Grátis em : </h1>
+				</div>
+			</div>
+			<div class="row">
+        <table id="lista-compras" class="table table-striped">
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Nome Autor</th>
+              <th>Nome Dono</th>
+			  <th>Pontuação</th>
+			  <th>Páginas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in itens" class="comprado-{{ item.comprado }}">
+              <td><a>Spring framework : Aprendendo</a></td>
+              <td><a>Geraldo neves</a></td>
+              <td><a>Pedro Vitor</a></td>
+			  
+			  <td><a>5</a></td>
+              <td><a>40</a></td>
+            </tr>
+          </tbody>
+        </table>
+			</div>
+		</div>
+	</body>
+</html>
