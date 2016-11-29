@@ -134,4 +134,5 @@ public class LivroRepository {
 		String sql = "SELECT * FROM livro where titulo LIKE " + "'" + "%" + s + "%" + "'" + ";";
 		return entityManager.createNativeQuery(sql, Livro.class).getResultList();
 	}
+	
 }

@@ -25,4 +25,14 @@ public class LivroWSService {
 	public List<Livro> listarTodosRegistros() {
 		return livroRepository.todosOsRegistros();
 	}
+	
+	@Transactional
+	public Livro buscaApenasUm(Long id){
+		return this.livroRepository.search(id);
+	}
+	
+	@Transactional
+	public void deletar(Long id){
+		 this.livroRepository.deletar(buscaApenasUm(id));
+	}
 }

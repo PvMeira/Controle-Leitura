@@ -18,8 +18,6 @@
 		<class>com.senac.cl.modelos.LeituraHistorico</class>
 		<class>com.senac.cl.modelos.LivroHistorico</class>
 		<class>com.senac.cl.modelos.LivroPublico</class>
-		<class>com.senac.cl.modelos.Post</class>
-		<class>com.senac.cl.modelos.Comentario</class>
 		
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<validation-mode>CALLBACK</validation-mode>
