@@ -1,0 +1,28 @@
+<conteudo-interno>
+    <h1>Pesquisar livros</h1>
+    <button class="btn btn-primary" type="submit" form="frm" ng-click="pesquisar()">Listar</button>
+    <hr />
+</conteudo-interno>
+
+<conteudo-interno ng-if="resultados.length > 0">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Autor</th>
+				 <th>Dono</th>
+                <th>Páginas</th>
+                <th>Pontuação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="livro in resultados | orderBy:'idLivro'">
+                <td>{{livro.nomeLivro}}</td>
+                <td>{{livro.nomeAutor}}</td>
+				<td>{{livro.nomeDono}}</td>
+                <td>{{livro.paginas}}</td>
+                <td>{{livro.pontuacao}}</td>
+            </tr>
+        </tbody>
+    </table>
+</conteudo-interno>
