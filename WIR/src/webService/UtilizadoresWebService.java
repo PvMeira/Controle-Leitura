@@ -9,10 +9,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-import com.senac.cl.modelos.Livro;
 import com.senac.cl.modelos.Pessoa;
 
-import webService.modelos.LivroWS;
 import webService.modelos.UtilizadoresWS;
 import webService.servicos.UtilizadoresWSService;
 
@@ -56,6 +54,7 @@ public class UtilizadoresWebService {
 		return retorno;
 	}
 
+	@SuppressWarnings("deprecation")
 	private String montaCalendario(Calendar cal) {
 		String calendarioString = null;
 		StringBuilder sb = new StringBuilder();
