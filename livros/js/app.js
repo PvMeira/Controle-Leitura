@@ -1,5 +1,5 @@
 angular.module('AppModule', ['ngRoute', 
-    'LivroModule'
+    'LivroModule','UserModule'
 ])
 
 .controller('AppController', ['$scope', function($scope) {
@@ -15,6 +15,10 @@ angular.module('AppModule', ['ngRoute',
         when('/logon', {
             templateUrl: 'partials/logon.html',
             controller: 'AutenticacaoController'
+        }).
+		 when('/user-pesquisar', {
+            templateUrl: 'partials/user-pesquisar.html',
+            controller: 'UserController'
         }).
         when('/logoff', {
             templateUrl: 'partials/logoff.html',

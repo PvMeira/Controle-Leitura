@@ -27,6 +27,18 @@ angular.module('CrudServiceModule', [])
                 geraMensagem("Ooops! " + (response.statusText===""?OOPS:response.statusText));
             });
     };
+	    this.pesquisarUser = function(serviceURL, value, fn) {
+        console.log(value);
+
+        $http.get(serviceURL + value)
+            .then(function successCallback(response) {
+                console.log(response);
+                fn(response.data);
+            }, function errorCallback(response) {
+                console.log(response);
+                geraMensagem("Ooops! " + (response.statusText===""?OOPS:response.statusText));
+            });
+    };
         
     this.geraMensagemDefault = function() {
         $('#myModalMessage').text("Ação executada com sucesso!");
