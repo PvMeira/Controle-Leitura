@@ -12,6 +12,9 @@ import javax.ws.rs.Produces;
 
 import com.senac.cl.modelos.Livro;
 
+import webService.modelos.LivroWS;
+import webService.servicos.LivroWSService;
+
 @Path("/livros")
 @Produces({ "application/json" })
 public class LivroWebService {

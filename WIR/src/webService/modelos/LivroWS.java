@@ -1,4 +1,4 @@
-package webService;
+package webService.modelos;
 
 public class LivroWS {
 	private int idLivro;
