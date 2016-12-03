@@ -18,12 +18,12 @@
 			<h:form id="formModalResumo" prependId="false">
 			<h:panelGrid columns="2">
 			<p:commandButton 
-				ajax="false"
+				ajax="true"
 				icon="fa fa-fw fa-check"  
 				value="#{msg['title.salvar']}" 
 				process="@this"
 				action="#{livroMB.atualizaResumoLivro()}"
-				oncomplete="modalResumo.hide(); updateTabelaLivro();"/>
+				oncomplete="PF('modalResumo').hide();"/>
 			<p:commandButton 
 				ajax="false"
 				icon="fa fa-fw fa-ban"
