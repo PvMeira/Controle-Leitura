@@ -32,6 +32,7 @@ angular.module('AppModule', ['ngRoute',
             templateUrl: 'partials/principal.html',
             controller: 'AppController'
         }).
+        
         otherwise({
             redirectTo: '/'
         });

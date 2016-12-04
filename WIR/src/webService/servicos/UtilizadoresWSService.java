@@ -27,4 +27,11 @@ public class UtilizadoresWSService {
 		return this.livroRepository.todosOsRegistrosDoUsuario(id).size();
 	}
 
+	@Transactional
+	public Pessoa buscarPeloId(long id) {
+		return this.pessoaRepository.buscarPeloId(id);
+	}
+	public void salvar(Pessoa ed) {
+		this.pessoaRepository.inserir(ed);
+	}
 }

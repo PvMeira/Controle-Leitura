@@ -1,124 +1,160 @@
 package webService.modelos;
 
+import java.util.Calendar;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class LivroWS {
-	private int idLivro;
-	private String nomeLivro;
-	private String nomeAutor;
-	private String nomeDono;
+
+	private Long idLivro;
+
+	private String titulo;
+
+	private String autor;
+
 	private int paginas;
+
+	private String observacao;
+
 	private int pontuacao;
+
+	private boolean livroAtivo;
+
+	private boolean jaFoiLido;
+
+	private boolean publico;
+
+	private Calendar dataUltimaLeitura;
+
+	private Calendar dataUpload;
 
 	/**
 	 * 
 	 */
 	public LivroWS() {
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param nomeLivro
-	 * @param nomeAutor
-	 * @param nomeDono
-	 * @param paginas
-	 * @param pontuacao
-	 */
-	public LivroWS(String nomeLivro, String nomeAutor, String nomeDono, int paginas, int pontuacao, int idLivro) {
-		this.nomeLivro = nomeLivro;
-		this.nomeAutor = nomeAutor;
-		this.nomeDono = nomeDono;
-		this.paginas = paginas;
-		this.pontuacao = pontuacao;
-		this.idLivro = idLivro;
-	}
-
-	/**
-	 * @return the nomeLivro
-	 */
-	public String getNomeLivro() {
-		return nomeLivro;
-	}
-
-	/**
-	 * @param nomeLivro
-	 *            the nomeLivro to set
-	 */
-	public void setNomeLivro(String nomeLivro) {
-		this.nomeLivro = nomeLivro;
-	}
-
-	/**
-	 * @return the nomeAutor
-	 */
-	public String getNomeAutor() {
-		return nomeAutor;
-	}
-
-	/**
-	 * @param nomeAutor
-	 *            the nomeAutor to set
-	 */
-	public void setNomeAutor(String nomeAutor) {
-		this.nomeAutor = nomeAutor;
-	}
-
-	/**
-	 * @return the nomeDono
-	 */
-	public String getNomeDono() {
-		return nomeDono;
-	}
-
-	/**
-	 * @param nomeDono
-	 *            the nomeDono to set
-	 */
-	public void setNomeDono(String nomeDono) {
-		this.nomeDono = nomeDono;
-	}
-
-	/**
-	 * @return the paginas
-	 */
-	public int getPaginas() {
-		return paginas;
-	}
-
-	/**
-	 * @param paginas
-	 *            the paginas to set
-	 */
-	public void setPaginas(int paginas) {
-		this.paginas = paginas;
-	}
-
-	/**
-	 * @return the pontuacao
-	 */
-	public int getPontuacao() {
-		return pontuacao;
-	}
-
-	/**
-	 * @param pontuacao
-	 *            the pontuacao to set
-	 */
-	public void setPontuacao(int pontuacao) {
-		this.pontuacao = pontuacao;
-	}
-
-	/**
-	 * @return the idLivro
-	 */
-	public int getIdLivro() {
-		return idLivro;
 	}
 
 	/**
 	 * @param idLivro
-	 *            the idLivro to set
+	 * @param dono
+	 * @param titulo
+	 * @param autor
+	 * @param paginas
+	 * @param observacao
+	 * @param pontuacao
+	 * @param livroAtivo
+	 * @param dataUltimaLeitura
+	 * @param dataUpload
 	 */
-	public void setIdLivro(int idLivro) {
+	public LivroWS(Long idLivro, String titulo, String autor, int paginas, String observacao, int pontuacao,
+			boolean livroAtivo, Calendar dataUltimaLeitura, Calendar dataUpload, boolean jaFoiLido, boolean publico) {
 		this.idLivro = idLivro;
+		this.titulo = titulo;
+		this.autor = autor;
+		this.paginas = paginas;
+		this.observacao = observacao;
+		this.pontuacao = pontuacao;
+		this.livroAtivo = livroAtivo;
+		this.dataUltimaLeitura = dataUltimaLeitura;
+		this.dataUpload = dataUpload;
+		this.jaFoiLido = jaFoiLido;
+		this.publico = publico;
+	}
+
+	public Long getIdLivro() {
+		return idLivro;
+	}
+
+	public void setIdLivro(Long idLivro) {
+		this.idLivro = idLivro;
+	}
+
+	public boolean isPublico() {
+		return publico;
+	}
+
+	public void setPublico(boolean publico) {
+		this.publico = publico;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getAutor() {
+		return autor;
+	}
+
+	public void setAutor(String autor) {
+		this.autor = autor;
+	}
+
+	public int getPaginas() {
+		return paginas;
+	}
+
+	public void setPaginas(int paginas) {
+		this.paginas = paginas;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+	public int getPontuacao() {
+		return pontuacao;
+	}
+
+	public void setPontuacao(int pontuacao) {
+		this.pontuacao = pontuacao;
+	}
+
+	public boolean isLivroAtivo() {
+		return livroAtivo;
+	}
+
+	public void setLivroAtivo(boolean livroAtivo) {
+		this.livroAtivo = livroAtivo;
+	}
+
+	public Calendar getDataUltimaLeitura() {
+		return dataUltimaLeitura;
+	}
+
+	public void setDataUltimaLeitura(Calendar dataUltimaLeitura) {
+		this.dataUltimaLeitura = dataUltimaLeitura;
+	}
+
+	public Calendar getDataUpload() {
+		return dataUpload;
+	}
+
+	public void setDataUpload(Calendar dataUpload) {
+		this.dataUpload = dataUpload;
+	}
+
+	/**
+	 * @return the jaFoiLido
+	 */
+	public boolean isJaFoiLido() {
+		return jaFoiLido;
+	}
+
+	/**
+	 * @param jaFoiLido
+	 *            the jaFoiLido to set
+	 */
+	public void setJaFoiLido(boolean jaFoiLido) {
+		this.jaFoiLido = jaFoiLido;
 	}
 
 }

@@ -2,7 +2,7 @@ angular.module('UserModule', ['CrudServiceModule'])
 
 .controller('UserController', ['$scope', 'CrudService', '$routeParams', function($scope, CrudService, $routeParams) {
 
-	$scope.url = 'http://localhost:8080/CL/ws/user/';
+	$scope.url = 'http://localhost:8080/CL/ws/user';
 	  
     $scope.objeto = { name: '' };
     $scope.resultados;

@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import com.senac.cl.modelos.Livro;
 
@@ -16,14 +15,13 @@ import webService.modelos.LivroWS;
 import webService.servicos.LivroWSService;
 
 @Path("/livros")
-@Produces({ "application/json" })
 public class LivroWebService {
 
 	@Inject
 	private LivroWSService livroServico;
 
 	@GET
-	@Path("/")
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<LivroWS> listAll() {
 		List<LivroWS> listaRetorno = new ArrayList<LivroWS>();
 		List<Livro> listLivro = new ArrayList<Livro>();
@@ -35,41 +33,16 @@ public class LivroWebService {
 		}
 		return listaRetorno;
 	}
-/**
- * Monta uma entidade para apresen
- * @param livro
- * @return
- */
-	private LivroWS montaEntidadeWS(Livro livro) {
-		LivroWS livroWS = new LivroWS();
-		livroWS.setIdLivro(livro.getIdLivro().intValue());
-		livroWS.setNomeAutor(livro.getAutor());
-		livroWS.setNomeDono(livro.getDono().getNome());
-		livroWS.setNomeLivro(livro.getTitulo());
-		livroWS.setPaginas(livro.getPaginas());
-		livroWS.setPontuacao(livro.getPontuacao());
-		return livroWS;
+
+	private LivroWS montaEntidadeWS(Livro l) {
+		LivroWS ed = new LivroWS();
+		ed.setAutor(l.getAutor());
+		ed.setIdLivro(l.getIdLivro());
+		ed.setPaginas(l.getPaginas());
+		ed.setTitulo(l.getTitulo());
+		ed.setLivroAtivo(l.isLivroAtivo());
+
+		return ed;
 	}
 
-	@GET
-	@Path("/{id}")
-	public LivroWS umLivro(@PathParam("id") Integer id) {
-		Livro livro = this.livroServico.buscaApenasUm(id.longValue());
-		LivroWS livroWS = this.montaEntidadeWS(livro);
-		return livroWS;
-	}
-	@GET
-	@Path("/deletar/{id}")
-	public void deletar(@PathParam("id") Integer id){
-		this.livroServico.deletar(id.longValue());
-	}
-	
-	@GET
-	@Path("/deletar/teste/{id}")
-	@Produces("text/plain")
-	public String  deletarTeste(@PathParam("id") Integer id){
-		this.livroServico.deletar(id.longValue());
-		return "Livro Excluido";
-	}
-	
 }

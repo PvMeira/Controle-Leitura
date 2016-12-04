@@ -8,18 +8,16 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Nome</th>
+                <th>Título</th>
                 <th>Autor</th>
-				 <th>Dono</th>
                 <th>Páginas</th>
                 <th>Pontuação</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="livro in resultados | orderBy:'idLivro'">
-                <td>{{livro.nomeLivro}}</td>
-                <td>{{livro.nomeAutor}}</td>
-				<td>{{livro.nomeDono}}</td>
+                <td>{{livro.titulo}}</td>
+                <td>{{livro.autor}}</td>
                 <td>{{livro.paginas}}</td>
                 <td>{{livro.pontuacao}}</td>
             </tr>

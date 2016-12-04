@@ -9,15 +9,19 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Data de Cadastro</th>
-				<th>Livros Compartilhados</th>
+				<th>CPF</th>
+				<th>Telefone</th>
+                <th>Email</th>
+				<th>Username</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="user in resultados | orderBy:'id'">
                 <td>{{user.nome}}</td>
-                <td>{{user.data}}</td>
-				<td>{{user.livrosCompartilhados}}</td>
+                <td>{{user.cpf}}</td>
+				<td>{{user.telefone}}</td>
+				<td>{{user.mail}}</td>
+				<td>{{user.username}}</td>
             </tr>
         </tbody>
     </table>
