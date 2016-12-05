@@ -47,30 +47,35 @@ public class LeituraMB {
 	private LeituraHistoricoService leituraHistoricoService;
 
 	private StreamedContent streamedContent;
-	
-	public List<LeituraHistorico> listaHistoricoLeituraUsuarioLogado(){
-		
+
+	public List<LeituraHistorico> listaHistoricoLeituraUsuarioLogado() {
+
 		return this.leituraHistoricoService.listaHistoricoLeituraUsuarioLogado();
-		
+
 	}
+
+	private List<Leitura> leituraUsuarioLogado;
+
 	/**
 	 * Conversor acao leitura
+	 * 
 	 * @param ed
 	 * @return
 	 */
-	public String conversorAcaoEnumleitura(LeituraHistorico ed){
-		if(tipoLeituraHistorico.getTipoLeituraHistoricoEnumPorSigla(ed.getTipoAcao()).getNome().equalsIgnoreCase("CANCELAMENTO")){
+	public String conversorAcaoEnumleitura(LeituraHistorico ed) {
+		if (tipoLeituraHistorico.getTipoLeituraHistoricoEnumPorSigla(ed.getTipoAcao()).getNome()
+				.equalsIgnoreCase("CANCELAMENTO")) {
 			return "LIDO";
 		}
-		if(tipoLeituraHistorico.getTipoLeituraHistoricoEnumPorSigla(ed.getTipoAcao()).getNome().equalsIgnoreCase("ALTERACAO")){
+		if (tipoLeituraHistorico.getTipoLeituraHistoricoEnumPorSigla(ed.getTipoAcao()).getNome()
+				.equalsIgnoreCase("ALTERACAO")) {
 			return "LENDO";
-		}else{
-			return tipoLeituraHistorico.getTipoLeituraHistoricoEnumPorSigla(ed.getTipoAcao()).getNome();	
+		} else {
+			return tipoLeituraHistorico.getTipoLeituraHistoricoEnumPorSigla(ed.getTipoAcao()).getNome();
 		}
-	
-		
+
 	}
-	
+
 	public StreamedContent getStreamedContent() {
 		if (FacesContext.getCurrentInstance().getRenderResponse()) {
 			return new DefaultStreamedContent();
@@ -142,8 +147,16 @@ public class LeituraMB {
 	 * @return
 	 */
 	public List<Leitura> listaTodasLeiturasPessoaLogada() {
-		List<Leitura> lista = this.leituraService.listaTodasLeiturasPessoaLogada();
-		return lista;
+		if (this.leituraUsuarioLogado != null) {
+			return this.leituraUsuarioLogado;
+		} else {
+			this.populaListaLeiturasPessoaLogada();
+			return this.leituraUsuarioLogado;
+		}
+	}
+
+	private void populaListaLeiturasPessoaLogada() {
+		this.leituraUsuarioLogado = this.leituraService.listaTodasLeiturasPessoaLogada();
 	}
 
 	/**
@@ -234,6 +247,21 @@ public class LeituraMB {
 	 */
 	public void setLivroMB(LivroMB livroMB) {
 		this.livroMB = livroMB;
+	}
+
+	/**
+	 * @return the leituraUsuarioLogado
+	 */
+	public List<Leitura> getLeituraUsuarioLogado() {
+		return leituraUsuarioLogado;
+	}
+
+	/**
+	 * @param leituraUsuarioLogado
+	 *            the leituraUsuarioLogado to set
+	 */
+	public void setLeituraUsuarioLogado(List<Leitura> leituraUsuarioLogado) {
+		this.leituraUsuarioLogado = leituraUsuarioLogado;
 	}
 
 }

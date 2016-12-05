@@ -43,7 +43,9 @@ public class LivroMB {
 	private List<Livro> livrosPessoaLogada;
 	private List<Livro> livrosSelecionados;
 	private List<LivroPublico> livrosPublicosSelecionados;
-	
+	private List<Livro> todosLivros;
+	private List<Livro> todosLivrosUser;
+
 	private SistemaDeMensagens m;
 
 	@Inject
@@ -51,8 +53,8 @@ public class LivroMB {
 
 	@Inject
 	private LeituraService leituraService;
-	
-	@Inject 
+
+	@Inject
 	LivroPublicoService livroPublicoService;
 
 	@Inject
@@ -67,34 +69,33 @@ public class LivroMB {
 	public LivroMB() {
 	}
 
-	
 	@PostConstruct
-	public void init(){
+	public void init() {
 		atribuirEstadoInicial();
 		m = new SistemaDeMensagens();
 	}
-	
-	private void atribuirEstadoInicial()
-	{
+
+	private void atribuirEstadoInicial() {
 		livro = new Livro();
 	}
-	
+
 	/**
 	 * Salva o livro
 	 */
 	public void salvar() {
-		if(tornarpublico == true){
+		if (tornarpublico == true) {
 			this.livroPublicoService.salvarPublico(this.getLivro());
-			if(this.livro.getIdLivro() != null){
+			if (this.livro.getIdLivro() != null) {
 				this.livro.setPublico(true);
 				this.livroService.atualizar(this.livro);
 			}
 		}
-		
+
 		livroService.salvar(this.getLivro(), tornarpublico);
 		limpar();
 		m.geraMensagemPadrão("Livro Adicionado !");
 	}
+
 	/**
 	 * Editar livro selecionado
 	 */
@@ -102,7 +103,6 @@ public class LivroMB {
 		livroService.atualizar(this.getLivroEdit());
 		SistemaDeMensagens.notificaINFORMACAO("Parabéns!", "Cadastro alterado com sucesso!");
 	}
-	
 
 	/**
 	 * Salva uma nova leitura apartir do livro seleciona inline
@@ -135,11 +135,10 @@ public class LivroMB {
 	public void transferir() {
 		this.livroService.atualizarATransferenciaParaPublico(this.livroParaTransferir);
 	}
-	
-
 
 	/**
 	 * Lista livros do autocomplete que esteja com publico = false
+	 * 
 	 * @param particula
 	 * @return
 	 */
@@ -147,25 +146,28 @@ public class LivroMB {
 		List<Livro> lista = this.livroService.listarLivrosAutoCompleteTransferir(particula);
 		return lista;
 	}
-	
+
 	public List<Livro> listarLivrosAutoCompleteResenha(String particula) {
 		List<Livro> lista = this.livroService.listarLivrosAutoCompleteResenha(particula);
 		return lista;
 	}
+
 	/**
 	 * Retorna o nome da aba com contador
+	 * 
 	 * @return
 	 */
-	public String nomeAbaLivrosAdm(){
+	public String nomeAbaLivrosAdm() {
 		int num = listarTodosLivros().size();
-		
-		String retorno = "Todos os Livros Cadastrados".concat("("+num).concat(")");
-		
+
+		String retorno = "Todos os Livros Cadastrados".concat("(" + num).concat(")");
+
 		return retorno;
 	}
 
 	/**
 	 * Deleta o livro selecionado
+	 * 
 	 * @param livro
 	 */
 	public void deletar(Livro livro) {
@@ -184,6 +186,7 @@ public class LivroMB {
 
 	/**
 	 * Deletar Sem as informações de sucessso para o metodo de delete em lote
+	 * 
 	 * @param livro
 	 */
 	public void deletarSeminformação(Livro livro) {
@@ -192,6 +195,7 @@ public class LivroMB {
 
 	/**
 	 * Carrega o arquivo upado para a entidade
+	 * 
 	 * @param event
 	 */
 	public void carregarArquivo(FileUploadEvent event) {
@@ -203,6 +207,7 @@ public class LivroMB {
 
 	/**
 	 * Retorna o Arquivo para downlaod do pdf
+	 * 
 	 * @param livro
 	 * @return
 	 * @throws IOException
@@ -219,6 +224,7 @@ public class LivroMB {
 
 	/**
 	 * Metodo para Retornar um .ZIP com todos os PDF selecionados
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
@@ -247,6 +253,7 @@ public class LivroMB {
 	/**
 	 * Verifica o status do livro, caso seja true retorna não lido se não
 	 * retorna ja lido
+	 * 
 	 * @param livro
 	 * @return
 	 */
@@ -268,6 +275,7 @@ public class LivroMB {
 
 	/**
 	 * busca se existe uma leitura para o livro em questao
+	 * 
 	 * @param ed
 	 * @return
 	 */
@@ -275,8 +283,10 @@ public class LivroMB {
 		return this.leituraService.buscaLeituraPeloId(ed);
 
 	}
+
 	/**
 	 * popula livro para edição
+	 * 
 	 * @param ed
 	 */
 	public void populaLivroEdicao(Livro ed) {
@@ -344,7 +354,16 @@ public class LivroMB {
 	 * @return
 	 */
 	public List<Livro> listarTodosLivros() {
-		return livroService.listarTodosRegistros();
+		if (this.todosLivros != null) {
+			return this.todosLivros;
+		} else {
+			this.populaLisaTodosLivro();
+			return this.todosLivros;
+		}
+	}
+
+	private void populaLisaTodosLivro() {
+		this.todosLivros = livroService.listarTodosRegistros();
 	}
 
 	/**
@@ -359,7 +378,16 @@ public class LivroMB {
 	 * Lista todos os livros do usuario logado
 	 */
 	public List<Livro> listaLivrosPessoaLogada() {
-		return this.livroService.listarTodosLivrosDoUsuario();
+		if (this.todosLivrosUser != null) {
+			return this.todosLivrosUser;
+		} else {
+			this.populaListaTodosLivrosUser();
+			return this.todosLivrosUser;
+		}
+	}
+
+	private void populaListaTodosLivrosUser() {
+		this.todosLivrosUser = this.livroService.listarTodosLivrosDoUsuario();
 	}
 
 	/**
@@ -480,7 +508,6 @@ public class LivroMB {
 		this.livroEdit = livroEdit;
 	}
 
-
 	/**
 	 * @return the livrosPublicosSelecionados
 	 */
@@ -488,14 +515,13 @@ public class LivroMB {
 		return livrosPublicosSelecionados;
 	}
 
-
 	/**
-	 * @param livrosPublicosSelecionados the livrosPublicosSelecionados to set
+	 * @param livrosPublicosSelecionados
+	 *            the livrosPublicosSelecionados to set
 	 */
 	public void setLivrosPublicosSelecionados(List<LivroPublico> livrosPublicosSelecionados) {
 		this.livrosPublicosSelecionados = livrosPublicosSelecionados;
 	}
-
 
 	/**
 	 * @return the livroVisualizacao
@@ -504,12 +530,42 @@ public class LivroMB {
 		return livroVisualizacao;
 	}
 
-
 	/**
-	 * @param livroVisualizacao the livroVisualizacao to set
+	 * @param livroVisualizacao
+	 *            the livroVisualizacao to set
 	 */
 	public void setLivroVisualizacao(Livro livroVisualizacao) {
 		this.livroVisualizacao = livroVisualizacao;
+	}
+
+	/**
+	 * @return the todosLivros
+	 */
+	public List<Livro> getTodosLivros() {
+		return todosLivros;
+	}
+
+	/**
+	 * @param todosLivros
+	 *            the todosLivros to set
+	 */
+	public void setTodosLivros(List<Livro> todosLivros) {
+		this.todosLivros = todosLivros;
+	}
+
+	/**
+	 * @return the todosLivrosUser
+	 */
+	public List<Livro> getTodosLivrosUser() {
+		return todosLivrosUser;
+	}
+
+	/**
+	 * @param todosLivrosUser
+	 *            the todosLivrosUser to set
+	 */
+	public void setTodosLivrosUser(List<Livro> todosLivrosUser) {
+		this.todosLivrosUser = todosLivrosUser;
 	}
 
 }

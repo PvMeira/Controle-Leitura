@@ -23,12 +23,12 @@
 				value="#{msg['title.salvar']}" 
 				process="@this"
 				action="#{livroMB.atualizaResumoLivro()}"
-				oncomplete="PF('modalResumo').hide();"/>
+				oncomplete="PF('modalResumo').hide(); :formModalResumo"/>
 			<p:commandButton 
 				ajax="false"
 				icon="fa fa-fw fa-ban"
 				value="#{msg['title.fechar']}" 
-				oncomplete="modalResumo.hide()"/>
+				oncomplete="modalResumo.hide(); :formModalResumo"/>
 			</h:panelGrid>	
 			
 				<p:panelGrid columns="1">
