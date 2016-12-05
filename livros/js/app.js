@@ -20,6 +20,10 @@ angular.module('AppModule', ['ngRoute',
             templateUrl: 'partials/user-pesquisar.html',
             controller: 'UserController'
         }).
+		 when('/user-add', {
+            templateUrl: 'partials/user-add.html',
+            controller: 'UserController'
+        }).
         when('/logoff', {
             templateUrl: 'partials/logoff.html',
             controller: 'AutenticacaoController'
@@ -32,6 +36,7 @@ angular.module('AppModule', ['ngRoute',
             templateUrl: 'partials/principal.html',
             controller: 'AppController'
         }).
+		
         
         otherwise({
             redirectTo: '/'

@@ -60,7 +60,8 @@ public class PessoaWebService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Pessoa create(PessoaWS ed) {
+	@Path("/add")
+	public Pessoa create(Pessoa ed) {
 		Pessoa p = new Pessoa();
 		p.setCpf(ed.getCpf());
 		p.setNome(ed.getNome());
