@@ -26,7 +26,12 @@ public class UtilizadoresWSService {
 	public void salvar(Pessoa ed) {
 		this.pessoaRepository.inserir(ed);
 	}
-
+	
+	@Transactional
+	public void atualizar(Pessoa ed) {
+		this.pessoaRepository.atualizar(ed);
+	}
+	
 	@Transactional
 	public void remover(int id) {
 		this.pessoaRepository.removeIdRest(id);

@@ -16,8 +16,8 @@
               $http.post('http://localhost:8080/CL/ws/user/add', $scope.pessoaWS)
                      .success(function(data) {
                            alert("Cadastro efetuado com sucesso!");
+						   $scope.pessoaWS = montarObjNoticia();
                            $scope.showCadastro = false;
-                           $scope.noticia = montarObjNoticia();
 						   $scope.listarUsers();
                      }).error(function() {
                            alert("Falha ao cadastrar notícia!");
@@ -33,6 +33,10 @@
                            alert("Falha ao deletar usuario!");
                      });
        };
+	   $scope.editar = function(pessoa){
+		   $scope.pessoaWS = pessoa		   
+		   $scope.showCadastro = true;
+	   };
 	   
 	    $scope.allUsers = {};
 	    $scope.listarUsers = function(){
@@ -62,5 +66,19 @@
 			  password : "",
 			  dataUltimoLogin :"",
 			  dataLoginAtual : ""
+       };
+   }
+   
+     function montarObjEdicao(pessoa) {
+       return {
+              idPessoa : pessoa.idPessoa,
+              nome : pessoa.nome,
+              cpf : pessoa.cpf,
+              telefone : pessoa.telefone,
+              mail : pessoa.mail,
+			  username :pessoa.username,
+			  password : pessoa.username,
+			  dataUltimoLogin :pessoa.dataUltimoLogin,
+			  dataLoginAtual : pessoa.dataLoginAtual
        };
    }

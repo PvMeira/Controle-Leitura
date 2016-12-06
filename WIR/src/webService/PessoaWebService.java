@@ -77,7 +77,14 @@ public class PessoaWebService {
 		p.setNormal(true);
 		p.setLivros(null);
 		p.setLogado(false);
-		this.service.salvar(p);
+		p.setIdPessoa(ed.getIdPessoa());
+		if(ed.getIdPessoa() != null){
+			p.setIdPessoa(ed.getIdPessoa());
+			this.service.atualizar(p);
+		}else{
+			this.service.salvar(p);	
+		}
+		
 		return ed;
 	}
 
