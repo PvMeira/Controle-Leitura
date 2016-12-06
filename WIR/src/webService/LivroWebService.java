@@ -1,6 +1,9 @@
 package webService;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -40,9 +43,20 @@ public class LivroWebService {
 		ed.setIdLivro(l.getIdLivro());
 		ed.setPaginas(l.getPaginas());
 		ed.setTitulo(l.getTitulo());
+		ed.setPontuacao(l.getPontuacao());
+		ed.setObservacao(ed.getObservacao());
 		ed.setLivroAtivo(l.isLivroAtivo());
+		ed.setDataUpload(format(l.getDataUpload()));
 
 		return ed;
+	}
+
+	private String format(Calendar c) {
+		Date data = c.getTime();
+		DateFormat dataFormatada = DateFormat.getDateInstance(DateFormat.LONG);
+		String dataFinalFormatada = " ".concat(dataFormatada.format(data));
+
+		return dataFinalFormatada;
 	}
 
 }

@@ -1,9 +1,19 @@
 <!DOCTYPE html>
  <html ng-app="app">
      <head>
-         <title>Painel Administrativo</title>
+         <title>Painel Administrativo - Usuários</title>
          <meta charset="utf-8">
-         <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css" />
+		 
+         <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+         <link href="components/font-awesome/css/font-awesome.min.css" rel="stylesheet">	
+		
+        <script src="components/angular/angular.min.js"></script>
+		<script src="components/angular-resource.min.js"></script>
+        <script src="components/angular-route/angular-route.min.js"></script>
+		<script src="components/angular-route/angular-route.js"></script>   
+		
+        <script src="js/painelController.js"></script>
+		
          <style>
                    .mbottom {
                          margin-bottom: 10px;
@@ -11,20 +21,39 @@
             </style>
      </head>
      <body>
-         <nav class="navbar navbar-default">
-           <div class="container-fluid">
-             <div class="navbar-header">
-               <a class="navbar-brand" href="#">Biblioteca Online </a>
-             </div>
-           </div>
-         </nav>
+                <div class="navbar navbar-default">
+            <ul class="nav navbar-nav">
+				  <li>
+				   <a href="http://localhost:8081/BibliotecaOnline/index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+						Home
+				   </a>
+				  </li>
+				  
+				  <li>
+				   <a href="http://localhost:8081/BibliotecaOnline/painel-inicial.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					  
+					  Usuários
+				   </a>
+				  </li>
+				  
+				  <li>
+					  <a href="http://localhost:8081/BibliotecaOnline/painel-livro.html"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+					  Livros
+					  </a>
+				  </li>
+            </ul>
+          </div>
+       </div>
          
          <div ng-controller="painelInicialController">
              <div class="container">
                  <div class="row">
                      <div class="col-xs-12">
                          <div class="well well-sm">
-                             <button type="button" class="btn btn-primary" ng-click="abreCadastroNoticia()">Novo Usuario</button>
+                             <button type="button" class="btn btn-primary" ng-click="abreCadastroNoticia()">
+							 <span class=" glyphicon glyphicon-plus" aria-hidden="true"></span>		
+							 Novo Usuario
+							 </button>
                          </div>
                      </div>
                  </div>
@@ -43,47 +72,53 @@
                      </div>
                      
                      <div class="row mbottom">
-                         <div class="col-xs-3 text-right">CPF:</div>
+                         <div class="col-xs-3 text-right">
+							CPF:
+						 </div>
                          <div class="col-xs-9">
                              <input type="text" class="form-control" ng-model="pessoaWS.cpf" required>
                          </div>
                      </div>
 					 
 					 <div class="row mbottom">
-                         <div class="col-xs-3 text-right">Telefone:</div>
+                         <div class="col-xs-3 text-right">
+							Telefone:
+						 </div>
                          <div class="col-xs-9">
                              <input type="text" class="form-control" ng-model="pessoaWS.telefone" required>
                          </div>
                      </div>
 					  <div class="row mbottom">
-                         <div class="col-xs-3 text-right">Email:</div>
+                         <div class="col-xs-3 text-right">
+							Email:
+						 </div>
                          <div class="col-xs-9">
                              <input type="text" class="form-control" ng-model="pessoaWS.mail" required>
                          </div>
                      </div>
 					  <div class="row mbottom">
-                         <div class="col-xs-3 text-right">Usuario:</div>
+                         <div class="col-xs-3 text-right">
+							Usuario:
+						 </div>
                          <div class="col-xs-9">
                              <input type="text" class="form-control" ng-model="pessoaWS.username" required>
                          </div>
                      </div>
 					  <div class="row mbottom">
-                         <div class="col-xs-3 text-right">Senha:</div>
+                         <div class="col-xs-3 text-right">
+							Senha:
+						 </div>
                          <div class="col-xs-9">
                              <input type="password" class="form-control" ng-model="pessoaWS.password" required>
                          </div>
-                     </div>
-                     
-                     <div class="row mbottom">
-                         <div class="col-xs-3 text-right">Data:</div>
-                         <div class="col-xs-9">
-                             <input class="form-control" ng-model="pessoaWS.dataUltimoLogin" ui-mask="99/99/9999" model-view-value="true">
-                         </div>
-                     </div>
+                     </div>                    
                      
                      <div class="row mbottom">
                          <div class="col-xs-9 col-xs-offset-3">
-                             <button class="btn btn-danger" type="submit">Inserir</button>
+                             <button class="btn btn-danger" type="submit">
+							 <span class=" glyphicon glyphicon-floppy-save" aria-hidden="true"></span>					 
+							 Inserir		 
+							 </button>
                          </div>
                      </div>
                      
@@ -125,10 +160,7 @@
   </div>
 			 
          </div>
-		 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-		 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-resource.min.js"></script>
-		 <script src="https://code.angularjs.org/1.4.5/angular-route.js"></script>    
-		 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
-         <script src="painelController.js"></script>
+		<script src="components/jquery/dist/jquery.min.js"></script>
+        <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
      </body>
  </html>

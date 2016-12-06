@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+ <html ng-app="app">
+     <head>
+         <title>Painel Administrativo - Livros</title>
+        		 
+         <meta charset="utf-8">
+		 
+		 <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+         <link href="components/font-awesome/css/font-awesome.min.css" rel="stylesheet">	
+		
+        <script src="components/angular/angular.min.js"></script>
+		<script src="components/angular-resource.min.js"></script>
+        <script src="components/angular-route/angular-route.min.js"></script>
+		<script src="components/angular-route/angular-route.js"></script>   		
+        <script src="js/livroController.js"></script>
+		
+         <style>
+                   .mbottom {
+                         margin-bottom: 10px;
+                   }
+         </style>
+		 
+     </head>
+     <body>
+             <div class="navbar navbar-default">
+            <ul class="nav navbar-nav">
+				  <li>
+				   <a href="http://localhost:8081/BibliotecaOnline/index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+						Home
+				   </a>
+				  </li>
+				  
+				  <li>
+				   <a href="http://localhost:8081/BibliotecaOnline/painel-inicial.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					  
+					  Usuários
+				   </a>
+				  </li>
+				  
+				  <li>
+					  <a href="http://localhost:8081/BibliotecaOnline/painel-livro.html"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+					  Livros
+					  </a>
+				  </li>
+            </ul>
+          </div>
+       </div>
+         
+         <div ng-controller="painelLivroController">
+			<div class="container">
+			 <div class="row">
+				   <div class="col-xs-12">
+				   
+						  <table class="table table-bordered table-striped table-hover">
+								 <thead>
+										<tr>
+											  <th>Título</th>
+											  <th>Autor</th>
+											  <th>Paginas</th>								  
+											  <th>Observacao</th>
+											  <th>Pontuação</th>
+											  <th>Data Upload</th>
+										</tr>
+								 </thead>
+								 
+								 <tbody>
+										
+										<tr ng-repeat="livro in allLivros">
+											  <td>{{ livro.titulo }}</td>
+											  <td>{{ livro.autor }}</td>
+											  <td>{{ livro.paginas }}</td>
+											  <td>{{ livro.observacao }}</td>
+											  <td>{{ livro.pontuacao }}</td>
+											  <td>{{ livro.dataUpload }}</td>
+										</tr>
+										
+								 </tbody>
+								 
+						  </table>
+						  
+				   </div>
+			 </div>
+	  </div>
+			 
+         </div>
+		<script src="components/jquery/dist/jquery.min.js"></script>
+        <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+     </body>
+ </html>

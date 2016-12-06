@@ -25,9 +25,9 @@ public class LivroWS {
 
 	private boolean publico;
 
-	private Calendar dataUltimaLeitura;
+	private String dataUltimaLeitura;
 
-	private Calendar dataUpload;
+	private String dataUpload;
 
 	/**
 	 * 
@@ -48,7 +48,7 @@ public class LivroWS {
 	 * @param dataUpload
 	 */
 	public LivroWS(Long idLivro, String titulo, String autor, int paginas, String observacao, int pontuacao,
-			boolean livroAtivo, Calendar dataUltimaLeitura, Calendar dataUpload, boolean jaFoiLido, boolean publico) {
+			boolean livroAtivo, String dataUltimaLeitura, String dataUpload, boolean jaFoiLido, boolean publico) {
 		this.idLivro = idLivro;
 		this.titulo = titulo;
 		this.autor = autor;
@@ -126,19 +126,19 @@ public class LivroWS {
 		this.livroAtivo = livroAtivo;
 	}
 
-	public Calendar getDataUltimaLeitura() {
+	public String getDataUltimaLeitura() {
 		return dataUltimaLeitura;
 	}
 
-	public void setDataUltimaLeitura(Calendar dataUltimaLeitura) {
+	public void setDataUltimaLeitura(String dataUltimaLeitura) {
 		this.dataUltimaLeitura = dataUltimaLeitura;
 	}
 
-	public Calendar getDataUpload() {
+	public String getDataUpload() {
 		return dataUpload;
 	}
 
-	public void setDataUpload(Calendar dataUpload) {
+	public void setDataUpload(String dataUpload) {
 		this.dataUpload = dataUpload;
 	}
 
