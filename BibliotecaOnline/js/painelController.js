@@ -3,6 +3,7 @@
    
    app.controller('painelInicialController', function($scope, $http) {
        $scope.showCadastro = false;
+	   $scope.showLista = false;
        $scope.pessoaWS = montarObjNoticia();
 	   $scope.idDelete = '';
 	  
@@ -10,6 +11,16 @@
    
        $scope.abreCadastroNoticia = function() {
               $scope.showCadastro = true;
+       }
+	   
+	   $scope.fechaCadastroNoticia = function() {
+              $scope.showCadastro = false;
+       }
+	    $scope.abrirListagem = function() {
+              $scope.showLista = true;
+       }
+	     $scope.fecharListagem = function() {
+              $scope.showLista = false;
        }
    
        $scope.cadastrarNovaNoticia = function() {                    

@@ -3,6 +3,7 @@
    
    app.controller('painelLivroController', function($scope, $http) {
 	    $scope.allLivros = {};
+		$scope.showLista = false;
 	    $scope.listarLivros = function(){
 				 $http.get('http://localhost:8080/CL/ws/livros')
 					   .success(function(data){
@@ -13,6 +14,13 @@
 					   });
   };
    $scope.listarLivros();
+   
+    $scope.abrirListagem = function() {
+              $scope.showLista = true;
+       };
+	     $scope.fecharListagem = function() {
+              $scope.showLista = false;
+       };
 
   
    })
