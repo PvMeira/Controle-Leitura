@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -26,7 +27,7 @@ public class PessoaWebService {
 
 	@Inject
 	private UtilizadoresWSService service;
-	
+
 	Data dataUtil;
 
 	@GET
@@ -48,7 +49,8 @@ public class PessoaWebService {
 		}
 		return listaFinal;
 	}
-	private  String format(Calendar c) {
+
+	private String format(Calendar c) {
 		Date data = c.getTime();
 		DateFormat dataFormatada = DateFormat.getDateInstance(DateFormat.LONG);
 		String dataFinalFormatada = " ".concat(dataFormatada.format(data));
@@ -56,28 +58,33 @@ public class PessoaWebService {
 		return dataFinalFormatada;
 	}
 
-
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/add")
 	public PessoaWS create(PessoaWS ed) {
 		Pessoa p = new Pessoa();
-			p.setCpf(ed.getCpf());
-			p.setNome(ed.getNome());
-			p.setMail(ed.getMail());
-			p.setTelefone(ed.getTelefone());
-			p.setUsername(ed.getUsername());
-			p.setPassword(ed.getPassword());
-			p.setDataLoginAtual(Calendar.getInstance());
-			p.setDataUltimoLogin(Calendar.getInstance());
-			p.setFotoUser(null);
-			p.setAdm(false);
-			p.setNormal(true);
-			p.setLivros(null);
-			p.setLogado(false);
-			this.service.salvar(p);
+		p.setCpf(ed.getCpf());
+		p.setNome(ed.getNome());
+		p.setMail(ed.getMail());
+		p.setTelefone(ed.getTelefone());
+		p.setUsername(ed.getUsername());
+		p.setPassword(ed.getPassword());
+		p.setDataLoginAtual(Calendar.getInstance());
+		p.setDataUltimoLogin(Calendar.getInstance());
+		p.setFotoUser(null);
+		p.setAdm(false);
+		p.setNormal(true);
+		p.setLivros(null);
+		p.setLogado(false);
+		this.service.salvar(p);
 		return ed;
+	}
+
+	@POST
+	@Path("/delete/{idPessoa}")
+	public void delete( @PathParam("idPessoa") int id) {
+		this.service.remover(id);
 	}
 
 }

@@ -21,9 +21,14 @@ public class UtilizadoresWSService {
 	public List<Pessoa> listarTodos() {
 		return this.pessoaRepository.todasAsPessoas();
 	}
-	
+
 	@Transactional
 	public void salvar(Pessoa ed) {
 		this.pessoaRepository.inserir(ed);
+	}
+
+	@Transactional
+	public void remover(int id) {
+		this.pessoaRepository.removeIdRest(id);
 	}
 }

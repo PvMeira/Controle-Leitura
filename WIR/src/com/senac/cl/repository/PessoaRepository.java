@@ -68,6 +68,11 @@ public class PessoaRepository {
 		Pessoa entity = entityManager.find(Pessoa.class, id);
 		entityManager.remove(entity);
 	}
+	
+	public void removeIdRest(int id){
+		String sql = "delete  from pessoa where id_pessoa ="+id+";";
+		entityManager.createNativeQuery(sql).executeUpdate();
+	}
 
 	/**
 	 * Atualiza entidade

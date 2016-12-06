@@ -4,6 +4,7 @@
    app.controller('painelInicialController', function($scope, $http) {
        $scope.showCadastro = false;
        $scope.pessoaWS = montarObjNoticia();
+	   $scope.idDelete = '';
 	  
 	  
    
@@ -17,10 +18,22 @@
                            alert("Cadastro efetuado com sucesso!");
                            $scope.showCadastro = false;
                            $scope.noticia = montarObjNoticia();
+						   $scope.listarUsers();
                      }).error(function() {
                            alert("Falha ao cadastrar notícia!");
                      });
        };
+	   
+	   $scope.deletar = function(idPessoa) {    
+              $http.post('http://localhost:8080/CL/ws/user/delete/'+idPessoa ,{params: {'Content-type': 'text/plain'}})
+                     .success(function(data) {
+						 $scope.listarUsers();
+                           alert("Cadastro deletado com  com sucesso!");                            
+                     }).error(function() {	  
+                           alert("Falha ao deletar usuario!");
+                     });
+       };
+	   
 	    $scope.allUsers = {};
 	    $scope.listarUsers = function(){
 				 $http.get('http://localhost:8080/CL/ws/user')
