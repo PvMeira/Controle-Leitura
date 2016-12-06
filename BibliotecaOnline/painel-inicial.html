@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+ <html ng-app="app">
+     <head>
+         <title>Painel Administrativo</title>
+         <meta charset="utf-8">
+         <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css" />
+         <style>
+                   .mbottom {
+                         margin-bottom: 10px;
+                   }
+            </style>
+     </head>
+     <body>
+         <nav class="navbar navbar-default">
+           <div class="container-fluid">
+             <div class="navbar-header">
+               <a class="navbar-brand" href="#">Dashboard</a>
+             </div>
+           </div>
+         </nav>
+         
+         <div ng-controller="painelInicialController">
+             <div class="container">
+                 <div class="row">
+                     <div class="col-xs-12">
+                         <div class="well well-sm">
+                             <button type="button" class="btn btn-primary" ng-click="abreCadastroNoticia()">Novo Usuario</button>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             
+             <div class="container" ng-show="showCadastro">
+                 <form ng-submit="cadastrarNovaNoticia()">
+                     
+                     <div class="row mbottom">
+                         <div class="col-xs-3 text-right">
+                             Nome:
+                         </div>
+                         <div class="col-xs-9">
+                             <input type="text" class="form-control" ng-model="pessoaWS.nome" required>
+                         </div>
+                     </div>
+                     
+                     <div class="row mbottom">
+                         <div class="col-xs-3 text-right">CPF:</div>
+                         <div class="col-xs-9">
+                             <input type="text" class="form-control" ng-model="pessoaWS.cpf" >
+                         </div>
+                     </div>
+					 
+					 <div class="row mbottom">
+                         <div class="col-xs-3 text-right">Telefone:</div>
+                         <div class="col-xs-9">
+                             <input type="text" class="form-control" ng-model="pessoaWS.telefone" >
+                         </div>
+                     </div>
+					  <div class="row mbottom">
+                         <div class="col-xs-3 text-right">Email:</div>
+                         <div class="col-xs-9">
+                             <input type="text" class="form-control" ng-model="pessoaWS.mail" >
+                         </div>
+                     </div>
+					  <div class="row mbottom">
+                         <div class="col-xs-3 text-right">Usuario:</div>
+                         <div class="col-xs-9">
+                             <input type="text" class="form-control" ng-model="pessoaWS.username" >
+                         </div>
+                     </div>
+					  <div class="row mbottom">
+                         <div class="col-xs-3 text-right">Senha:</div>
+                         <div class="col-xs-9">
+                             <input type="text" class="form-control" ng-model="pessoaWS.password" >
+                         </div>
+                     </div>
+                     
+                     <div class="row mbottom">
+                         <div class="col-xs-3 text-right">Data:</div>
+                         <div class="col-xs-9">
+                             <input class="form-control" ng-model="pessoaWS.dataUltimoLogin" ui-mask="99/99/9999" model-view-value="true">
+                         </div>
+                     </div>
+                     
+                     <div class="row mbottom">
+                         <div class="col-xs-9 col-xs-offset-3">
+                             <button class="btn btn-default" type="submit">Inserir</button>
+                         </div>
+                     </div>
+                     
+                 </form>
+             </div>
+         </div>
+		 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+		 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-resource.min.js"></script>
+		 <script src="https://code.angularjs.org/1.4.5/angular-route.js"></script>    
+		 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
+         <script src="painelController.js"></script>
+     </body>
+ </html>

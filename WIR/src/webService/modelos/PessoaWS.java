@@ -48,9 +48,9 @@ public class PessoaWS {
 
 	private boolean logado = false;
 
-	private Calendar dataUltimoLogin;
+	private String dataUltimoLogin;
 
-	private Calendar dataLoginAtual;
+	private String dataLoginAtual;
 
 	/**
 	 * 
@@ -74,7 +74,7 @@ public class PessoaWS {
 	 * @param dataUltimoLogin
 	 */
 	public PessoaWS(Long id, String nome, String cpf, String telefone, String mail, String username, String password,
-			boolean adm, boolean normal, boolean logado, Calendar dataUltimoLogin) {
+			boolean adm, boolean normal, boolean logado, String dataUltimoLogin) {
 		this.idPessoa = id;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -253,7 +253,7 @@ public class PessoaWS {
 	 * 
 	 * @return
 	 */
-	public Calendar getDataUltimoLogin() {
+	public String getDataUltimoLogin() {
 		return dataUltimoLogin;
 	}
 
@@ -261,7 +261,7 @@ public class PessoaWS {
 	 * 
 	 * @param dataUltimoLogin
 	 */
-	public void setDataUltimoLogin(Calendar dataUltimoLogin) {
+	public void setDataUltimoLogin(String dataUltimoLogin) {
 		this.dataUltimoLogin = dataUltimoLogin;
 	}
 
@@ -269,7 +269,7 @@ public class PessoaWS {
 	 * 
 	 * @return
 	 */
-	public Calendar getDataLoginAtual() {
+	public String getDataLoginAtual() {
 		return dataLoginAtual;
 	}
 
@@ -277,7 +277,7 @@ public class PessoaWS {
 	 * 
 	 * @param dataLoginAtual
 	 */
-	public void setDataLoginAtual(Calendar dataLoginAtual) {
+	public void setDataLoginAtual(String dataLoginAtual) {
 		this.dataLoginAtual = dataLoginAtual;
 	}
 

@@ -61,20 +61,21 @@ public class PessoaWebService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/add")
-	public Pessoa create(Pessoa ed) {
+	public PessoaWS create(PessoaWS ed) {
 		Pessoa p = new Pessoa();
-		p.setCpf(ed.getCpf());
-		p.setNome(ed.getNome());
-		p.setMail(ed.getMail());
-		p.setTelefone(ed.getTelefone());
-		p.setUsername(ed.getUsername());
-		p.setDataLoginAtual(Calendar.getInstance());
-		p.setDataUltimoLogin(Calendar.getInstance());
-		p.setFotoUser(null);
-		p.setAdm(false);
-		p.setNormal(true);
-		this.service.salvar(p);
-		return p;
+			p.setCpf(ed.getCpf());
+			p.setNome(ed.getNome());
+			p.setMail(ed.getMail());
+			p.setTelefone(ed.getTelefone());
+			p.setUsername(ed.getUsername());
+			p.setPassword(ed.getPassword());
+			p.setDataLoginAtual(Calendar.getInstance());
+			p.setDataUltimoLogin(Calendar.getInstance());
+			p.setFotoUser(null);
+			p.setAdm(false);
+			p.setNormal(true);
+			this.service.salvar(p);
+		return ed;
 	}
 
 }
