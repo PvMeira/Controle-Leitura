@@ -4,6 +4,8 @@
    app.controller('painelInicialController', function($scope, $http) {
        $scope.showCadastro = false;
        $scope.pessoaWS = montarObjNoticia();
+	  
+	  
    
        $scope.abreCadastroNoticia = function() {
               $scope.showCadastro = true;
@@ -28,6 +30,19 @@
                            alert("Falha ao cadastrar notícia!");
                      });
        };
+	    $scope.allUsers = {};
+	    $scope.listarUsers = function(){
+				 $http.get('http://localhost:8080/CL/ws/user')
+					   .success(function(data){
+							  $scope.allUsers = data;
+					   })
+					   .error(function(){
+							  alert("Falha em obter lista de Usuarios");
+					   });
+  };
+   $scope.listarUsers();
+
+  
    });
    
    function montarObjNoticia() {

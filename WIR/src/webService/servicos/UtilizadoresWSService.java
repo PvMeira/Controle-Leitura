@@ -21,16 +21,8 @@ public class UtilizadoresWSService {
 	public List<Pessoa> listarTodos() {
 		return this.pessoaRepository.todasAsPessoas();
 	}
-
+	
 	@Transactional
-	public int contarLivrosUsuarios(long id) {
-		return this.livroRepository.todosOsRegistrosDoUsuario(id).size();
-	}
-
-	@Transactional
-	public Pessoa buscarPeloId(long id) {
-		return this.pessoaRepository.buscarPeloId(id);
-	}
 	public void salvar(Pessoa ed) {
 		this.pessoaRepository.inserir(ed);
 	}

@@ -1,7 +1,9 @@
 package webService;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,6 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.senac.cl.modelos.Pessoa;
+import com.senac.cl.utilitarios.Data;
 
 import webService.modelos.PessoaWS;
 import webService.servicos.UtilizadoresWSService;
@@ -23,6 +26,8 @@ public class PessoaWebService {
 
 	@Inject
 	private UtilizadoresWSService service;
+	
+	Data dataUtil;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -37,25 +42,20 @@ public class PessoaWebService {
 			p.setNome(ed.getNome());
 			p.setTelefone(ed.getTelefone());
 			p.setUsername(ed.getUsername());
+			p.setPassword(ed.getPassword());
+			p.setDataUltimoLogin(format(ed.getDataUltimoLogin()));
 			listaFinal.add(p);
 		}
 		return listaFinal;
 	}
+	private  String format(Calendar c) {
+		Date data = c.getTime();
+		DateFormat dataFormatada = DateFormat.getDateInstance(DateFormat.LONG);
+		String dataFinalFormatada = " ".concat(dataFormatada.format(data));
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/find/{id}")
-	public PessoaWS findOne(@PathParam("id") Integer id) {
-		Pessoa ed = service.buscarPeloId(id.longValue());
-		PessoaWS p = new PessoaWS();
-		p.setIdPessoa(ed.getIdPessoa());
-		p.setCpf(ed.getCpf());
-		p.setMail(ed.getMail());
-		p.setNome(ed.getNome());
-		p.setTelefone(ed.getTelefone());
-		p.setUsername(ed.getUsername());
-		return p;
+		return dataFinalFormatada;
 	}
+
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -74,6 +74,8 @@ public class PessoaWebService {
 			p.setFotoUser(null);
 			p.setAdm(false);
 			p.setNormal(true);
+			p.setLivros(null);
+			p.setLogado(false);
 			this.service.salvar(p);
 		return ed;
 	}

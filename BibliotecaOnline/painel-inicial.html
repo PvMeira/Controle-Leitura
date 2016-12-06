@@ -14,7 +14,7 @@
          <nav class="navbar navbar-default">
            <div class="container-fluid">
              <div class="navbar-header">
-               <a class="navbar-brand" href="#">Dashboard</a>
+               <a class="navbar-brand" href="#">Biblioteca Online </a>
              </div>
            </div>
          </nav>
@@ -45,32 +45,32 @@
                      <div class="row mbottom">
                          <div class="col-xs-3 text-right">CPF:</div>
                          <div class="col-xs-9">
-                             <input type="text" class="form-control" ng-model="pessoaWS.cpf" >
+                             <input type="text" class="form-control" ng-model="pessoaWS.cpf" required>
                          </div>
                      </div>
 					 
 					 <div class="row mbottom">
                          <div class="col-xs-3 text-right">Telefone:</div>
                          <div class="col-xs-9">
-                             <input type="text" class="form-control" ng-model="pessoaWS.telefone" >
+                             <input type="text" class="form-control" ng-model="pessoaWS.telefone" required>
                          </div>
                      </div>
 					  <div class="row mbottom">
                          <div class="col-xs-3 text-right">Email:</div>
                          <div class="col-xs-9">
-                             <input type="text" class="form-control" ng-model="pessoaWS.mail" >
+                             <input type="text" class="form-control" ng-model="pessoaWS.mail" required>
                          </div>
                      </div>
 					  <div class="row mbottom">
                          <div class="col-xs-3 text-right">Usuario:</div>
                          <div class="col-xs-9">
-                             <input type="text" class="form-control" ng-model="pessoaWS.username" >
+                             <input type="text" class="form-control" ng-model="pessoaWS.username" required>
                          </div>
                      </div>
 					  <div class="row mbottom">
                          <div class="col-xs-3 text-right">Senha:</div>
                          <div class="col-xs-9">
-                             <input type="text" class="form-control" ng-model="pessoaWS.password" >
+                             <input type="password" class="form-control" ng-model="pessoaWS.password" required>
                          </div>
                      </div>
                      
@@ -83,12 +83,47 @@
                      
                      <div class="row mbottom">
                          <div class="col-xs-9 col-xs-offset-3">
-                             <button class="btn btn-default" type="submit">Inserir</button>
+                             <button class="btn btn-danger" type="submit">Inserir</button>
                          </div>
                      </div>
                      
                  </form>
              </div>
+		<div class="container">
+         <div class="row">
+               <div class="col-xs-12">
+               
+                      <table class="table table-bordered table-striped table-hover">
+                             <thead>
+                                    <tr>
+                                          <th>Nome</th>
+                                          <th>CPF</th>
+                                          <th>Telefone</th>								  
+										  <th>EMAIL</th>
+                                          <th>Usuario</th>
+										  <th>Data Ultimo Login</th>
+                                    </tr>
+                             </thead>
+                             
+                             <tbody>
+                                    
+                                    <tr ng-repeat="user in allUsers">
+                                          <td>{{ user.nome }}</td>
+                                          <td>{{ user.cpf }}</td>
+                                          <td>{{ user.telefone }}</td>
+										  <td>{{ user.mail }}</td>
+										  <td>{{ user.username }}</td>
+										  <td>{{ user.dataUltimoLogin }}</td>
+                                    </tr>
+                                    
+                             </tbody>
+                             
+                      </table>
+                      
+               </div>
+         </div>
+  </div>
+			 
          </div>
 		 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 		 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-resource.min.js"></script>
